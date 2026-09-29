@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Never commit local environment files. Keep only the fake V1 test fixture.
+.env
+**/.env
+!test/secrets/.env
+
+.DS_Store
+Thumbs.db
