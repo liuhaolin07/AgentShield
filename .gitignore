@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+logs/
 
 # Never commit local environment files. Keep only the fake V1 test fixture.
 .env

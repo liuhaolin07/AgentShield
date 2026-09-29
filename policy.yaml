@@ -1,0 +1,12 @@
+# AgentShield V1.5 policy. This prototype supports string lists only.
+blocked_files:
+  - .env
+  - id_rsa
+
+allowed_file_roots:
+  - test
+
+allowed_domains:
+  - example.com
+  - github.com
+  - note3-prev-api.askdiandian.com
