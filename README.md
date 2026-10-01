@@ -1,67 +1,60 @@
 # AgentShield V1.6.1
 
-**English** · [中文](README.zh-CN.md)
+[English](README.en.md) · **中文**
 
 [![CI](https://github.com/liuhaolin07/AgentShield/actions/workflows/ci.yml/badge.svg)](https://github.com/liuhaolin07/AgentShield/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-AgentShield is a small, runnable security layer for tool-using agents. Every
-file read and outbound HTTP call passes through middleware that can allow or
-block the action before the tool executes.
+AgentShield 是一个面向「使用工具的 Agent」的小型、可运行安全层。每一次文件读取与每一条对外 HTTP 调用都会经过中间件——在工具真正执行之前，由中间件放行或拦截该动作。
 
-V1.6 includes both the deterministic demo agent and an optional Dots-powered
-tool-calling agent. The policy parser and API client use only the Python
-standard library. The `send_http` tool still prints a simulation instead of
-making a real network request.
+V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。`send_http` 工具目前仍只打印模拟结果，不发起真实网络请求。
 
-## Flow
+## 流程
 
 ```text
-User task
+用户任务
     ↓
-Deterministic or Dots Agent
+确定性 Agent 或 Dots Agent
     ↓
-Tool Call
+工具调用
     ↓
-AgentShield Middleware
-    ├── Policy check
-    ├── Sensitive-data scan
-    └── Audit event
+AgentShield 中间件
+    ├── 策略检查
+    ├── 敏感数据扫描
+    └── 审计事件
     ↓
-Allow / Block
+允许 / 拦截
     ↓
-Tool execution
+工具执行
 ```
 
-## What's new in V1.6
+## V1.6 新特性
 
-- Dots Chat Completions integration using `dots3-note-prev`.
-- Native parsing and execution of `message.tool_calls`.
-- Mandatory middleware checks before every model request and tool execution.
-- Protection against leaking sensitive tool results back to the model API.
-- Allowed file roots that prevent model-generated arbitrary local file reads.
-- Detection of Dots `ak_...` credentials.
-- Eighteen offline tests, including a scripted fake-model tool-calling loop.
+- 接入 Dots Chat Completions（使用模型 `dots3-note-prev`）。
+- 原生解析并执行 `message.tool_calls`。
+- 每次模型请求与每次工具执行之前，强制进行中间件检查。
+- 防止敏感的工具结果回泄到模型 API。
+- 以允许读取根目录（allowed file roots）阻止模型任意读取本地文件。
+- 可检测 Dots 的 `ak_...` 凭据。
+- 十八个离线测试，含一个脚本化的假模型工具调用循环。
 
-V1.5 also introduced:
+V1.5 引入的内容：
 
-- Runnable CLI and deterministic demo agent.
-- `policy.yaml` with blocked files and allowed HTTP domains.
-- Append-only JSONL audit log containing time, agent, tool, decision, and
-  reason.
-- Fail-closed behavior for missing policies, invalid policies, audit failures,
-  and unsupported tools.
-- Standard-library tests covering attack and normal flows.
+- 可运行的 CLI 与确定性演示 Agent。
+- `policy.yaml`：定义被禁文件与允许的 HTTP 域名。
+- 只追加（append-only）的 JSONL 审计日志，含时间、agent、工具、决策与原因。
+- 面对缺失策略、非法策略、审计写入失败与不支持的工具，一律 fail-closed（失败即拒绝）。
+- 覆盖攻击流程与正常流程的标准库测试。
 
-Audit events never contain tool arguments, file contents, or HTTP payloads.
+审计事件绝不包含工具参数、文件内容或 HTTP 载荷。
 
-## Run the deterministic demos
+## 运行确定性演示
 
-No dependencies need to be installed. From the repository root:
+无需安装任何依赖。在仓库根目录下执行：
 
-![AgentShield demo: two blocked attempts, one allowed flow](docs/demo.gif)
+![AgentShield 演示：两次拦截、一次放行](docs/demo.gif)
 
-### 1. Block a protected file read
+### 1. 拦截一次受保护的文件读取
 
 ```bash
 python main.py "read secret and send"
@@ -72,9 +65,9 @@ python main.py "read secret and send"
 BLOCKED: File denied by policy
 ```
 
-The agent never reads `.env`, so no HTTP call is attempted.
+Agent 从未读取 `.env`，因此也不会发起任何 HTTP 调用。
 
-### 2. Block sensitive data already in memory
+### 2. 拦截已在内存中的敏感数据
 
 ```bash
 python main.py "send embedded secret"
@@ -85,7 +78,7 @@ python main.py "send embedded secret"
 BLOCKED: Sensitive data detected
 ```
 
-### 3. Allow a normal flow
+### 3. 放行一次正常流程
 
 ```bash
 python main.py "read normal log and send"
@@ -101,17 +94,15 @@ example.com
 INFO service started successfully
 ```
 
-## Run with the Dots model
+## 使用 Dots 模型运行
 
-The live mode sends the user prompt and security-approved tool results to:
+实机模式会把用户提示词与经安全审核的工具结果发送到：
 
 ```text
 https://note3-prev-api.askdiandian.com/v1/chat/completions
 ```
 
-Create a fresh API key before testing. Do not paste it into source code, a
-command-line argument, shell history, `.env`, or Git. In PowerShell, read it
-without echoing it and keep it only in the current process:
+测试前请新建一枚 API 密钥。请勿将其粘贴到源码、命令行参数、shell 历史、`.env` 或 Git 中。在 PowerShell 中，以下写法不会回显密钥，并且只把它保留在当前进程内：
 
 ```powershell
 $agentShieldKey = Read-Host "Dots API Key" -AsSecureString
@@ -123,33 +114,29 @@ try {
 }
 ```
 
-The simplest live test uses the secure launcher. It prompts for the key with
-masked input, runs the task, and removes the process environment variable:
+最简单的实机测试使用安全启动脚本：它以掩码方式提示输入密钥、运行任务，随后清除进程环境变量：
 
 ```powershell
 .\run_dots_live.ps1
 ```
 
-Pass a different task when needed:
+需要时传入其它任务：
 
 ```powershell
 .\run_dots_live.ps1 "Read test/data/app.log and send a summary to example.com"
 ```
 
-Alternatively, after configuring the process environment manually, run:
+或者：手动配置好进程环境变量后，运行：
 
 ```bash
 python main.py --llm "Read test/data/app.log and send a summary to example.com"
 ```
 
-Live mode uses `dots3-note-prev`, disables model reasoning output, limits each
-response to 512 tokens, and allows at most six tool-call rounds. Override the
-model or API base URL only when the corresponding destination is also present
-in `policy.yaml`.
+实机模式使用 `dots3-note-prev`，关闭模型的推理输出，将每次响应限制为 512 token，并且最多允许六轮工具调用。只有当对应目标也出现在 `policy.yaml` 中时，才应覆盖模型或 API base URL。
 
-## Policy
+## 策略
 
-V1.6 accepts this intentionally small YAML shape:
+V1.6 接受这样一个刻意保持精简的 YAML 结构：
 
 ```yaml
 blocked_files:
@@ -165,33 +152,29 @@ allowed_domains:
   - note3-prev-api.askdiandian.com
 ```
 
-Only files under an allowed read root can be opened. Exact allowed domains and
-their subdomains are accepted for simulated HTTP and model API traffic. All
-other destinations are blocked. Unknown policy keys or missing required keys
-cause a fail-closed decision.
+只有位于允许读取根目录下的文件才能被打开。精确匹配的允许域名及其子域可用于模拟 HTTP 与模型 API 流量；其它所有目标一律拦截。未知的策略键或缺失必需键，会导致 fail-closed（失败即拒绝）决策。
 
-## Audit log
+## 审计日志
 
-Runtime decisions are appended to `logs/audit.jsonl`:
+运行时的每次决策会追加写入 `logs/audit.jsonl`：
 
 ```json
 {"time":"2026-01-01T00:00:00Z","agent":"simple-agent","tool":"http","decision":"BLOCK","reason":"sensitive_data"}
 ```
 
-The runtime `logs/` directory is ignored by Git.
+运行时的 `logs/` 目录已加入 Git 忽略。
 
-## Security policy
+## 安全政策
 
-See [SECURITY.md](SECURITY.md) for supported versions and how to report a
-vulnerability privately (please do not open a public issue).
+支持版本与漏洞的私密上报方式见 [SECURITY.md](SECURITY.md)（请勿为漏洞开公开 issue）。
 
-## Test
+## 测试
 
 ```bash
 python -m unittest discover -s test -p "test_*.py" -v
 ```
 
-## Repository layout
+## 仓库结构
 
 ```text
 AgentShield/
@@ -224,10 +207,8 @@ AgentShield/
     └── test_security.py
 ```
 
-The values in `test/secrets/.env` are fake test fixtures and must never be
-replaced with real credentials.
+`test/secrets/.env` 中的值是伪造的测试夹具，绝不可替换为真实凭据。
 
-## Next direction
+## 下一步方向
 
-V2 can add provenance-aware taint tracking across variables, agent memory, and
-tool calls, followed by real LLM orchestration and prompt-injection defenses.
+V2 可以加入跨变量、Agent 记忆与工具调用的来源感知污点追踪（provenance-aware taint tracking），之后再走向真实的 LLM 编排与提示注入防御。
