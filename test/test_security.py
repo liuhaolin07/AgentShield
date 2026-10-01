@@ -130,6 +130,38 @@ class AgentShieldTests(unittest.TestCase):
         self.assertTrue(normal_allowed)
         self.assertIn("Sending data to:", normal_output.getvalue())
 
+    def test_secret_in_url_field_is_blocked(self) -> None:
+        """A secret smuggled in the url field is blocked (the V1.6.1 fix).
+
+        The destination domain is allowlisted and the payload is benign, so
+        only scanning of the url field can produce this verdict.
+        """
+
+        decision = check_tool_call(
+            "http",
+            {
+                "url": "https://example.com/collect?token=PASSWORD=root123",
+                "data": "safe summary",
+            },
+            audit_path=self.audit_path,
+        )
+        self.assertFalse(decision)
+        self.assertEqual(decision.reason, "sensitive_data")
+
+    def test_benign_url_with_query_is_still_allowed(self) -> None:
+        """Control case: a benign url (with a query string) still passes."""
+
+        decision = check_tool_call(
+            "http",
+            {
+                "url": "https://example.com/collect?note=hello",
+                "data": "safe summary",
+            },
+            audit_path=self.audit_path,
+        )
+        self.assertTrue(decision)
+        self.assertEqual(decision.reason, "policy_passed")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -112,7 +112,8 @@ def check_tool_call(
 
     if tool in {"http", "model"}:
         data = str(args.get("data", ""))
-        if scan_sensitive(data):
+        url = str(args.get("url", ""))
+        if scan_sensitive(data) or scan_sensitive(url):
             return _finish_decision(
                 allowed=False,
                 reason="sensitive_data",
@@ -122,7 +123,6 @@ def check_tool_call(
                 audit_path=audit_path,
             )
 
-        url = str(args.get("url", ""))
         if not policy.allows_url(url):
             return _finish_decision(
                 allowed=False,
