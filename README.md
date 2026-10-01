@@ -57,6 +57,8 @@ Audit events never contain tool arguments, file contents, or HTTP payloads.
 
 No dependencies need to be installed. From the repository root:
 
+![AgentShield demo: two blocked attempts, one allowed flow](docs/demo.gif)
+
 ### 1. Block a protected file read
 
 ```bash
@@ -197,6 +199,8 @@ AgentShield/
 ├── SECURITY.md
 ├── CHANGELOG.md
 ├── LICENSE
+├── docs/
+│   └── demo.gif
 ├── agent/
 │   ├── agent.py
 │   └── llm_agent.py
