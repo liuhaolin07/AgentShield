@@ -1,4 +1,7 @@
-# AgentShield V1.6
+# AgentShield V1.6.1
+
+[![CI](https://github.com/liuhaolin07/AgentShield/actions/workflows/ci.yml/badge.svg)](https://github.com/liuhaolin07/AgentShield/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 AgentShield is a small, runnable security layer for tool-using agents. Every
 file read and outbound HTTP call passes through middleware that can allow or
@@ -36,7 +39,7 @@ Tool execution
 - Protection against leaking sensitive tool results back to the model API.
 - Allowed file roots that prevent model-generated arbitrary local file reads.
 - Detection of Dots `ak_...` credentials.
-- Fifteen offline tests, including a scripted fake-model tool-calling loop.
+- Eighteen offline tests, including a scripted fake-model tool-calling loop.
 
 V1.5 also introduced:
 
