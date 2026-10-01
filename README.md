@@ -176,6 +176,11 @@ Runtime decisions are appended to `logs/audit.jsonl`:
 
 The runtime `logs/` directory is ignored by Git.
 
+## Security policy
+
+See [SECURITY.md](SECURITY.md) for supported versions and how to report a
+vulnerability privately (please do not open a public issue).
+
 ## Test
 
 ```bash
@@ -189,6 +194,9 @@ AgentShield/
 ├── main.py
 ├── policy.yaml
 ├── run_dots_live.ps1
+├── SECURITY.md
+├── CHANGELOG.md
+├── LICENSE
 ├── agent/
 │   ├── agent.py
 │   └── llm_agent.py
