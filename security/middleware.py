@@ -6,6 +6,10 @@ from os import PathLike
 from typing import Any
 
 from security.audit import DEFAULT_AUDIT_PATH, write_audit_event
+from security.capabilities import (
+    CapabilityRegistry,
+    builtin_registry,
+)
 from security.policy import DEFAULT_POLICY_PATH, PolicyError, load_policy
 from security.scanner import scan_sensitive
 
@@ -16,6 +20,7 @@ class SecurityDecision:
 
     allowed: bool
     reason: str
+    capability: str | None = None
 
     def __bool__(self) -> bool:
         return self.allowed
@@ -29,6 +34,7 @@ def _finish_decision(
     agent: str,
     tool: str,
     audit_path: str | PathLike[str],
+    capability: str | None = None,
 ) -> SecurityDecision:
     decision = "ALLOW" if allowed else "BLOCK"
     try:
@@ -38,13 +44,14 @@ def _finish_decision(
             decision=decision,
             reason=reason,
             path=audit_path,
+            capability=capability,
         )
     except OSError:
         print("BLOCKED: Audit log unavailable")
-        return SecurityDecision(False, "audit_error")
+        return SecurityDecision(False, "audit_error", capability)
 
     print(message)
-    return SecurityDecision(allowed, reason)
+    return SecurityDecision(allowed, reason, capability)
 
 
 def check_tool_call(
@@ -54,9 +61,21 @@ def check_tool_call(
     agent: str = "simple-agent",
     policy_path: str | PathLike[str] = DEFAULT_POLICY_PATH,
     audit_path: str | PathLike[str] = DEFAULT_AUDIT_PATH,
+    registry: CapabilityRegistry | None = None,
 ) -> SecurityDecision:
-    """Evaluate policy, scan outbound data, and audit the final decision."""
+    """Evaluate policy, scan outbound data, and audit the final decision.
+
+    ``registry=None`` keeps the V1.6.1 name-whitelist behavior: only the
+    literal names ``file``/``http``/``model`` are recognized.  Passing an
+    explicit :class:`CapabilityRegistry` lets additional agent-visible tool
+    names resolve to the same capability (and therefore the same policy
+    branch and executor) — the setup required for threat-preserving
+    representation-sensitivity measurements.
+    """
     print("[AgentShield] Checking...")
+    if registry is None:
+        registry = builtin_registry()
+    capability = registry.resolve(tool)
 
     try:
         policy = load_policy(policy_path)
@@ -68,9 +87,10 @@ def check_tool_call(
             agent=agent,
             tool=tool,
             audit_path=audit_path,
+            capability=capability,
         )
 
-    if tool not in {"file", "http", "model"}:
+    if capability is None:
         return _finish_decision(
             allowed=False,
             reason="unsupported_tool",
@@ -78,9 +98,10 @@ def check_tool_call(
             agent=agent,
             tool=tool,
             audit_path=audit_path,
+            capability=capability,
         )
 
-    if tool == "file":
+    if capability == "file_read":
         path = str(args.get("path", ""))
         if not path:
             return _finish_decision(
@@ -90,6 +111,7 @@ def check_tool_call(
                 agent=agent,
                 tool=tool,
                 audit_path=audit_path,
+                capability=capability,
             )
         if policy.blocks_file(path):
             return _finish_decision(
@@ -99,6 +121,7 @@ def check_tool_call(
                 agent=agent,
                 tool=tool,
                 audit_path=audit_path,
+                capability=capability,
             )
         if not policy.allows_file(path):
             return _finish_decision(
@@ -108,9 +131,10 @@ def check_tool_call(
                 agent=agent,
                 tool=tool,
                 audit_path=audit_path,
+                capability=capability,
             )
 
-    if tool in {"http", "model"}:
+    if capability in {"http_send", "model_call"}:
         data = str(args.get("data", ""))
         url = str(args.get("url", ""))
         if scan_sensitive(data) or scan_sensitive(url):
@@ -121,6 +145,7 @@ def check_tool_call(
                 agent=agent,
                 tool=tool,
                 audit_path=audit_path,
+                capability=capability,
             )
 
         if not policy.allows_url(url):
@@ -131,6 +156,7 @@ def check_tool_call(
                 agent=agent,
                 tool=tool,
                 audit_path=audit_path,
+                capability=capability,
             )
 
     return _finish_decision(
@@ -140,6 +166,7 @@ def check_tool_call(
         agent=agent,
         tool=tool,
         audit_path=audit_path,
+        capability=capability,
     )
 
 
@@ -150,6 +177,7 @@ def secure_tool_call(
     agent: str = "simple-agent",
     policy_path: str | PathLike[str] = DEFAULT_POLICY_PATH,
     audit_path: str | PathLike[str] = DEFAULT_AUDIT_PATH,
+    registry: CapabilityRegistry | None = None,
 ) -> bool:
     """Backward-compatible boolean wrapper around :func:`check_tool_call`."""
     return check_tool_call(
@@ -158,4 +186,5 @@ def secure_tool_call(
         agent=agent,
         policy_path=policy_path,
         audit_path=audit_path,
+        registry=registry,
     ).allowed

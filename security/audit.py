@@ -16,9 +16,10 @@ def write_audit_event(
     decision: str,
     reason: str,
     path: str | Path = DEFAULT_AUDIT_PATH,
-) -> dict[str, str]:
+    capability: str | None = None,
+) -> dict[str, str | None]:
     """Append one decision without recording tool arguments or payload data."""
-    event = {
+    event: dict[str, str | None] = {
         "time": datetime.now(timezone.utc)
         .isoformat(timespec="seconds")
         .replace("+00:00", "Z"),
@@ -27,6 +28,8 @@ def write_audit_event(
         "decision": decision,
         "reason": reason,
     }
+    if capability is not None:
+        event["capability"] = capability
 
     audit_path = Path(path)
     audit_path.parent.mkdir(parents=True, exist_ok=True)
