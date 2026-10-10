@@ -10,6 +10,10 @@ Baseline: V1.7 `d1e0552`, 92 tests and HELD 82 / FAILED 0 / UNRUN 4 over two
 repeats. Stage 1 `c65ceb0`: 108 tests. Stage 2 `963935d`: 120 tests and identical
 V1.7 statuses, with real source-to-sink validation. Stage 3 candidate `b3a2808`:
 133 tests passed without skips, four-arm development run and charts verified.
+Final regression adds configuration/CLI, source-scoping and explicit negative
+controls: **143 tests passed, zero failures/skips**. V1.7 remains 82/0/4 with
+82 HELD→HELD and four UNRUN→UNRUN. Runtime/evaluator source hashes still match
+the pre-holdout candidate; only tests, documentation and CI were added afterward.
 
 The dataset `v1.8-explicit-flow-1` was frozen in stage 1: 23 development and 11
 holdout contracts. Development has 14 attack, six benign and three control cases;
@@ -54,7 +58,10 @@ through the same GuardedRuntime middleware gate before the same HTTP executor.
 | Scanner + Taint | The same scanner/policy plus explicit source constraints and strict tracking at sinks |
 
 All arms carry the same wrappers and perform the same explicit transforms. This
-is an enforcement ablation: common labeling/transform cost is shared. The
+is an enforcement ablation: common labeling/transform cost is shared. Source
+classification is trusted: frozen case annotations configure confidentiality
+identically in all arms. These results validate propagation given accurate
+labels, not an automatic classifier's accuracy. The
 transport canary intentionally turns enforcement off identically in every arm;
 it is a control, never a detection success. Canary and normal delivery must
 succeed before dependent network conclusions are allowed. Unsupported third-party
@@ -158,6 +165,12 @@ Complete raw JSON/CSV, traces, arrivals and command/exit metadata remain locally
   CSV and SVG/PNG figures before holdout.
 - `logs/v1.8/holdout-first/`: first untouched holdout report, CSV/figures and
   invocation metadata binding candidate commit and first-run index.
+- `logs/v1.8/final/`: final 143-test regression, unchanged V1.7 comparison and
+  CI-gate mutation checks. The gate rejects missing reports, unsupported defense
+  credit, altered inputs/cohorts and invalid observations.
+- `logs/v1.8/restricted/`: explicit no-loopback run, all 92 assessments UNRUN
+  over one development repeat across four arms, exit 2. No defense credit and
+  all classification denominators zero; missing evidence is not success.
 
 Durable [summary JSON, metrics CSV and per-case outcome CSV](results/v1.8/)
 exclude raw payloads. They include the raw reports' SHA-256, frozen dataset digest,

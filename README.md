@@ -1,4 +1,4 @@
-# AgentShield V1.6.1 · V1.7 开发中
+# AgentShield · V1.8 开发中（保留 V1.7 基线）
 
 [English](README.en.md) · **中文**
 
@@ -8,6 +8,38 @@
 AgentShield 是一个面向「使用工具的 Agent」的小型、可运行安全层。每一次文件读取与每一条对外 HTTP 调用都会经过中间件——在工具真正执行之前，由中间件放行或拦截该动作。
 
 V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。`send_http` 工具目前仍只打印模拟结果，不发起真实网络请求。
+
+## V1.8：显式来源感知污点追踪
+
+在 V1.7 基线 `d1e0552` 上迭代，新增不可变的来源标签、转换记录和输出权限。支持拼接、切片、嵌套列表/字典、JSON、Base64、URL 编解码；即使敏感文件或工具结果不含已知密钥格式，也可按来源策略在 HTTP/模型发送前阻断。扫描与污点判断分别记录，普通数据仍可发送。污点能力默认关闭，原有 CLI 参数与模拟 HTTP 保持兼容。
+
+```bash
+python main.py "read normal log and send" --taint-config path/to/taint.json
+python -m evaluation --experiment v1.8 --split development --seed 17 --repeat 3 --output-dir logs/v18-development
+python -m evaluation --experiment v1.8 --split holdout --seed 17 --repeat 3 --output-dir logs/v18-holdout
+```
+
+配置示例：`{"sensitive_files":["test/data/confidential*.txt"],"sensitive_tools":["private_lookup"],"require_tracked":true}`。文件读取权限仍由原策略决定，污点配置单独定义来源保密性。使用方式、数据结构、精确支持范围见 [TAINT_TRACKING.md](docs/TAINT_TRACKING.md)。
+
+本轮 **143 项测试通过，无跳过**；V1.7 的 86 次评估逐项保持 **HELD 82 / FAILED 0 / UNRUN 4**。新数据集先冻结，完整候选 `b3a2808` 提交后首次运行保留集，未根据保留结果修改实现。Linux/Python 3.12.14、seed=17、三次重复的实际结果：
+
+| 组别 | 开发集攻击送达 ASR | 保留集攻击送达 ASR | 开发集正常完成 TCR | 开发集误报 FPR |
+| --- | --- | --- | --- | --- |
+| No Defense | 42/42 | 15/15 | 18/18 | 0/18 |
+| Static Rule | 39/42 | 15/15 | 12/18 | 6/18 |
+| Scanner（V1.7） | 36/42 | 12/15 | 18/18 | 0/18 |
+| Scanner + Taint（V1.8） | 0/42 | 0/15 | 18/18 | 0/18 |
+
+各组保留集正常完成均为 12/12。以上仅为依赖准确来源分类的探索性合成实验；重复样本不代表更多独立攻击。不支持的转换/隐式信息流保留为 UNRUN，控制项、缺失或无效证据不进入指标分母。对照组真实 FAILED 保留，因此四组评估命令退出 1。完整指标（含 Precision/Recall、延迟、分子分母）、[JSON/CSV 汇总](docs/results/v1.8/)、图表和失败分析见 [EXPERIMENT_V1.8.md](docs/EXPERIMENT_V1.8.md)。
+
+科研绘图为可选依赖，核心仅需标准库：
+
+```bash
+python -m pip install -r requirements-research.txt
+python -m evaluation.plot logs/v18-development/report.json
+```
+
+追踪仅覆盖显式包装操作。普通字符串操作、第三方库转换、模型改写和隐式信息流不受保证；错误来源分类或有权限的调用方重新标为普通值仍可外传，负对照测试已实测这些缺陷。未合并 main，未发布正式版本。
 
 ## V1.7 第一阶段：独立安全评估
 
@@ -25,7 +57,7 @@ python -m evaluation --seed 17 --repeat 2 --output-dir logs/evaluation
 
 `run_llm_agent_result` 分别返回 `model_finished`、工具执行 `evidence` 和 `completed`。只有模型完成声明、没有工具执行的运行会返回未完成；调用方还可指定 `required_tools` 和 `require_real_http`，模拟发送不能证明真实 HTTP 完成。默认完成条件是有成功执行的工具，不保证任意自然语言任务的语义目标。CLI 参数保持兼容；LLM 运行缺少执行证据时退出码为 2。
 
-报告写入 Git 忽略的 `logs/evaluation/report.json` 和 `cases.csv`。有 FAILED 时命令退出码为 1；只有 UNRUN 时为 2。详细测试条件、安全边界与后续验收门槛见[评估说明](docs/EVALUATION.md)。污点追踪和四组论文级对照实验尚未实现。
+报告写入 Git 忽略的 `logs/evaluation/report.json` 和 `cases.csv`。有 FAILED 时命令退出码为 1；只有 UNRUN 时为 2。详细测试条件、安全边界与后续验收门槛见[评估说明](docs/EVALUATION.md)。上述为保留的 V1.7 历史结果；V1.8 的显式污点 MVP 和探索性四组实验见上文，完整信息流追踪仍未实现。
 
 ## 流程
 
@@ -231,4 +263,4 @@ AgentShield/
 
 ## 下一步方向
 
-按[分阶段计划](docs/REVIEW-v1.7.md)继续扩充独立保留样本，再加入来源感知的显式污点追踪 MVP，最后构建 No Defense、Static Rule、Scanner、Scanner + Taint 四组实验。所有指标和图表必须由实际执行证据计算，并报告误报、失败与未运行条件。
+在已有显式污点 MVP 和四组探索性实验上，增加外部保留样本、真实 Agent 任务、细粒度传播与误报研究、独立复现及统计分析。生产网络、文件竞态和审计完整性仍需单独验证；详见[实验局限与论文所需工作](docs/EXPERIMENT_V1.8.md)。

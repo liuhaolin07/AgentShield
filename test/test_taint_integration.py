@@ -14,7 +14,7 @@ from evaluation.receiver import LoopbackReceiver
 from security.middleware import check_tool_call
 from security.runtime import GuardedRuntime
 from security.scanner import inspect_sensitive
-from security.taint import TaintError, TaintedValue, concat, url_encode
+from security.taint import SinkTarget, SourceRecord, TaintError, TaintedValue, concat, url_encode
 from security.taint_context import TaintContext
 from test_llm_agent import FakeDotsClient, final_response, tool_response
 
@@ -222,6 +222,57 @@ class TaintIntegrationTests(unittest.TestCase):
                                                context=TaintContext(self.root), defense_mode="no_defense")):
             with self.assertRaises(TaintError):
                 factory()
+
+    def test_sensitive_tool_ingress_blocks_without_sensitive_file_parent(self):
+        runtime = self.runtime()
+        with redirect_stdout(io.StringIO()):
+            value = runtime.tool_output("fixture_tool", lambda: "opaque synthetic tool return", reference="tool-only")
+            result = runtime.send(self.receiver.target.origin + "/model", value, sink="model")
+        self.assertFalse(result.executed)
+        self.assertEqual(result.decision.reason, "taint_sensitive_source")
+        self.assertFalse(result.decision.checks.explain()["scanner"]["detected"])
+        self.assertEqual(result.decision.checks.taint[0].sources[0].category, "tool")
+
+    def test_scoped_sensitive_origin_can_deliver_only_to_explicit_target(self):
+        target = SinkTarget("http", self.receiver.target.origin)
+        value = TaintedValue.from_source("opaque synthetic scoped data", SourceRecord.create("fixture", "scoped-case"),
+                                         sensitive=True, allowed_targets=frozenset({target}), forbidden_targets=frozenset())
+        with redirect_stdout(io.StringIO()):
+            allowed = self.runtime().send(self.receiver.url, value)
+            denied = self.runtime().send("http://127.0.0.1:1/receive", value)
+        self.assertTrue(allowed.executed)
+        self.assertIsNotNone(allowed.receipt)
+        self.assertFalse(denied.executed)
+        self.assertEqual(denied.decision.reason, "taint_sensitive_source")
+        self.assertEqual(len(self.receiver.arrivals), 1)
+
+    def test_llm_tool_classification_alone_protects_public_file_content(self):
+        client = FakeDotsClient([tool_response("1", "read_file", {"path": "data/public.txt"}), final_response("Done")])
+        client.endpoint = self.receiver.target.origin + "/model"
+        with redirect_stdout(io.StringIO()):
+            result = run_llm_agent_result("Read.", client=client, policy_path=self.policy, audit_path=self.audit,
+                                         taint_context=TaintContext(self.root, sensitive_tools=frozenset({"read_file"})))
+        self.assertFalse(result.completed)
+        self.assertEqual(len(client.sent_payloads), 1)
+        last = json.loads(self.audit.read_text().splitlines()[-1])
+        self.assertEqual(last["reason"], "taint_sensitive_source")
+        self.assertFalse(last["checks"]["scanner"]["detected"])
+
+    def test_incorrect_source_classification_is_a_real_protection_gap(self):
+        with redirect_stdout(io.StringIO()):
+            runtime = self.runtime(context=TaintContext(self.root))
+            result = TaintAgent(runtime).run(path="data/private.txt", operations=[], url=self.receiver.url)
+        self.assertTrue(result.completed)
+        self.assertEqual(self.receiver.arrivals[0]["body"], self.private.read_text())
+        self.assertFalse(result.outbound.decision.checks.explain()["scanner"]["detected"])
+
+    def test_privileged_reclassification_of_revealed_data_is_out_of_scope(self):
+        with redirect_stdout(io.StringIO()):
+            runtime = self.runtime()
+            value = runtime.read("data/private.txt").value
+            result = runtime.send(self.receiver.url, TaintedValue.literal(value.reveal()))
+        self.assertTrue(result.executed)
+        self.assertEqual(self.receiver.arrivals[0]["body"], self.private.read_text())
 
 
 if __name__ == "__main__":
