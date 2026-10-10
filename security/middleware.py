@@ -12,7 +12,7 @@ from security.capabilities import (
     builtin_registry,
 )
 from security.policy import DEFAULT_POLICY_PATH, PolicyError, load_policy
-from security.scanner import scan_sensitive
+from security.scanner import inspect_sensitive
 
 
 @dataclass(frozen=True)
@@ -180,7 +180,18 @@ def check_tool_call(
         url = args.get("url")
         if not isinstance(data, str) or not isinstance(url, str):
             return invalid_arguments()
-        if scan_sensitive(data) or scan_sensitive(url):
+        inspections = (inspect_sensitive(data), inspect_sensitive(url))
+        if any(result.limited for result in inspections):
+            return _finish_decision(
+                allowed=False,
+                reason="scan_limit",
+                message="BLOCKED: Sensitive-data inspection budget exceeded",
+                agent=agent,
+                tool=tool,
+                audit_path=audit_path,
+                capability=capability,
+            )
+        if any(result.detected for result in inspections):
             return _finish_decision(
                 allowed=False,
                 reason="sensitive_data",

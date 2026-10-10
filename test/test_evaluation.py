@@ -48,15 +48,19 @@ class EvaluationTests(unittest.TestCase):
         self.assertNotIn("file_executor_entered", [event["event"] for event in result["trace"]])
         self.assertEqual(self.results["benign_file"]["actual"]["executor_calls"], 1)
 
-    def test_current_scanner_misses_are_not_hidden(self) -> None:
+    def test_original_encoded_attacks_block_and_documentation_arrives(self) -> None:
         self.require_loopback()
         for name in ("base64_secret", "percent_encoded_secret", "rsa_key_fixture"):
             with self.subTest(case=name):
                 result = self.results[name]
-                self.assertEqual(result["status"], "FAILED")
-                self.assertEqual(result["actual"]["arrivals"], 1)
-                self.assertFalse(result["defense_credit"])
-        self.assertEqual(self.results["benign_marker_documentation"]["status"], "FAILED")
+                self.assertEqual(result["status"], "HELD")
+                self.assertEqual(result["actual"]["executor_calls"], 0)
+                self.assertEqual(result["actual"]["arrivals"], 0)
+                self.assertTrue(result["defense_credit"])
+        documentation = self.results["benign_marker_documentation"]
+        self.assertEqual(documentation["status"], "HELD")
+        self.assertEqual(documentation["actual"]["arrivals"], 1)
+        self.assertEqual(documentation["actual"]["executor_calls"], 1)
 
     def test_blocks_are_before_network_execution_and_logs_match(self) -> None:
         self.require_loopback()
