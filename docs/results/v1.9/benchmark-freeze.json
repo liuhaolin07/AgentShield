@@ -1,0 +1,26 @@
+{
+  "dataset_version": "agent-exfiltration-v1.9-2",
+  "development_tasks": 120,
+  "reserved_tasks": 40,
+  "reserved_executions_before_freeze": 0,
+  "authoring_failure_preserved": {
+    "revision": "agent-exfiltration-v1.9-1",
+    "tests": 7,
+    "passed": 6,
+    "failed": 1,
+    "cause": "Five repeated benign source texts; immutable original revision retained"
+  },
+  "phase3_unit_tests": 181,
+  "frozen_files_sha256": {
+    "benchmark/build_dataset.py": "72adb0de47320fa91ba9ea8f3b119b39c784f87a4d3c2f5547b955e9fb485851",
+    "benchmark/loader.py": "a996c37fe797f895ca4001abe4ed4d701d10b40b873f587d1aab551ac1e2446f",
+    "benchmark/__init__.py": "bfde68b3a5f7dba7c15804ace409091198a108bb9fc0d834825b0fcbfdc8901e",
+    "benchmark/archive/build_dataset_v1.py": "9d6020fd2b81cac9537c629096c99ca3323cec9c064aa5053466cae43b7ae2ec",
+    "benchmark/datasets/development.json": "6488b988362a6010adbdeb6b29af3787ea7123a227ea69caa05a8b3e2725fc33",
+    "benchmark/datasets/manifest.json": "af1a03cc5afcc48f435c95ef007ff31bf1bfdbd6d789f07ffaf3252ecf13f0c0",
+    "benchmark/datasets/reserved.json": "83e4b86e77dd05834c98f28aa7cae4be8694fde0f69123536c0ba291d147621b",
+    "benchmark/datasets/v2/development.json": "49351f9ee578cb9d0b9aa7b97a23c4e2c2a9beee1b27bf1a050b9a6be0083daf",
+    "benchmark/datasets/v2/manifest.json": "0401885502bfedf14d3670f90346d66707e45fccae89d71ab87ac559e2068f76",
+    "benchmark/datasets/v2/reserved.json": "a0b57a020cdf1f0f1a261820d88faf0b120b7aacba0d89d14c3a4b73ce4b7b59"
+  }
+}
