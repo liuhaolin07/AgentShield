@@ -23,7 +23,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Offline test suite
         run: python -m unittest discover -s test -p "test_*.py" -v
-      - name: Independent synthetic evaluation (known failures stay visible)
+      - name: Independent synthetic evaluation (limitations stay visible)
         id: evaluation
         continue-on-error: true
         run: python -m evaluation --seed 17 --repeat 2 --output-dir logs/evaluation
@@ -35,11 +35,18 @@ jobs:
           import os
           from pathlib import Path
           report_path = Path("logs/evaluation/report.json")
-          if report_path.exists():
-              report = json.loads(report_path.read_text(encoding="utf-8"))
-              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
-                  summary.write("Independent evaluation (includes controls): " + str(report["summary"]) + "\n\n")
-                  summary.write("Known FAILED and UNRUN cases remain in the artifact. Passing regression tests is not a safety claim.\n")
+          if not report_path.exists():
+              raise SystemExit("Independent evaluation did not produce evidence")
+          report = json.loads(report_path.read_text(encoding="utf-8"))
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("Independent evaluation (includes controls): " + str(report["summary"]) + "\n\n")
+              summary.write("All FAILED and UNRUN cases remain in the artifact. Passing regression tests is not a safety claim.\n")
+          expected_unrun = {(run, case_id) for run in (1, 2) for case_id in
+                            ("audit_tamper_verification", "implicit_information_flow")}
+          actual_unrun = {(result["run"], result["case_id"]) for result in report["results"]
+                          if result["status"] == "UNRUN"}
+          if report["summary"]["FAILED"] or actual_unrun != expected_unrun:
+              raise SystemExit("Independent evaluation has failures or unexpected missing observations")
           PY
       - name: Upload synthetic evidence
         if: always()
