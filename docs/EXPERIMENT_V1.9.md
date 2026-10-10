@@ -19,7 +19,8 @@ Development ran on Linux / Python 3.12.14, seed 17, three repeats before the
 candidate commit. Reports record 39 implementation/evaluator source hashes;
 the committed candidate must match them before first reserved execution.
 The report's HEAD field alone does not establish dirty-tree source identity.
-Candidate and reserved evidence will be recorded after that first execution.
+Candidate c8eebca was committed before first reserved execution; its full identity
+and matching source hashes are recorded in [candidate freeze](results/v1.9/candidate-freeze.json).
 Reserved cases have not been used for implementation debugging. They share
 operation families with development: this is not external blind attack-family
 validation. Repeats reuse cases, not independent attacks.
@@ -113,6 +114,38 @@ Unrounded data, category strata and exclusions: [summary](results/v1.9/developme
 [ablations CSV](results/v1.9/development-ablations.csv).
 
 ![Actual development outcomes](figures/v1.9/development-outcomes.svg)
+
+## First reserved results (no implementation tuning)
+
+840 assessments: HELD 339 / FAILED 354 / UNRUN 147, with zero invalid supported
+observations. Each arm has 120 records: 21 unsupported and six controls excluded,
+leaving 81 attacks (27 unique supported × 3) and 12 benign (four unique × 3).
+The report HEAD is the committed candidate c8eebca; all 39 implementation and
+evaluator hashes match development and remain unchanged after this execution.
+
+| Group | HELD / FAILED / UNRUN | ASR | ABR / Recall | TCR | FPR | Precision |
+| --- | --- | --- | --- | --- | --- | --- |
+| No Defense | 18 / 81 / 21 | 81/81 | 0/81 | 12/12 | 0/12 | 0/0 UNKNOWN |
+| Static Rule | 27 / 72 / 21 | 66/81 | 15/81 | 6/12 | 6/12 | 15/21 |
+| Scanner | 45 / 54 / 21 | 54/81 | 27/81 | 12/12 | 0/12 | 27/27 |
+| Taint | 87 / 12 / 21 | 6/81 | 75/81 | 6/12 | 6/12 | 75/81 |
+| Full | 90 / 9 / 21 | 3/81 | 78/81 | 6/12 | 6/12 | 78/84 |
+| Source only | 54 / 45 / 21 | 45/81 | 36/81 | 12/12 | 0/12 | 36/36 |
+| Detect only | 18 / 81 / 21 | 81/81 | 0/81 | 12/12 | 0/12 | 0/0 UNKNOWN |
+
+Full's three leaks are one incorrectly public opaque source × three repeats.
+Its six benign failures are two public projections × three repeats. Four unique
+normal cases are too few for a population FPR estimate, but **6/12 observed
+false blocks / 50% task completion is a material utility limitation**. It is
+neither removed from the denominator nor described as a defense success.
+
+Full vs A1/A2/A3/A4 adds 51/42/78/0 attack blocks and 6/6/6/0 benign blocks
+(93 matched assessments each). Full's paired benign additional latency is
+2.164 ms over only six pairs. Static's -1.126 ms paired delta is retained noise,
+not a speedup claim; other exact costs and memory deltas remain in the
+[reserved summary](results/v1.9/reserved-summary.json) and CSVs.
+
+![Actual first reserved outcomes](figures/v1.9/reserved-outcomes.svg)
 
 ## Retained failures and missing coverage
 

@@ -43,5 +43,13 @@
     "logs/v1.9/phase4/independent-gate-tests.txt": "fa41bdee18bd608565474c2c8981f15b7c801b529703a25ebf9382c7ee68a1fd",
     "logs/v1.9/phase4/independent-gate.txt": "944c229304bd8294f796ec69dc8f9411407bdcc8c71491a6500dec8609d4c1f1"
   },
-  "reserved_executions_before_candidate_commit": 0
+  "reserved_executions_before_candidate_commit": 0,
+  "first_reserved_gate": {
+    "split": "reserved",
+    "rows": 840,
+    "dataset_sha256": "a0b57a020cdf1f0f1a261820d88faf0b120b7aacba0d89d14c3a4b73ce4b7b59",
+    "result": "passed"
+  },
+  "candidate_commit": "c8eebca40fbf6b3767c463b85b61961ee6d143a1",
+  "implementation_hashes_match_before_after_reserved": true
 }

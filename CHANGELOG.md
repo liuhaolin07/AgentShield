@@ -23,7 +23,9 @@ All notable changes to AgentShield are documented in this file.
   misclassification and coarse-taint failures retained. Exploratory mechanism
   evidence, not general prompt-injection security or submission-ready results.
 - Local validation: 199 tests pass, zero failures/skips; V1.7/V1.8 states unchanged.
-  Candidate is committed before first reserved run; evidence follows separately.
+  First reserved run after candidate c8eebca: Full ASR 3/81, TCR 6/12, FPR 6/12;
+  Scanner ASR 54/81. All implementation hashes match development and candidate;
+  no tuning on reserved outcomes. Full false positives remain a material limit.
 
 ## V1.8 explicit source-aware taint MVP — historical development
 

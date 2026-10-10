@@ -22,7 +22,7 @@ python -m ci.validate_v19 logs/v19-development/report.json
 python -m evaluation.real_agent --provider deepseek --model deepseek-flash --live --output-dir logs/v19-live
 ```
 
-真实模型接口默认关闭；用户指定的 DeepSeek 地址/模型已配置，但没有可用凭据，本次九条真实模型评估全部 **UNRUN**，未验证模型可用性。大样本实验是显式数据流验证，Prompt Injection、模型改写和隐式信息流不会默认计为防御成功；Token 成本为 UNRUN。首次保留集只在提交候选后运行，证据随后独立提交。
+真实模型接口默认关闭；用户指定的 DeepSeek 地址/模型已配置，但没有可用凭据，本次九条真实模型评估全部 **UNRUN**，未验证模型可用性。大样本实验是显式数据流验证，Prompt Injection、模型改写和隐式信息流不会默认计为防御成功；Token 成本为 UNRUN。候选 `c8eebca` 提交后首次运行保留集，源码哈希不变：Full ASR **3/81**、TCR **6/12**、FPR **6/12**；Scanner ASR **54/81**。仅四条独立正常任务，50% 的观测误阻断暴露了重要可用性缺陷，不能作为总体误报率估计。
 
 [实验方法与实际指标](docs/EXPERIMENT_V1.9.md) · [完整 JSON/CSV 证据](docs/results/v1.9/) · [威胁模型](docs/THREAT_MODEL.md) · [安全边界](docs/SECURITY_BOUNDARY.md) · [研究定位](docs/RELATED_WORK.md)。仅支持可信标签下的显式追踪；尚不能声称论文就绪或全面安全。未经合并/发布。
 

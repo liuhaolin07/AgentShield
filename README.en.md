@@ -41,8 +41,10 @@ Live calls default off. User-selected DeepSeek endpoint/model are configured,
 but no credential was available: all nine live assessments are **UNRUN**, model
 availability unverified. The larger benchmark validates explicit flow, not real
 model reasoning. Injection, model rewrites and implicit flows are not credited;
-token cost is UNRUN. First reserved execution follows a committed candidate and
-its evidence is committed separately.
+token cost is UNRUN. First reserved execution followed candidate c8eebca with unchanged hashes:
+Full ASR **3/81**, TCR **6/12**, FPR **6/12**; Scanner ASR **54/81**. Only four
+unique benign cases: the observed 50% false-block rate exposes material utility
+loss and is not a population FPR estimate.
 
 [Methods/results](docs/EXPERIMENT_V1.9.md), [full JSON/CSV evidence](docs/results/v1.9/),
 [threat model](docs/THREAT_MODEL.md), [boundary](docs/SECURITY_BOUNDARY.md),
