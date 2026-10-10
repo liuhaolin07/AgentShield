@@ -23,3 +23,28 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Offline test suite
         run: python -m unittest discover -s test -p "test_*.py" -v
+      - name: Independent synthetic evaluation (known failures stay visible)
+        id: evaluation
+        continue-on-error: true
+        run: python -m evaluation --seed 17 --repeat 2 --output-dir logs/evaluation
+      - name: Evaluation summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report_path = Path("logs/evaluation/report.json")
+          if report_path.exists():
+              report = json.loads(report_path.read_text(encoding="utf-8"))
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+                  summary.write("Independent evaluation (includes controls): " + str(report["summary"]) + "\n\n")
+                  summary.write("Known FAILED and UNRUN cases remain in the artifact. Passing regression tests is not a safety claim.\n")
+          PY
+      - name: Upload synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: independent-evaluation-python-${{ matrix.python-version }}
+          path: logs/evaluation/
+          retention-days: 7
