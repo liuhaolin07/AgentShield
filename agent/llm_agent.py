@@ -12,6 +12,7 @@ from security.middleware import check_tool_call
 from security.policy import DEFAULT_POLICY_PATH
 from tools.file_tool import read_file
 from tools.http_tool import send_http
+from tools.local_http import LocalHTTPTarget, LocalTransportError
 
 
 AGENT_NAME = "dots-agent"
@@ -135,6 +136,7 @@ def _execute_tool_call(
     *,
     policy_path: str | PathLike[str],
     audit_path: str | PathLike[str],
+    local_http_target: LocalHTTPTarget | None = None,
 ) -> ToolExecutionResult:
     try:
         name, arguments = _parse_tool_arguments(tool_call)
@@ -173,8 +175,16 @@ def _execute_tool_call(
         )
         if not decision:
             return ToolExecutionResult(f"BLOCKED: {decision.reason}", True)
-        send_http(arguments["url"], arguments["data"])
-        return ToolExecutionResult("ALLOWED: simulated HTTP send completed", False)
+        if local_http_target is None:
+            send_http(arguments["url"], arguments["data"])
+            return ToolExecutionResult("ALLOWED: simulated HTTP send completed", False)
+        try:
+            receipt = send_http(
+                arguments["url"], arguments["data"], local_target=local_http_target,
+            )
+        except LocalTransportError as error:
+            return ToolExecutionResult(f"ERROR: local_transport:{error.reason}", True)
+        return ToolExecutionResult(f"ALLOWED: local HTTP response {receipt.status}", False)
 
     decision = check_tool_call(
         name,
@@ -193,6 +203,7 @@ def run_llm_agent(
     policy_path: str | PathLike[str] = DEFAULT_POLICY_PATH,
     audit_path: str | PathLike[str] = DEFAULT_AUDIT_PATH,
     max_steps: int = MAX_STEPS,
+    local_http_target: LocalHTTPTarget | None = None,
 ) -> bool:
     """Run a guarded Dots tool-calling loop and print the final model response."""
     active_client = client or DotsClient()
@@ -232,6 +243,7 @@ def run_llm_agent(
                 tool_call,
                 policy_path=policy_path,
                 audit_path=audit_path,
+                local_http_target=local_http_target,
             )
             messages.append(
                 {
