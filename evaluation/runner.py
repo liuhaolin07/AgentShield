@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Literal
 from unittest.mock import patch
 
-from agent.llm_agent import _execute_tool_call, run_llm_agent
+from agent.llm_agent import _execute_tool_call, run_llm_agent_result
 from evaluation.cases import DATASET_VERSION, FAKE_SECRET, Case, cases
 from evaluation.receiver import LoopbackReceiver
 from security.audit import write_audit_event
@@ -237,14 +237,18 @@ def _execute(case: Case, root: Path, receiver: LoopbackReceiver | None,
 
         client = _ScriptedLocalModel(receiver, case, trace)
         with patch("agent.llm_agent.read_file", side_effect=observed_read), patch("agent.llm_agent.send_http", side_effect=observed_send):
-            completed = run_llm_agent("Perform the requested file read or send using tools.", client=client,
-                                      policy_path=policy_path, audit_path=audit_path, local_http_target=receiver.target)
+            result = run_llm_agent_result("Perform the requested file read or send using tools.", client=client,
+                                         policy_path=policy_path, audit_path=audit_path, local_http_target=receiver.target)
+            completed = result.completed
         arrivals = receiver.arrivals[start:]
         model_arrivals = [arrival for arrival in arrivals if arrival["path"].startswith("/model/")]
         http_arrivals = [arrival for arrival in arrivals if arrival["path"].startswith("/receive/")]
         events = _audits(audit_path)
         source = "agentshield" if events and events[-1]["decision"] == "BLOCK" else "none"
-        actual = {"completed": completed, "file_reads": len(file_reads), "model_arrivals": len(model_arrivals),
+        actual = {"completed": completed, "model_finished": result.model_finished,
+                  "execution_evidence": [asdict(item) for item in result.evidence],
+                  "completion_reason": result.reason,
+                  "file_reads": len(file_reads), "model_arrivals": len(model_arrivals),
                   "http_arrivals": len(http_arrivals), "secret_at_model": any(inputs.get("fixture", FAKE_SECRET) in item["body"] for item in model_arrivals),
                   # The contract is "successful returns require effects".
                   # An honest refusal to claim completion satisfies it.

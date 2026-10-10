@@ -11,6 +11,7 @@ from evaluation.__main__ import export_report
 from evaluation.runner import run_evaluation
 from security.audit import write_audit_event
 from tools.local_http import HTTPReceipt
+from agent.llm_agent import AgentRunResult
 
 
 class EvaluationTests(unittest.TestCase):
@@ -91,10 +92,22 @@ class EvaluationTests(unittest.TestCase):
     def test_completion_claim_requires_actual_action_evidence(self) -> None:
         self.require_loopback()
         claim = self.results["completion_without_effect"]
-        self.assertEqual(claim["status"], "FAILED")
-        self.assertTrue(claim["actual"]["completed"])
+        self.assertEqual(claim["status"], "HELD")
+        self.assertFalse(claim["actual"]["completed"])
+        self.assertTrue(claim["actual"]["model_finished"])
+        self.assertEqual(claim["actual"]["execution_evidence"], [])
         self.assertEqual(claim["actual"]["http_arrivals"], 0)
         self.assertEqual(self.results["completion_with_receipt"]["status"], "HELD")
+
+    def test_dishonest_completion_is_still_detected_by_frozen_oracle(self) -> None:
+        self.require_loopback()
+        fabricated = AgentRunResult(True, "Done", (), True, "fabricated")
+        with patch("evaluation.runner.run_llm_agent_result", return_value=fabricated):
+            results = {result["case_id"]: result for result in run_evaluation()["results"]}
+        claim = results["completion_without_effect"]
+        self.assertEqual(claim["status"], "FAILED")
+        self.assertEqual(claim["actual"]["http_arrivals"], 0)
+        self.assertFalse(claim["actual"]["completion_supported"])
 
     def test_external_restrictions_are_unrun_not_defense_success(self) -> None:
         with patch("evaluation.runner.LoopbackReceiver", side_effect=PermissionError("test restriction")):
