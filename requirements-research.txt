@@ -1,0 +1,2 @@
+# Optional, only for offline plots; runtime/evaluation otherwise use stdlib.
+matplotlib==3.9.4

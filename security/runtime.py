@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
+import time
 
 from security.middleware import SecurityDecision, check_tool_call
 from security.inspection import DEFENSE_MODES
@@ -38,10 +39,12 @@ class GuardedRuntime:
 
     def _check(self, capability: str, args: dict[str, Any]) -> SecurityDecision:
         self.observe("policy_check_started", capability=capability)
+        started = time.perf_counter_ns()
         decision = check_tool_call(capability, args, agent="explicit-agent", policy_path=self.policy_path,
                                    audit_path=self.audit_path, defense_mode=self.defense_mode,
                                    taint_policy=self.context.policy)
-        self.observe("policy_decision", allowed=decision.allowed, reason=decision.reason,
+        duration_ns = time.perf_counter_ns() - started
+        self.observe("policy_decision", allowed=decision.allowed, reason=decision.reason, duration_ns=duration_ns,
                      checks=decision.checks.explain() if decision.checks else None)
         return decision
 

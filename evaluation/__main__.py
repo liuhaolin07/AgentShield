@@ -14,6 +14,8 @@ def export_report(report: dict[str, Any], output: Path) -> None:
     (output / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     fields = ["run", "case_id", "principle", "category", "status", "block_source",
               "defense_credit", "duration_ms", "inputs", "policy", "expected", "actual", "trace", "differences", "limitations"]
+    if report.get("experiment") == "v1.8":
+        fields = ["arm", *fields]
     with (output / "cases.csv").open("w", encoding="utf-8", newline="") as destination:
         writer = csv.DictWriter(destination, fieldnames=fields)
         writer.writeheader()
@@ -27,11 +29,24 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, default=Path("logs/evaluation"))
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--repeat", type=int, default=1)
+    parser.add_argument("--experiment", choices=["v1.7", "v1.8"], default="v1.7")
+    parser.add_argument("--split", choices=["development", "holdout"], default="development")
+    parser.add_argument("--charts", action="store_true", help="Export research charts (optional matplotlib dependency)")
     args = parser.parse_args()
     if args.repeat < 1:
         parser.error("--repeat must be positive")
-    report = run_evaluation(seed=args.seed, repeat=args.repeat)
+    if args.experiment == "v1.8":
+        from evaluation.experiment import run_experiment
+        report = run_experiment(split=args.split, seed=args.seed, repeat=args.repeat)
+    else:
+        report = run_evaluation(seed=args.seed, repeat=args.repeat)
     export_report(report, args.output_dir)
+    if report.get("experiment") == "v1.8":
+        from evaluation.plot import export_metrics_csv
+        export_metrics_csv(report, args.output_dir)
+        if args.charts:
+            from evaluation.plot import export_charts
+            export_charts(report, args.output_dir)
     print(json.dumps(report["summary"]))
     for result in report["results"]:
         if result["status"] != "HELD":

@@ -10,7 +10,7 @@ from security.taint import TaintDecision
 
 DEFENSE_MODES = ("no_defense", "static_rule", "scanner", "scanner_taint")
 STATIC_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
-    r"sk-[a-zA-Z0-9]{20,}", r"ak_[a-zA-Z0-9_-]{16,}", r"PASSWORD", r"AWS_SECRET",
+    r"sk-[a-zA-Z0-9]+", r"\bak_[a-zA-Z0-9]{16,}\b", r"PASSWORD", r"AWS_SECRET",
     r"-----BEGIN OPENSSH PRIVATE KEY-----",
 ))
 
