@@ -2,7 +2,32 @@
 
 All notable changes to AgentShield are documented in this file.
 
-## Unreleased — V1.8 explicit source-aware taint MVP
+## Unreleased — V1.9 research hardening
+
+- Session-issued immutable handles, keyed source hashes/HMAC and replayed
+  transform-chain verification; bounded data-only AgentPort rejects manual
+  wrappers, label stripping, fake literals, cross-session/source mismatch.
+  Trusted runtime boundary only, not unrestricted Python isolation.
+- Opt-in stdlib DeepSeek/Qwen real-model tool loop, fixed official endpoints,
+  bounded tool schemas/budgets and model-payload checks; user-selected
+  deepseek-flash. Missing credentials: nine live assessments UNRUN, no fabricated
+  model/token evidence. Legacy Dots/CLI and V1.8 API remain compatible.
+- Frozen 120-development / 40-reserved authored benchmark, independent authoring
+  oracle, pinned hashes and preserved initial revision/authoring failure.
+- Five baselines, four ablations (seven unique arms), real local receivers,
+  separate detection/enforcement attribution, actual fractions/exclusions,
+  paired instrumented latency/Python allocation measurements and JSON/CSV/charts.
+- Independent stdlib evidence gate and mutation tests, CI evidence artifacts,
+  threat/boundary/benchmark/experiment and research-positioning documentation.
+- Actual development: 2,520 assessments; Full ASR 6/246, TCR 48/54, FPR 6/54;
+  misclassification and coarse-taint failures retained. Exploratory mechanism
+  evidence, not general prompt-injection security or submission-ready results.
+- Local validation: 199 tests pass, zero failures/skips; V1.7/V1.8 states unchanged.
+  First reserved run after candidate c8eebca: Full ASR 3/81, TCR 6/12, FPR 6/12;
+  Scanner ASR 54/81. All implementation hashes match development and candidate;
+  no tuning on reserved outcomes. Full false positives remain a material limit.
+
+## V1.8 explicit source-aware taint MVP — historical development
 
 ### Added
 

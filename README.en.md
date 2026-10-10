@@ -1,4 +1,4 @@
-# AgentShield · V1.8 in development (V1.7 baseline preserved)
+# AgentShield · V1.9 in development (V1.7 / V1.8 baselines preserved)
 
 **English** · [中文](README.md)
 
@@ -14,7 +14,44 @@ tool-calling agent. The policy parser and API client use only the Python
 standard library. The `send_http` tool still prints a simulation instead of
 making a real network request.
 
-## V1.8: explicit source-aware taint tracking
+## V1.9: attested sources and independently checked experiments (development)
+
+Built on V1.8 ecfa751, the new runtime issues opaque handles, verifies source and
+transform chains, and exposes a bounded data-only AgentPort. Only trusted file,
+approved-tool and model adapters issue sources. Manual wrappers, fake literals,
+label stripping and cross-session handles are rejected before sends. Existing
+CLI, V1.7 scanner and V1.8 APIs/historical evidence remain compatible. **Private
+Python objects are not a sandbox**: runtime and data-only agent boundary are trusted.
+
+The frozen v2 dataset contains 120 development and 40 reserved tasks; five
+baselines and four ablations map to seven unique arms. Three development repeats
+produced 2,520 real loopback-observed assessments: HELD 1,122 / FAILED 1,020 /
+UNRUN 378. Scanner ASR **159/246**; Full ASR **6/246**, TCR **48/54**, FPR **6/54**.
+Source misclassification leaks and public-projection false positives remain
+FAILED. **199 tests pass**, with unchanged V1.7/V1.8 regression states.
+
+```bash
+python -m evaluation --experiment v1.9 --split development --seed 17 --repeat 3 --output-dir logs/v19-development
+python -m ci.validate_v19 logs/v19-development/report.json
+# Optional live model; configure DEEPSEEK_API_KEY securely outside the repository
+python -m evaluation.real_agent --provider deepseek --model deepseek-flash --live --output-dir logs/v19-live
+```
+
+Live calls default off. User-selected DeepSeek endpoint/model are configured,
+but no credential was available: all nine live assessments are **UNRUN**, model
+availability unverified. The larger benchmark validates explicit flow, not real
+model reasoning. Injection, model rewrites and implicit flows are not credited;
+token cost is UNRUN. First reserved execution followed candidate c8eebca with unchanged hashes:
+Full ASR **3/81**, TCR **6/12**, FPR **6/12**; Scanner ASR **54/81**. Only four
+unique benign cases: the observed 50% false-block rate exposes material utility
+loss and is not a population FPR estimate.
+
+[Methods/results](docs/EXPERIMENT_V1.9.md), [full JSON/CSV evidence](docs/results/v1.9/),
+[threat model](docs/THREAT_MODEL.md), [boundary](docs/SECURITY_BOUNDARY.md),
+[related work](docs/RELATED_WORK.md). Exploratory trusted-label evidence only;
+no broad security or paper-ready claim. No main merge or release.
+
+## V1.8: explicit source-aware taint tracking — historical results
 
 Built on V1.7 `d1e0552`, this branch adds immutable source labels, transformation
 lineage and per-source sink permissions. Explicit concat/slice, list/dictionary,

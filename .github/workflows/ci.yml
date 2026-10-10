@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, codex/v1.7-independent-evaluation]
+    branches: [main, codex/v1.7-independent-evaluation, codex/v1.8-taint-tracking]
 
 permissions:
   contents: read
@@ -58,7 +58,7 @@ jobs:
       - name: V1.8 development ablation (baseline failures stay visible)
         continue-on-error: true
         run: python -m evaluation --experiment v1.8 --split development --seed 17 --repeat 3 --output-dir logs/v18-development
-      - name: Reproduce frozen V1.8 holdout (no implementation tuning)
+      - name: V1.8 compatibility evaluation (historical inputs unchanged)
         continue-on-error: true
         run: python -m evaluation --experiment v1.8 --split holdout --seed 17 --repeat 3 --output-dir logs/v18-holdout
       - name: V1.8 evidence gate
@@ -105,6 +105,50 @@ jobs:
           path: |
             logs/v18-development/
             logs/v18-holdout/
+          retention-days: 7
+
+  v19-research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install optional plotting dependencies
+        run: python -m pip install -r requirements-research.txt
+      - name: V1.9 development (retain actual failures)
+        continue-on-error: true
+        run: python -m evaluation --experiment v1.9 --split development --seed 17 --repeat 3 --charts --output-dir logs/v19-development
+      - name: V1.9 reserved compatibility run (not a new blind evaluation)
+        continue-on-error: true
+        run: python -m evaluation --experiment v1.9 --split reserved --seed 17 --repeat 3 --charts --output-dir logs/v19-reserved
+      - name: Independently check contracts, receipts, audits, metrics and ablations
+        if: always()
+        run: python -m ci.validate_v19 logs/v19-development/report.json logs/v19-reserved/report.json
+      - name: Verify live model calls stay disabled without explicit opt-in
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+          execution = subprocess.run([sys.executable, '-m', 'evaluation.real_agent', '--provider', 'deepseek',
+                                      '--model', 'deepseek-flash', '--output-dir', 'logs/v19-live-disabled'])
+          if execution.returncode != 2:
+              raise SystemExit('Expected UNRUN exit code 2')
+          report = json.loads(Path('logs/v19-live-disabled/report.json').read_text())
+          if report['summary'] != {'HELD': 0, 'FAILED': 0, 'UNRUN': 9}:
+              raise SystemExit('Unexpected model observations')
+          PY
+      - name: Upload full evidence, including FAILED and UNRUN
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: v19-research-evidence
+          path: |
+            logs/v19-development/
+            logs/v19-reserved/
+            logs/v19-live-disabled/
           retention-days: 7
 
   research-figures:

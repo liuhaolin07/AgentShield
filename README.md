@@ -1,4 +1,4 @@
-# AgentShield · V1.8 开发中（保留 V1.7 基线）
+# AgentShield · V1.9 开发中（保留 V1.7 / V1.8 基线）
 
 [English](README.en.md) · **中文**
 
@@ -9,7 +9,24 @@ AgentShield 是一个面向「使用工具的 Agent」的小型、可运行安�
 
 V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。`send_http` 工具目前仍只打印模拟结果，不发起真实网络请求。
 
-## V1.8：显式来源感知污点追踪
+## V1.9：可信来源边界与可核验实验（开发中）
+
+在 V1.8 `ecfa751` 上迭代，新增运行时签发的不透明句柄、来源/转换链完整性检查和受限数据接口 `AgentPort`。文件、批准工具和模型适配器才能生成来源；手工包装、伪造 literal、标签剥离、跨会话句柄在新运行时发送前被拒绝。旧 CLI、V1.7 扫描器和 V1.8 公共 API/历史证据保持兼容。**同进程私有对象不是 Python 沙箱**；保护依赖可信运行时和仅通过数据接口调用的 Agent。
+
+已冻结 120 开发任务、40 保留任务（版本 agent-exfiltration-v1.9-2），五个基线、四个消融映射为七个独立组。开发集三次重复：2,520 条真实本机接收验证，HELD 1,122 / FAILED 1,020 / UNRUN 378。Scanner ASR **159/246**；Full ASR **6/246**、TCR **48/54**、FPR **6/54**。错误来源分类造成实际外泄，敏感聚合值的公共切片造成误阻断，均保留为 FAILED。199 项单元/集成测试通过；V1.7/V1.8 回归状态不变。
+
+```bash
+python -m evaluation --experiment v1.9 --split development --seed 17 --repeat 3 --output-dir logs/v19-development
+python -m ci.validate_v19 logs/v19-development/report.json
+# 可选真实模型；凭据通过 DEEPSEEK_API_KEY 安全配置，不写入仓库/命令行
+python -m evaluation.real_agent --provider deepseek --model deepseek-flash --live --output-dir logs/v19-live
+```
+
+真实模型接口默认关闭；用户指定的 DeepSeek 地址/模型已配置，但没有可用凭据，本次九条真实模型评估全部 **UNRUN**，未验证模型可用性。大样本实验是显式数据流验证，Prompt Injection、模型改写和隐式信息流不会默认计为防御成功；Token 成本为 UNRUN。候选 `c8eebca` 提交后首次运行保留集，源码哈希不变：Full ASR **3/81**、TCR **6/12**、FPR **6/12**；Scanner ASR **54/81**。仅四条独立正常任务，50% 的观测误阻断暴露了重要可用性缺陷，不能作为总体误报率估计。
+
+[实验方法与实际指标](docs/EXPERIMENT_V1.9.md) · [完整 JSON/CSV 证据](docs/results/v1.9/) · [威胁模型](docs/THREAT_MODEL.md) · [安全边界](docs/SECURITY_BOUNDARY.md) · [研究定位](docs/RELATED_WORK.md)。仅支持可信标签下的显式追踪；尚不能声称论文就绪或全面安全。未经合并/发布。
+
+## V1.8：显式来源感知污点追踪 — historical results
 
 在 V1.7 基线 `d1e0552` 上迭代，新增不可变的来源标签、转换记录和输出权限。支持拼接、切片、嵌套列表/字典、JSON、Base64、URL 编解码；即使敏感文件或工具结果不含已知密钥格式，也可按来源策略在 HTTP/模型发送前阻断。扫描与污点判断分别记录，普通数据仍可发送。污点能力默认关闭，原有 CLI 参数与模拟 HTTP 保持兼容。
 

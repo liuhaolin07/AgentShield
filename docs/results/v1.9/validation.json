@@ -1,0 +1,55 @@
+{
+  "unit_tests": {
+    "passed": 199,
+    "failed": 0,
+    "skipped": 0
+  },
+  "baseline_unit_tests": 143,
+  "independent_development_gate": {
+    "split": "development",
+    "rows": 2520,
+    "dataset_sha256": "49351f9ee578cb9d0b9aa7b97a23c4e2c2a9beee1b27bf1a050b9a6be0083daf",
+    "result": "passed"
+  },
+  "v17_regression": {
+    "HELD": 82,
+    "FAILED": 0,
+    "UNRUN": 4
+  },
+  "v18_regression": {
+    "no_defense": {
+      "HELD": 21,
+      "FAILED": 42,
+      "UNRUN": 6
+    },
+    "static_rule": {
+      "HELD": 18,
+      "FAILED": 45,
+      "UNRUN": 6
+    },
+    "scanner": {
+      "HELD": 27,
+      "FAILED": 36,
+      "UNRUN": 6
+    },
+    "scanner_taint": {
+      "HELD": 63,
+      "FAILED": 0,
+      "UNRUN": 6
+    }
+  },
+  "preserved_raw_logs_sha256": {
+    "logs/v1.9/phase4/final-unit-tests.txt": "79349bc52e315ecf5cc316840a15f569f4c32a7d318d49618e2320bbd8b46bda",
+    "logs/v1.9/phase4/independent-gate-tests.txt": "fa41bdee18bd608565474c2c8981f15b7c801b529703a25ebf9382c7ee68a1fd",
+    "logs/v1.9/phase4/independent-gate.txt": "944c229304bd8294f796ec69dc8f9411407bdcc8c71491a6500dec8609d4c1f1"
+  },
+  "reserved_executions_before_candidate_commit": 0,
+  "first_reserved_gate": {
+    "split": "reserved",
+    "rows": 840,
+    "dataset_sha256": "a0b57a020cdf1f0f1a261820d88faf0b120b7aacba0d89d14c3a4b73ce4b7b59",
+    "result": "passed"
+  },
+  "candidate_commit": "c8eebca40fbf6b3767c463b85b61961ee6d143a1",
+  "implementation_hashes_match_before_after_reserved": true
+}

@@ -1,0 +1,838 @@
+{
+  "schema_version": 1,
+  "experiment": "v1.9",
+  "dataset_version": "agent-exfiltration-v1.9-2",
+  "dataset_sha256": "a0b57a020cdf1f0f1a261820d88faf0b120b7aacba0d89d14c3a4b73ce4b7b59",
+  "split": "reserved",
+  "seed": 17,
+  "repeat": 3,
+  "candidate_commit": "c8eebca40fbf6b3767c463b85b61961ee6d143a1",
+  "source_sha256": {
+    "agent/__init__.py": "e88108980ee06817c523400311beedb329164dbb2ed832057159e3f28f5b7e57",
+    "agent/agent.py": "6c474323ea08e551eec15f736f5e77d5425100e8de5d17f6c7cd6e8b07d3cfab",
+    "agent/llm_agent.py": "82c39727b59fe3a2a574f90b9a18a21c536c1daa77f63f91cc328a5ac916b253",
+    "agent/research_agent.py": "d59598ee68bce7e666f5739445ae48d9f91774752f1295694fe4f23baeb7565c",
+    "agent/taint_agent.py": "9c52a7b22ecbbe0ea46fc5a28335279f049f11ae193f7588ba3de8b1e7e30c43",
+    "security/__init__.py": "0241698196e35e90b549ae1c3c58eec63958378c0cff49763ec6c69bd79f2247",
+    "security/attested_runtime.py": "8556b3ddce6162a945ce11a086b776179b23d2c2818f952a0cb1bb94c8e8636d",
+    "security/audit.py": "233cc6d0846d79fdc3431ea7698dbdb963be75e89f5676fe05d22953efcfcd27",
+    "security/capabilities.py": "c2cc644be85f24e4b9256a0acf47ae3837073e623ae2ec16ae39eec4af9f683d",
+    "security/inspection.py": "74c1ed23ec5162cee66dc1dcb13790bec39c353da9a250f5246caacfd7cae6ef",
+    "security/middleware.py": "c3af328763aba7a743916191ccb648ef834d012bb195656b37effc4b2f2e5393",
+    "security/policy.py": "aca1af4e00d419161bc50151ae31b2f71474e1897c2fad53e9c20c77d9249442",
+    "security/research_runtime.py": "ed9c4d2ba03ea212d83f5e26c6456a1129022694dadda9d5cad8b6bf443874b0",
+    "security/runtime.py": "ce42312609d83d3d7428dd20a3d739249650cb968544069d2a6f573ae65f1d04",
+    "security/scanner.py": "639025038337ac9dea18dcdec760ec171bf46c59b3c2b93beec36c4a7af3a1ab",
+    "security/taint.py": "3897181a17b915c6104f022b63c13304d77507f95551697101be54626d7809da",
+    "security/taint_context.py": "4c9e3f1468925875b6218334d09a0c80dd3775e3f51af6c8f73f7f47c1eecb4a",
+    "security/taint_integrity.py": "17cb20faf37ca8af7738cfadaaf12f3226b4852647384ebd4e6a18da470a72fa",
+    "evaluation/__init__.py": "07916e28063a4e833efca7fb4606f0166fc4d1bb98e0477386ef10b6660ecefb",
+    "evaluation/__main__.py": "f6905d2a4faeb76770c037b6ea131c323b0ac69807cdc506bd297563d5f4c315",
+    "evaluation/cases.py": "c960b69cd39c09998ff6fea4cd3967b456cb65e8f5eda1237c394e00d6dd955a",
+    "evaluation/compare.py": "2e2b90f7e122b6f359c8b7f2965924ce8544e5b64080c9687105ac89c649b6ef",
+    "evaluation/experiment.py": "46058448c29ebba5d47f291b24c5e8706d0faa64865245ea6b98890b202ea5c9",
+    "evaluation/plot.py": "b58b1aaab046e43f6fd9bc33dd67ff45e0df228a301f4af19df760d7edecf03f",
+    "evaluation/real_agent.py": "b0c2eae1f4cb4f684cf1460c85e0ebf3f1410ce02cca26334636702dd2c35eb9",
+    "evaluation/receiver.py": "7fc94b5eb8e9a2ea70f5210e4769db3653af6ae3e9cc7a969dcd2c617af2effe",
+    "evaluation/research.py": "97f22b7582c5471733c78304cfbc868879a72a0bcd7cf0782c7f5cc7cc9e21ff",
+    "evaluation/research_plot.py": "959c2ee6f51bd115bb4034da8b6170fde475c7cf3a344d50e3ebed286dd1b1d2",
+    "evaluation/runner.py": "ecdb065655cbeff6f7d0c1634b0260e4bf5c686aeb5dc47a6e1bca1ae64b17b9",
+    "tools/__init__.py": "ed2554f5a66c6ef8fa05986679b012b9d186f79f9a09682b357acb1025331041",
+    "tools/file_tool.py": "a4b2d0299e450a69d422df5baa27a11eaf7529f06168fb269821b783354573ce",
+    "tools/http_tool.py": "c390b0fb93fd11aa0131ccfc71c0d818bf47f92e250950f8b295f8883e98e544",
+    "tools/local_http.py": "dd575fab40d0ba9f16cd01fb176ab23fd0e02685645c95632acfc7a23392a2f2",
+    "model/__init__.py": "c9ffd663bfa4d70c6963b781e9867ae8d32c840bc5c2d90329de9d6498f70358",
+    "model/dots_client.py": "789a1e3db483c9678735383df06009ee9cd3e840de159b5c0dfceeda342016d0",
+    "model/research_client.py": "3d99972828a619a62bdaa73ddc3b982929f3ce56a034edbbbb61af5f4ec8a825",
+    "benchmark/__init__.py": "bfde68b3a5f7dba7c15804ace409091198a108bb9fc0d834825b0fcbfdc8901e",
+    "benchmark/build_dataset.py": "72adb0de47320fa91ba9ea8f3b119b39c784f87a4d3c2f5547b955e9fb485851",
+    "benchmark/loader.py": "a996c37fe797f895ca4001abe4ed4d701d10b40b873f587d1aab551ac1e2446f"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "memory_measurement": "tracemalloc Python allocations"
+  },
+  "conditions": {
+    "synthetic_only": true,
+    "live_llm": false,
+    "same_contracts_tools_executor_receiver": true,
+    "canaries": "enforcement off identically; excluded",
+    "model_sink": "controlled boundary, no inference",
+    "cost": "tracemalloc instrumented; common handle issuance; integrity verification disabled in B0-B2"
+  },
+  "summary": {
+    "HELD": 339,
+    "FAILED": 354,
+    "UNRUN": 147
+  },
+  "baseline_arms": [
+    "no_defense",
+    "static_rule",
+    "scanner",
+    "taint",
+    "full"
+  ],
+  "ablation_mapping": {
+    "A1": "scanner",
+    "A2": "source_only",
+    "A3": "detect_only",
+    "A4": "full"
+  },
+  "metrics": {
+    "no_defense": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 18,
+        "FAILED": 81,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 81,
+        "denominator": 81,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 12,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 81,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 12,
+        "FN": 81
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "attack_blocking_rate": {
+        "numerator": 0,
+        "denominator": 81,
+        "value": 0.0
+      },
+      "task_success_rate": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 12,
+          "mean": 0.0
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 12,
+          "mean": 0.0
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 24,
+          "blocked": 0,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 21,
+          "blocked": 0,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 6,
+          "blocked": 0,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 18,
+          "blocked": 0,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 12,
+          "blocked": 0,
+          "assessments": 12
+        }
+      }
+    },
+    "static_rule": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 27,
+        "FAILED": 72,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 66,
+        "denominator": 81,
+        "value": 0.8148148148148148
+      },
+      "TCR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "FPR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "precision": {
+        "numerator": 15,
+        "denominator": 21,
+        "value": 0.7142857142857143
+      },
+      "recall": {
+        "numerator": 15,
+        "denominator": 81,
+        "value": 0.18518518518518517
+      },
+      "confusion": {
+        "TP": 15,
+        "FP": 6,
+        "TN": 6,
+        "FN": 66
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 0.2692098709677419,
+        "minimum": -9.362507,
+        "maximum": 9.952366
+      },
+      "attack_blocking_rate": {
+        "numerator": 15,
+        "denominator": 81,
+        "value": 0.18518518518518517
+      },
+      "task_success_rate": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 6,
+          "mean": -1.1258308333333333
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 6,
+          "mean": 735.6666666666666
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 12,
+          "blocked": 12,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 18,
+          "blocked": 3,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 6,
+          "blocked": 0,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 18,
+          "blocked": 0,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 12,
+          "blocked": 0,
+          "assessments": 12
+        }
+      }
+    },
+    "scanner": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 45,
+        "FAILED": 54,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 54,
+        "denominator": 81,
+        "value": 0.6666666666666666
+      },
+      "TCR": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 12,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 27,
+        "denominator": 27,
+        "value": 1.0
+      },
+      "recall": {
+        "numerator": 27,
+        "denominator": 81,
+        "value": 0.3333333333333333
+      },
+      "confusion": {
+        "TP": 27,
+        "FP": 0,
+        "TN": 12,
+        "FN": 54
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 0.8972838494623655,
+        "minimum": -9.096042,
+        "maximum": 16.033963
+      },
+      "attack_blocking_rate": {
+        "numerator": 27,
+        "denominator": 81,
+        "value": 0.3333333333333333
+      },
+      "task_success_rate": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 12,
+          "mean": 3.641099333333333
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 12,
+          "mean": -3344.0
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 6,
+          "blocked": 18,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 12,
+          "blocked": 9,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 6,
+          "blocked": 0,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 18,
+          "blocked": 0,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 12,
+          "blocked": 0,
+          "assessments": 12
+        }
+      }
+    },
+    "taint": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 87,
+        "FAILED": 12,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 6,
+        "denominator": 81,
+        "value": 0.07407407407407407
+      },
+      "TCR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "FPR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "precision": {
+        "numerator": 75,
+        "denominator": 81,
+        "value": 0.9259259259259259
+      },
+      "recall": {
+        "numerator": 75,
+        "denominator": 81,
+        "value": 0.9259259259259259
+      },
+      "confusion": {
+        "TP": 75,
+        "FP": 6,
+        "TN": 6,
+        "FN": 6
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 2.548333430107527,
+        "minimum": -8.302917,
+        "maximum": 15.898817
+      },
+      "attack_blocking_rate": {
+        "numerator": 75,
+        "denominator": 81,
+        "value": 0.9259259259259259
+      },
+      "task_success_rate": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 6,
+          "mean": 0.2980800000000001
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 6,
+          "mean": -1662.5
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 6,
+          "blocked": 18,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 0,
+          "blocked": 21,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 0,
+          "blocked": 6,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 0,
+          "blocked": 18,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 0,
+          "blocked": 12,
+          "assessments": 12
+        }
+      }
+    },
+    "full": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 90,
+        "FAILED": 9,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 3,
+        "denominator": 81,
+        "value": 0.037037037037037035
+      },
+      "TCR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "FPR": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "precision": {
+        "numerator": 78,
+        "denominator": 84,
+        "value": 0.9285714285714286
+      },
+      "recall": {
+        "numerator": 78,
+        "denominator": 81,
+        "value": 0.9629629629629629
+      },
+      "confusion": {
+        "TP": 78,
+        "FP": 6,
+        "TN": 6,
+        "FN": 3
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 4.158371430107527,
+        "minimum": -7.710911,
+        "maximum": 22.35232
+      },
+      "attack_blocking_rate": {
+        "numerator": 78,
+        "denominator": 81,
+        "value": 0.9629629629629629
+      },
+      "task_success_rate": {
+        "numerator": 6,
+        "denominator": 12,
+        "value": 0.5
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 6,
+          "mean": 2.1637601666666666
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 6,
+          "mean": -2382.0
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 3,
+          "blocked": 21,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 0,
+          "blocked": 21,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 0,
+          "blocked": 6,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 0,
+          "blocked": 18,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 0,
+          "blocked": 12,
+          "assessments": 12
+        }
+      }
+    },
+    "source_only": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 54,
+        "FAILED": 45,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 45,
+        "denominator": 81,
+        "value": 0.5555555555555556
+      },
+      "TCR": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 12,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 36,
+        "denominator": 36,
+        "value": 1.0
+      },
+      "recall": {
+        "numerator": 36,
+        "denominator": 81,
+        "value": 0.4444444444444444
+      },
+      "confusion": {
+        "TP": 36,
+        "FP": 0,
+        "TN": 12,
+        "FN": 45
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 2.902724247311828,
+        "minimum": -4.91096,
+        "maximum": 17.144516
+      },
+      "attack_blocking_rate": {
+        "numerator": 36,
+        "denominator": 81,
+        "value": 0.4444444444444444
+      },
+      "task_success_rate": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 12,
+          "mean": 0.07257958333333325
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 12,
+          "mean": 3853.9166666666665
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 3,
+          "blocked": 21,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 12,
+          "blocked": 9,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 6,
+          "blocked": 0,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 18,
+          "blocked": 0,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 6,
+          "blocked": 6,
+          "assessments": 12
+        }
+      }
+    },
+    "detect_only": {
+      "assessments": 120,
+      "summary": {
+        "HELD": 18,
+        "FAILED": 81,
+        "UNRUN": 21
+      },
+      "ASR": {
+        "numerator": 81,
+        "denominator": 81,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 12,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 81,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 12,
+        "FN": 81
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 21
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 93,
+        "mean": 4.196744494623656,
+        "minimum": -8.562213,
+        "maximum": 24.739457
+      },
+      "attack_blocking_rate": {
+        "numerator": 0,
+        "denominator": 81,
+        "value": 0.0
+      },
+      "task_success_rate": {
+        "numerator": 12,
+        "denominator": 12,
+        "value": 1.0
+      },
+      "paired_cost": {
+        "population": "benign completed in both arms with equal executor counts",
+        "latency_ms": {
+          "pairs": 12,
+          "mean": 7.590261999999999
+        },
+        "python_peak_delta_bytes": {
+          "pairs": 12,
+          "mean": 51.5
+        },
+        "token_overhead": {
+          "status": "UNRUN",
+          "value": null,
+          "reason": "No live model usage in this experiment"
+        }
+      },
+      "by_attack_category": {
+        "direct_leakage": {
+          "arrived": 24,
+          "blocked": 0,
+          "assessments": 24
+        },
+        "encoding_attack": {
+          "arrived": 21,
+          "blocked": 0,
+          "assessments": 21
+        },
+        "memory_context_leakage": {
+          "arrived": 6,
+          "blocked": 0,
+          "assessments": 6
+        },
+        "multi_step_attack": {
+          "arrived": 18,
+          "blocked": 0,
+          "assessments": 18
+        },
+        "tool_result_leakage": {
+          "arrived": 12,
+          "blocked": 0,
+          "assessments": 12
+        }
+      }
+    }
+  },
+  "ablations": {
+    "A1": {
+      "arm": "scanner",
+      "matched_assessments": 93,
+      "additional_full_attack_blocks": 51,
+      "additional_full_benign_blocks": 6
+    },
+    "A2": {
+      "arm": "source_only",
+      "matched_assessments": 93,
+      "additional_full_attack_blocks": 42,
+      "additional_full_benign_blocks": 6
+    },
+    "A3": {
+      "arm": "detect_only",
+      "matched_assessments": 93,
+      "additional_full_attack_blocks": 78,
+      "additional_full_benign_blocks": 6
+    },
+    "A4": {
+      "arm": "full",
+      "matched_assessments": 93,
+      "additional_full_attack_blocks": 0,
+      "additional_full_benign_blocks": 0
+    }
+  },
+  "limitations": [
+    "Authored synthetic templates, not a third-party blind benchmark.",
+    "Prompt injection, unsupported transforms and implicit/rewrite cases are UNRUN.",
+    "Misclassification and coarse-taint false positives are intentionally retained.",
+    "Common handle protocol/issuance in all arms; not an arbitrary-code no-defense sandbox.",
+    "Gate time includes integrity/policy/audit; cost deltas use matched completed benign flows.",
+    "Python traced peak is not RSS; instrumentation affects latency; missing tokens are UNRUN.",
+    "Small fixed cases/repeats do not establish statistical generalization."
+  ],
+  "raw_evidence": {
+    "filename": "reserved-report.json.gz",
+    "uncompressed_sha256": "d1d7d0bd4c87cdbbf7fba5803bd82e7c46641941a057f68ada62c6dd93d52e29",
+    "rows": 840
+  }
+}

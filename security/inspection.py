@@ -28,9 +28,10 @@ class InspectionEvidence:
     mode: str
     scanner: tuple[ScanResult, ...] = ()
     taint: tuple[TaintDecision, ...] = ()
+    enforced: bool = True
 
     def explain(self) -> dict[str, Any]:
-        return {"mode": self.mode,
+        return {**({"enforced": False} if not self.enforced else {}), "mode": self.mode,
                 "scanner": {"active": bool(self.scanner),
                             "detected": any(result.detected for result in self.scanner),
                             "limited": any(result.limited for result in self.scanner),

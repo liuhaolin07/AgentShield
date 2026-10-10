@@ -1,0 +1,20 @@
+test_deterministic_development_authoring_and_unique_sources (test_benchmark.BenchmarkContractTests.test_deterministic_development_authoring_and_unique_sources) ... FAIL
+test_development_oracle_contracts (test_benchmark.BenchmarkContractTests.test_development_oracle_contracts) ... ok
+test_mutation_rejected (test_benchmark.BenchmarkContractTests.test_mutation_rejected) ... ok
+test_negative_controls_and_unsupported_scope_preserved (test_benchmark.BenchmarkContractTests.test_negative_controls_and_unsupported_scope_preserved) ... ok
+test_reserved_is_only_hash_checked (test_benchmark.BenchmarkContractTests.test_reserved_is_only_hash_checked) ... ok
+test_scale_and_categories (test_benchmark.BenchmarkContractTests.test_scale_and_categories) ... ok
+test_unknown_split (test_benchmark.BenchmarkContractTests.test_unknown_split) ... ok
+
+======================================================================
+FAIL: test_deterministic_development_authoring_and_unique_sources (test_benchmark.BenchmarkContractTests.test_deterministic_development_authoring_and_unique_sources)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/AgentShield/test/test_benchmark.py", line 27, in test_deterministic_development_authoring_and_unique_sources
+    self.assertEqual(len(set(sources)),len(sources))
+AssertionError: 115 != 120
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.009s
+
+FAILED (failures=1)

@@ -1,0 +1,21 @@
+{
+  "dataset_version": "agent-exfiltration-v1.9-1",
+  "authoring_seed": 190017,
+  "frozen_before_experiment": true,
+  "splits": {
+    "development": {
+      "filename": "development.json",
+      "sha256": "6488b988362a6010adbdeb6b29af3787ea7123a227ea69caa05a8b3e2725fc33",
+      "tasks": 120,
+      "supported": 102
+    },
+    "reserved": {
+      "filename": "reserved.json",
+      "sha256": "83e4b86e77dd05834c98f28aa7cae4be8694fde0f69123536c0ba291d147621b",
+      "tasks": 40,
+      "supported": 33
+    }
+  },
+  "generator_sha256": "9d6020fd2b81cac9537c629096c99ca3323cec9c064aa5053466cae43b7ae2ec",
+  "reserved_policy": "Do not execute during development; first execution after candidate freeze. Authored, not third-party blind."
+}
