@@ -4,7 +4,6 @@ import json
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from os import PathLike
-from pathlib import Path
 from typing import Any, Protocol
 
 from model.dots_client import DotsAPIError, DotsClient
@@ -150,14 +149,9 @@ def _execute_tool_call(
         return ToolExecutionResult("BLOCKED: invalid_tool_call", True)
 
     if name == "read_file":
-        raw_path = arguments.get("path", "")
-        path = Path(str(raw_path))
-        if not path.is_absolute():
-            path = Path(policy_path).resolve().parent / path
-        path = path.resolve()
         decision = check_tool_call(
             "file",
-            {"path": str(path)},
+            arguments,
             agent=AGENT_NAME,
             policy_path=policy_path,
             audit_path=audit_path,
@@ -165,23 +159,21 @@ def _execute_tool_call(
         if not decision:
             return ToolExecutionResult(f"BLOCKED: {decision.reason}", True)
         try:
-            return ToolExecutionResult(read_file(path), False)
-        except OSError:
+            return ToolExecutionResult(read_file(decision.resolved_path), False)
+        except (OSError, UnicodeError):
             return ToolExecutionResult("ERROR: file could not be read", True)
 
     if name == "send_http":
-        url = str(arguments.get("url", ""))
-        data = str(arguments.get("data", ""))
         decision = check_tool_call(
             "http",
-            {"url": url, "data": data},
+            arguments,
             agent=AGENT_NAME,
             policy_path=policy_path,
             audit_path=audit_path,
         )
         if not decision:
             return ToolExecutionResult(f"BLOCKED: {decision.reason}", True)
-        send_http(url, data)
+        send_http(arguments["url"], arguments["data"])
         return ToolExecutionResult("ALLOWED: simulated HTTP send completed", False)
 
     decision = check_tool_call(

@@ -2,7 +2,8 @@
 
 from collections.abc import Mapping
 from dataclasses import dataclass
-from os import PathLike
+from os import PathLike, fspath
+from pathlib import Path
 from typing import Any
 
 from security.audit import DEFAULT_AUDIT_PATH, write_audit_event
@@ -16,11 +17,16 @@ from security.scanner import scan_sensitive
 
 @dataclass(frozen=True)
 class SecurityDecision:
-    """An allow/block decision with a machine-readable reason."""
+    """A decision, plus the approved canonical path for file executors.
+
+    ``resolved_path`` is not written to the audit log and does not guarantee
+    atomic protection against filesystem changes between check and open.
+    """
 
     allowed: bool
     reason: str
     capability: str | None = None
+    resolved_path: Path | None = None
 
     def __bool__(self) -> bool:
         return self.allowed
@@ -35,6 +41,7 @@ def _finish_decision(
     tool: str,
     audit_path: str | PathLike[str],
     capability: str | None = None,
+    resolved_path: Path | None = None,
 ) -> SecurityDecision:
     decision = "ALLOW" if allowed else "BLOCK"
     try:
@@ -46,12 +53,12 @@ def _finish_decision(
             path=audit_path,
             capability=capability,
         )
-    except OSError:
+    except (OSError, UnicodeError):
         print("BLOCKED: Audit log unavailable")
         return SecurityDecision(False, "audit_error", capability)
 
     print(message)
-    return SecurityDecision(allowed, reason, capability)
+    return SecurityDecision(allowed, reason, capability, resolved_path)
 
 
 def check_tool_call(
@@ -79,7 +86,7 @@ def check_tool_call(
 
     try:
         policy = load_policy(policy_path)
-    except (OSError, PolicyError):
+    except (OSError, PolicyError, UnicodeError):
         return _finish_decision(
             allowed=False,
             reason="policy_error",
@@ -101,8 +108,28 @@ def check_tool_call(
             capability=capability,
         )
 
+    def invalid_arguments() -> SecurityDecision:
+        return _finish_decision(
+            allowed=False,
+            reason="invalid_arguments",
+            message="BLOCKED: Invalid tool arguments",
+            agent=agent,
+            tool=tool,
+            audit_path=audit_path,
+            capability=capability,
+        )
+
+    if not isinstance(args, Mapping):
+        return invalid_arguments()
+
+    resolved_path: Path | None = None
     if capability == "file_read":
-        path = str(args.get("path", ""))
+        path = args.get("path", "")
+        if not isinstance(path, (str, PathLike)):
+            return invalid_arguments()
+        path = fspath(path)
+        if not isinstance(path, str):
+            return invalid_arguments()
         if not path:
             return _finish_decision(
                 allowed=False,
@@ -113,7 +140,21 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if policy.blocks_file(path):
+        try:
+            if "\0" in path:
+                raise ValueError("Invalid path")
+            resolved_path = policy.resolve_file(path)
+        except (OSError, RuntimeError, ValueError):
+            return _finish_decision(
+                allowed=False,
+                reason="invalid_file_path",
+                message="BLOCKED: File path could not be resolved",
+                agent=agent,
+                tool=tool,
+                audit_path=audit_path,
+                capability=capability,
+            )
+        if policy.blocks_file(path) or policy.blocks_file(resolved_path):
             return _finish_decision(
                 allowed=False,
                 reason="blocked_file",
@@ -123,7 +164,7 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if not policy.allows_file(path):
+        if not policy.allows_file(resolved_path):
             return _finish_decision(
                 allowed=False,
                 reason="file_outside_allowed_roots",
@@ -135,8 +176,10 @@ def check_tool_call(
             )
 
     if capability in {"http_send", "model_call"}:
-        data = str(args.get("data", ""))
-        url = str(args.get("url", ""))
+        data = args.get("data")
+        url = args.get("url")
+        if not isinstance(data, str) or not isinstance(url, str):
+            return invalid_arguments()
         if scan_sensitive(data) or scan_sensitive(url):
             return _finish_decision(
                 allowed=False,
@@ -167,6 +210,7 @@ def check_tool_call(
         tool=tool,
         audit_path=audit_path,
         capability=capability,
+        resolved_path=resolved_path,
     )
 
 
