@@ -32,12 +32,28 @@ the opt-in experimental transport pins one local port, performs no DNS lookup
 and never follows redirects. Ordinary demos still simulate HTTP. Transport or
 environment restrictions receive no AgentShield defense credit.
 
-Observed on 2026-10-10, Linux/Python 3.12.14: **66 automated tests passed**;
-21 independent cases repeated twice produced **HELD 28 / FAILED 10 / UNRUN 4**.
-Failures include encoded data, RSA key headers, benign-document false positives
-and unsupported completion claims. Audit tamper verification and implicit
-information flow are UNRUN. Counts include controls and are not ASR or a general
-security score.
+Observed on 2026-10-10, Linux/Python 3.12.14: **92 automated tests passed**.
+The original 21 cases changed from **HELD 28 / FAILED 10 / UNRUN 4** to
+**HELD 38 / FAILED 0 / UNRUN 4** over two repeats. An expanded baseline was
+recorded before defense changes: 43 cases repeated twice changed from
+**HELD 40 / FAILED 42 / UNRUN 4** to **HELD 82 / FAILED 0 / UNRUN 4**.
+Inputs, policies and expected contracts were preserved. Audit tamper verification
+and implicit information flow remain UNRUN. These synthetic counts include
+controls; they are not ASR or a general security score.
+
+The scanner now inspects nested JSON, percent-encoding and standard/URL-safe
+Base64 within explicit resource budgets, and recognizes RSA/EC/OpenSSH/PKCS#8
+private-key headers. Ordinary PASSWORD documentation, public keys and legal API
+parameters have delivery controls. `scan_limit` distinguishes exhausted budgets
+from detected credentials. [Iteration evidence and all case transitions](docs/ITERATION2.md)
+describe remaining heuristic limits.
+
+`run_llm_agent_result` separates `model_finished`, tool `evidence` and
+`completed`. A final model claim without an executed tool is incomplete.
+Callers may specify `required_tools` and `require_real_http`; simulated sends
+cannot satisfy a real-HTTP contract. Default completion requires successful tool
+work, not semantic proof of an arbitrary task. CLI options remain unchanged;
+LLM runs without required execution evidence return exit code 2.
 
 Evidence is exported to Git-ignored `logs/evaluation/report.json` and `cases.csv`.
 The evaluator exits 1 for FAILED cases or 2 for UNRUN cases without failures.
@@ -270,7 +286,7 @@ replaced with real credentials.
 
 ## Next direction
 
-Follow the [staged plan](docs/REVIEW-v1.7.md): bounded structured/encoded scanning,
+Follow the [staged plan](docs/REVIEW-v1.7.md): extend held-out scanner controls,
 explicit provenance-aware taint tracking, then No Defense, Static Rule, Scanner
 and Scanner + Taint experiments. Derive metrics and plots from actual execution
 evidence, including false positives, failures and missing observations.

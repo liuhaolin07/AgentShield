@@ -4,6 +4,12 @@ Reviewed on 2026-10-10 against `main` at
 `d6702767c5e20b4ede8e764e29cb412b96a2b74a`. This is a source review and an
 offline, synthetic-data assessment, not a security certification.
 
+This document preserves the original review and risk register. Subsequent fixes
+to bounded scanning, documentation false positives, completion evidence and
+tool protocol handling are recorded in [iteration two](ITERATION2.md), with
+actual before/after results. The live-provider, process mediation, filesystem
+race, audit integrity and complete information-flow boundaries remain open.
+
 ## Architecture and coverage
 
 ```mermaid

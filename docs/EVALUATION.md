@@ -1,8 +1,9 @@
 # V1.7 independent evaluation
 
-This development iteration implements the first evaluation stage. Scanner
-enhancement, explicit taint tracking and the four-arm research benchmark are
-subsequent stages in [the review and plan](REVIEW-v1.7.md).
+This branch implements independent evaluation and a bounded scanner/completion
+iteration. Explicit taint tracking and the four-arm research benchmark remain
+subsequent stages in [the review and plan](REVIEW-v1.7.md). See the
+[iteration record](ITERATION2.md) for preserved baselines and every case change.
 
 ## Run and reproduce
 
@@ -22,9 +23,10 @@ The experimental executor requires `local_target=LocalHTTPTarget(port)`;
 
 The evaluator exits **1** if any case is FAILED, **2** if there are UNRUN cases
 and no failures, and **0** only when every contract is HELD. A nonzero result is
-intentional for the present baseline. Passing unit tests means the implementation
-and measurement logic passed those tests; it does not make the defense failures
-disappear.
+intentional while audit integrity and implicit information flow remain UNRUN.
+Passing unit tests establishes only the tested behavior and measurement logic.
+CI fails on any FAILED case or unexpected UNRUN while retaining the raw report
+and the evaluator's nonzero exit in its artifact.
 
 ## Case meanings and attribution
 
@@ -73,7 +75,7 @@ redirect/address limitations identified in the review; it is not exercised by
 this evaluation. Policies, interpreter, receiver and fixture generator are trusted.
 All fixtures are fabricated; never substitute real keys or private data.
 
-## Observed baseline
+## Historical baseline before scanner/completion fixes
 
 Observed on 2026-10-10, Linux, Python 3.12.14, dataset
 `v1.7-synthetic-1`, seed 17, two repeats:
@@ -85,7 +87,7 @@ Observed on 2026-10-10, Linux, Python 3.12.14, dataset
 
 Per repeat, all five principles are represented:
 
-| Principle | Evidence and current result |
+| Principle | Historical evidence and result |
 | --- | --- |
 | Clean Start | A fresh source copy runs the deterministic CLI from another directory, with no inherited API credential or dependency installation. HELD within this scope. |
 | Blocked Means Blocked | Protected file read does not enter the reader; denied and sensitive HTTP requests do not enter the sender; benign file/read and HTTP controls execute. HELD for those cases. |
@@ -108,6 +110,90 @@ and environment permissions when comparing runs. Reports contain only synthetic
 fixtures and are written under the Git-ignored `logs/` directory. CI uploads
 them as short-lived artifacts; raw evaluation failures remain visible.
 
+## Current iteration and comparison
+
+On the same Linux/Python 3.12.14 environment, `v1.7-synthetic-2`, seed 17,
+two repeats: **92 tests passed without skips; HELD 82 / FAILED 0 / UNRUN 4**.
+The expanded pre-fix baseline was **HELD 40 / FAILED 42 / UNRUN 4**. Of 86
+assessments, 42 changed FAILED→HELD, 40 stayed HELD and four stayed UNRUN.
+The original 21-case subset now has **HELD 38 / FAILED 0 / UNRUN 4**.
+All 14 benign cases passed in both final repeats; this is an authored control
+set, not a population estimate of false-positive rate. Three resource cases are
+controls rejected with `scan_limit`, not sensitive detections.
+
+The expanded baseline was committed at `a0e1aa7` before scanner fixes. Original
+case inputs, policies and expected answers are unchanged. Before recording this
+baseline, the completion consistency predicate was made explicit: successful
+return implies observed send, while honest incomplete return is permitted. The
+old implementation still failed; all original 42 assessment statuses stayed
+identical. A mutation test forcing success with no execution still yields FAILED.
+Expected answers are never derived from scanner rules.
+
+Preserve reports before modifying a defense, then compare:
+
+```bash
+python -m evaluation.compare logs/before/report.json logs/after/report.json \
+  --output-dir logs/comparison
+```
+
+The comparator requires the same case/run set, inputs, policy, expected contract,
+limitations, seed, repeat and oracle conditions. Only each run's canary loopback
+origin is normalized; different destinations and payloads stay exact. It exports
+every before/after status, blocker/reason and duration, and rejects changed
+contracts instead of declaring improvement. Durations are fixture-inclusive.
+
+Without loopback permission, the current 43-case run produced **HELD 3 / FAILED
+0 / UNRUN 40**, exit 2. These missing observations receive no defense credit.
+
+## Scanner and completion boundary
+
+The scanner checks both HTTP/model `data` and `url`, including serialized model
+history. JSON objects preserve duplicate keys, credential keys are normalized,
+and decoded string values re-enter a bounded work queue. URL decoding and
+standard/URL-safe Base64 support mixed layers, missing padding and line wrapping.
+Malformed data falls back to raw checks; depth/resource exhaustion rejects the
+operation before its executor. Findings contain kind and transformations, not
+matched values. Audit reasons distinguish `sensitive_data` from `scan_limit`.
+
+Default limits are per field/inspection:
+
+| Resource | Maximum |
+| --- | ---: |
+| Input/view length | 65,536 Python characters |
+| Total scheduled view characters | 262,144 |
+| Decode/JSON-string transformations | 4 layers |
+| Distinct queued views | 128 |
+| JSON nesting | 16 levels |
+| JSON nodes across parses | 2,048 |
+| JSON parse attempts | 32 |
+| Unique Base64 candidates attempted | 64 |
+
+JSON depth is checked before parsing; numeric parsing avoids unbounded integer
+conversion. Work and storage are bounded by these limits, candidate deduplication
+and bounded queue size. Unit tests exercise every budget and pathological inputs
+inside a 10-second subprocess limit. No claim of constant time or production
+latency is made. Large legitimate payloads can be rejected; that tradeoff is
+explicitly recorded rather than credited as detected credentials.
+
+`run_llm_agent_result` returns model termination, sanitized successful-executor
+observations, completion and reason separately. By default at least one tool
+must finish successfully. `required_tools=("read_file", "send_http")` expresses
+a tool-work contract, and `require_real_http=True` requires a successful local
+HTTP receipt; simulation cannot satisfy it. This does not verify arbitrary task
+semantics or a precise destination/data contract; independent receiver contracts
+perform that check in evaluation. Tool evidence is in-memory observation, not
+cryptographically protected audit proof. CLI flags remain compatible; the bool
+wrapper now returns False (LLM CLI exit 2) for unsupported completion claims.
+The deterministic demo retains its existing exit behavior, so CLI process exit
+alone is not completion evidence.
+
+Tool responses allow at most 16 calls per batch, each with at most 65,536 raw
+argument characters, and six model rounds. Invalid entry types, IDs, duplicate
+IDs, JSON syntax or oversized batches are rejected before any sibling executes.
+An unsupported name is rejected by dispatch and cannot borrow an internal
+capability's ALLOW audit. Policy/semantic errors can still stop a batch after
+an earlier valid action; batches are not transactional.
+
 ## Limits and next acceptance gate
 
 This sample set is small, authored and synthetic. Its status counts include
@@ -118,8 +204,14 @@ prompt-injection benchmark, implicit-flow tracking, cryptographic audit integrit
 or proof against malicious code in the Python process. Clean Start uses an
 isolated source copy/subprocess, not a freshly provisioned operating system.
 
-The next change should improve bounded structured/encoded scanning against
-these observed misses while adding benign encoded controls. Explicit taint
-tracking should follow with documented supported transformations. The four
+Heuristics do not reconstruct secrets split across separate calls, remember
+provenance, decode arbitrary compression/encryption, or detect every novel key.
+Bare generic `token` fields are allowed for cursor/identifier controls; recognized
+credential fields, signatures and Authorization headers are scanned. Placeholder
+exemptions and key-header heuristics have limits: literal examples of real-looking
+credentials/private-key headers can still be blocked. Concatenated recognizable
+strings are inspected, but this is not split-value taint tracking.
+
+Explicit taint tracking should follow with documented supported transformations. The four
 defense arms and paper-style metrics/plots should only be added once their
 per-case evidence and denominators are implemented and checked.
