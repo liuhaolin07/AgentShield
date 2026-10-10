@@ -3,6 +3,7 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -17,9 +18,10 @@ def write_audit_event(
     reason: str,
     path: str | Path = DEFAULT_AUDIT_PATH,
     capability: str | None = None,
-) -> dict[str, str | None]:
+    checks: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Append one decision without recording tool arguments or payload data."""
-    event: dict[str, str | None] = {
+    event: dict[str, Any] = {
         "time": datetime.now(timezone.utc)
         .isoformat(timespec="seconds")
         .replace("+00:00", "Z"),
@@ -30,6 +32,8 @@ def write_audit_event(
     }
     if capability is not None:
         event["capability"] = capability
+    if checks is not None:
+        event["checks"] = checks
 
     audit_path = Path(path)
     audit_path.parent.mkdir(parents=True, exist_ok=True)

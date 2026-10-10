@@ -13,6 +13,8 @@ from security.capabilities import (
 )
 from security.policy import DEFAULT_POLICY_PATH, PolicyError, load_policy
 from security.scanner import inspect_sensitive
+from security.inspection import DEFENSE_MODES, InspectionEvidence, inspect_static
+from security.taint import SinkTarget, TaintError, TaintPolicy, TaintedValue, decide_taint
 
 
 @dataclass(frozen=True)
@@ -27,6 +29,7 @@ class SecurityDecision:
     reason: str
     capability: str | None = None
     resolved_path: Path | None = None
+    checks: InspectionEvidence | None = None
 
     def __bool__(self) -> bool:
         return self.allowed
@@ -42,6 +45,7 @@ def _finish_decision(
     audit_path: str | PathLike[str],
     capability: str | None = None,
     resolved_path: Path | None = None,
+    checks: InspectionEvidence | None = None,
 ) -> SecurityDecision:
     decision = "ALLOW" if allowed else "BLOCK"
     try:
@@ -52,13 +56,14 @@ def _finish_decision(
             reason=reason,
             path=audit_path,
             capability=capability,
+            checks=checks.explain() if checks else None,
         )
     except (OSError, UnicodeError):
         print("BLOCKED: Audit log unavailable")
-        return SecurityDecision(False, "audit_error", capability)
+        return SecurityDecision(False, "audit_error", capability, checks=checks)
 
     print(message)
-    return SecurityDecision(allowed, reason, capability, resolved_path)
+    return SecurityDecision(allowed, reason, capability, resolved_path, checks)
 
 
 def check_tool_call(
@@ -69,6 +74,8 @@ def check_tool_call(
     policy_path: str | PathLike[str] = DEFAULT_POLICY_PATH,
     audit_path: str | PathLike[str] = DEFAULT_AUDIT_PATH,
     registry: CapabilityRegistry | None = None,
+    defense_mode: str = "scanner",
+    taint_policy: TaintPolicy | None = None,
 ) -> SecurityDecision:
     """Evaluate policy, scan outbound data, and audit the final decision.
 
@@ -83,6 +90,9 @@ def check_tool_call(
     if registry is None:
         registry = builtin_registry()
     capability = registry.resolve(tool)
+    if defense_mode not in DEFENSE_MODES:
+        return _finish_decision(allowed=False, reason="invalid_defense_mode", message="BLOCKED: Invalid defense mode",
+                                agent=agent, tool=tool, audit_path=audit_path, capability=capability)
 
     try:
         policy = load_policy(policy_path)
@@ -154,7 +164,7 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if policy.blocks_file(path) or policy.blocks_file(resolved_path):
+        if defense_mode != "no_defense" and (policy.blocks_file(path) or policy.blocks_file(resolved_path)):
             return _finish_decision(
                 allowed=False,
                 reason="blocked_file",
@@ -164,7 +174,7 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if not policy.allows_file(resolved_path):
+        if defense_mode != "no_defense" and not policy.allows_file(resolved_path):
             return _finish_decision(
                 allowed=False,
                 reason="file_outside_allowed_roots",
@@ -175,12 +185,29 @@ def check_tool_call(
                 capability=capability,
             )
 
+    checks: InspectionEvidence | None = None
     if capability in {"http_send", "model_call"}:
         data = args.get("data")
         url = args.get("url")
+        labeled_data, labeled_url = data, url
+        if isinstance(data, TaintedValue):
+            data = data.reveal()
+        if isinstance(url, TaintedValue):
+            url = url.reveal()
         if not isinstance(data, str) or not isinstance(url, str):
             return invalid_arguments()
-        inspections = (inspect_sensitive(data), inspect_sensitive(url))
+        scanner = inspect_static if defense_mode == "static_rule" else inspect_sensitive
+        inspections = () if defense_mode == "no_defense" else (scanner(data), scanner(url))
+        taint_decisions = ()
+        if defense_mode == "scanner_taint":
+            try:
+                target = SinkTarget.from_url("model" if capability == "model_call" else "http",
+                                             url if "://" in url else "https://" + url.lstrip("/"))
+                values = (labeled_data, labeled_url) if isinstance(labeled_url, TaintedValue) else (labeled_data,)
+                taint_decisions = tuple(decide_taint(value, target, taint_policy or TaintPolicy()) for value in values)
+            except (TaintError, ValueError):
+                return invalid_arguments()
+        checks = InspectionEvidence(defense_mode, inspections, taint_decisions)
         if any(result.limited for result in inspections):
             return _finish_decision(
                 allowed=False,
@@ -190,6 +217,7 @@ def check_tool_call(
                 tool=tool,
                 audit_path=audit_path,
                 capability=capability,
+                checks=checks,
             )
         if any(result.detected for result in inspections):
             return _finish_decision(
@@ -200,9 +228,15 @@ def check_tool_call(
                 tool=tool,
                 audit_path=audit_path,
                 capability=capability,
+                checks=checks,
             )
 
-        if not policy.allows_url(url):
+        if any(not result.allowed for result in taint_decisions):
+            reason = next(result.reason for result in taint_decisions if not result.allowed)
+            return _finish_decision(allowed=False, reason=reason, message="BLOCKED: Taint policy denied output",
+                                    agent=agent, tool=tool, audit_path=audit_path, capability=capability, checks=checks)
+
+        if defense_mode != "no_defense" and not policy.allows_url(url):
             return _finish_decision(
                 allowed=False,
                 reason="domain_not_allowed",
@@ -211,6 +245,7 @@ def check_tool_call(
                 tool=tool,
                 audit_path=audit_path,
                 capability=capability,
+                checks=checks,
             )
 
     return _finish_decision(
@@ -222,6 +257,7 @@ def check_tool_call(
         audit_path=audit_path,
         capability=capability,
         resolved_path=resolved_path,
+        checks=checks,
     )
 
 

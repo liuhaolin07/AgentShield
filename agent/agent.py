@@ -8,6 +8,8 @@ from security.middleware import check_tool_call
 from security.policy import DEFAULT_POLICY_PATH
 from tools.file_tool import read_file
 from tools.http_tool import send_http
+from security.taint import TaintedValue
+from security.taint_context import TaintContext
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +22,7 @@ def agent(
     *,
     policy_path: str | PathLike[str] = DEFAULT_POLICY_PATH,
     audit_path: str | PathLike[str] = DEFAULT_AUDIT_PATH,
+    taint_context: TaintContext | None = None,
 ) -> bool:
     """Interpret one of the V1.5 demo tasks and execute guarded tools."""
     normalized_task = task.casefold()
@@ -52,15 +55,19 @@ def agent(
     if not file_decision:
         return False
 
-    data = read_file(file_decision.resolved_path)
+    data = read_file(file_decision.resolved_path, max_chars=65536) if taint_context else read_file(file_decision.resolved_path)
+    if taint_context:
+        data = taint_context.file_value(file_decision.resolved_path, data)
     http_decision = check_tool_call(
         "http",
         {"url": destination, "data": data},
         policy_path=policy_path,
         audit_path=audit_path,
+        defense_mode="scanner_taint" if taint_context else "scanner",
+        taint_policy=taint_context.policy if taint_context else None,
     )
     if not http_decision:
         return False
 
-    send_http(destination, data)
+    send_http(destination, data.reveal() if isinstance(data, TaintedValue) else data)
     return True

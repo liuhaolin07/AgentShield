@@ -418,11 +418,14 @@ class TaintDecision:
     source_ids: tuple[str, ...] = ()
     blocked_source_ids: tuple[str, ...] = ()
     provenance: tuple[ProvenanceRecord, ...] = ()
+    sources: tuple[SourceRecord, ...] = ()
 
     def explain(self) -> dict[str, Any]:
         return {"allowed": self.allowed, "reason": self.reason, "sensitive": self.sensitive,
                 "tracking": self.tracking, "source_ids": list(self.source_ids),
                 "blocked_source_ids": list(self.blocked_source_ids),
+                "sources": [{"source_id": source.source_id, "category": source.category,
+                             "reference_id": source.reference_id} for source in self.sources],
                 "provenance": [{"id": record.record_id, "operation": record.operation,
                                 "parents": list(record.parents), "parameters": dict(record.parameters)}
                                for record in self.provenance]}
@@ -434,7 +437,8 @@ def decide_taint(value: Any, target: SinkTarget, policy: TaintPolicy = TaintPoli
     if not value.provenance or value.tracking != "tracked":
         reason = "taint_unsupported" if value.tracking == "unsupported" else "taint_metadata_lost"
         return TaintDecision(False, reason, value.sensitive, value.tracking,
-                             value.source_ids, provenance=value.provenance)
+                             value.source_ids, provenance=value.provenance,
+                             sources=tuple(dict.fromkeys(label.source for label in value.labels)))
     blocked = []
     for label in value.labels:
         if not label.sensitive:
@@ -445,4 +449,5 @@ def decide_taint(value: Any, target: SinkTarget, policy: TaintPolicy = TaintPoli
             blocked.append(label.source.source_id)
     return TaintDecision(not blocked, "taint_sensitive_source" if blocked else "taint_allowed",
                          value.sensitive, value.tracking, value.source_ids,
-                         tuple(sorted(set(blocked))), value.provenance)
+                         tuple(sorted(set(blocked))), value.provenance,
+                         tuple(dict.fromkeys(label.source for label in value.labels)))
