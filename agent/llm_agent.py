@@ -5,12 +5,15 @@ import hashlib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from os import PathLike
+from pathlib import Path
 from typing import Any, Protocol
 
 from model.dots_client import DotsAPIError, DotsClient
 from security.audit import DEFAULT_AUDIT_PATH
 from security.middleware import check_tool_call
 from security.policy import DEFAULT_POLICY_PATH
+from security.taint import MAX_CHARS, SourceRecord, TaintError, TaintedValue, json_serialize, make_dict, make_list, get_item, mark_unsupported
+from security.taint_context import TaintContext
 from tools.file_tool import read_file
 from tools.http_tool import send_http
 from tools.local_http import HTTPReceipt, LocalHTTPTarget, LocalTransportError
@@ -109,6 +112,7 @@ class ToolExecutionResult:
     content: str
     blocked: bool
     evidence: ToolEvidence | None = None
+    tainted_content: TaintedValue | None = None
 
 
 def _evidence(tool: str, mode: str, content: str,
@@ -123,15 +127,32 @@ def _model_call(
     *,
     policy_path: str | PathLike[str],
     audit_path: str | PathLike[str],
+    taint_context: TaintContext | None = None,
 ) -> dict[str, Any] | None:
-    payload = client.build_payload(messages=messages, tools=TOOLS)
-    serialized_payload = json.dumps(payload, ensure_ascii=False)
+    if taint_context is None:
+        payload = client.build_payload(messages=messages, tools=TOOLS)
+        serialized_payload = json.dumps(payload, ensure_ascii=False)
+    else:
+        try:
+            history = make_list(messages)
+            raw_history = history.reveal()
+            payload = client.build_payload(messages=raw_history, tools=TOOLS)
+            if payload.get("messages") == raw_history:
+                serialized_payload = json_serialize(make_dict({**payload, "messages": history}))
+            else:
+                raw = TaintedValue.literal(json.dumps(payload, ensure_ascii=False))
+                serialized_payload = mark_unsupported(get_item(make_list([history, raw]), 1))
+        except TaintError:
+            payload = {}
+            serialized_payload = TaintedValue("", tracking="lost")
     decision = check_tool_call(
         "model",
         {"url": client.endpoint, "data": serialized_payload},
         agent=AGENT_NAME,
         policy_path=policy_path,
         audit_path=audit_path,
+        defense_mode="scanner_taint" if taint_context else "scanner",
+        taint_policy=taint_context.policy if taint_context else None,
     )
     if not decision:
         return None
@@ -178,6 +199,7 @@ def _execute_tool_call(
     policy_path: str | PathLike[str],
     audit_path: str | PathLike[str],
     local_http_target: LocalHTTPTarget | None = None,
+    taint_context: TaintContext | None = None,
 ) -> ToolExecutionResult:
     try:
         name, arguments = _parse_tool_arguments(tool_call)
@@ -202,18 +224,30 @@ def _execute_tool_call(
         if not decision:
             return ToolExecutionResult(f"BLOCKED: {decision.reason}", True)
         try:
-            content = read_file(decision.resolved_path)
-            return ToolExecutionResult(content, False, _evidence(name, "file_read", content))
-        except (OSError, UnicodeError):
+            content = (read_file(decision.resolved_path, max_chars=MAX_CHARS) if taint_context
+                       else read_file(decision.resolved_path))
+            labeled = taint_context.file_value(decision.resolved_path, content) if taint_context else None
+            if taint_context:
+                tool_value = taint_context.tool_value("read_file", content, reference=tool_call["id"])
+                labeled = get_item(make_list([labeled, tool_value]), 1)
+            return ToolExecutionResult(content, False, _evidence(name, "file_read", content), labeled)
+        except (OSError, UnicodeError, ValueError):
             return ToolExecutionResult("ERROR: file could not be read", True)
 
     if name == "send_http":
+        guarded_arguments = dict(arguments)
+        if taint_context is not None and isinstance(arguments.get("data"), str):
+            guarded_arguments["data"] = TaintedValue.from_source(
+                arguments["data"], SourceRecord.create("model", "argument:" + tool_call["id"]),
+                sensitive="model" in taint_context.sensitive_tools)
         decision = check_tool_call(
             "http",
-            arguments,
+            guarded_arguments,
             agent=AGENT_NAME,
             policy_path=policy_path,
             audit_path=audit_path,
+            defense_mode="scanner_taint" if taint_context else "scanner",
+            taint_policy=taint_context.policy if taint_context else None,
         )
         if not decision:
             return ToolExecutionResult(f"BLOCKED: {decision.reason}", True)
@@ -252,6 +286,7 @@ def run_llm_agent_result(
     local_http_target: LocalHTTPTarget | None = None,
     required_tools: Sequence[str] = (),
     require_real_http: bool = False,
+    taint_context: TaintContext | None = None,
 ) -> AgentRunResult:
     """Separate model termination from observable tool-work completion.
 
@@ -265,6 +300,8 @@ def run_llm_agent_result(
     if isinstance(required_tools, str) or not required <= {"read_file", "send_http"}:
         raise ValueError("required_tools must name supported agent tools")
     active_client = client or DotsClient()
+    if taint_context and taint_context.root != Path(policy_path).resolve().parent:
+        raise TaintError("Tracking and policy roots disagree")
     evidence: list[ToolEvidence] = []
 
     def stopped(reason: str) -> AgentRunResult:
@@ -285,6 +322,7 @@ def run_llm_agent_result(
             messages,
             policy_path=policy_path,
             audit_path=audit_path,
+            taint_context=taint_context,
         )
         if response is None:
             return stopped("model_boundary_blocked")
@@ -334,12 +372,13 @@ def run_llm_agent_result(
                 policy_path=policy_path,
                 audit_path=audit_path,
                 local_http_target=local_http_target,
+                taint_context=taint_context,
             )
             messages.append(
                 {
                     "role": "tool",
                     "tool_call_id": str(tool_call.get("id", "unknown")),
-                    "content": result.content,
+                    "content": result.tainted_content if result.tainted_content is not None else result.content,
                 }
             )
             if result.blocked:
@@ -362,10 +401,12 @@ def run_llm_agent(
     local_http_target: LocalHTTPTarget | None = None,
     required_tools: Sequence[str] = (),
     require_real_http: bool = False,
+    taint_context: TaintContext | None = None,
 ) -> bool:
     """Compatible boolean API: model claims alone no longer mean completion."""
     return run_llm_agent_result(
         task, client=client, policy_path=policy_path, audit_path=audit_path,
         max_steps=max_steps, local_http_target=local_http_target,
         required_tools=required_tools, require_real_http=require_real_http,
+        taint_context=taint_context,
     ).completed

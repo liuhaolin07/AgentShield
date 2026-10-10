@@ -1,5 +1,10 @@
 # V1.7 independent evaluation
 
+This is the preserved V1.7 measurement/boundary record. V1.8 adds an opt-in
+explicit-flow MVP and exploratory four-arm experiments; see
+[TAINT_TRACKING.md](TAINT_TRACKING.md) and [EXPERIMENT_V1.8.md](EXPERIMENT_V1.8.md).
+Historical V1.7 results below are not rewritten as V1.8 results.
+
 This branch implements independent evaluation and a bounded scanner/completion
 iteration. Explicit taint tracking and the four-arm research benchmark remain
 subsequent stages in [the review and plan](REVIEW-v1.7.md). See the

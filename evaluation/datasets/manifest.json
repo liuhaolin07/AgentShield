@@ -1,0 +1,15 @@
+{
+  "version": "v1.8-explicit-flow-1",
+  "authored_seed": 81017,
+  "files": {
+    "development": {
+      "sha256": "ed1aea6a6dbaec49892359b4fdca3cefaab8595d54b88ee62198bcfa70cfd485",
+      "cases": 23
+    },
+    "holdout": {
+      "sha256": "10efc10f5cf73db03e0b3fc14bb338aeb665fb259ab8515264b348ba8b0e76de",
+      "cases": 11
+    }
+  },
+  "holdout_protocol": "Freeze candidate implementation before first holdout execution. No tuning on results; any code repair invalidates this holdout for independence."
+}

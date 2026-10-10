@@ -1,4 +1,4 @@
-# AgentShield V1.6.1 · V1.7 in development
+# AgentShield · V1.8 in development (V1.7 baseline preserved)
 
 **English** · [中文](README.md)
 
@@ -13,6 +13,57 @@ V1.6 includes both the deterministic demo agent and an optional Dots-powered
 tool-calling agent. The policy parser and API client use only the Python
 standard library. The `send_http` tool still prints a simulation instead of
 making a real network request.
+
+## V1.8: explicit source-aware taint tracking
+
+Built on V1.7 `d1e0552`, this branch adds immutable source labels, transformation
+lineage and per-source sink permissions. Explicit concat/slice, list/dictionary,
+JSON, Base64 and percent conversions retain confidential sources. Opaque file/
+tool results can be blocked before HTTP/model execution without a scanner match.
+Scanner and taint observations are recorded separately; public data still sends.
+Tracking is opt-in; existing CLI options and simulated HTTP remain compatible.
+
+```bash
+python main.py "read normal log and send" --taint-config path/to/taint.json
+python -m evaluation --experiment v1.8 --split development --seed 17 --repeat 3 --output-dir logs/v18-development
+python -m evaluation --experiment v1.8 --split holdout --seed 17 --repeat 3 --output-dir logs/v18-holdout
+```
+
+Example configuration:
+`{"sensitive_files":["test/data/confidential*.txt"],"sensitive_tools":["private_lookup"],"require_tracked":true}`.
+Read permission and source confidentiality are separate policies. See
+[TAINT_TRACKING.md](docs/TAINT_TRACKING.md) for runnable local usage and boundaries.
+
+**143 tests passed, no skips**. The 86 V1.7 assessments remain unchanged at
+**HELD 82 / FAILED 0 / UNRUN 4**. New datasets were frozen first; the complete
+candidate `b3a2808` was committed before the first holdout run and was not tuned
+on its results. Observed Linux/Python 3.12.14, seed 17, three repeats:
+
+| Arm | Development ASR | Holdout ASR | Development TCR | Development FPR |
+| --- | --- | --- | --- | --- |
+| No Defense | 42/42 | 15/15 | 18/18 | 0/18 |
+| Static Rule | 39/42 | 15/15 | 12/18 | 6/18 |
+| Scanner (V1.7) | 36/42 | 12/15 | 18/18 | 0/18 |
+| Scanner + Taint (V1.8) | 0/42 | 0/15 | 18/18 | 0/18 |
+
+All arms' holdout TCR is 12/12. These are exploratory authored fixtures given
+accurate source classification; repeated cases are not independent populations.
+Unsupported transforms/implicit flows stay UNRUN. Controls and missing/invalid
+evidence are excluded from metric denominators. Other arms' actual FAILED cases
+remain, so four-arm commands exit 1. Full precision/recall, latency, numerators,
+denominators, [JSON/CSV summaries](docs/results/v1.8/), figures and failure analysis
+are in [EXPERIMENT_V1.8.md](docs/EXPERIMENT_V1.8.md).
+
+Plotting is an optional dependency; core runtime/evaluation uses the standard library:
+
+```bash
+python -m pip install -r requirements-research.txt
+python -m evaluation.plot logs/v18-development/report.json
+```
+
+Unwrapped Python/third-party operations, model paraphrase and implicit flows are
+untracked. Misclassified sources and privileged relabeling can still leak; real
+negative-control tests demonstrate these gaps. No main merge or formal release.
 
 ## V1.7 stage one: independent security evaluation
 
@@ -57,8 +108,9 @@ LLM runs without required execution evidence return exit code 2.
 
 Evidence is exported to Git-ignored `logs/evaluation/report.json` and `cases.csv`.
 The evaluator exits 1 for FAILED cases or 2 for UNRUN cases without failures.
-See [evaluation conditions and boundaries](docs/EVALUATION.md). Taint tracking
-and the four-arm research benchmark remain subsequent stages.
+See [historical V1.7 conditions and boundaries](docs/EVALUATION.md). The V1.8
+explicit tracking MVP and exploratory four-arm framework are described above;
+complete information-flow protection remains unimplemented.
 
 ## Flow
 
@@ -286,7 +338,8 @@ replaced with real credentials.
 
 ## Next direction
 
-Follow the [staged plan](docs/REVIEW-v1.7.md): extend held-out scanner controls,
-explicit provenance-aware taint tracking, then No Defense, Static Rule, Scanner
-and Scanner + Taint experiments. Derive metrics and plots from actual execution
-evidence, including false positives, failures and missing observations.
+Extend the explicit-flow MVP and four-arm framework with external held-out
+datasets, real agent tasks, finer propagation/false-positive studies, independent
+reproduction and statistical analysis. Production networking, filesystem races
+and audit integrity still need separate validation. See the
+[research gaps](docs/EXPERIMENT_V1.8.md).

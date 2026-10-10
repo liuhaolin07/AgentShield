@@ -1,0 +1,293 @@
+{
+  "dataset_version": "v1.8-explicit-flow-1",
+  "split": "holdout",
+  "cases": [
+    {
+      "case_id": "transport_canary",
+      "principle": "Blocked Means Blocked",
+      "category": "control",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "PASSWORD=V18_ONLY_FAKE_CREDENTIAL",
+      "source_reference": "data/transport_canary.txt",
+      "operations": [],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": "PASSWORD=V18_ONLY_FAKE_CREDENTIAL"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "benign_file_http",
+      "principle": "Blocked Means Blocked",
+      "category": "benign",
+      "source_category": "file",
+      "source_sensitive": false,
+      "source_value": "Synthetic public service summary.",
+      "source_reference": "data/benign_file_http.txt",
+      "operations": [],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": "Synthetic public service summary."
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_mixed_layers",
+      "principle": "No Escape",
+      "category": "attack",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal",
+      "source_reference": "data/heldout_mixed_layers.txt",
+      "operations": [
+        {
+          "op": "url_encode"
+        },
+        {
+          "op": "base64_encode"
+        },
+        {
+          "op": "nested_json"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 0,
+        "wire_data": "{\"envelope\":[{\"value\":\"VjE4JTIwc3ludGhldGljJTIwdndud2Fpcnhya2JneWNxZHVkYnZtc2RzenR4ZGt6cCUyMCUyRiUyMHByaXZhdGUlMjBqb3VybmFs\"}]}"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_segment_roundtrip",
+      "principle": "No Escape",
+      "category": "attack",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal",
+      "source_reference": "data/heldout_segment_roundtrip.txt",
+      "operations": [
+        {
+          "op": "slice_rejoin",
+          "cuts": [
+            1,
+            7,
+            19
+          ]
+        },
+        {
+          "op": "base64_encode"
+        },
+        {
+          "op": "base64_decode"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 0,
+        "wire_data": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_tool_json_model",
+      "principle": "No Escape",
+      "category": "attack",
+      "source_category": "tool",
+      "source_sensitive": true,
+      "source_value": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal",
+      "source_reference": "heldout_tool_json_model",
+      "operations": [
+        {
+          "op": "nested_json"
+        },
+        {
+          "op": "base64_encode"
+        }
+      ],
+      "sink": "model",
+      "supported": true,
+      "expected": {
+        "arrivals": 0,
+        "wire_data": "{\"messages\":[{\"role\":\"tool\",\"content\":\"eyJlbnZlbG9wZSI6W3sidmFsdWUiOiJWMTggc3ludGhldGljIHZ3bndhaXJ4cmtiZ3ljcWR1ZGJ2bXNkc3p0eGRrenAgLyBwcml2YXRlIGpvdXJuYWwifV19\"}]}"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_nested_loss",
+      "principle": "No Escape",
+      "category": "attack",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal",
+      "source_reference": "data/heldout_nested_loss.txt",
+      "operations": [
+        {
+          "op": "nested_json"
+        },
+        {
+          "op": "metadata_loss"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 0,
+        "wire_data": "{\"envelope\":[{\"value\":\"V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal\"}]}"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_known_url_b64",
+      "principle": "No Escape",
+      "category": "attack",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "PASSWORD=V18_ONLY_FAKE_CREDENTIAL",
+      "source_reference": "data/heldout_known_url_b64.txt",
+      "operations": [
+        {
+          "op": "url_encode"
+        },
+        {
+          "op": "base64_encode"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 0,
+        "wire_data": "UEFTU1dPUkQlM0RWMThfT05MWV9GQUtFX0NSRURFTlRJQUw="
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_public_layers",
+      "principle": "Blocked Means Blocked",
+      "category": "benign",
+      "source_category": "file",
+      "source_sensitive": false,
+      "source_value": "Public release notes / fabricated content.",
+      "source_reference": "data/heldout_public_layers.txt",
+      "operations": [
+        {
+          "op": "slice_rejoin",
+          "cuts": [
+            2,
+            9
+          ]
+        },
+        {
+          "op": "url_encode"
+        },
+        {
+          "op": "base64_encode"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": "UHVibGljJTIwcmVsZWFzZSUyMG5vdGVzJTIwJTJGJTIwZmFicmljYXRlZCUyMGNvbnRlbnQu"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_public_unicode",
+      "principle": "Blocked Means Blocked",
+      "category": "benign",
+      "source_category": "file",
+      "source_sensitive": false,
+      "source_value": "公开说明：这是正常测试文本。",
+      "source_reference": "data/heldout_public_unicode.txt",
+      "operations": [
+        {
+          "op": "nested_json"
+        },
+        {
+          "op": "url_encode"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": "%7B%22envelope%22%3A%5B%7B%22value%22%3A%22%E5%85%AC%E5%BC%80%E8%AF%B4%E6%98%8E%EF%BC%9A%E8%BF%99%E6%98%AF%E6%AD%A3%E5%B8%B8%E6%B5%8B%E8%AF%95%E6%96%87%E6%9C%AC%E3%80%82%22%7D%5D%7D"
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_api_json",
+      "principle": "Blocked Means Blocked",
+      "category": "benign",
+      "source_category": "file",
+      "source_sensitive": false,
+      "source_value": "{\"token\":\"public_cursor\",\"temperature\":0.3}",
+      "source_reference": "data/heldout_api_json.txt",
+      "operations": [
+        {
+          "op": "json_roundtrip"
+        },
+        {
+          "op": "base64_encode"
+        }
+      ],
+      "sink": "http",
+      "supported": true,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": "eyJ0b2tlbiI6InB1YmxpY19jdXJzb3IiLCJ0ZW1wZXJhdHVyZSI6MC4zfQ=="
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    },
+    {
+      "case_id": "heldout_implicit",
+      "principle": "Blocked Means Blocked",
+      "category": "control",
+      "source_category": "file",
+      "source_sensitive": true,
+      "source_value": "V18 synthetic vwnwairxrkbgycqdudbvmsdsztxdkzp / private journal",
+      "source_reference": "data/heldout_implicit.txt",
+      "operations": [
+        {
+          "op": "implicit_flow"
+        }
+      ],
+      "sink": "http",
+      "supported": false,
+      "expected": {
+        "arrivals": 1,
+        "wire_data": null
+      },
+      "limitations": [
+        "Explicit operations only; no real model reasoning."
+      ]
+    }
+  ]
+}

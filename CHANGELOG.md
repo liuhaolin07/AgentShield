@@ -2,7 +2,45 @@
 
 All notable changes to AgentShield are documented in this file.
 
-## Unreleased — V1.7 evaluation foundations
+## Unreleased — V1.8 explicit source-aware taint MVP
+
+### Added
+
+- Immutable bounded TaintedValue, TaintLabel, SourceRecord, ProvenanceRecord,
+  SinkTarget, TaintPolicy and TaintDecision with stable lineage IDs and scoped
+  output constraints, independent of string-pattern recognition.
+- Explicit concat/slice, list/dict composition/access, JSON/Base64/URL roundtrips,
+  conservative source unions, sticky lost/unsupported states and strict raw-sink
+  handling. No arbitrary Python or implicit-flow tracking claim.
+- Optional TaintContext source classification, `--taint-config`, guarded runtime
+  and deterministic explicit-flow agent. Confidential readable files and tool
+  outputs are checked before HTTP or next model request; known read denials remain.
+- Separate sanitized scanner/taint audit observations with source categories and
+  provenance explanations; bounded tracked file/config reads.
+- Frozen 23-case development and 11-case authored holdout datasets, pinned SHA-256,
+  common four-arm executors/contracts, actual loopback observations, exploratory
+  ASR/TCR/FPR/precision/recall and paired gate latency with numerator/denominator
+  and exclusion reporting. Candidate committed before first holdout execution.
+- Complete JSON/CSV exports, optional matplotlib research figures, durable
+  payload-free result summaries and CI evidence gates/artifacts on three Python
+  versions. Runtime/evaluation remain standard-library only.
+- Core/propagation, real sink, source-scoping, CLI compatibility, measurement
+  mutation and negative-control tests. Actual local validation: **143 tests pass**;
+  V1.7 remains HELD 82 / FAILED 0 / UNRUN 4 with unchanged contracts.
+
+### Observed experiments and limits
+
+- Three repeats: development Scanner ASR 36/42 versus Scanner+Taint 0/42,
+  both TCR 18/18; first untouched holdout Scanner 12/15 versus Taint 0/15,
+  both TCR 12/12. Other arms' real failures and unsupported UNRUN remain visible.
+  See `docs/EXPERIMENT_V1.8.md` for all metrics, statuses and artifacts.
+- Explicit enforcement depends on accurate trusted source classification.
+  Misclassified sources and privileged relabeling demonstrably allow delivery.
+  Coarse labels can overtaint projections; declassification, arbitrary transforms,
+  implicit flows, real agent reasoning, live-provider confinement, filesystem
+  races and audit integrity remain open. No release or broad safety certification.
+
+## V1.7 evaluation foundations — historical development baseline
 
 ### Added
 

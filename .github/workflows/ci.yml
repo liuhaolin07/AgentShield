@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, codex/v1.7-independent-evaluation]
 
 permissions:
   contents: read
@@ -54,4 +54,75 @@ jobs:
         with:
           name: independent-evaluation-python-${{ matrix.python-version }}
           path: logs/evaluation/
+          retention-days: 7
+      - name: V1.8 development ablation (baseline failures stay visible)
+        continue-on-error: true
+        run: python -m evaluation --experiment v1.8 --split development --seed 17 --repeat 3 --output-dir logs/v18-development
+      - name: Reproduce frozen V1.8 holdout (no implementation tuning)
+        continue-on-error: true
+        run: python -m evaluation --experiment v1.8 --split holdout --seed 17 --repeat 3 --output-dir logs/v18-holdout
+      - name: V1.8 evidence gate
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from evaluation.experiment import load_dataset
+          from security.inspection import DEFENSE_MODES
+          for split in ("development", "holdout"):
+              path = Path(f"logs/v18-{split}/report.json")
+              if not path.exists():
+                  raise SystemExit(f"Missing {split} experiment evidence")
+              report = json.loads(path.read_text(encoding="utf-8"))
+              dataset, digest = load_dataset(split)
+              cases = {case["case_id"]: case for case in dataset["cases"]}
+              expected = {(run, arm, name) for run in (1, 2, 3) for arm in DEFENSE_MODES for name in cases}
+              actual = {(row["run"], row["arm"], row["case_id"]) for row in report["results"]}
+              if actual != expected or len(actual) != len(report["results"]) or report["dataset_sha256"] != digest:
+                  raise SystemExit("Changed/missing experiment cohort")
+              for row in report["results"]:
+                  case = cases[row["case_id"]]
+                  if row["inputs"] != case or row["expected"] != case["expected"]:
+                      raise SystemExit("Changed experiment contract")
+                  if not case["supported"]:
+                      if row["status"] != "UNRUN" or row["block_source"] != "unsupported" or row["defense_credit"]:
+                          raise SystemExit("Unsupported flow received defense credit")
+                  else:
+                      if row["status"] == "UNRUN" or not row["actual"].get("valid_observation"):
+                          raise SystemExit("Missing/invalid independent observations")
+                      if row["arm"] == "scanner_taint" and row["status"] != "HELD":
+                          raise SystemExit("Supported V1.8 regression")
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as output:
+                  output.write(f"V1.8 {split}: " + str({arm: metrics["summary"] for arm, metrics in report["metrics"].items()}) + "\n\n")
+                  output.write("Other arms' FAILED and unsupported UNRUN remain visible; exploratory synthetic evidence only.\n")
+          PY
+      - name: Upload complete V1.8 synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: v18-experiment-python-${{ matrix.python-version }}
+          path: |
+            logs/v18-development/
+            logs/v18-holdout/
+          retention-days: 7
+
+  research-figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install optional plotting dependencies
+        run: python -m pip install -r requirements-research.txt
+      - name: Render figures from committed actual-result summaries
+        run: |
+          python -m evaluation.plot docs/results/v1.8/development-summary.json --output-dir logs/research-figures/development
+          python -m evaluation.plot docs/results/v1.8/holdout-summary.json --output-dir logs/research-figures/holdout
+      - name: Upload research figures
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: v18-research-figures
+          path: logs/research-figures/
           retention-days: 7
