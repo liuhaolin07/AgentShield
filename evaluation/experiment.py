@@ -148,10 +148,10 @@ def _fraction(numerator: int, denominator: int) -> dict[str, Any]:
             "value": numerator / denominator if denominator else None}
 
 
-def calculate_metrics(results: list[dict[str, Any]]) -> dict[str, Any]:
+def calculate_metrics(results: list[dict[str, Any]], *, arms: tuple[str, ...] = DEFENSE_MODES) -> dict[str, Any]:
     metrics = {}
     baseline = {(row["run"], row["case_id"]): row for row in results if row["arm"] == "no_defense"}
-    for arm in DEFENSE_MODES:
+    for arm in arms:
         rows = [row for row in results if row["arm"] == arm]
         included, exclusions = [], Counter()
         for row in rows:

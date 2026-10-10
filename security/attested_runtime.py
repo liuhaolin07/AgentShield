@@ -24,9 +24,12 @@ class AttestedReadResult:
 
 class AttestedRuntime(GuardedRuntime):
     def __init__(self, *, approved_tools: dict[str, Callable[[Any], Any]] | None = None,
+                 source_only: bool = False, verify_integrity: bool = True,
                  **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.__authority = _SourceAuthority()
+        if type(source_only) is not bool or type(verify_integrity) is not bool:
+            raise IntegrityError("integrity_invalid_configuration")
+        self.__authority = _SourceAuthority(source_only=source_only, verify_integrity=verify_integrity)
         self.__tools = dict(approved_tools or {})
         if len(self.__tools) > 128 or not all(isinstance(k, str) and len(k) <= 128 and callable(v)
                                               for k, v in self.__tools.items()):
@@ -85,11 +88,13 @@ class AttestedRuntime(GuardedRuntime):
         return self.__authority.resolve(handle).reveal()
 
     def approve_model_payload(self, endpoint: str, handle: ValueHandle) -> SecurityDecision:
+        started = time.perf_counter_ns()
         explanation = self.__authority.explain(handle)
-        self.observe("integrity_check", **explanation)
+        value = self.__authority.resolve(handle) if explanation["allowed"] else None
+        self.observe("integrity_check", duration_ns=time.perf_counter_ns()-started, **explanation)
         if not explanation["allowed"]:
             return self._integrity_rejection(explanation["reason"], "model", explanation).decision
-        return self._check("model", {"url": endpoint, "data": self.__authority.resolve(handle)})
+        return self._check("model", {"url": endpoint, "data": value})
 
     def _integrity_rejection(self, reason: str, sink: str, explanation: dict[str, Any]) -> RuntimeResult:
         capability = {"http": "http_send", "model": "model_call"}.get(sink, "agent_request")
@@ -108,10 +113,11 @@ class AttestedRuntime(GuardedRuntime):
             raise IntegrityError("integrity_invalid_sink")
         started = time.perf_counter_ns()
         explanation = self.__authority.explain(handle)
+        value = self.__authority.resolve(handle) if explanation["allowed"] else None
         self.observe("integrity_check", duration_ns=time.perf_counter_ns() - started, **explanation)
         if not explanation["allowed"]:
             return self._integrity_rejection(explanation["reason"], sink, explanation)
-        return super().send(url, self.__authority.resolve(handle), sink=sink)
+        return super().send(url, value, sink=sink)
 
 
 class AgentPort:

@@ -1,0 +1,5 @@
+ablation,arm,matched_assessments,additional_full_attack_blocks,additional_full_benign_blocks
+A1,scanner,300,153,6
+A2,source_only,300,117,6
+A3,detect_only,300,240,6
+A4,full,300,0,0

@@ -161,12 +161,13 @@ def _transform(operation: str, values: tuple[TaintedValue, ...], params: dict[st
 class _SourceAuthority:
     """Trusted runtime implementation detail; never handed to agent logic."""
 
-    def __init__(self, *, source_only: bool = False) -> None:
+    def __init__(self, *, source_only: bool = False, verify_integrity: bool = True) -> None:
         self.runtime_id = secrets.token_hex(32)
         self._key = secrets.token_bytes(32)
         self._entries: dict[str, _Entry] = {}
         self._charged_bytes = 0
         self.source_only = source_only  # Explicit research ablation, never a default.
+        self.verify_integrity = verify_integrity
 
     def _mac(self, domain: str, value: Any) -> str:
         return hmac.new(self._key, domain.encode() + b"\0" + _canonical(value), hashlib.sha256).hexdigest()
@@ -221,6 +222,12 @@ class _SourceAuthority:
         return self._issue(value, operation, handles, parameters)
 
     def verify(self, handle: Any) -> IntegrityDecision:
+        if not self.verify_integrity:
+            if type(handle) is not ValueHandle or handle.runtime_id != self.runtime_id or handle.value_id not in self._entries:
+                return IntegrityDecision(False, "integrity_invalid_reference", self.runtime_id)
+            entry = self._entries[handle.value_id]
+            return IntegrityDecision(True, "integrity_not_enabled", self.runtime_id,
+                                     (entry.handle.provenance_id,), entry.value.source_ids)
         visited: dict[str, _Entry] = {}
         active: set[str] = set()
 

@@ -34,3 +34,12 @@ model rewrites and information encoded in tool choice/timing are outside proven
 coverage. No OS isolation, signed append-only audit or complete information-flow
 security is claimed. Legacy V1.8 APIs are unchanged and do not gain attestation
 protection automatically.
+
+ResearchRuntime requires a local target. Trusted configuration may omit MAC
+verification (B0–B2), disable scanning (Taint), drop transformed labels (Source
+only), or observe content without enforcing (Detect only). These flags are absent
+from AgentPort and are not default AttestedRuntime behavior. Detector findings
+and enforcing modules are separate: detection in an ALLOW decision is not a block.
+The model adapter allows only fixed official DeepSeek/Qwen endpoints after opt-in
+and credential reuse; attack sinks stay local. Missing keys, non-attempted attacks
+and unsupported conversions are UNRUN without credit. Model paraphrase is not tracked.

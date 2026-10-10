@@ -29,3 +29,10 @@ explicit credential decision. Transport restrictions are never defense credit.
 V1.8 APIs and evidence are preserved. Their publicly constructed TaintedValue
 is a legacy trusted-caller value, **not** an attestation accepted by the V1.9
 runtime. Existing V1.8 negative controls remain valid for that interface.
+
+The five baselines / A1–A4 ablations are selected by trusted evaluation code.
+No AgentPort request can disable integrity, discard labels, or select detect-only.
+B0–B2 omit MAC/replay checks while sharing bounded issuance; source-only and
+observe-only are intentional research weakening modes. The receiver/executor
+is infrastructure, never a defense credited for blocking. Misclassification and
+benign-projection contracts remain in every group and metric denominator.

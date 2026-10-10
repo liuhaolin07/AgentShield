@@ -76,6 +76,8 @@ def check_tool_call(
     registry: CapabilityRegistry | None = None,
     defense_mode: str = "scanner",
     taint_policy: TaintPolicy | None = None,
+    scan_content: bool = True,
+    enforce_content: bool = True,
 ) -> SecurityDecision:
     """Evaluate policy, scan outbound data, and audit the final decision.
 
@@ -90,7 +92,7 @@ def check_tool_call(
     if registry is None:
         registry = builtin_registry()
     capability = registry.resolve(tool)
-    if defense_mode not in DEFENSE_MODES:
+    if defense_mode not in DEFENSE_MODES or type(scan_content) is not bool or type(enforce_content) is not bool:
         return _finish_decision(allowed=False, reason="invalid_defense_mode", message="BLOCKED: Invalid defense mode",
                                 agent=agent, tool=tool, audit_path=audit_path, capability=capability)
 
@@ -197,7 +199,7 @@ def check_tool_call(
         if not isinstance(data, str) or not isinstance(url, str):
             return invalid_arguments()
         scanner = inspect_static if defense_mode == "static_rule" else inspect_sensitive
-        inspections = () if defense_mode == "no_defense" else (scanner(data), scanner(url))
+        inspections = () if defense_mode == "no_defense" or not scan_content else (scanner(data), scanner(url))
         taint_decisions = ()
         if defense_mode == "scanner_taint":
             try:
@@ -207,8 +209,8 @@ def check_tool_call(
                 taint_decisions = tuple(decide_taint(value, target, taint_policy or TaintPolicy()) for value in values)
             except (TaintError, ValueError):
                 return invalid_arguments()
-        checks = InspectionEvidence(defense_mode, inspections, taint_decisions)
-        if any(result.limited for result in inspections):
+        checks = InspectionEvidence(defense_mode, inspections, taint_decisions, enforce_content)
+        if enforce_content and any(result.limited for result in inspections):
             return _finish_decision(
                 allowed=False,
                 reason="scan_limit",
@@ -219,7 +221,7 @@ def check_tool_call(
                 capability=capability,
                 checks=checks,
             )
-        if any(result.detected for result in inspections):
+        if enforce_content and any(result.detected for result in inspections):
             return _finish_decision(
                 allowed=False,
                 reason="sensitive_data",
@@ -231,7 +233,7 @@ def check_tool_call(
                 checks=checks,
             )
 
-        if any(not result.allowed for result in taint_decisions):
+        if enforce_content and any(not result.allowed for result in taint_decisions):
             reason = next(result.reason for result in taint_decisions if not result.allowed)
             return _finish_decision(allowed=False, reason=reason, message="BLOCKED: Taint policy denied output",
                                     agent=agent, tool=tool, audit_path=audit_path, capability=capability, checks=checks)
