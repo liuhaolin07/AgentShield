@@ -273,6 +273,8 @@ class _SourceAuthority:
         decision = self.verify(handle)
         explanation = decision.explain()
         if decision.allowed:
+            explanation["sensitive"] = self._entries[handle.value_id].value.sensitive
+            explanation["tracking"] = self._entries[handle.value_id].value.tracking
             seen: set[str] = set()
             records = []
 

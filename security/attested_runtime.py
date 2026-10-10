@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+import json
 from dataclasses import dataclass
 from typing import Any, Callable
 
@@ -71,6 +72,24 @@ class AttestedRuntime(GuardedRuntime):
 
     def provenance(self, handle: Any) -> dict[str, Any]:
         return self.__authority.explain(handle)
+
+    def _model_payload(self, payload: dict[str, Any], *, reference: str,
+                       parents: tuple[ValueHandle, ...]) -> ValueHandle:
+        """Trusted model adapter wraps the exact outgoing payload with parents."""
+        bounded = TaintedValue.literal(payload)
+        serialized = json.dumps(bounded.reveal(), ensure_ascii=False, separators=(",", ":"))
+        return self._model_return(serialized, reference=reference, parents=parents)
+
+    def _model_content(self, handle: ValueHandle) -> Any:
+        """Trusted history builder only. The assembled request is checked next."""
+        return self.__authority.resolve(handle).reveal()
+
+    def approve_model_payload(self, endpoint: str, handle: ValueHandle) -> SecurityDecision:
+        explanation = self.__authority.explain(handle)
+        self.observe("integrity_check", **explanation)
+        if not explanation["allowed"]:
+            return self._integrity_rejection(explanation["reason"], "model", explanation).decision
+        return self._check("model", {"url": endpoint, "data": self.__authority.resolve(handle)})
 
     def _integrity_rejection(self, reason: str, sink: str, explanation: dict[str, Any]) -> RuntimeResult:
         capability = {"http": "http_send", "model": "model_call"}.get(sink, "agent_request")

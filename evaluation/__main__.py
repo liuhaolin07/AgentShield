@@ -14,7 +14,7 @@ def export_report(report: dict[str, Any], output: Path) -> None:
     (output / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     fields = ["run", "case_id", "principle", "category", "status", "block_source",
               "defense_credit", "duration_ms", "inputs", "policy", "expected", "actual", "trace", "differences", "limitations"]
-    if report.get("experiment") == "v1.8":
+    if any("arm" in result for result in report["results"]):
         fields = ["arm", *fields]
     with (output / "cases.csv").open("w", encoding="utf-8", newline="") as destination:
         writer = csv.DictWriter(destination, fieldnames=fields)
