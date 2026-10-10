@@ -4,6 +4,20 @@ AgentShield is a security tool — it exists to stop sensitive-data leakage
 through LLM agent tool calls. Findings about its own defenses are taken
 seriously.
 
+## Runtime and evaluation boundary
+
+The Python process, policy author and local filesystem owner are trusted.
+Middleware protects calls integrated through it; direct tool/client calls are
+not process-wide mediated. Audit records are decisions, not signed execution
+receipts. Canonical path checks do not provide atomic-open guarantees.
+
+The V1.7 development evaluator uses fabricated fixtures and an opt-in receiver
+on 127.0.0.1 only. Its transport is separately confined and is not evidence of
+AgentShield blocking an action. The live Dots client is not covered by this
+experimental transport guarantee. Do not replace fixtures with real credentials.
+See [evaluation conditions and known failures](docs/EVALUATION.md) and the
+[source review](docs/REVIEW-v1.7.md) before interpreting results.
+
 ## Supported versions
 
 Only the latest release line (`v1.6.x`) is supported. Fixes land on `main`

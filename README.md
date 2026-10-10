@@ -1,4 +1,4 @@
-# AgentShield V1.6.1
+# AgentShield V1.6.1 · V1.7 开发中
 
 [English](README.en.md) · **中文**
 
@@ -8,6 +8,24 @@
 AgentShield 是一个面向「使用工具的 Agent」的小型、可运行安全层。每一次文件读取与每一条对外 HTTP 调用都会经过中间件——在工具真正执行之前，由中间件放行或拦截该动作。
 
 V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。`send_http` 工具目前仍只打印模拟结果，不发起真实网络请求。
+
+## V1.7 第一阶段：独立安全评估
+
+本开发分支新增完整[架构审查、风险清单和分阶段计划](docs/REVIEW-v1.7.md)，以及依据 Clean Start、Blocked Means Blocked、No Escape、Honest Logs、Done Means Done 的独立评估框架。每个样本记录输入、策略、执行轨迹、实际接收记录、预期/实际结果与阻断来源，输出 `HELD / FAILED / UNRUN`。
+
+```bash
+python -m evaluation --seed 17 --repeat 2 --output-dir logs/evaluation
+```
+
+该命令显式启动临时 `127.0.0.1` 接收端，仅发送伪造测试数据；无需模型密钥。真实 HTTP 默认关闭，测试传输固定连接本机指定端口，不解析 DNS、不跟随重定向。普通演示仍使用模拟 HTTP。环境或传输层拒绝不会归功于 AgentShield。
+
+2026-10-10 在 Linux/Python 3.12.14 下实际运行：**92 项自动化测试通过**。原有 21 个独立样本重复两次，从 **HELD 28 / FAILED 10 / UNRUN 4** 改善为 **HELD 38 / FAILED 0 / UNRUN 4**。先冻结扩展样本并运行修复前基线后，43 个样本重复两次从 **HELD 40 / FAILED 42 / UNRUN 4** 改善为 **HELD 82 / FAILED 0 / UNRUN 4**，输入、策略和预期契约保持一致。审计防篡改与隐式信息流仍为 UNRUN。这些合成样本计数包含控制项，不能视为 ASR 或整体安全率。
+
+扫描器支持有资源上限的嵌套 JSON、URL 编码和标准/URL-safe Base64 多层检查，识别 RSA、EC、OpenSSH、PKCS#8 等常见私钥头。普通 PASSWORD 文档、公钥与合法 API 参数都有实际送达对照。资源超限单独记录为 `scan_limit`，不算敏感信息识别成功。完整逐项变化和启发式检测局限见[本轮验证记录](docs/ITERATION2.md)。
+
+`run_llm_agent_result` 分别返回 `model_finished`、工具执行 `evidence` 和 `completed`。只有模型完成声明、没有工具执行的运行会返回未完成；调用方还可指定 `required_tools` 和 `require_real_http`，模拟发送不能证明真实 HTTP 完成。默认完成条件是有成功执行的工具，不保证任意自然语言任务的语义目标。CLI 参数保持兼容；LLM 运行缺少执行证据时退出码为 2。
+
+报告写入 Git 忽略的 `logs/evaluation/report.json` 和 `cases.csv`。有 FAILED 时命令退出码为 1；只有 UNRUN 时为 2。详细测试条件、安全边界与后续验收门槛见[评估说明](docs/EVALUATION.md)。污点追踪和四组论文级对照实验尚未实现。
 
 ## 流程
 
@@ -36,7 +54,7 @@ AgentShield 中间件
 - 防止敏感的工具结果回泄到模型 API。
 - 以允许读取根目录（allowed file roots）阻止模型任意读取本地文件。
 - 可检测 Dots 的 `ak_...` 凭据。
-- 十八个离线测试，含一个脚本化的假模型工具调用循环。
+- 标准库回归测试，含脚本化的假模型工具调用循环；V1.7 另有独立接收证据测试。
 
 V1.5 引入的内容：
 
@@ -46,7 +64,7 @@ V1.5 引入的内容：
 - 面对缺失策略、非法策略、审计写入失败与不支持的工具，一律 fail-closed（失败即拒绝）。
 - 覆盖攻击流程与正常流程的标准库测试。
 
-审计事件绝不包含工具参数、文件内容或 HTTP 载荷。
+审计器不写入工具参数、文件内容或 HTTP 载荷，但 agent/tool 元数据由调用方提供；它不是经过签名或防篡改的日志。ALLOW 代表执行许可，不证明执行成功。工具和模型客户端的直接调用仍需调用方接入中间件。
 
 ## 运行确定性演示
 
@@ -154,6 +172,8 @@ allowed_domains:
 
 只有位于允许读取根目录下的文件才能被打开。精确匹配的允许域名及其子域可用于模拟 HTTP 与模型 API 流量；其它所有目标一律拦截。未知的策略键或缺失必需键，会导致 fail-closed（失败即拒绝）决策。
 
+V1.7 开发分支拒绝非法 URL、非 HTTP(S) 协议、URL 用户信息和非法参数类型，按策略所在目录解析文件路径，同时检查原始路径与符号链接目标的禁用文件名。路径检查与文件打开仍是分开的操作，不保证抵抗并发文件系统替换。现有实机 Dots 客户端不在本机实验传输的约束保证内。
+
 ## 审计日志
 
 运行时的每次决策会追加写入 `logs/audit.jsonl`：
@@ -211,4 +231,4 @@ AgentShield/
 
 ## 下一步方向
 
-V2 可以加入跨变量、Agent 记忆与工具调用的来源感知污点追踪（provenance-aware taint tracking），之后再走向真实的 LLM 编排与提示注入防御。
+按[分阶段计划](docs/REVIEW-v1.7.md)继续扩充独立保留样本，再加入来源感知的显式污点追踪 MVP，最后构建 No Defense、Static Rule、Scanner、Scanner + Taint 四组实验。所有指标和图表必须由实际执行证据计算，并报告误报、失败与未运行条件。

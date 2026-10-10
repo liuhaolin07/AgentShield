@@ -52,7 +52,7 @@ def agent(
     if not file_decision:
         return False
 
-    data = read_file(source_path)
+    data = read_file(file_decision.resolved_path)
     http_decision = check_tool_call(
         "http",
         {"url": destination, "data": data},

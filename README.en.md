@@ -1,4 +1,4 @@
-# AgentShield V1.6.1
+# AgentShield V1.6.1 · V1.7 in development
 
 **English** · [中文](README.md)
 
@@ -13,6 +13,52 @@ V1.6 includes both the deterministic demo agent and an optional Dots-powered
 tool-calling agent. The policy parser and API client use only the Python
 standard library. The `send_http` tool still prints a simulation instead of
 making a real network request.
+
+## V1.7 stage one: independent security evaluation
+
+This development branch adds an [architecture review, risk register and staged
+plan](docs/REVIEW-v1.7.md) and evaluates Clean Start, Blocked Means Blocked,
+No Escape, Honest Logs and Done Means Done. Each case records inputs, policy,
+execution observations, receiver arrivals, expected/actual effects and blocker,
+with **HELD / FAILED / UNRUN** outcomes.
+
+```bash
+python -m evaluation --seed 17 --repeat 2 --output-dir logs/evaluation
+```
+
+This command explicitly starts a temporary **127.0.0.1** receiver and sends only
+fabricated fixtures. No model key is needed. Real HTTP is disabled by default;
+the opt-in experimental transport pins one local port, performs no DNS lookup
+and never follows redirects. Ordinary demos still simulate HTTP. Transport or
+environment restrictions receive no AgentShield defense credit.
+
+Observed on 2026-10-10, Linux/Python 3.12.14: **92 automated tests passed**.
+The original 21 cases changed from **HELD 28 / FAILED 10 / UNRUN 4** to
+**HELD 38 / FAILED 0 / UNRUN 4** over two repeats. An expanded baseline was
+recorded before defense changes: 43 cases repeated twice changed from
+**HELD 40 / FAILED 42 / UNRUN 4** to **HELD 82 / FAILED 0 / UNRUN 4**.
+Inputs, policies and expected contracts were preserved. Audit tamper verification
+and implicit information flow remain UNRUN. These synthetic counts include
+controls; they are not ASR or a general security score.
+
+The scanner now inspects nested JSON, percent-encoding and standard/URL-safe
+Base64 within explicit resource budgets, and recognizes RSA/EC/OpenSSH/PKCS#8
+private-key headers. Ordinary PASSWORD documentation, public keys and legal API
+parameters have delivery controls. `scan_limit` distinguishes exhausted budgets
+from detected credentials. [Iteration evidence and all case transitions](docs/ITERATION2.md)
+describe remaining heuristic limits.
+
+`run_llm_agent_result` separates `model_finished`, tool `evidence` and
+`completed`. A final model claim without an executed tool is incomplete.
+Callers may specify `required_tools` and `require_real_http`; simulated sends
+cannot satisfy a real-HTTP contract. Default completion requires successful tool
+work, not semantic proof of an arbitrary task. CLI options remain unchanged;
+LLM runs without required execution evidence return exit code 2.
+
+Evidence is exported to Git-ignored `logs/evaluation/report.json` and `cases.csv`.
+The evaluator exits 1 for FAILED cases or 2 for UNRUN cases without failures.
+See [evaluation conditions and boundaries](docs/EVALUATION.md). Taint tracking
+and the four-arm research benchmark remain subsequent stages.
 
 ## Flow
 
@@ -41,7 +87,8 @@ Tool execution
 - Protection against leaking sensitive tool results back to the model API.
 - Allowed file roots that prevent model-generated arbitrary local file reads.
 - Detection of Dots `ak_...` credentials.
-- Eighteen offline tests, including a scripted fake-model tool-calling loop.
+- Standard-library regression tests, including a scripted fake-model loop;
+  V1.7 adds independent receiver-evidence tests.
 
 V1.5 also introduced:
 
@@ -53,7 +100,10 @@ V1.5 also introduced:
   and unsupported tools.
 - Standard-library tests covering attack and normal flows.
 
-Audit events never contain tool arguments, file contents, or HTTP payloads.
+The audit writer excludes tool arguments, file contents and HTTP payloads, but
+agent/tool metadata is caller supplied. Logs are unsigned and mutable. ALLOW
+records permission, not successful execution. Direct tool/client calls still
+require the caller to integrate the middleware.
 
 ## Run the deterministic demos
 
@@ -170,6 +220,13 @@ their subdomains are accepted for simulated HTTP and model API traffic. All
 other destinations are blocked. Unknown policy keys or missing required keys
 cause a fail-closed decision.
 
+The V1.7 development branch rejects malformed URLs, non-HTTP(S) schemes,
+userinfo and invalid argument types. File paths resolve relative to the policy
+directory; both lexical names and symlink targets are checked. Checking and
+opening a file are separate operations and do not guarantee protection against
+concurrent filesystem replacement. The existing live Dots client is outside
+the experimental loopback transport's guarantee.
+
 ## Audit log
 
 Runtime decisions are appended to `logs/audit.jsonl`:
@@ -229,5 +286,7 @@ replaced with real credentials.
 
 ## Next direction
 
-V2 can add provenance-aware taint tracking across variables, agent memory, and
-tool calls, followed by real LLM orchestration and prompt-injection defenses.
+Follow the [staged plan](docs/REVIEW-v1.7.md): extend held-out scanner controls,
+explicit provenance-aware taint tracking, then No Defense, Static Rule, Scanner
+and Scanner + Taint experiments. Derive metrics and plots from actual execution
+evidence, including false positives, failures and missing observations.
