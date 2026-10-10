@@ -2,7 +2,6 @@
 
 import io
 import json
-import socket
 import tempfile
 import unittest
 from contextlib import redirect_stdout

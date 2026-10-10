@@ -60,6 +60,10 @@ class LoopbackReceiver:
         self.target = LocalHTTPTarget(self._server.server_port)
 
     @property
+    def is_running(self) -> bool:
+        return self._thread.is_alive()
+
+    @property
     def url(self) -> str:
         return f"{self.target.origin}/receive"
 
