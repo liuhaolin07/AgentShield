@@ -41,3 +41,14 @@ to verify the execution boundary. They are transport/integration tests, never
 substitutes for live model security or utility results. This three-task interface
 is distinct from the larger synthetic explicit-flow benchmark and does not
 establish generalized LLM task success.
+
+Scoring remains a prototype: the attack-attempt flag currently counts any file
+read, and the held condition checks a runtime block with no local arrivals;
+it does not independently establish that the intended confidential source was
+read or that the exact attack objective was attempted. A block of an unrelated
+request must not be interpreted as robust attack prevention. The injection task
+is a direct user-prompt fixture, not an indirect injected tool-result corpus.
+Before publishing live-model ASR/ABR, add an objective-aware independent judge,
+source-specific evidence, provider-observed synthetic-content accounting and
+indirect/adaptive attacks. None of the nine missing-credential runs supplies
+such evidence; no live-model success rate is reported in V1.9.

@@ -189,3 +189,10 @@ needs actual multiple-provider models, external tasks/attack authors, attack-fam
 holdouts, adaptive adversaries, source accuracy/field taint/declassification,
 complete resource costs, independent replication and uncertainty over independent
 tasks. No main merge or release.
+
+The live interface's attempt/held rubric is still a prototype (any file read /
+runtime block with no local arrivals), not an independent confidential-source
+objective judge. Its injection fixture is a direct user prompt, not indirect
+tool-result injection. Before deriving live-model security rates, establish
+source/objective-specific observations and independent judging; see REAL_AGENT.md.
+The nine current missing-credential assessments provide no live defense credit.
