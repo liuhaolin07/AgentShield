@@ -1,0 +1,19 @@
+{
+  "kind": "MEASUREMENT_CONTROLS_NOT_PILOT",
+  "created_utc": "2026-10-11T07:06:42.104875+00:00",
+  "cohort_sha256": "e634769553d110093104d52c2d395020e848adf72409179facfd2cdc7d361bc0",
+  "cohort_file_sha256": "89cb465a67a87b01c62326d2a5c0004e839a6af76b4f251e8c8a9328550e7fbe",
+  "families": 12,
+  "templates": 12,
+  "leaves": 240,
+  "graphs": 13,
+  "planned_consumers": 936,
+  "executions": 0,
+  "receiver_observations": 0,
+  "model_requests": 0,
+  "dual_human_annotation": false,
+  "pilot_eligible": false,
+  "tests_passed": 22,
+  "tests_failed": 0,
+  "scope": "generator and independent pre-execution manifest checks, not runtime defense or 984-row pilot"
+}
