@@ -1,0 +1,44 @@
+name: Source trust methods development
+
+on:
+  push:
+    branches: [codex/source-trust-methods]
+  pull_request:
+    branches: [codex/source-trust-research-design]
+
+permissions:
+  contents: read
+
+jobs:
+  regression-and-evidence:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0 # Original statistical-generation Git object is evidence.
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Complete regression suite, including methods and tamper checks
+        run: |
+          mkdir -p logs/source-trust-methods
+          python -m unittest discover -s test -p 'test_*.py' -v > logs/source-trust-methods/unit-tests.txt 2>&1
+      - name: Independent frozen files and retained statistical CSV gate
+        run: python -m ci.validate_source_trust_methods | tee logs/source-trust-methods/methods-gate.txt
+      - name: Reproduce development planning only (never execute pilot)
+        run: |
+          python -m benchmark.source_trust_corruption --output logs/source-trust-methods/manifest.json
+          python -m ci.validate_source_trust_corruption logs/source-trust-methods/manifest.json --cohort-sha256 e634769553d110093104d52c2d395020e848adf72409179facfd2cdc7d361bc0
+      - name: Upstream primitive only, no provider calls
+        run: python -m evaluation.source_trust_external_smoke --output logs/source-trust-methods/upstream-smoke.json
+      - name: Retain all test/evidence logs on failure too
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-trust-methods-python-${{ matrix.python-version }}
+          path: logs/source-trust-methods/
+          retention-days: 14
