@@ -178,7 +178,7 @@ def readiness_check(root: Path = ROOT) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
-    print(json.dumps({'frozen_pr6_files': freeze_check(), 'calibration': validate_artifacts(), 'readiness': readiness_check()}, sort_keys=True))
+    print(json.dumps({'frozen_pr6_files': freeze_check(), 'calibration': validate_artifacts(), 'calibration_r3': validate_artifacts(ROOT/'r3'), 'readiness': readiness_check()}, sort_keys=True))
 
 
 if __name__ == '__main__':

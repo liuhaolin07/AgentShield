@@ -49,3 +49,8 @@ class MethodsGateTests(unittest.TestCase):
         report['estimand']={'grid':[0,.01,.05,.1,.25,.5]}
         report['config']['estimand']=report['estimand']
         with self.assertRaisesRegex(ValueError,'R1_H5_estimand_binding'):validate_calibration(report,rows)
+
+    def test_new_artifacts_bind_to_R1_not_legacy_implementation(self):
+        result=validate_artifacts(Path('docs/research/source-trust-methods/r3'))
+        self.assertTrue(result['R1_H5_grid_eligible'])
+        self.assertEqual(result['validated_simulation_rows'],9600)
