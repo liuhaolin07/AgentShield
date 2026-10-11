@@ -1,0 +1,7 @@
+{
+  "passed": 6,
+  "failed": 0,
+  "raw_sha256": "8c25aa3e99f21ebd48a0a00bc0d59692825671317b54741cd47049d05cfa257c",
+  "old_runtime_unchanged": true,
+  "explicit_wrong_public_and_parent_public_leaks_retained": true
+}
