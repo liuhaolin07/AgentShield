@@ -229,7 +229,7 @@ def export(report: dict, rows: list[dict], output: Path, charts: bool = False) -
                 cells = [r for r in report["summary"] if r["families"] == fixed and r["scenario"] == scenario and r["method"] == method]
                 x = [r["graphs"] for r in cells]
                 y = [r["coverage"] for r in cells]
-                errors = [[r["coverage"]-r["coverage_mc95"][0] for r in cells], [r["coverage_mc95"][1]-r["coverage"] for r in cells]]
+                errors = [[max(0., r["coverage"]-r["coverage_mc95"][0]) for r in cells], [max(0., r["coverage_mc95"][1]-r["coverage"]) for r in cells]]
                 ax.errorbar(x, y, yerr=errors, marker="o", capsize=3, label=method)
             ax.axhline(.95, color="black", linestyle=":")
             ax.set(title=scenario.replace("_", "\n"), xlabel="Independent whole graphs", ylim=(-.02, 1.05))
