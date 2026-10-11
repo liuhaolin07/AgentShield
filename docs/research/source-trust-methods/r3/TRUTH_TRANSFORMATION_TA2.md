@@ -57,10 +57,15 @@ TA-1 的自然人身份、盲化、叶级授权和 D_read/D_out 要求继续有�
 “第二份原稿”同样由作者程序构造，不计算为第二位自然人；真实标注者/仲裁者/审计者均0。
 原始fixture、投影、验证结果及日志在 `truth-chain-fixture/`。
 测试发现fixture的D_read/D_out列表别名错误，已改为独立副本并保留首次失败日志。
-11项转换/篡改/审计/不确定处理单测和26项图回归通过。
+阶段提交时11项转换单测和26项图回归通过；随后新增CLI及外部cohort绑定篡改单测。
 没有网络执行、模型请求、保留材料或pilot执行。
 
 ```sh
 python -m benchmark.source_trust_truth raw-ledger.json --output projection.json
-python -m ci.validate_source_trust_truth raw-ledger.json projection.json --ledger-sha256 <frozen-ledger-sha256>
+python -m ci.validate_source_trust_truth raw-ledger.json projection.json --ledger-sha256 FROZEN_LEDGER_SHA256
+python -m benchmark.source_trust_corruption --cohort projection.json --output graphs.json
+python -m ci.validate_source_trust_corruption graphs.json --cohort-sha256 EXTERNALLY_VERIFIED_PROJECTION_SHA256
 ```
+
+规划器CLI接受投影包只代表结构输入；必须先验证外部冻结原稿，再用已验证的cohort哈希检查图。
+攻击者自行重算投影哈希不证明真值可信；独立外部绑定会拒绝其修改。该路径仍不能执行pilot。

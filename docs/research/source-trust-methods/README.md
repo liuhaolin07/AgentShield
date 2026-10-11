@@ -1,73 +1,76 @@
-# Source-trust methods development R2
+# 来源可信性方法学 R3 / Source-trust methods R3
 
-以 PR #6 的 `b631d1c17c6d1125d4ffc9969f5e794926c49681` 为冻结基线的新分支。
-PR #6、PR #5、V1.10 和所有历史结果不变；`frozen-pr6.json` 覆盖该提交的 266 个文件。
+PR #7 保持 Draft，冻结基线仍为 PR #6 的 `b631d1c17c6d1125d4ffc9969f5e794926c49681`。
+266个冻结文件、历史实验原始结果与生产策略保持原字节。当前状态：**不可预注册、不可启动984行pilot或保留集**。
+测量贡献与系统优越性分开；H5不成立不否定测量研究的价值。
 
-本工作线实现方法学与开发校准；尚未注册、不运行保留集。
-将测量贡献（曲线、暴露与边界）与 H5 内部策略优越性结论分开：H5 不支持不等于测量失败。
-以整张全局腐化图为随机化单位，任务 cohort 固定；不推断一般来源总体。
-固定五张图的结果只作有限图的描述，不能用家族 bootstrap 冒充随机错标过程的区间。
+## 当前修正与证据
 
-新增覆盖率/功效模拟属于统计方法压力测试，不是 AgentShield 防御实验。
-5% 改善/非劣、80% 完成率、2% 等效界仍缺外部风险/任务价值依据；
-保持为候选，不能按开发或模拟观察到的策略效果调整。真正注册前还需独立评审和覆盖/功效门禁。
+- [P1勘误](r3/ERRATUM_H5_GRID.md)：撤回R2定额场景的H5命名。
+  正式网格改为 `[0,.05,.10,.25,.50,1]`、[0,1]积分；生成器与独立门禁均外部绑定冻结R1。
+  [新9,600行统计复跑](r3/statistical-calibration/RESULTS.md)保留全部CSV/JSON与图，
+  4,800行共同故障记录与旧版逐字段相同，48/200、156/200的欠覆盖警告仍成立。
+- [完整规划清单](r3/E3_MANIFEST.md)：32MiB等原资源界保持，图上限81；
+  同一清单含76个E0/E1和5个E3，定向图必须携带其随机父图，不能借用其他清单的图。
+  12作者控制家族的5,832个计划绑定没有工具执行或接收证据。
+- [TA-2原始标注转换与量化审计门禁](r3/TRUTH_TRANSFORMATION_TA2.md)：
+  原始双稿、UNCERTAIN、证据、仲裁、D_read/D_out、审计→可验证哈希链→布尔cohort。
+  未裁决不投影；任意分类/授权/依赖等关键错误全量重做，任意发现暂停pilot。
+  fixture验证只证明结构，真实人类标注者/仲裁者/审计者均0。
+- [预先冻结的GHO-1候选](r3/JOINT_ESTIMATOR_GHO1.md)和[完整六点联合统计校准](r3/joint-calibration/RESULTS.md)：
+  2,000次试验、35,000原始整图计数和2,000一次E0记录。所有十格联合确认0/200，
+  当前5/30图预算下功效不可用；全拒绝控制不获胜，MNAR缺失不算成功。
+- [当前门禁](r3/readiness.json)：实际策略联合功效UNRUN；候选阈值缺任务价值依据、
+  真人人员回执未获、跨图相关未验证、外部配对执行器未完成。统计模拟不能代替实际防御证据。
+- [R3改进报告](r3/RESEARCH_REPORT_ZH.md)、[变更记录](CHANGELOG.md)及
+  [最终验证记录](r3/final-verification.json)：完整本地测试、真实旧版252行回归与不变性核验。
 
-双人真值标注、盲化、仲裁和抽样核查未完成前，984 行 pilot 保持 UNRUN。
-No Defense 只校准载荷与观测，不从其结果决定任务入选或修改真值/依赖。
-内部合成控制不能冒充经过两位独立作者/标注者验证的保留材料。
+## English scope
 
-本目录保留本轮真实原始日志。`baseline-unit-tests.txt.gz` 是新执行的完整基线单测；
-`baseline-evidence-gate.json` / `.txt` 是历史 252 行的重新校验，明确不是新实验执行。
-后续每阶段测试日志与代码提交分别记录。未合并、未发布。
+R3 corrects the P1 grid mismatch by binding the formal six-point H5 grid and integration domain
+from the externally frozen R1 protocol. The prior low-rate exploratory AUC artifacts remain intact,
+but their H5 name is retracted. A formal-grid rerun retains 9,600 statistical rows; all 4,800 common-fault
+rows exactly match the old run, preserving the independent undercoverage finding.
 
-## 本轮交付与证据索引
+The bounded 81-graph planner includes E0/E1 and paired E3 parents in one manifest. A traceable raw
+annotation-to-cohort projection preserves uncertainty, evidence, adjudication and output dependencies.
+Its synthetic fixture does not establish independent human judgment. Any audit finding blocks progress;
+a single critical error requires full-cohort rework. Real annotators and auditors remain absent.
 
-- `benchmark/source_trust_corruption.py`：有界显式叶声明腐化；精确定额、方向分母、
-  稳定排名/嵌套比例、同家族预算的定向配对、执行前的 X_any/X_all/Z_any。
-- `ci/validate_source_trust_corruption.py`：不导入生成器/防御的独立重算；
-  13 张图、936 个三个策略共享图的**计划绑定**。无执行，不是 984 行 pilot。
-- [统计设计](STATISTICAL_ANALYSIS.md)、[实际校准与不足](statistical-calibration/RESULTS.md)：
-  9,600 行离线统计试验及完整 JSON/CSV/图，保留欠覆盖、退化、UNRUN 与首次绘图失败。
-- [双人真值与依赖协议](TRUTH_ANNOTATION_PROTOCOL.md)：读者/用途/叶路径、D_read/D_out、
-  A/B 盲化独立原稿、第三人仲裁、分层审计及 No Defense 不得筛选任务。
-- [外部可行性](EXTERNAL_FEASIBILITY.md)：固定 FIDES/OpenAPPA 工件及许可证；
-  FIDES 五个原始 lattice 断言实际通过，完整配对执行适配仍 UNRUN。
-- [未完成门禁](readiness.json)：完整 H5 联合功效、阈值价值依据和真实双人标注未完成；
-  开发 pilot 与保留集均 UNRUN，无模型请求。
-- `ci/validate_source_trust_methods.py`：266 文件冻结、生成提交 Git 对象、原始 CSV 行/分母/
-  排除规则独立校验。新 CI 覆盖 Python3.10–3.12，检查方法一致性，不要求安全零失败。
+A whole-graph Hoeffding candidate was committed before **full six-point joint toy calibration**.
+The 2,000 trial records preserve raw paired counts, shared graph faults, MNAR bounds and one E0 per trial.
+All ten cells confirm 0/200: the candidate is underpowered at both tested graph budgets. This is not
+measured AgentShield policy power or defense performance. Measurement findings do not require H5;
+a policy superiority claim must pass every joint H5 condition.
 
-生产策略、V1.10、PR #5 与 PR #6 文档均保持原字节。本目录是方法学开发，未升级 V2.0。
+No preregistration, pilot, holdout intake/execution, paid model experiment, merge or release occurred.
+All 266 PR #6 baseline files and historical raw evidence remain unchanged. Root project README/CHANGELOG
+are frozen baseline files; bilingual changes for this research branch live in this directory.
 
-## English scope and reproduction
-
-This additive development branch preserves all 266 files at PR #6 commit `b631d1c`.
-It separates finite frozen-graph descriptions from random-graph inference conditional on a fixed cohort.
-Whole graphs, rather than individual family/seed rows, are the proposed randomization units.
-The corruption planner and its independent checker never execute tools or use evaluator truth as a runtime policy.
-The 936 bindings are development measurement controls, not executed pilot observations.
-
-The 9,600 retained Monte Carlo rows are **statistical toy calibration, not defense performance**.
-They show that graph percentile intervals still under-cover rare shared failures; conservative bounds are wide.
-Adjusted bootstrap component power is UNRUN because of inadequate tail resolution, and full joint H5 power
-is UNRUN because the TCR dependence has not been simulated. Candidate thresholds still lack task-owner value justification.
-No preregistration, holdout acquisition, pilot execution, model experiment, merge or release is authorized by these files.
-
-The locked annotation procedure requires two real independent human submissions, blinded from policies and outcomes,
-with leaf reader/purpose truth, explicit output dependencies, adjudication and audited receipts.
-No Defense calibrates observability after enrollment; it cannot select tasks or redefine truth.
-The upstream FIDES lattice smoke and OpenAPPA source review establish only partial artifact feasibility,
-not full runtime adapters or reproduced benchmark results. Both paired external experiments remain UNRUN.
-Measurement results need not satisfy H5; a superiority claim must satisfy all joint H5 conditions.
+## Reproduce independent gates
 
 ```sh
 python -m unittest discover -s test -p 'test_*.py' -v
 python -m ci.validate_source_trust_methods
-python -m benchmark.source_trust_corruption --output logs/methods-manifest.json
-python -m ci.validate_source_trust_corruption logs/methods-manifest.json \
-  --cohort-sha256 e634769553d110093104d52c2d395020e848adf72409179facfd2cdc7d361bc0
-python -m evaluation.source_trust_external_smoke --output logs/upstream-primitive.json
+python -m ci.validate_source_trust_joint docs/research/source-trust-methods/r3/joint-calibration
+python -m benchmark.source_trust_corruption --r1-panel --output logs/r1-panel.json
+python -m ci.validate_source_trust_corruption logs/r1-panel.json --r1-panel --cohort-sha256 e634769553d110093104d52c2d395020e848adf72409179facfd2cdc7d361bc0
+python -m benchmark.source_trust_truth docs/research/source-trust-methods/r3/truth-chain-fixture/raw-ledger.json --output logs/projection.json
+python -m ci.validate_source_trust_truth docs/research/source-trust-methods/r3/truth-chain-fixture/raw-ledger.json logs/projection.json --ledger-sha256 7cfd662cc94a05dcde2788794ed73a3f8a75858e7b3745dddf20d31377f911c7
+python -m benchmark.source_trust_corruption --cohort logs/projection.json --output logs/truth-graphs.json
+python -m ci.validate_source_trust_corruption logs/truth-graphs.json --cohort-sha256 42511904ac606bcdba3861e19f8c9e16715e196565356cb2324e105c8103f341
 ```
 
-Use `STATISTICAL_ANALYSIS.md` to reproduce statistical calibration. The plot dependency is optional;
-without `--charts` all calculation and exports use the Python standard library.
+The SHA pins above refer only to the retained author fixture. New real records require new independently
+frozen pins and semantic review; recomputing a self-hash is not trusted labeling.
+Matplotlib is optional for plots; all calculations, exports, tests and evidence gates use the standard library.
+CI audits retained evidence on Python3.10–3.12; it never launches the pilot or requires zero defense failures.
+
+## Historical R2 archive
+
+[R2 design](STATISTICAL_ANALYSIS.md), [R2 report](RESEARCH_REPORT_ZH.md),
+[raw low-rate statistics](statistical-calibration/RESULTS.md), [TA-1](TRUTH_ANNOTATION_PROTOCOL.md),
+[R2 readiness](readiness.json) and [external feasibility](EXTERNAL_FEASIBILITY.md) describe their historical execution.
+Read R2 grid statements together with the R3 erratum. R2 joint power was UNRUN then; R3 measures only
+hypothetical-model joint power. FIDES five lattice assertions remain primitive smoke checks; complete
+FIDES/OpenAPPA paired runtime experiments and real-model tests remain UNRUN.

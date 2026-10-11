@@ -1,0 +1,32 @@
+{
+  "kind": "ACTUAL_LEGACY_DEVELOPMENT_REGRESSION_NOT_R1_PILOT",
+  "executed_at_utc": "2026-10-11T12:38:04.178557+00:00",
+  "old_report_sha256": "16a8c3178be90122229fdc58aacd470e6864152ffc91be25d89185a7b7887364",
+  "new_report_sha256": "83c9cbcf553fd3f73ff2fe8559ae270d937c082b8cc9e23d27e2044a0738e781",
+  "dataset_sha256": "78c44607590906fabc730ffa8b495ce58b411c48dab8c17610a1a32bd44797cc",
+  "before": {
+    "HELD": 129,
+    "FAILED": 123,
+    "UNRUN": 0
+  },
+  "after": {
+    "HELD": 129,
+    "FAILED": 123,
+    "UNRUN": 0
+  },
+  "outcome_and_attribution_comparisons": 252,
+  "changed": 0,
+  "original_runtime_source_hashes_unchanged": 48,
+  "evaluation_exit_code": 1,
+  "independent_gate_exit_code": 0,
+  "real_http": "controlled 127.0.0.1 receiver",
+  "model_requests": 0,
+  "candidate_commit_is_parent_of_uncommitted_research_only_changes": true,
+  "files": {
+    "cases.csv": "c55e01ef138ea7bc9cfa0da12d08577df79117f7252813f02d7539a58f580417",
+    "failures.csv": "f56f74c1e04365d36b711a42fe7312ae6c29afa2cf9da5726d189cead6d5b64b",
+    "metrics.csv": "cd7ba8a31e5d2faaafe08e34516e2becb805567c4ba3c372d7c43b519c6e9ce3",
+    "report.json": "83c9cbcf553fd3f73ff2fe8559ae270d937c082b8cc9e23d27e2044a0738e781",
+    "source-profiles.csv": "56a8765d1a7702d1d3fb97ed8ef7fa136d4ebe210c26bc052ff013a1d0b689b4"
+  }
+}

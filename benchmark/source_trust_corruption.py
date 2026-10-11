@@ -240,8 +240,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate non-executed development measurement controls")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--r1-panel", action="store_true", help="plan all 76 E0/E1 plus 5 E3 graphs in one bounded manifest")
+    parser.add_argument("--cohort", type=Path, help="bounded development cohort or structurally adjudicated projection packet; not human certification")
     args = parser.parse_args()
     cohort = measurement_cohort()
+    if args.cohort is not None:
+        _require(args.cohort.stat().st_size <= MAX_BYTES, "cohort_file_limit")
+        cohort = json.loads(args.cohort.read_text())
+        if "projection" in cohort:
+            _require(cohort.get("version") == "source-trust-truth-projection-1" and
+                     cohort.get("status") == "STRUCTURAL_PROJECTION_ONLY" and
+                     cohort.get("pilot_eligible") is False and cohort.get("human_identity_or_semantics_verified") is False,
+                     "projection_not_human_or_execution_approval")
+            _require(cohort["chain"]["projection_sha256"] == digest(cohort["projection"]), "projection_cohort_identity")
+            cohort = cohort["projection"]
+        validate_cohort(cohort)
     graphs = [create_graph(cohort, rate="0", direction="correct", seed=None)]
     graphs += [create_graph(cohort, rate=rate, direction=direction, seed=seed)
                for rate in ("0.10", "0.25") for direction in DIRECTIONS for seed in (17, 29)]

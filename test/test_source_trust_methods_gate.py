@@ -5,7 +5,7 @@ import io
 import json
 from pathlib import Path
 import unittest
-from ci.validate_source_trust_methods import freeze_check, readiness_check, validate_calibration, validate_artifacts
+from ci.validate_source_trust_methods import freeze_check, readiness_check, readiness_r3_check, validate_calibration, validate_artifacts
 
 BASE=Path('docs/research/source-trust-methods/statistical-calibration')
 
@@ -54,3 +54,18 @@ class MethodsGateTests(unittest.TestCase):
         result=validate_artifacts(Path('docs/research/source-trust-methods/r3'))
         self.assertTrue(result['R1_H5_grid_eligible'])
         self.assertEqual(result['validated_simulation_rows'],9600)
+
+    def test_joint_toy_power_cannot_authorize_actual_policy_or_pilot(self):
+        verdict=readiness_r3_check()
+        self.assertEqual(verdict['actual_policy_joint_power'],'UNRUN')
+        self.assertEqual(verdict['toy_joint_power'],'MEASURED_INSUFFICIENT')
+        packet=json.loads(Path('docs/research/source-trust-methods/r3/readiness.json').read_text())
+        packet['gates']['actual_policy_joint_H5_power']='PASSED'
+        with self.assertRaisesRegex(ValueError,'R3_no_automatic_authorization'):readiness_r3_check(packet)
+
+    def test_missing_human_receipts_or_unrun_cannot_be_relabelled(self):
+        for field in ('actual_human_annotators','pilot'):
+            packet=json.loads(Path('docs/research/source-trust-methods/r3/readiness.json').read_text())
+            if field=='pilot':packet[field]['executions']=1
+            else:packet[field]=2
+            with self.subTest(field=field),self.assertRaises(ValueError):readiness_r3_check(packet)

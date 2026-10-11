@@ -175,10 +175,35 @@ def readiness_check(root: Path = ROOT) -> dict:
     return {'pilot': 'UNRUN', 'holdout': 'UNRUN', 'human_truth_verified': False}
 
 
+def readiness_r3_check(packet: dict | None = None) -> dict:
+    packet = packet or json.loads((ROOT/'r3/readiness.json').read_text())
+    require(packet['version'] == 'source-trust-methods-readiness-3' and
+            packet['status'] == 'NOT_READY_FOR_PREREGISTRATION_OR_PILOT', 'R3_still_pending')
+    require(packet['pilot']['status'] == packet['holdout']['status'] == 'UNRUN' and
+            not packet['holdout']['material_acquired'] and packet['holdout']['executions'] == 0,
+            'R3_no_pilot_or_holdout')
+    require(packet['pilot']['planned_maximum_rows'] == 984 and
+            all(packet['pilot'][k] == 0 for k in ('executions','receiver_observations','model_requests')), 'R3_zero_pilot')
+    require(all(packet[k] == 0 for k in ('actual_human_annotators','actual_human_arbitrators','actual_independent_auditors')), 'R3_no_invented_humans')
+    require(packet['gates']['actual_policy_joint_H5_power'] == 'UNRUN' and
+            packet['gates']['threshold_task_value_basis'] == 'PENDING_INDEPENDENT_TASK_OWNER' and
+            packet['gates']['revised_confirmatory_graph_budget'] == 'NOT_APPROVED', 'R3_no_automatic_authorization')
+    report = json.loads(load_gzip(ROOT/'r3/joint-calibration/report.json.gz'))
+    counts = {'trials':report['trial_rows'], 'graph_rows':report['raw_graph_rows'], 'E0_rows':report['e0_rows'],
+              'joint_confirmations':sum(r['joint_confirmation_numerator'] for r in report['summary']),
+              'actual_defense_executions':report['actual_defense_executions']}
+    require(packet['joint_toy'] == counts and counts['joint_confirmations'] == 0, 'R3_joint_toy_counts')
+    require(packet['gates']['full_joint_H5_toy_power'] == 'MEASURED_INSUFFICIENT_POWER_AT_5_AND_30_GRAPHS', 'R3_toy_not_policy_power')
+    return {'pilot':'UNRUN', 'holdout':'UNRUN', 'toy_joint_power':'MEASURED_INSUFFICIENT',
+            'actual_policy_joint_power':'UNRUN', 'human_truth_verified':False}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
-    print(json.dumps({'frozen_pr6_files': freeze_check(), 'calibration': validate_artifacts(), 'calibration_r3': validate_artifacts(ROOT/'r3'), 'readiness': readiness_check()}, sort_keys=True))
+    print(json.dumps({'frozen_pr6_files': freeze_check(), 'calibration': validate_artifacts(),
+                     'calibration_r3': validate_artifacts(ROOT/'r3'), 'readiness': readiness_check(),
+                     'readiness_r3':readiness_r3_check()}, sort_keys=True))
 
 
 if __name__ == '__main__':

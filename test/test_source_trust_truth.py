@@ -1,4 +1,9 @@
 import copy
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import unittest
 from benchmark.source_trust_corruption import measurement_cohort,create_graph,manifest,validate_cohort
 from benchmark.source_trust_truth import convert,digest,fixture_ledger,audit_gate
@@ -16,6 +21,30 @@ class TruthProjectionTests(unittest.TestCase):
         self.assertFalse(result['human_identity_or_semantics_verified'])
         graph=create_graph(result['projection'],rate='.1',direction='sensitive_to_public',seed=17)
         self.assertFalse(check_graph(manifest(result['projection'],[graph]))['pilot_eligible'])
+
+    def test_CLI_consumes_pinned_projection_and_external_gate_catches_rehash(self):
+        ledger=self.ledger();result=convert(ledger)
+        validate(ledger,result,digest(ledger))
+        original_cohort_sha256=digest(result['projection'])
+        with tempfile.TemporaryDirectory() as folder:
+            source=Path(folder)/'projection.json';output=Path(folder)/'graphs.json'
+            source.write_text(json.dumps(result))
+            command=[sys.executable,'-m','benchmark.source_trust_corruption','--cohort',str(source),'--output',str(output)]
+            subprocess.run(command,check=True,capture_output=True)
+            packet=json.loads(output.read_text())
+            checked=check_graph(packet,expected_cohort_sha256=digest(result['projection']))
+            self.assertTrue(checked['trusted_cohort_hash_supplied'])
+            # Alter an unused private leaf, keeping the enrolled task contract
+            # coherent, so the external pin (not task validity) rejects it.
+            result['projection']['families'][0]['leaves'][1]['sensitive']=False
+            source.write_text(json.dumps(result))
+            self.assertNotEqual(subprocess.run(command,capture_output=True).returncode,0)
+            result['chain']['projection_sha256']=digest(result['projection'])
+            result['chain_sha256']=digest(result['chain'])
+            source.write_text(json.dumps(result))
+            subprocess.run(command,check=True,capture_output=True)
+            with self.assertRaisesRegex(ValueError,'cohort'):
+                check_graph(json.loads(output.read_text()),expected_cohort_sha256=original_cohort_sha256)
 
     def test_uncertain_not_false_and_no_silent_task_drop(self):
         ledger=self.ledger();key=next(iter(ledger['submissions'][0]['answers']))
