@@ -44,3 +44,9 @@ samples require a pinned upstream revision, actual license/provenance, unchanged
 attack objectives, separate adaptation records and independent authors. Reading
 AgentDojo or authoring adaptive examples does not satisfy that requirement.
 Neither stage is represented by scripted-model numbers.
+
+The observed follow-up is in [SOURCE_TRUST_REPORT.md](SOURCE_TRUST_REPORT.md).
+Its [complete evidence](results/source-trust/v1/README.md) includes initial runs,
+the clean-candidate run, all failures, source-profile rates and computed figures.
+Externally authored AgentDojo source templates are staged with their exact
+revision/license/hash; they are UNRUN intake material, not external validation.

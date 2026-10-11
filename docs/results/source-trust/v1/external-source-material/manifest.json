@@ -1,0 +1,51 @@
+{
+  "repository": "ethz-spylab/agentdojo",
+  "commit_sha": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+  "license": "MIT",
+  "files": [
+    {
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/089ed468cf3ed0322acc66b0211f26d9d90dbf60/LICENSE",
+      "local_file": "LICENSE.agentdojo.txt",
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e",
+      "bytes": 1161,
+      "attack_classes": []
+    },
+    {
+      "upstream_path": "src/agentdojo/attacks/baseline_attacks.py",
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/089ed468cf3ed0322acc66b0211f26d9d90dbf60/src/agentdojo/attacks/baseline_attacks.py",
+      "local_file": "baseline_attacks.py.txt",
+      "sha256": "0e3f3cec2173524989d67bd3d934d032774ad3fc5995969c9565613efaa21c6d",
+      "bytes": 2864,
+      "attack_classes": [
+        "ManualAttack",
+        "DirectAttack",
+        "IgnorePreviousAttack",
+        "SystemMessageAttack",
+        "InjecAgentAttack"
+      ]
+    },
+    {
+      "upstream_path": "src/agentdojo/attacks/important_instructions_attacks.py",
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/089ed468cf3ed0322acc66b0211f26d9d90dbf60/src/agentdojo/attacks/important_instructions_attacks.py",
+      "local_file": "important_instructions_attacks.py.txt",
+      "sha256": "519f24e0b9d72f43343d665679adacc33758b50cd1b586a81fa53fb098dcfe71",
+      "bytes": 6222,
+      "attack_classes": [
+        "ImportantInstructionsAttack",
+        "ImportantInstructionsAttackNoUserName",
+        "ImportantInstructionsAttackNoModelName",
+        "ImportantInstructionsAttackNoNames",
+        "ImportantInstructionsWrongModelName",
+        "ImportantInstructionsWrongUserName",
+        "ToolKnowledgeAttack"
+      ]
+    }
+  ],
+  "status": "UNRUN",
+  "model_requests": 0,
+  "receiver_observations": 0,
+  "reason": "Source intake only. No task-suite adapter or genuine model run has occurred.",
+  "independence": "Externally authored upstream templates, read during development; no blind evaluation or official AgentDojo score.",
+  "adaptation": "None. Exact upstream source stored as .py.txt and never imported or executed."
+}

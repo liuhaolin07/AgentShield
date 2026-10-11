@@ -1,0 +1,95 @@
+name: Source classification trust study
+
+on:
+  push:
+    branches: [codex/v1.10-source-trust-study]
+  pull_request:
+    branches: [codex/v1.10-precision-evaluation]
+
+permissions:
+  contents: read
+
+jobs:
+  source-trust:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Verify all original V1.10 files remain unchanged
+        run: |
+          python - <<'PY'
+          from ci.validate_source_trust import check_v110_freeze
+          print('Frozen V1.10 files:', check_v110_freeze())
+          PY
+      - name: Full regression suite
+        run: python -m unittest discover -s test -p "test_*.py" -v
+      - name: Source trust comparison (retain leaks and false blocks)
+        continue-on-error: true
+        run: python -m evaluation.source_trust --seed 17 --repeat 3 --output-dir logs/source-trust
+      - name: Independent evidence gate, not a zero-leak gate
+        if: always()
+        run: python -m ci.validate_source_trust logs/source-trust/report.json
+      - name: Verify live model requests remain disabled
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          execution = subprocess.run([sys.executable, '-m', 'evaluation.live_precision',
+                                      '--output-dir', 'logs/source-trust-live-disabled'])
+          report = json.loads(Path('logs/source-trust-live-disabled/report.json').read_text())
+          if execution.returncode != 2 or report['summary'] != {'HELD': 0, 'FAILED': 0, 'UNRUN': 36}:
+              raise SystemExit('Unexpected real-model observations')
+          if report['cost']['request_attempts'] != 0:
+              raise SystemExit('Unexpected paid request')
+          print('36 UNRUN, zero model requests; no model-defense conclusion')
+          PY
+      - name: Retain complete observed failures and exclusions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-trust-python-${{ matrix.python-version }}
+          path: |
+            logs/source-trust/
+            logs/source-trust-live-disabled/
+          retention-days: 7
+
+  figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-research.txt
+      - name: Export plots from the committed actual observations
+        run: |
+          python - <<'PY'
+          import gzip, hashlib, json
+          from pathlib import Path
+          from ci.validate_source_trust import validate
+          from evaluation.source_trust_plot import export_analysis
+          report = json.loads(gzip.decompress(Path('docs/results/source-trust/v1/report.json.gz').read_bytes()))
+          for name, digest in report['source_sha256'].items():
+              if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
+                  raise SystemExit('Changed measured implementation: '+name)
+          intake = Path('docs/results/source-trust/v1/external-source-material')
+          manifest = json.loads((intake/'manifest.json').read_text())
+          for record in manifest['files']:
+              if hashlib.sha256((intake/record['local_file']).read_bytes()).hexdigest() != record['sha256']:
+                  raise SystemExit('Changed unmodified upstream source: '+record['upstream_path'])
+          if manifest['status'] != 'UNRUN' or manifest['model_requests'] or manifest['receiver_observations']:
+              raise SystemExit('Source intake incorrectly claimed as an experiment')
+          print(validate(report))
+          export_analysis(report, Path('logs/source-trust-figures'), charts=True)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-trust-actual-result-figures
+          path: logs/source-trust-figures/
+          retention-days: 7
