@@ -1,0 +1,30 @@
+{
+  "version": "source-trust-statistical-calibration-1",
+  "kind": "STATISTICAL_SIMULATION_NOT_DEFENSE",
+  "seed": 271828,
+  "trials": 200,
+  "bootstrap_draws": 1000,
+  "families": [
+    30,
+    60
+  ],
+  "graphs": [
+    5,
+    30
+  ],
+  "scenarios": [
+    "uniform_quota",
+    "template_block_quota",
+    "rare_global_fault",
+    "balanced_global_fault"
+  ],
+  "alpha": 0.05,
+  "multiplicity": 17,
+  "thresholds": {
+    "safety_improvement": 0.05,
+    "tcr_noninferiority": 0.05,
+    "absolute_tcr": 0.8,
+    "equivalence": 0.02
+  },
+  "threshold_status": "NOT_JUSTIFIED_BY_TASK_OWNER"
+}
