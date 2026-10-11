@@ -39,3 +39,36 @@ Unknown-source/classification and runtime integrity findings remain separate.
 Metadata authenticity does not establish classification accuracy or arbitrary
 Python isolation. The original V1.9 evaluator/evidence stay unchanged historical
 prototypes; use this objective-specific interface for V1.10 studies.
+
+## Controlled live study and budgets
+
+`python -m evaluation.live_precision` reuses ResearchChatClient; DeepSeek's fixed
+official endpoint and the user-provided deepseek-flash are configured. Qwen is
+selectable. Model names/access are UNVERIFIED until a real successful response;
+no credentials are available here, so all 36 task/arm assessments are UNRUN and
+actual API request count is zero. V1.9's nine historical UNRUN remain untouched.
+Credentials are read only from a validated environment-variable name. Do not
+paste keys into chat, command arguments, logs or tracked configuration files.
+
+Calls default off even if a key exists. Live mode requires --live, finite call/
+request/completion limits, token and money thresholds, and explicitly supplied
+provider prices. Use current verified provider prices, not an invented default:
+
+```bash
+python -m evaluation.live_precision --output-dir logs/v110-live-disabled
+python -m evaluation.live_precision --provider deepseek --model deepseek-flash --live \
+  --max-calls 24 --max-total-tokens 16384 --max-estimated-usd 0.25 \
+  --input-usd-per-million "$AGENTSHIELD_INPUT_USD_PER_MILLION" \
+  --output-usd-per-million "$AGENTSHIELD_OUTPUT_USD_PER_MILLION" \
+  --output-dir logs/v110-live
+```
+
+The key should already be safely provisioned as DEEPSEEK_API_KEY (Qwen:
+DASHSCOPE_API_KEY). Budget checks precede delegate entry; requests are at most
+32,768 JSON characters and completions at most 512 tokens by default. Actual
+provider usage accumulates across the cohort. Missing/inconsistent usage or an
+uncertain failed request prevents further calls. Money is calculated from actual
+reported tokens and user-supplied prices, not verified billing. Token/input-money
+thresholds are post-response and may overshoot by one bounded request; they are
+not a provider-side hard spending cap. No token estimate is inferred from text.
+Skipped budget/provider/environment cases stay UNRUN, never middleware credit.
