@@ -1,0 +1,149 @@
+{
+  "version": "source-trust-external-artifacts-1",
+  "kind": "SOURCE_INTAKE_NOT_DEFENSE_EVALUATION",
+  "retrieved_at_utc": "2026-10-11T07:19:20.691213+00:00",
+  "files": [
+    {
+      "artifact": "fides",
+      "local_path": "fides/README.md",
+      "upstream_path": "README.md",
+      "commit": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "source_url": "https://github.com/microsoft/fides/blob/669c046c4adbc56ee49c9672fdd30c54937ea062/README.md",
+      "sha256": "ea8bd3b555bee1092c332fe3910fa9da05c3090d58ded22e6e40eac143043566",
+      "unmodified": true
+    },
+    {
+      "artifact": "fides",
+      "local_path": "fides/LICENSE",
+      "upstream_path": "LICENSE",
+      "commit": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "source_url": "https://github.com/microsoft/fides/blob/669c046c4adbc56ee49c9672fdd30c54937ea062/LICENSE",
+      "sha256": "fd532481d828e13a0b13ccb598e02338a3617740675a862ee6bdc1541b68e93d",
+      "unmodified": true
+    },
+    {
+      "artifact": "fides",
+      "local_path": "fides/pyproject.toml",
+      "upstream_path": "pyproject.toml",
+      "commit": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "source_url": "https://github.com/microsoft/fides/blob/669c046c4adbc56ee49c9672fdd30c54937ea062/pyproject.toml",
+      "sha256": "e5bd00c8ef2f1dd05fc1892ebc8ed4a412ecdb01a1fd1c70ef3608211be8cc65",
+      "unmodified": true
+    },
+    {
+      "artifact": "fides",
+      "local_path": "fides/requirements.txt",
+      "upstream_path": "requirements.txt",
+      "commit": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "source_url": "https://github.com/microsoft/fides/blob/669c046c4adbc56ee49c9672fdd30c54937ea062/requirements.txt",
+      "sha256": "7d97366b10e85cc89ca3873392d627cb4418d3b62b92356abe98e419e71a8051",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/README.md",
+      "upstream_path": "README.md",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/README.md",
+      "sha256": "1b54033e7dbbe2db211c438d79641cab441b08c99e2bf9710ba6564578d37734",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/LICENSE.md",
+      "upstream_path": "LICENSE.md",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/LICENSE.md",
+      "sha256": "4d699db022022acf51f959343e444444c98f0e3adc89e954489092981e1fd55a",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/Cargo.toml",
+      "upstream_path": "Cargo.toml",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/Cargo.toml",
+      "sha256": "cb278ea0a02aa7d9af549f1906ee6cc6552cc6476e0eb7623a2e06c97e8cdb8f",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-agent-python/pyproject.toml",
+      "upstream_path": "appa-agent-python/pyproject.toml",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-agent-python/pyproject.toml",
+      "sha256": "77b0dbc2355805264aaebd7cd53c26585a441847882a445a1b5a6f590c4355b6",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-agent-python/Cargo.toml",
+      "upstream_path": "appa-agent-python/Cargo.toml",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-agent-python/Cargo.toml",
+      "sha256": "98c94b7d2b9d3b1ce907772c63d77867836bdfe712790be889daed66d2ce20a4",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-policy/Cargo.toml",
+      "upstream_path": "appa-policy/Cargo.toml",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-policy/Cargo.toml",
+      "sha256": "83e167e93ddadc4d660682c6030b6ae3cf208003792c726ba6b3558f53d5fd3b",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-agent-python/src/lib.rs",
+      "upstream_path": "appa-agent-python/src/lib.rs",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-agent-python/src/lib.rs",
+      "sha256": "d384c2875798177f7e0224de4afe9f4580c327292755e757c0deb621352a3446",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-engine/src/label.rs",
+      "upstream_path": "appa-engine/src/label.rs",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-engine/src/label.rs",
+      "sha256": "1d19f17afbf25bf82421a9da4557037700fb7f7610ffbdd1eaadffcb59059b23",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-engine/src/shape.rs",
+      "upstream_path": "appa-engine/src/shape.rs",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-engine/src/shape.rs",
+      "sha256": "fab856b42a8034e0e5fcab0025d201416bf9db9a0685218631e1fa28d1705d97",
+      "unmodified": true
+    },
+    {
+      "artifact": "appa",
+      "local_path": "appa/appa-engine/src/check.rs",
+      "upstream_path": "appa-engine/src/check.rs",
+      "commit": "1c52575176330bc88a3c346abe678af5d42083b3",
+      "source_url": "https://github.com/archestra-ai/OpenAPPA/blob/1c52575176330bc88a3c346abe678af5d42083b3/appa-engine/src/check.rs",
+      "sha256": "c6c8fcc066f1f8bad1c37fdd40fe4ad4476c43a959870fb616c4b3a2fc5a997e",
+      "unmodified": true
+    },
+    {
+      "artifact": "fides",
+      "local_path": "fides/lattice_cell_21.py",
+      "upstream_path": "Tutorial.ipynb",
+      "cell_index": 21,
+      "commit": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "source_url": "https://github.com/microsoft/fides/blob/669c046c4adbc56ee49c9672fdd30c54937ea062/Tutorial.ipynb",
+      "upstream_notebook_sha256": "1772a3b8604f874974e06c47d2e2e1ebd268f7de6c11a5545f7187f75c35a19c",
+      "sha256": "72f56eed66b66c622bf80ffcd2b1400b57e81140674989daa291316df03bf43f",
+      "unmodified_cell_source": true,
+      "outputs_copied": false
+    }
+  ],
+  "benchmark_task_materials_copied": false,
+  "model_requests": 0,
+  "actual_network_sink_executions": 0,
+  "upstream_benchmark_claims_independently_verified": false
+}

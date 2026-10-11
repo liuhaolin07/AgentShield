@@ -1,0 +1,22 @@
+[package]
+name = "appa-policy"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[features]
+# The `archestra` annotator builtin, served by an embedding host's endpoint. Off by
+# default: a policy naming it elsewhere is refused as an unknown builtin. Enable it
+# through `appa/archestra`: the runtime matches on the variant only under its own flag.
+archestra = []
+
+[dependencies]
+appa-engine = { workspace = true }
+appa-runtime-api = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+toml = { workspace = true }
+
+[lints]
+workspace = true
