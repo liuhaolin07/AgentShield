@@ -1,0 +1,42 @@
+{
+  "verified_utc": "2026-10-11T05:12:48.853180+00:00",
+  "frozen_baseline_commit": "5c2b86c0f381b89f55f6f5d41a5d9180a82240fb",
+  "frozen_baseline_files_verified": 255,
+  "historical_evidence_gate": {
+    "validated_rows": 252,
+    "frozen_v110_files": 212,
+    "summary": {
+      "HELD": 129,
+      "FAILED": 123,
+      "UNRUN": 0
+    }
+  },
+  "new_experiments": "PLANNED/UNRUN",
+  "new_model_requests": 0,
+  "new_runtime_modules": 0,
+  "full_unit_suite_rerun": false,
+  "historical_unit_tests": {
+    "passed": 286,
+    "failed": 0,
+    "origin": "Frozen PR #5; not a new regression run"
+  },
+  "pdf": {
+    "pages": 4,
+    "format": "A4",
+    "embedded_fonts": true,
+    "page_bounds_verified": true,
+    "body_vertical_margin_min_points": 25,
+    "footer_vertical_margin_min_points": 10,
+    "reference_links_verified": 5
+  },
+  "primary_papers_verified": 5,
+  "file_sha256": {
+    "RESEARCH_DESIGN.md": "b64acc8fc6bf430a1f6abae4c63108b67db584fa0c1335134cc6c801dca33b9f",
+    "RESEARCH_DESIGN.pdf": "8400c431f690fec6df71b83872b51ce4161c39269809f0c5ffbf67772716aa85",
+    "pdf-header.tex": "1285fb35579ba40c2383c9c71b50f4062ccf26cc92147722298a8dbdce417b39",
+    "references-verified.json": "d61d461ae6d0253cff402d43677c6336ec88f24d88a8df8448f5aa5dcbca5401",
+    "frozen-pr5.json": "62ef48021ceb7ef96cd0eb17baffb7a3880ec39fb5a4756492b3fa1d3acc3d89",
+    "README.md": "69fda9684e1c09f312f3d4eb2849036cf7d62a5ecd769d5d872d189480e8e3a4"
+  },
+  "verification_scope": "Frozen file hashes, preserved historical result gate, actual PDF page/bounds/font/text/link checks and downloaded primary-source hashes. No new safety evaluation or defense reproduction."
+}
