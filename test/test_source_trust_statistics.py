@@ -6,17 +6,17 @@ import random
 import unittest
 
 from evaluation.source_trust_statistics import (auc, bootstrap_means, hoeffding_interval, quantile,
-                                               run, toy_matrix, validate_config, wilson)
+                                               run, toy_matrix, validate_config, wilson, h5_binding, GRID)
 
 
 class StatisticsTests(unittest.TestCase):
     def config(self):
-        config = json.loads(Path("docs/research/source-trust-methods/statistical-calibration-config.json").read_text())
+        config = json.loads(Path("docs/research/source-trust-methods/r3/statistical-calibration-config.json").read_text())
         config.update(trials=20, bootstrap_draws=100, families=[4], graphs=[5])
         return config
 
     def test_auc_linear_and_constant(self):
-        self.assertAlmostEqual(auc([0, .01, .05, .10, .25, .50]), .25)
+        self.assertAlmostEqual(auc([0, .05, .10, .25, .50, 1.]), .5)
         self.assertAlmostEqual(auc([.3]*6), .3)
 
     def test_quantile_interpolation(self):
@@ -38,7 +38,7 @@ class StatisticsTests(unittest.TestCase):
     def test_quota_known_expectation_and_bounds(self):
         for scenario in ("uniform_quota", "template_block_quota"):
             matrix, mean, bounds = toy_matrix(scenario, 30, 5, random.Random(5))
-            self.assertAlmostEqual(mean, -.125)
+            self.assertAlmostEqual(mean, -.25)
             self.assertEqual(bounds, (-.5, 0.))
             self.assertTrue(all(-1 <= v <= 0 for row in matrix for v in row))
             self.assertTrue(all(set(matrix[i]) == {0.} for i in range(1, 30, 2)))
@@ -88,3 +88,17 @@ class StatisticsTests(unittest.TestCase):
             self.assertEqual(cell['component_gate_denominator'] + cell['component_excluded'], 20)
             if cell['method'] != 'graph_hoeffding':
                 self.assertEqual(cell['component_status'], 'UNRUN_insufficient_adjusted_tail_resolution')
+
+    def test_grid_bound_to_external_R1_H5_TCR_contract(self):
+        protocol=json.loads(Path("docs/research/source-trust/protocol-draft.json").read_text())
+        self.assertEqual(list(GRID),protocol['design']['rates'])
+        binding=h5_binding()
+        self.assertEqual(binding['integration_domain'],[0,1])
+        self.assertEqual(binding['normalization_width'],1)
+        c=self.config();c['estimand']['grid']=[0,.01,.05,.1,.25,.5]
+        with self.assertRaisesRegex(ValueError,'estimand_binding'):validate_config(c)
+
+    def test_auc_scale_against_independent_linear_integral(self):
+        # Integral of -.5*p on [0,1] is -.25, from calculus rather than generator assumptions.
+        self.assertAlmostEqual(auc([-.5*p for p in GRID]),-.25)
+        self.assertEqual(toy_matrix('uniform_quota',30,5,random.Random(5))[1],-.25)

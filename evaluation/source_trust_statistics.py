@@ -18,8 +18,30 @@ import statistics
 import sys
 from typing import Sequence
 
-VERSION = "source-trust-statistical-calibration-1"
-GRID = (0, .01, .05, .10, .25, .50)
+VERSION = "source-trust-statistical-calibration-2"
+# Keep the old independent streams so only the estimand changes in paired reruns.
+RNG_VERSION = "source-trust-statistical-calibration-1"
+PROTOCOL_PATH = Path(__file__).resolve().parents[1]/"docs/research/source-trust/protocol-draft.json"
+PROTOCOL_SHA256 = "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+
+
+def h5_binding() -> dict:
+    blob = PROTOCOL_PATH.read_bytes()
+    if len(blob) > 65536 or hashlib.sha256(blob).hexdigest() != PROTOCOL_SHA256:
+        raise ValueError("frozen_R1_protocol_changed")
+    protocol = json.loads(blob)
+    grid = protocol["design"]["rates"]
+    h5 = next(h for h in protocol["hypotheses"] if h["id"] == "H5")
+    delta_points = sorted(float(v.split("=", 1)[1]) for v in h5["statistics"] if v.startswith("delta_TCR_p="))
+    absolute_points = sorted(float(v.split("=", 1)[1]) for v in h5["statistics"] if v.startswith("TCR_conservative_p="))
+    if len(grid) != 6 or grid != delta_points or grid != absolute_points or grid[0] != 0 or grid[-1] != 1:
+        raise ValueError("R1_H5_grid_and_TCR_points_disagree")
+    return {"hypothesis": "H5", "protocol_path": "docs/research/source-trust/protocol-draft.json",
+            "protocol_sha256": PROTOCOL_SHA256, "grid": grid, "integration_domain": [grid[0], grid[-1]],
+            "normalization_width": grid[-1]-grid[0], "scope": "toy_safety_component_only"}
+
+
+GRID = tuple(h5_binding()["grid"])
 SCENARIOS = ("uniform_quota", "template_block_quota", "rare_global_fault", "balanced_global_fault")
 METHODS = ("family_percentile", "graph_percentile", "graph_hoeffding")
 
@@ -35,6 +57,7 @@ def canonical(value: object) -> bytes:
 
 def validate_config(config: dict) -> None:
     require(config.get("version") == VERSION, "config_version")
+    require(config.get("estimand") == h5_binding() and tuple(config["estimand"]["grid"]) == GRID, "R1_H5_estimand_binding")
     require(config.get("kind") == "STATISTICAL_SIMULATION_NOT_DEFENSE", "simulation_only")
     require(type(config.get("seed")) is int and 0 <= config["seed"] < 2**32, "seed")
     require(type(config.get("trials")) is int and 20 <= config["trials"] <= 1000, "trials")
@@ -152,7 +175,7 @@ def run(config: dict) -> tuple[dict, list[dict]]:
             for scenario in SCENARIOS:
                 for trial in range(config["trials"]):
                     # Cell/trial identity gives order-independent fixed streams.
-                    stream = hashlib.sha256(canonical([VERSION, config["seed"], families, graphs, scenario, trial])).digest()
+                    stream = hashlib.sha256(canonical([RNG_VERSION, config["seed"], families, graphs, scenario, trial])).digest()
                     rng = random.Random(int.from_bytes(stream, "big"))
                     matrix, truth, bounds = toy_matrix(scenario, families, graphs, rng)
                     estimate = statistics.fmean(v for family in matrix for v in family)
@@ -199,6 +222,7 @@ def run(config: dict) -> tuple[dict, list[dict]]:
                                       "component_mc95": wilson(passed, len(eligible)) if eligible else None})
     report = {"version": VERSION, "kind": "STATISTICAL_SIMULATION_NOT_DEFENSE", "config": config,
               "config_sha256": hashlib.sha256(canonical(config)).hexdigest(),
+              "estimand": h5_binding(), "rng_stream_version": RNG_VERSION,
               "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               "environment": {"python": sys.version, "platform": platform.platform()}, "summary": summaries,
               "simulation_rows": len(rows), "actual_defense_executions": 0, "receiver_observations": 0, "model_requests": 0,

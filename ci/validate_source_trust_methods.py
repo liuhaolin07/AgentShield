@@ -1,6 +1,7 @@
 """Independent frozen-file and statistical CSV checks, not security efficacy."""
 from __future__ import annotations
 import argparse
+import ast
 import csv
 import gzip
 import hashlib
@@ -42,11 +43,49 @@ def boolean(text: str) -> bool:
     return text == 'True'
 
 
+def protocol_grid() -> tuple[list[float], str]:
+    path = Path('docs/research/source-trust/protocol-draft.json')
+    blob = path.read_bytes()
+    frozen = json.loads((ROOT/'frozen-pr6.json').read_text())['tracked_files_sha256']
+    digest = hashlib.sha256(blob).hexdigest()
+    require(digest == frozen[str(path)], 'frozen_R1_protocol_identity')
+    doc = json.loads(blob)
+    h5 = next(h for h in doc['hypotheses'] if h['id'] == 'H5')
+    grid = doc['design']['rates']
+    require(grid == sorted(float(k.split('=',1)[1]) for k in h5['statistics'] if k.startswith('delta_TCR_p=')), 'protocol_TCR_grid')
+    require(grid[0] == 0 and grid[-1] == 1 and len(grid) == 6, 'protocol_domain')
+    return grid, digest
+
+
+def estimand_grid(report: dict) -> tuple[list[float], bool]:
+    formal, digest = protocol_grid()
+    if report['version'] == 'source-trust-statistical-calibration-1':
+        # Recover the historical wrong grid from the pinned code Git object;
+        # verify consistency while explicitly refusing its historical H5 name.
+        provenance = json.loads((ROOT/'statistical-calibration/provenance.json').read_text())
+        commit = provenance['generation_commit']
+        require(re.fullmatch('[0-9a-f]{40}',commit) is not None, 'legacy_commit')
+        code = subprocess.check_output(['git','show',commit+':evaluation/source_trust_statistics.py'])
+        require(hashlib.sha256(code).hexdigest() == report['source_sha256'], 'legacy_generator_identity')
+        assignments = [n for n in ast.parse(code).body if isinstance(n, ast.Assign) and
+                       any(isinstance(t,ast.Name) and t.id == 'GRID' for t in n.targets)]
+        require(len(assignments) == 1, 'historical_grid_definition')
+        grid = list(ast.literal_eval(assignments[0].value))
+        return grid, False
+    require(report['version'] == 'source-trust-statistical-calibration-2', 'calibration_version')
+    expected = {'hypothesis':'H5','protocol_path':'docs/research/source-trust/protocol-draft.json',
+                'protocol_sha256':digest,'grid':formal,'integration_domain':[formal[0],formal[-1]],
+                'normalization_width':formal[-1]-formal[0],'scope':'toy_safety_component_only'}
+    require(report.get('estimand') == report['config'].get('estimand') == expected, 'R1_H5_estimand_binding')
+    return formal, True
+
+
 def validate_calibration(report: dict, rows: list[dict]) -> dict:
     require(report['kind'] == 'STATISTICAL_SIMULATION_NOT_DEFENSE', 'not_defense')
     require(all(report[k] == 0 for k in ('actual_defense_executions', 'receiver_observations', 'model_requests')), 'no_execution_claim')
     require(report['full_joint_H5_power']['status'] == 'UNRUN', 'joint_power_not_observed')
     config = report['config']
+    grid, h5_eligible = estimand_grid(report)
     require(config['threshold_status'] == 'NOT_JUSTIFIED_BY_TASK_OWNER', 'value_basis_pending')
     expected_cells = {(f, g, s, m) for f in config['families'] for g in config['graphs']
                       for s in config['scenarios'] for m in ('family_percentile', 'graph_percentile', 'graph_hoeffding')}
@@ -62,10 +101,9 @@ def validate_calibration(report: dict, rows: list[dict]) -> dict:
         require(all(math.isfinite(v) for v in (truth, estimate, low, high)) and low <= high, 'finite_interval')
         if key[2] in ('uniform_quota', 'template_block_quota'):
             # Independent analytic integral on the frozen six-point grid.
-            grid = (0., .01, .05, .1, .25, .5)
             n = key[0]*10
             rates = [math.floor(p*n)/n for p in grid]
-            analytic = -.5*sum((grid[i+1]-grid[i])*(rates[i]+rates[i+1]) for i in range(5))
+            analytic = -.5*sum((grid[i+1]-grid[i])*(rates[i]+rates[i+1])/2 for i in range(len(grid)-1))/(grid[-1]-grid[0])
             criterion = 'H5_safety_component_ONLY'
         else:
             require(key[2] in ('rare_global_fault', 'balanced_global_fault'), 'known_response')
@@ -103,7 +141,8 @@ def validate_calibration(report: dict, rows: list[dict]) -> dict:
         require(summary['component_status'] == ('MEASURED_TOY_ONLY' if observed else 'UNRUN_insufficient_adjusted_tail_resolution'), 'exclusions_status')
     require(summary_keys == expected_cells, 'complete_summary')
     return {'kind': 'STATISTICAL_CONSISTENCY_GATE_NOT_SECURITY_TEST', 'validated_simulation_rows': len(rows),
-            'cells': len(cells), 'actual_defense_executions': 0, 'full_joint_H5_power': 'UNRUN'}
+            'cells': len(cells), 'actual_defense_executions': 0, 'full_joint_H5_power': 'UNRUN',
+            'R1_H5_grid_eligible': h5_eligible, 'historical_claim_status': 'FORMAL_GRID_TOY_COMPONENT_ONLY' if h5_eligible else 'RETRACTED_H5_NAME_LOW_RATE_EXPLORATORY_AUC'}
 
 
 def validate_artifacts(root: Path = ROOT) -> dict:

@@ -36,3 +36,16 @@ class MethodsGateTests(unittest.TestCase):
     def test_coverage_recomputed_independently(self):
         report,rows=self.packet();rows[0]['covered']='False' if rows[0]['covered']=='True' else 'True'
         with self.assertRaisesRegex(ValueError,'coverage_recomputed'):validate_calibration(report,rows)
+
+    def test_historical_grid_cannot_receive_formal_h5_credit(self):
+        report,rows=self.packet()
+        verdict=validate_calibration(report,rows)
+        self.assertFalse(verdict['R1_H5_grid_eligible'])
+        self.assertIn('RETRACTED',verdict['historical_claim_status'])
+
+    def test_formal_name_with_low_rate_grid_rejected(self):
+        report,rows=self.packet()
+        report['version']='source-trust-statistical-calibration-2'
+        report['estimand']={'grid':[0,.01,.05,.1,.25,.5]}
+        report['config']['estimand']=report['estimand']
+        with self.assertRaisesRegex(ValueError,'R1_H5_estimand_binding'):validate_calibration(report,rows)
