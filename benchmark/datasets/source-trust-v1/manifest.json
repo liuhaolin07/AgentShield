@@ -1,0 +1,7 @@
+{
+  "dataset_version": "v1.10-source-trust-1",
+  "sha256": "78c44607590906fabc730ffa8b495ce58b411c48dab8c17610a1a32bd44797cc",
+  "tasks": 28,
+  "frozen_utc": "2026-10-11T04:34:01.580569+00:00",
+  "protocol": "Same inputs/tools/executors and scanner for all strategies; only precision and MIXED default differ"
+}
