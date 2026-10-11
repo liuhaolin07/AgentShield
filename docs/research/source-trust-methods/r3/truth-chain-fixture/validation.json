@@ -1,0 +1,29 @@
+{
+  "kind": "SYNTHETIC_AUTHOR_METHOD_FIXTURE_NOT_HUMAN_ANNOTATION",
+  "ledger_sha256": "7cfd662cc94a05dcde2788794ed73a3f8a75858e7b3745dddf20d31377f911c7",
+  "chain_gate": {
+    "kind": "RAW_TRUTH_CHAIN_CONSISTENCY_NOT_SEMANTIC_CERTIFICATION",
+    "leaves": 40,
+    "tasks": 4,
+    "projection_verified": true,
+    "pilot_eligible": false,
+    "human_identity_or_semantics_verified": false,
+    "raw_ledger_sha256": "7cfd662cc94a05dcde2788794ed73a3f8a75858e7b3745dddf20d31377f911c7",
+    "chain_sha256": "f4d379100f4f2422fc3abf659564ae9d41cbdaea32b5d0ace857bb026ae787a6"
+  },
+  "graph_gate": {
+    "kind": "manifest_validation_NOT_safety_test",
+    "graphs": 1,
+    "planned_consumers": 12,
+    "leaves": 40,
+    "cohort_sha256": "42511904ac606bcdba3861e19f8c9e16715e196565356cb2324e105c8103f341",
+    "trusted_cohort_hash_supplied": false,
+    "truth_semantics_verified": false,
+    "pilot_eligible": false,
+    "executions": 0
+  },
+  "verified_real_human_annotators": 0,
+  "actual_executions": 0,
+  "pilot": "UNRUN",
+  "holdout": "UNRUN"
+}

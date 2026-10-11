@@ -38,7 +38,7 @@ def _require(condition: bool, reason: str) -> None:
 
 def validate_cohort(cohort: dict) -> dict[str, dict]:
     _require(cohort.get("schema_version") == VERSION, "cohort_version")
-    _require(cohort.get("split") == "development" and cohort.get("annotation_status") == "author_only_measurement_control", "development_controls_only")
+    _require(cohort.get("split") == "development" and cohort.get("annotation_status") in ("author_only_measurement_control", "adjudicated_development_NOT_human_verified"), "development_controls_only")
     families = cohort.get("families")
     _require(type(families) is list and 1 <= len(families) <= 128, "family_limit")
     leaves: dict[str, dict] = {}

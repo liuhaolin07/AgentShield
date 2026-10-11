@@ -1,0 +1,15 @@
+{
+  "version": "TA-2-development-rules-NOT-preregistered",
+  "audit_seed": 314159,
+  "strata": ["file", "tool"],
+  "family_sample": "ceil(10%); at least one per nonempty stratum; deterministic SHA ranking",
+  "additional_100_percent": ["all_task_contracts", "all_PUBLIC_leaves", "all_conflicts_and_adjudications"],
+  "critical_error_tolerance": 0,
+  "critical_categories": ["classification", "readers", "purposes", "dependencies", "evidence", "inventory", "blinding", "identity"],
+  "any_finding_blocks_pilot": true,
+  "full_rework": "any critical error OR minor errors across >=2 families OR minor errors >1% inspected units",
+  "local_repair": "versioned rationale-only typo correction; 100% affected-family reaudit and frozen sample repeated",
+  "machine_structure_is_human_semantic_review": false,
+  "independent_review_status": "PENDING",
+  "real_human_records": 0
+}

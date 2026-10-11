@@ -25,7 +25,7 @@ def validate(packet: dict, expected_cohort_sha256: str | None = None) -> dict:
     require(all(type(packet[k]) is int and packet[k] == 0 for k in ("executions", "receiver_observations", "model_requests")), "no_execution_claims")
     source = packet["cohort"]
     require(source.get("schema_version") == "source-trust-corruption-1" and source.get("split") == "development"
-            and source.get("annotation_status") == "author_only_measurement_control", "development_controls_only")
+            and source.get("annotation_status") in ("author_only_measurement_control", "adjudicated_development_NOT_human_verified"), "development_controls_only")
     families = source["families"]
     require(type(families) is list and 1 <= len(families) <= 128, "families")
     source_hash = hashlib.sha256(encode(source)).hexdigest()
