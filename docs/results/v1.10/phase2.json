@@ -1,0 +1,8 @@
+{
+  "stage": "source_classification",
+  "passed": 236,
+  "failed": 0,
+  "raw_test_sha256": "4fabd2feb7ef0a40b7b75c46b1ac06ae862547dff15d9295200511953f76c69a",
+  "unknown_default": "BLOCK",
+  "wrong_public_opaque_fixture": "actual arrival observed; valid integrity does not prove classification"
+}

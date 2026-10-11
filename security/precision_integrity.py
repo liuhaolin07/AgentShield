@@ -57,7 +57,8 @@ def snapshot(value,depth=0,counter=None):
         'spans':[{'start':s.start,'stop':s.stop,'labels':[label(l) for l in s.labels]} for s in value.spans],
         'children':[(k,snapshot(c,depth+1,counter)) for k,c in value.children],
         'witness':[value.witness[0],snapshot(value.witness[1],depth+1,counter)] if value.witness else None,
-        'releases':[asdict(s) for s in value.releases]}
+        'releases':[asdict(s) for s in value.releases],
+        'classifications':[asdict(s) for s in value.classifications]}
 
 
 class PrecisionAuthority:
@@ -95,14 +96,16 @@ class PrecisionAuthority:
         root=(category,SourceRecord.create(category,reference).reference_id)
         roots=tuple(dict.fromkeys([root,*(r for h in parents for r in self._entries[h.value_id].roots)]))
         if len(roots)>32: raise IntegrityError('precision_source_budget')
-        if not self.field_precision: value=uniform(value.raw.reveal(),value.labels)
+        if not self.field_precision: value=replace(uniform(value.raw.reveal(),value.labels),classifications=value.classifications)
         return self._issue(value,'source_'+category,parents,{},roots)
 
     def _derive(self,operation,values,parameters):
         result=transform(operation,values,parameters)
         if not self.propagate: return uniform(result.raw.reveal(),())
-        if not self.field_precision: return uniform(result.raw.reveal(),tuple(dict.fromkeys(l for v in values for l in v.labels)))
-        return result
+        if not self.field_precision: result=uniform(result.raw.reveal(),tuple(dict.fromkeys(l for v in values for l in v.labels)))
+        active=set(result.to_tainted().source_ids)
+        stamps=tuple(dict.fromkeys(s for v in values for s in v.classifications if active.intersection(s.source_ids)))
+        return replace(result,classifications=stamps)
 
     def transform(self,operation,handles,parameters):
         if not isinstance(handles,tuple) or not 1<=len(handles)<=32 or not isinstance(parameters,dict): raise IntegrityError('precision_invalid_parameters')
@@ -147,6 +150,7 @@ class PrecisionAuthority:
             entry=walk(handle)
             return {'allowed':True,'reason':'precision_integrity_verified','sensitive':any(l.sensitive for l in entry.node.labels),'source_ids':list(entry.node.to_tainted().source_ids),
                 'root_reference_ids':[r for _,r in entry.roots],'releases':[{'rule_id_hash':hashlib.sha256(s.rule_id.encode()).hexdigest(),'target':asdict(s.target)} for s in entry.node.releases],
+                'classifications':[asdict(s) for s in entry.node.classifications],
                 'chain':[{'provenance_id':e.handle.provenance_id,'operation':e.operation,'parents':[p.provenance_id for p in e.parents]} for e in visited.values()]}
         except (ValueError,TypeError,KeyError,RecursionError,AttributeError):
             return {'allowed':False,'reason':'precision_integrity_rejected'}

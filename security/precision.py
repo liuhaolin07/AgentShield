@@ -74,6 +74,14 @@ class ReleaseStamp:
 
 
 @dataclass(frozen=True)
+class ClassificationStamp:
+    reference_id: str
+    status: str
+    source_ids: tuple[str,...]
+    unknown_policy: str
+
+
+@dataclass(frozen=True)
 class PrecisionValue:
     raw: TaintedValue = field(repr=False)
     ambient: tuple[TaintLabel,...] = ()
@@ -81,6 +89,7 @@ class PrecisionValue:
     spans: tuple[Span,...] = ()
     witness: tuple[str,PrecisionValue] | None = field(default=None,repr=False)
     releases: tuple[ReleaseStamp,...] = ()
+    classifications: tuple[ClassificationStamp,...] = ()
 
     @property
     def labels(self):

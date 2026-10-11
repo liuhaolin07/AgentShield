@@ -2,20 +2,22 @@
 from __future__ import annotations
 import json
 import time
+from dataclasses import replace
 from typing import Any
 from security.attested_runtime import AttestedReadResult,AttestedRuntime
 from security.audit import write_audit_event
-from security.middleware import check_tool_call
-from security.runtime import GuardedRuntime
+from security.middleware import check_tool_call,SecurityDecision
+from security.runtime import GuardedRuntime,RuntimeResult
 from security.taint import SourceRecord,TaintLabel,SinkTarget,TaintedValue,json_deserialize
 from security.taint_integrity import IntegrityError
-from security.precision import SourceLayout,source_value,uniform,union
+from security.precision import SourceLayout,source_value,uniform,union,ClassificationStamp
 from security.precision_integrity import PrecisionAuthority
+from security.source_classification import SourceRegistry,SourcePlan,decide_source,strict_json
 
 
 class PrecisionRuntime(GuardedRuntime):
     def __init__(self,*,layouts=None,rules=(),field_precision=True,propagate=True,release_enabled=True,
-                 scan_content=True,enforce_content=True,approved_tools=None,**kwargs):
+                 scan_content=True,enforce_content=True,approved_tools=None,registry=None,source_policy_enabled=True,**kwargs):
         super().__init__(**kwargs)
         self._precision=PrecisionAuthority(rules=rules,field_precision=field_precision,propagate=propagate,release_enabled=release_enabled)
         self._layouts=dict(layouts or {}); self._tools=dict(approved_tools or {})
@@ -23,6 +25,15 @@ class PrecisionRuntime(GuardedRuntime):
         if len(self._tools)>128 or any(not isinstance(k,str) or not callable(v) for k,v in self._tools.items()): raise IntegrityError('precision_invalid_tools')
         if type(scan_content) is not bool or type(enforce_content) is not bool: raise IntegrityError('precision_invalid_configuration')
         self._scan_content,self._enforce_content=scan_content,enforce_content
+        if registry is not None and not isinstance(registry,SourceRegistry) or type(source_policy_enabled) is not bool: raise IntegrityError('source_invalid_registry')
+        if registry is None:
+            plans=[]
+            for (category,reference),layout in self._layouts.items():
+                status='MIXED' if layout.fields or layout.ranges or layout.structure_sensitive!=layout.default_sensitive else 'SENSITIVE' if layout.default_sensitive else 'PUBLIC'
+                plans.append((category,reference,SourcePlan(status,layout)))
+            registry=SourceRegistry(tuple(plans))
+        self._registry=registry
+        self._source_enforce=source_policy_enabled and self.defense_mode=='scanner_taint' and enforce_content
 
     def _check(self,capability,args):
         started=time.perf_counter_ns()
@@ -32,13 +43,23 @@ class PrecisionRuntime(GuardedRuntime):
         return decision
 
     def _ingress(self,category,reference,content,parents=(),fallback_sensitive=False):
-        layout=self._layouts.get((category,reference),SourceLayout(default_sensitive=fallback_sensitive,structure_sensitive=fallback_sensitive))
+        plan=self._registry.classify(category,reference)
+        if plan.status=='MISSING' and fallback_sensitive: plan=SourcePlan('SENSITIVE',SourceLayout(default_sensitive=True,structure_sensitive=True))
+        layout=plan.layout
         if layout.structured_json:
             if not isinstance(content,str): raise IntegrityError('precision_json_source_requires_text')
-            content=json_deserialize(TaintedValue.literal(content)).reveal()
-        value=source_value(content,category,reference,layout)
+            content=strict_json(content)
+        if category=='model':
+            if layout.fields or layout.ranges or layout.structured_json: raise IntegrityError('source_model_semantics_not_field_trackable')
+            value=uniform(content,(TaintLabel(SourceRecord.create('model',reference),layout.default_sensitive),))
+        else:
+            value=source_value(content,category,reference,layout)
+        stamp=ClassificationStamp(SourceRecord.create(category,reference).reference_id,plan.status,value.to_tainted().source_ids,self._registry.unknown_policy)
+        stamps=(stamp,)
         if parents:
             value=uniform(value.raw.reveal(),union(value.labels,*(self._precision.resolve(h).labels for h in parents)))
+            stamps=tuple(dict.fromkeys([stamp,*(s for h in parents for s in self._precision.resolve(h).classifications)]))
+        value=replace(value,classifications=stamps)
         handle=self._precision._source(category,reference,value,parents)
         self.observe('precision_source_issued',category=category,**self.provenance(handle))
         return handle
@@ -83,18 +104,33 @@ class PrecisionRuntime(GuardedRuntime):
 
     def _sink_value(self,handle,sink,url):
         started=time.perf_counter_ns(); explanation=self.provenance(handle)
-        value=self._precision.resolve(handle).to_tainted(SinkTarget.from_url(sink,url)) if explanation['allowed'] else None
+        target=SinkTarget.from_url(sink,url)
+        node=self._precision.resolve(handle) if explanation['allowed'] else None
+        value=node.to_tainted(target) if node is not None else None
         self.observe('integrity_check',duration_ns=time.perf_counter_ns()-started,**explanation)
-        return value,explanation
+        classification=decide_source(node.classifications,node.labels,target,node.releases) if node is not None else {'allowed':False,'reason':'source_integrity_missing'}
+        classification['enforced']=self._source_enforce
+        self.observe('source_classification_check',**classification)
+        return value,explanation,classification
+
+    def _source_rejection(self,sink,integrity,classification):
+        reason=classification['reason']; capability='http_send' if sink=='http' else 'model_call'
+        checks={'integrity':integrity,'source_classification':classification}
+        try: write_audit_event(agent='precision-agent',tool=sink,capability=capability,decision='BLOCK',reason=reason,path=self.audit_path,checks=checks)
+        except (OSError,UnicodeError): reason='audit_error'
+        self.observe('policy_decision',allowed=False,reason=reason,checks=checks,duration_ns=0)
+        return RuntimeResult(SecurityDecision(False,reason,capability),False)
 
     def send(self,url,handle,*,sink='http'):
         if sink not in {'http','model'}: raise IntegrityError('precision_invalid_sink')
-        try: value,explanation=self._sink_value(handle,sink,url)
+        try: value,explanation,classification=self._sink_value(handle,sink,url)
         except (ValueError,TypeError): return self._integrity_rejection('precision_invalid_sink_input',sink,{'allowed':False})
         if value is None: return self._integrity_rejection(explanation['reason'],sink,explanation)
+        if not classification['allowed'] and self._source_enforce: return self._source_rejection(sink,explanation,classification)
         return GuardedRuntime.send(self,url,value,sink=sink)
 
     def approve_model_payload(self,endpoint,handle):
-        value,explanation=self._sink_value(handle,'model',endpoint)
+        value,explanation,classification=self._sink_value(handle,'model',endpoint)
         if value is None: return self._integrity_rejection(explanation['reason'],'model',explanation).decision
+        if not classification['allowed'] and self._source_enforce: return self._source_rejection('model',explanation,classification).decision
         return self._check('model',{'url':endpoint,'data':value})
