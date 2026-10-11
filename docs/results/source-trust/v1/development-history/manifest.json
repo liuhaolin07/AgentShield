@@ -1,0 +1,50 @@
+{
+  "first-report.json.gz": {
+    "raw_sha256": "593ec50b08bfd98e97cb0f006508d6ec42517718315c137903de59b1a00572cf",
+    "original_path": "logs/source-trust/first/report.json"
+  },
+  "precommit-validated-report.json.gz": {
+    "raw_sha256": "a66c3ec518881f48754238ca6b600e2587c23f7a65ea4682bdc62662bb86baeb",
+    "original_path": "logs/source-trust/validated/report.json"
+  },
+  "first-run.txt.gz": {
+    "raw_sha256": "03a8f6933c886dd9c6af9a5767103ddedccf23299f81a6f8d97d20619295d024",
+    "original_path": "logs/source-trust-first.txt"
+  },
+  "precommit-run.txt.gz": {
+    "raw_sha256": "72409141165879e46f2f337806bd8df7d1cc1bcd8612c375844a96d952a2491c",
+    "original_path": "logs/source-trust-validated.txt"
+  },
+  "study-tests.txt.gz": {
+    "raw_sha256": "7b38633d8b9013fda98db4fb01a341670997f6754ce00bb17fb5a7d54e7fa8ff",
+    "original_path": "logs/source-trust-study-tests.txt"
+  },
+  "study-test-import-error.txt.gz": {
+    "raw_sha256": "7eabb7c5833f467cb32593ca3756101b28dddfefb749d589bfe50f1f9d74a657",
+    "original_path": "logs/source-trust-study-import-error.txt"
+  },
+  "full-tests.txt.gz": {
+    "raw_sha256": "b5cc29f7358cac793317af02837a2fe0f527d46491f74822bab77ce695907baa",
+    "original_path": "logs/source-trust-full-tests.txt"
+  },
+  "precommit-gate.txt.gz": {
+    "raw_sha256": "dcf493318049291a6715b4ccea8f40a1e8f6b17240f2f171771fdc5b2b48311d",
+    "original_path": "logs/source-trust-validated-gate.txt"
+  },
+  "precommit_validation": {
+    "validated_rows": 252,
+    "frozen_v110_files": 212,
+    "summary": {
+      "HELD": 129,
+      "FAILED": 123,
+      "UNRUN": 0
+    }
+  },
+  "tests": {
+    "passed": 286,
+    "failed": 0,
+    "focused_study_passed": 9,
+    "corrected_invocation": "python -m unittest discover -s test -p test_source_trust_study.py -v"
+  },
+  "scope": "Development/debugging history preserved without replacement. First report predates independent gate corrections and latency export. Primary clean-candidate run is produced after the stage commit; no holdout or external-independence claim."
+}

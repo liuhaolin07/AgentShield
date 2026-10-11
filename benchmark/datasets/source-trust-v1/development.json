@@ -1,0 +1,1181 @@
+{
+  "dataset_version": "v1.10-source-trust-1",
+  "split": "development",
+  "cases": [
+    {
+      "case_id": "measurement_public",
+      "category": "control",
+      "family": "measurement",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "receiver ping",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-measurement_public"
+      },
+      "expected": {
+        "wire_data": "receiver ping",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "measurement_private",
+      "category": "control",
+      "family": "measurement",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "fictional.4H8Q.private.material",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-measurement_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "correct_public",
+      "category": "benign",
+      "family": "correct",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "other"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-correct_public"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "correct_private",
+      "category": "attack",
+      "family": "correct",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "other"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-correct_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "omitted_private_label",
+      "category": "attack",
+      "family": "omitted_label",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-omitted_private_label"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "omitted_private_encoded",
+      "category": "attack",
+      "family": "omitted_label",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        },
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-omitted_private_encoded"
+      },
+      "expected": {
+        "wire_data": "ZmljdGlvbmFsLjRIOFEucHJpdmF0ZS5tYXRlcmlhbA==",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unannotated_public",
+      "category": "benign",
+      "family": "omitted_label",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "other"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-unannotated_public"
+      },
+      "expected": {
+        "wire_data": "ordinary appendix",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "mixed_no_field_declarations",
+      "category": "attack",
+      "family": "omitted_label",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"unexpected\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "unexpected"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-mixed_no_field_declarations"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "explicit_false_private",
+      "category": "attack",
+      "family": "wrong_field",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-explicit_false_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "explicit_true_public",
+      "category": "benign",
+      "family": "wrong_field",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-explicit_true_public"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "whole_public_private",
+      "category": "attack",
+      "family": "wrong_public",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-whole_public_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "whole_public_normal",
+      "category": "benign",
+      "family": "wrong_public",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-whole_public_normal"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "incomplete_nested_private",
+      "category": "attack",
+      "family": "incomplete_schema",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"profile\":{\"name\":\"alice\",\"recovery\":\"fictional.4H8Q.private.material\"},\"key\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "profile",
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "profile"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "recovery"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-incomplete_nested_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "incomplete_nested_public",
+      "category": "benign",
+      "family": "incomplete_schema",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"profile\":{\"name\":\"alice\",\"recovery\":\"fictional.4H8Q.private.material\"},\"key\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "profile",
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "profile"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-incomplete_nested_public"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "incomplete_list_private",
+      "category": "attack",
+      "family": "incomplete_schema",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"fictional.4H8Q.private.material\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                0
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": 1
+          }
+        },
+        {
+          "operation": "url_encode",
+          "parameters": {}
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-incomplete_list_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "incomplete_list_public",
+      "category": "benign",
+      "family": "incomplete_schema",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"fictional.4H8Q.private.material\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                0
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": 0
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-incomplete_list_public"
+      },
+      "expected": {
+        "wire_data": "public",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "public_parent_extension",
+      "category": "attack",
+      "family": "public_parent",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"profile\":{\"name\":\"alice\",\"recovery\":\"fictional.4H8Q.private.material\"},\"key\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "profile"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "profile"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "recovery"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-public_parent_extension"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "public_parent_normal",
+      "category": "benign",
+      "family": "public_parent",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"profile\":{\"name\":\"alice\",\"recovery\":\"fictional.4H8Q.private.material\"},\"key\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "profile"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "profile"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-public_parent_normal"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "tool_unannotated_private",
+      "category": "attack",
+      "family": "incomplete_schema",
+      "source_kind": "tool",
+      "source": {
+        "reference": "fixture_reader",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "key"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-tool_unannotated_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "tool_explicit_public",
+      "category": "benign",
+      "family": "correct",
+      "source_kind": "tool",
+      "source": {
+        "reference": "fixture_reader",
+        "content": "{\"name\":\"alice\",\"key\":\"fictional.4H8Q.private.material\",\"other\":\"ordinary appendix\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "name"
+              ],
+              "sensitive": false
+            },
+            {
+              "path": [
+                "key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "other"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "name"
+          }
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-tool_explicit_public"
+      },
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "missing_private",
+      "category": "attack",
+      "family": "missing",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "fictional.4H8Q.private.material",
+        "status": "MISSING",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-missing_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "missing_normal",
+      "category": "benign",
+      "family": "missing",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public prose",
+        "status": "MISSING",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-missing_normal"
+      },
+      "expected": {
+        "wire_data": "public prose",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unknown_private",
+      "category": "attack",
+      "family": "unknown",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "fictional.4H8Q.private.material",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-unknown_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unknown_normal",
+      "category": "benign",
+      "family": "unknown",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public prose",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-unknown_normal"
+      },
+      "expected": {
+        "wire_data": "public prose",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unknown_review_normal",
+      "category": "benign",
+      "family": "unknown",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public glossary",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "REQUIRE_REVIEW"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-unknown_review_normal"
+      },
+      "expected": {
+        "wire_data": "public glossary",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unknown_allow_private",
+      "category": "attack",
+      "family": "explicit_unknown_allow",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "fictional.4H8Q.private.material",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "ALLOW"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-unknown_allow_private"
+      },
+      "expected": {
+        "wire_data": "fictional.4H8Q.private.material",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unknown_allow_normal",
+      "category": "benign",
+      "family": "explicit_unknown_allow",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public glossary",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": []
+        },
+        "unknown_policy": "ALLOW"
+      },
+      "operations": [],
+      "supported": true,
+      "truth": {
+        "output_sensitive": false,
+        "payload_id": "payload-unknown_allow_normal"
+      },
+      "expected": {
+        "wire_data": "public glossary",
+        "arrivals": 1
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    },
+    {
+      "case_id": "unicode_unlisted_private",
+      "category": "attack",
+      "family": "incomplete_schema",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"公开\":\"hello\",\"附加\":\"fictional.4H8Q.private.material\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "公开"
+              ],
+              "sensitive": false
+            }
+          ]
+        },
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "附加"
+          }
+        },
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "supported": true,
+      "truth": {
+        "output_sensitive": true,
+        "payload_id": "payload-unicode_unlisted_private"
+      },
+      "expected": {
+        "wire_data": "ZmljdGlvbmFsLjRIOFEucHJpdmF0ZS5tYXRlcmlhbA==",
+        "arrivals": 0
+      },
+      "scope": "Authored explicit source-classification contract; not model adoption or external blind evidence"
+    }
+  ],
+  "sampling": "Hand-authored source/selector contracts; correlated paired tasks, no population sampling",
+  "independence": "Development only; no external authors or held-out claim"
+}

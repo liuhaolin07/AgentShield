@@ -1,0 +1,698 @@
+{
+  "schema_version": 1,
+  "experiment": "v1.10-source-trust",
+  "dataset_version": "v1.10-source-trust-1",
+  "dataset_sha256": "78c44607590906fabc730ffa8b495ce58b411c48dab8c17610a1a32bd44797cc",
+  "seed": 17,
+  "repeat": 3,
+  "candidate_commit": "cad7c1e08dd2d7631f0c0e73dcd8672bfd88891c",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "conditions": {
+    "synthetic_only": true,
+    "real_http": "pinned 127.0.0.1",
+    "live_llm": false,
+    "scanner_on_all_primary_strategies": true,
+    "same_frozen_inputs_and_operations": true,
+    "classification_default_treatment_only": true,
+    "declassification": false
+  },
+  "source_sha256": {
+    "security/__init__.py": "0241698196e35e90b549ae1c3c58eec63958378c0cff49763ec6c69bd79f2247",
+    "security/attested_runtime.py": "8556b3ddce6162a945ce11a086b776179b23d2c2818f952a0cb1bb94c8e8636d",
+    "security/audit.py": "233cc6d0846d79fdc3431ea7698dbdb963be75e89f5676fe05d22953efcfcd27",
+    "security/capabilities.py": "c2cc644be85f24e4b9256a0acf47ae3837073e623ae2ec16ae39eec4af9f683d",
+    "security/inspection.py": "74c1ed23ec5162cee66dc1dcb13790bec39c353da9a250f5246caacfd7cae6ef",
+    "security/middleware.py": "c3af328763aba7a743916191ccb648ef834d012bb195656b37effc4b2f2e5393",
+    "security/policy.py": "aca1af4e00d419161bc50151ae31b2f71474e1897c2fad53e9c20c77d9249442",
+    "security/precision.py": "93b5e4ebc2b99413d63567b7a2036b0ee022ebe36e7716baca746d15bc7aed67",
+    "security/precision_integrity.py": "afa59a6b511d3652598b2eb239a6d83a63822dfb32418c8505d87eb01ef54067",
+    "security/precision_research.py": "6af3ca05cfa073d2c303c5e15f3d6ff4d85b56ba57e3e6bc50a0d67a00c4366c",
+    "security/precision_runtime.py": "d2c12a5185573f3d9f9a4d169a44f46e3b2bd141b5031487db8816dab2ef7430",
+    "security/research_runtime.py": "ed9c4d2ba03ea212d83f5e26c6456a1129022694dadda9d5cad8b6bf443874b0",
+    "security/runtime.py": "ce42312609d83d3d7428dd20a3d739249650cb968544069d2a6f573ae65f1d04",
+    "security/scanner.py": "639025038337ac9dea18dcdec760ec171bf46c59b3c2b93beec36c4a7af3a1ab",
+    "security/source_classification.py": "e751e48f896c9004990f333d7d278ba9f21a2390c95614609db0e315da8f869d",
+    "security/source_trust_policy.py": "124db8211a82860c78af4e207cf875141721d107378db72d47d56414ce7d957c",
+    "security/taint.py": "3897181a17b915c6104f022b63c13304d77507f95551697101be54626d7809da",
+    "security/taint_context.py": "4c9e3f1468925875b6218334d09a0c80dd3775e3f51af6c8f73f7f47c1eecb4a",
+    "security/taint_integrity.py": "17cb20faf37ca8af7738cfadaaf12f3226b4852647384ebd4e6a18da470a72fa",
+    "evaluation/__init__.py": "07916e28063a4e833efca7fb4606f0166fc4d1bb98e0477386ef10b6660ecefb",
+    "evaluation/__main__.py": "f6905d2a4faeb76770c037b6ea131c323b0ac69807cdc506bd297563d5f4c315",
+    "evaluation/agent_oracle.py": "37a80a8bb7e036c71abbe32c9da68f20f314e6dd8aac7d67349c94bab1ce7545",
+    "evaluation/cases.py": "c960b69cd39c09998ff6fea4cd3967b456cb65e8f5eda1237c394e00d6dd955a",
+    "evaluation/compare.py": "2e2b90f7e122b6f359c8b7f2965924ce8544e5b64080c9687105ac89c649b6ef",
+    "evaluation/experiment.py": "46058448c29ebba5d47f291b24c5e8706d0faa64865245ea6b98890b202ea5c9",
+    "evaluation/live_precision.py": "82de124256c018cf85bd18fc020440a5b3a48c9af4828f9ccc07a09aebce7c50",
+    "evaluation/plot.py": "b58b1aaab046e43f6fd9bc33dd67ff45e0df228a301f4af19df760d7edecf03f",
+    "evaluation/precision_agent_study.py": "787694ddcaa0adeff4b81cdab7427e8123644a78dc9e18d085a2c3189e5ecee7",
+    "evaluation/precision_experiment.py": "329eb6b3cfe79807a9be50ad43cf1ff67244f79c41582d1d7cc01217a6f2c112",
+    "evaluation/precision_metrics.py": "cdfb93a5b32f87fd5de87c95a2388353217f1ec0d6806badd4bf7a207cb9c0c9",
+    "evaluation/precision_plot.py": "428c88cbab298b8b2aabdec876ff40e08e06f51e80b4791676015404efe2cfda",
+    "evaluation/real_agent.py": "b0c2eae1f4cb4f684cf1460c85e0ebf3f1410ce02cca26334636702dd2c35eb9",
+    "evaluation/receiver.py": "7fc94b5eb8e9a2ea70f5210e4769db3653af6ae3e9cc7a969dcd2c617af2effe",
+    "evaluation/research.py": "97f22b7582c5471733c78304cfbc868879a72a0bcd7cf0782c7f5cc7cc9e21ff",
+    "evaluation/research_plot.py": "959c2ee6f51bd115bb4034da8b6170fde475c7cf3a344d50e3ebed286dd1b1d2",
+    "evaluation/runner.py": "ecdb065655cbeff6f7d0c1634b0260e4bf5c686aeb5dc47a6e1bca1ae64b17b9",
+    "evaluation/source_trust.py": "f869c639ea1086872fdc9963425080c2673c9af530545c811692e4f063ef3ebd",
+    "evaluation/source_trust_plot.py": "587d7923e6cddfb43ddb3337c0d3ed0605790265e0c0399b617703b8764fce56",
+    "benchmark/__init__.py": "bfde68b3a5f7dba7c15804ace409091198a108bb9fc0d834825b0fcbfdc8901e",
+    "benchmark/build_dataset.py": "72adb0de47320fa91ba9ea8f3b119b39c784f87a4d3c2f5547b955e9fb485851",
+    "benchmark/live_protocol.py": "14c73b03b1681ea08377454c5c35e04448f36870834596683cf8a7e397b4ae16",
+    "benchmark/loader.py": "a996c37fe797f895ca4001abe4ed4d701d10b40b873f587d1aab551ac1e2446f",
+    "benchmark/precision_dataset.py": "e33b7dc021fa5ede85750b34fc8d39972dd79dea2e0b2535a25f120752685f4f",
+    "benchmark/source_trust_dataset.py": "c6210df9728faa2dc118a6da76216bc821ada599956789a6f603b6bdeca75da4",
+    "ci/__init__.py": "dc04cca018d1dd58a8e67776cf400faa788396683eedc2925d8912972e96e833",
+    "ci/validate_source_trust.py": "ad7295b9c75834f9cac981611ae6b14a7204eb23a9c8788086b240f2719aaf46",
+    "ci/validate_v110.py": "5a2ab00e929f20f41de2c74b31572c81082edf556a26555d8c995e3e9797e714",
+    "ci/validate_v19.py": "0a6f0b35a7f1ed229680f53aa2cb24df9405b6998f6bd0e16ad3f93f2ff25030"
+  },
+  "summary": {
+    "HELD": 129,
+    "FAILED": 123,
+    "UNRUN": 0
+  },
+  "metrics": {
+    "coarse": {
+      "assessments": 84,
+      "summary": {
+        "HELD": 33,
+        "FAILED": 51,
+        "UNRUN": 0
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 42,
+        "value": 0.5714285714285714
+      },
+      "TCR": {
+        "numerator": 9,
+        "denominator": 36,
+        "value": 0.25
+      },
+      "FPR": {
+        "numerator": 27,
+        "denominator": 36,
+        "value": 0.75
+      },
+      "precision": {
+        "numerator": 18,
+        "denominator": 45,
+        "value": 0.4
+      },
+      "recall": {
+        "numerator": 18,
+        "denominator": 42,
+        "value": 0.42857142857142855
+      },
+      "confusion": {
+        "TP": 18,
+        "FP": 27,
+        "TN": 9,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 0,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "ABR": {
+        "numerator": 18,
+        "denominator": 42,
+        "value": 0.42857142857142855
+      },
+      "false_block_reasons": {
+        "taint_sensitive_source": 18,
+        "source_classification_blocked": 6,
+        "source_review_required": 3
+      },
+      "source_profiles": {
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          }
+        },
+        "explicit_unknown_allow": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "incomplete_schema": {
+          "ASR": {
+            "numerator": 9,
+            "denominator": 12,
+            "value": 0.75
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 6,
+            "value": 0.5
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "omitted_label": {
+          "ASR": {
+            "numerator": 9,
+            "denominator": 9,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "public_parent": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "unknown": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        }
+      },
+      "unique_task_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 14,
+          "value": 0.5714285714285714,
+          "wilson_95": [
+            0.3259064457965074,
+            0.7861920109552588
+          ]
+        },
+        "TCR": {
+          "numerator": 3,
+          "denominator": 12,
+          "value": 0.25,
+          "wilson_95": [
+            0.08894166839405471,
+            0.5323053349335657
+          ]
+        },
+        "FPR": {
+          "numerator": 9,
+          "denominator": 12,
+          "value": 0.75,
+          "wilson_95": [
+            0.46769466506643426,
+            0.9110583316059453
+          ]
+        }
+      },
+      "gate_duration_ms": {
+        "samples": 78,
+        "mean": 1.1611201923076924,
+        "minimum": 0.28212,
+        "maximum": 3.091968
+      },
+      "model_cost": null
+    },
+    "precision": {
+      "assessments": 84,
+      "summary": {
+        "HELD": 39,
+        "FAILED": 45,
+        "UNRUN": 0
+      },
+      "ASR": {
+        "numerator": 33,
+        "denominator": 42,
+        "value": 0.7857142857142857
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 36,
+        "value": 0.6666666666666666
+      },
+      "FPR": {
+        "numerator": 12,
+        "denominator": 36,
+        "value": 0.3333333333333333
+      },
+      "precision": {
+        "numerator": 9,
+        "denominator": 21,
+        "value": 0.42857142857142855
+      },
+      "recall": {
+        "numerator": 9,
+        "denominator": 42,
+        "value": 0.21428571428571427
+      },
+      "confusion": {
+        "TP": 9,
+        "FP": 12,
+        "TN": 24,
+        "FN": 33
+      },
+      "excluded": {
+        "control": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 0,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "ABR": {
+        "numerator": 9,
+        "denominator": 42,
+        "value": 0.21428571428571427
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 6,
+        "source_review_required": 3,
+        "taint_sensitive_source": 3
+      },
+      "source_profiles": {
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 6,
+            "value": 0.0
+          }
+        },
+        "explicit_unknown_allow": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "incomplete_schema": {
+          "ASR": {
+            "numerator": 12,
+            "denominator": 12,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 6,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "omitted_label": {
+          "ASR": {
+            "numerator": 9,
+            "denominator": 9,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "public_parent": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "unknown": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        }
+      },
+      "unique_task_estimates": {
+        "ASR": {
+          "numerator": 11,
+          "denominator": 14,
+          "value": 0.7857142857142857,
+          "wilson_95": [
+            0.524107694133997,
+            0.9242861328730683
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 12,
+          "value": 0.6666666666666666,
+          "wilson_95": [
+            0.39062208887279953,
+            0.8618799089087867
+          ]
+        },
+        "FPR": {
+          "numerator": 4,
+          "denominator": 12,
+          "value": 0.3333333333333333,
+          "wilson_95": [
+            0.13812009109121315,
+            0.6093779111272004
+          ]
+        }
+      },
+      "gate_duration_ms": {
+        "samples": 78,
+        "mean": 0.9266510384615384,
+        "minimum": 0.294066,
+        "maximum": 5.009496
+      },
+      "model_cost": null
+    },
+    "conservative": {
+      "assessments": 84,
+      "summary": {
+        "HELD": 57,
+        "FAILED": 27,
+        "UNRUN": 0
+      },
+      "ASR": {
+        "numerator": 12,
+        "denominator": 42,
+        "value": 0.2857142857142857
+      },
+      "TCR": {
+        "numerator": 21,
+        "denominator": 36,
+        "value": 0.5833333333333334
+      },
+      "FPR": {
+        "numerator": 15,
+        "denominator": 36,
+        "value": 0.4166666666666667
+      },
+      "precision": {
+        "numerator": 30,
+        "denominator": 45,
+        "value": 0.6666666666666666
+      },
+      "recall": {
+        "numerator": 30,
+        "denominator": 42,
+        "value": 0.7142857142857143
+      },
+      "confusion": {
+        "TP": 30,
+        "FP": 15,
+        "TN": 21,
+        "FN": 12
+      },
+      "excluded": {
+        "control": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 0,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "ABR": {
+        "numerator": 30,
+        "denominator": 42,
+        "value": 0.7142857142857143
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 6,
+        "source_review_required": 3,
+        "taint_sensitive_source": 6
+      },
+      "source_profiles": {
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 6,
+            "value": 0.0
+          }
+        },
+        "explicit_unknown_allow": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "incomplete_schema": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 12,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 6,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "omitted_label": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 9,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "public_parent": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "unknown": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        }
+      },
+      "unique_task_estimates": {
+        "ASR": {
+          "numerator": 4,
+          "denominator": 14,
+          "value": 0.2857142857142857,
+          "wilson_95": [
+            0.11721378644576919,
+            0.5464908432989318
+          ]
+        },
+        "TCR": {
+          "numerator": 7,
+          "denominator": 12,
+          "value": 0.5833333333333334,
+          "wilson_95": [
+            0.31951131254954973,
+            0.8067396863412435
+          ]
+        },
+        "FPR": {
+          "numerator": 5,
+          "denominator": 12,
+          "value": 0.4166666666666667,
+          "wilson_95": [
+            0.19326031365875665,
+            0.6804886874504503
+          ]
+        }
+      },
+      "gate_duration_ms": {
+        "samples": 78,
+        "mean": 0.7752688589743589,
+        "minimum": 0.281993,
+        "maximum": 1.803131
+      },
+      "model_cost": null
+    }
+  },
+  "limitations": [
+    "Authored development cases, no external blind validation.",
+    "Paired tasks and repeated runs are correlated; unique-task Wilson intervals are descriptive, not population confidence.",
+    "Explicit PUBLIC fields/parents/whole sources can still leak under conservative MIXED default.",
+    "Unknown normal sources and unlisted public fields measure availability cost.",
+    "No real agent/tool adoption or model-defense effectiveness measured; 36 historical live UNRUN remain unchanged."
+  ]
+}
