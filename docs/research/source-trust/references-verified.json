@@ -1,0 +1,188 @@
+{
+  "checked_utc": "2026-10-11T05:09:18.218063+00:00",
+  "method": "Actual bounded HTTPS PDF downloads, pdftotext/PyMuPDF extraction and inspection of the listed primary sections; exact URLs and hashes. Full papers not redistributed. No defense or benchmark reproduced.",
+  "papers": [
+    {
+      "citation": "1",
+      "title": "Defeating Prompt Injections by Design",
+      "authors_cited": "Debenedetti et al.",
+      "arxiv_version": "2503.18813v2",
+      "url": "https://arxiv.org/pdf/2503.18813v2",
+      "download_status": 200,
+      "bytes": 5531468,
+      "sha256": "c3719f6ce73eecf45e3764debef8a3d8ff8c9233b37d128c558b694ec3790cc7",
+      "pdf_total_pages": 125,
+      "inspected_scope": {
+        "sections": [
+          "5.2",
+          "5.3",
+          "5.4",
+          "9.2",
+          "9.3"
+        ],
+        "pdf_pages": [
+          9,
+          10,
+          11,
+          24
+        ]
+      },
+      "verified_note": "细粒度能力、允许读者与来源、工具前策略，以及策略维护与降密疲劳已有研究。",
+      "reproduced_defense": false
+    },
+    {
+      "citation": "2",
+      "title": "Securing AI Agents with Information-Flow Control",
+      "authors_cited": "Costa et al.",
+      "arxiv_version": "2505.23643v1",
+      "url": "https://arxiv.org/pdf/2505.23643v1",
+      "download_status": 200,
+      "bytes": 578828,
+      "sha256": "efc8261796d956727325946649fcc16373296b36061318684db9ee62bde02bef",
+      "pdf_total_pages": 38,
+      "inspected_scope": {
+        "sections": [
+          "2.2",
+          "4.1",
+          "4.2",
+          "4.4",
+          "5"
+        ],
+        "pdf_pages": [
+          4,
+          7,
+          8,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      "verified_note": "已支持结构化工具结果的节点标签与受约束揭示；信息流与安全—可用性权衡本身不构成本稿新颖性。",
+      "reproduced_defense": false
+    },
+    {
+      "citation": "3",
+      "title": "Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents",
+      "authors_cited": "Kravchenko et al.",
+      "arxiv_version": "2607.24625v1",
+      "url": "https://arxiv.org/pdf/2607.24625v1",
+      "download_status": 200,
+      "bytes": 1461679,
+      "sha256": "4096ea407dc5d05bb5f6501b3dc418e02c676960fb7120d510ab8aa1bae7d50a",
+      "pdf_total_pages": 12,
+      "inspected_scope": {
+        "sections": [
+          "5",
+          "8"
+        ],
+        "pdf_pages": [
+          5,
+          6,
+          9
+        ]
+      },
+      "verified_note": "调用范围授权、分支与受信转换已有研究，局限明确声明合同标签依赖和未声明写合同路径。",
+      "reproduced_defense": false
+    },
+    {
+      "citation": "4",
+      "title": "Confuse the Model, Control the Flow: Understanding and Mitigating Privacy Leakage from LLM Agents with Information Flow Control",
+      "authors_cited": "Shim et al.",
+      "arxiv_version": "2609.14003v1",
+      "url": "https://arxiv.org/pdf/2609.14003v1",
+      "download_status": 200,
+      "bytes": 1140120,
+      "sha256": "e96825c578afeae9ec8c32c0f24c71ab5d2c553464be0375afe2e16c3a8defdf",
+      "pdf_total_pages": 19,
+      "inspected_scope": {
+        "sections": [
+          "V.A",
+          "V.B"
+        ],
+        "pdf_pages": [
+          5,
+          6,
+          7
+        ]
+      },
+      "verified_note": "来源标签和强制输出检查已有研究，语义降密依赖隔离判断器；不能从未复现的论文推断本项目更有效。",
+      "reproduced_defense": false
+    },
+    {
+      "citation": "5",
+      "title": "AgentDojo: A Dynamic Environment to Evaluate Attacks and Defenses for LLM Agents",
+      "authors_cited": "Debenedetti et al.",
+      "arxiv_version": "2406.13352v1",
+      "url": "https://arxiv.org/pdf/2406.13352v1",
+      "download_status": 200,
+      "bytes": 988332,
+      "sha256": "7a67dd10e57390d5e5b58911724be1a3fc7e9c6647ac5fcd799719f4adff925e",
+      "pdf_total_pages": 19,
+      "inspected_scope": {
+        "sections": [
+          "2",
+          "3"
+        ],
+        "pdf_pages": [
+          2,
+          3,
+          4
+        ]
+      },
+      "verified_note": "动态任务、攻击目标、工具结果注入、成功判据与适应性攻击，不能以材料下载替代实际适配验证。",
+      "reproduced_defense": false
+    }
+  ],
+  "camel_official_code": {
+    "repository": "google-research/camel-prompt-injection",
+    "commit_sha": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+    "files": [
+      {
+        "name": "camel-README.md.txt",
+        "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/f083b6b396399d3b3c7f2ddaf613a5945eaf32d8/README.md",
+        "status": 200,
+        "bytes": 2301,
+        "sha256": "8f6152538ff3b72461e04b080010a6a08bcf52b3b6f575d6d2ac0fc6e2f71129"
+      },
+      {
+        "name": "camel-security_policy.py.txt",
+        "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/f083b6b396399d3b3c7f2ddaf613a5945eaf32d8/src/camel/security_policy.py",
+        "status": 200,
+        "bytes": 3318,
+        "sha256": "e7a060e0192314613494d7a24ca660a39ddf5bdf0f0cc6300fb9bf3cd4dd5b65"
+      },
+      {
+        "name": "camel-capabilities.py.txt",
+        "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/f083b6b396399d3b3c7f2ddaf613a5945eaf32d8/src/camel/capabilities/capabilities.py",
+        "status": 200,
+        "bytes": 1296,
+        "sha256": "46a779a6eff0e3e7f35639abe5eff57b2afeee76e8cd02f60f547f56d07ef19f"
+      }
+    ]
+  },
+  "discovery_queries": [
+    {
+      "query": "information flow control LLM agents source labels",
+      "url": "https://api.openalex.org/works?search=information+flow+control+LLM+agents+source+labels&per-page=12&select=id%2Ctitle%2Cpublication_year%2Cdoi%2Cprimary_location",
+      "status": "retrieved"
+    },
+    {
+      "query": "prompt injection source annotation schema confidentiality",
+      "url": "https://api.openalex.org/works?search=prompt+injection+source+annotation+schema+confidentiality&per-page=12&select=id%2Ctitle%2Cpublication_year%2Cdoi%2Cprimary_location",
+      "status": "retrieved"
+    }
+  ],
+  "metadata_disagreement": {
+    "work": "arXiv:2607.24625",
+    "index_title": "APPA: Recoverable Information-Flow Control for Real-World LLM Agents",
+    "primary_v1_pdf_title": "Agentic Permissions Policy Algebra for Taint Confinement in LLM Agents",
+    "resolution": "Cite inspected v1 PDF title, not the discovery-index title."
+  },
+  "limitations": [
+    "Selected primary sections inspected, not an exhaustive systematic review.",
+    "Later versions may differ; references are pinned to the inspected versions.",
+    "No claim that source-trust or declassification ideas are new.",
+    "Novelty of the proposed annotation-noise experiment remains to be established."
+  ]
+}
