@@ -1,0 +1,12 @@
+{
+  "candidate_commit": "196bedcfc05412aee241b72d27e22796bd543ad4",
+  "first_reserved_summary": {
+    "HELD": 375,
+    "FAILED": 219,
+    "UNRUN": 66
+  },
+  "source_hashes_match_pre_execution_record": true,
+  "implementation_tuned_after_observation": false,
+  "independence_scope": "Author-held-out contracts only, not external blind authorship",
+  "validation": "ci.validate_v110 checked all 660 source/executor/receiver/audit/contract/metric/cost records"
+}
