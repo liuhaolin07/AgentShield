@@ -10,9 +10,9 @@ import unittest
 
 from benchmark.source_trust_corruption import (
     create_graph, digest, exposure, leaf_id, manifest, measurement_cohort,
-    target_graph, validate_cohort,
+    target_graph, validate_cohort, r1_panel_manifest,
 )
-from ci.validate_source_trust_corruption import validate
+from ci.validate_source_trust_corruption import validate, validate_r1_panel
 
 
 class CorruptionTests(unittest.TestCase):
@@ -182,6 +182,30 @@ class CorruptionTests(unittest.TestCase):
         tree=ast.parse(Path('ci/validate_source_trust_corruption.py').read_text())
         imports=[n.module for n in ast.walk(tree) if isinstance(n,ast.ImportFrom)]
         self.assertFalse(any(n and n.startswith(('benchmark','security','evaluation')) for n in imports))
+
+    def test_complete_81_graph_R1_panel_bound_to_one_cohort(self):
+        packet=r1_panel_manifest(self.cohort)
+        result=validate_r1_panel(packet,digest(self.cohort))
+        self.assertEqual(result['graphs'],81)
+        self.assertEqual(result['planned_consumers'],81*2*2*3)
+        self.assertTrue(result['all_E3_parents_same_manifest'])
+        self.assertFalse(result['cross_manifest_E3_parent_accepted'])
+
+    def test_targeted_only_manifest_cannot_reference_external_parent(self):
+        parent=self.graph();target=target_graph(self.cohort,parent)
+        with self.assertRaisesRegex(ValueError,'target_pair'):validate(manifest(self.cohort,[target]))
+
+    def test_missing_condition_rejected_by_protocol_panel_gate(self):
+        packet=r1_panel_manifest(self.cohort)
+        deleted=packet['graphs'].pop()['graph_id']
+        packet['planned_consumers']=[r for r in packet['planned_consumers'] if r['graph_id']!=deleted]
+        with self.assertRaisesRegex(ValueError,'complete_R1'):validate_r1_panel(packet)
+
+    def test_82_graph_capacity_still_rejected(self):
+        base=r1_panel_manifest(self.cohort)
+        graphs=[create_graph(self.cohort,rate='.1',direction='sensitive_to_public',seed=n) for n in range(82)]
+        with self.assertRaisesRegex(ValueError,'graph_limit'):manifest(self.cohort,graphs)
+
 
 
 if __name__ == '__main__':

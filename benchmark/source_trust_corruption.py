@@ -188,7 +188,7 @@ def exposure(cohort: dict, family: dict, task: dict, graph: CorruptionGraph) -> 
 def manifest(cohort: dict, graphs: list[CorruptionGraph]) -> dict:
     fields = validate_cohort(cohort)
     _require(all(g.cohort_sha256 == digest(cohort) for g in graphs), "manifest_cohort_identity")
-    _require(1 <= len(graphs) <= 76 and len({g.graph_id for g in graphs}) == len(graphs), "graph_limit_or_duplicate")
+    _require(1 <= len(graphs) <= 81 and len({g.graph_id for g in graphs}) == len(graphs), "graph_limit_or_duplicate")
     bindings = []
     for graph in graphs:
         graph_id = graph.graph_id
@@ -202,6 +202,23 @@ def manifest(cohort: dict, graphs: list[CorruptionGraph]) -> dict:
               "executions": 0, "receiver_observations": 0, "model_requests": 0}
     _require(len(canonical(result)) <= MAX_BYTES, "manifest_resource_limit")
     return result
+
+
+def r1_panel_manifest(cohort: dict) -> dict:
+    """One bounded E0/E1/E3 planning manifest; never a holdout/execution."""
+    path = Path(__file__).resolve().parents[1]/'docs/research/source-trust/protocol-draft.json'
+    data = path.read_bytes()
+    _require(len(data) <= 65536 and hashlib.sha256(data).hexdigest() ==
+             '21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04', 'frozen_R1_panel_protocol')
+    protocol = json.loads(data)
+    design, pair = protocol['design'], protocol['targeted_pair']
+    graphs = [create_graph(cohort, rate='0', direction='correct', seed=None)]
+    graphs += [create_graph(cohort, rate=str(rate), direction=direction, seed=seed)
+               for rate in design['rates'] if rate != 0 for direction in design['directions'] for seed in design['injection_seeds']]
+    parents = [g for g in graphs if g.direction == pair['direction'] and Fraction(g.rate) == Fraction(str(pair['rate']))]
+    _require({g.seed for g in parents} == set(pair['injection_seeds']), 'E3_parent_seeds')
+    graphs += [target_graph(cohort, parent) for parent in parents]
+    return manifest(cohort, graphs)
 
 
 def measurement_cohort(families: int = 12) -> dict:
@@ -222,13 +239,15 @@ def measurement_cohort(families: int = 12) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate non-executed development measurement controls")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--r1-panel", action="store_true", help="plan all 76 E0/E1 plus 5 E3 graphs in one bounded manifest")
     args = parser.parse_args()
     cohort = measurement_cohort()
     graphs = [create_graph(cohort, rate="0", direction="correct", seed=None)]
     graphs += [create_graph(cohort, rate=rate, direction=direction, seed=seed)
                for rate in ("0.10", "0.25") for direction in DIRECTIONS for seed in (17, 29)]
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(manifest(cohort, graphs), ensure_ascii=False, indent=2) + "\n")
+    packet = r1_panel_manifest(cohort) if args.r1_panel else manifest(cohort, graphs)
+    args.output.write_text(json.dumps(packet, ensure_ascii=False, indent=2) + "\n")
 
 
 if __name__ == "__main__":

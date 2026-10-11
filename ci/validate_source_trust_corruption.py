@@ -65,7 +65,7 @@ def validate(packet: dict, expected_cohort_sha256: str | None = None) -> dict:
             contracts[tid] = (fid, private, {k for k in keys if not truth[k]["sensitive"]})
     require(len(truth) <= 4096, "total_leaf_limit")
     records = packet["graphs"]
-    require(type(records) is list and 1 <= len(records) <= 76, "graph_limit")
+    require(type(records) is list and 1 <= len(records) <= 81, "graph_limit")
     graphs = {}
     sp_pool = [k for k in truth if truth[k]["sensitive"]]
     ps_pool = [k for k in truth if not truth[k]["sensitive"]]
@@ -136,14 +136,35 @@ def validate(packet: dict, expected_cohort_sha256: str | None = None) -> dict:
             "truth_semantics_verified": False, "pilot_eligible": False, "executions": 0}
 
 
+def validate_r1_panel(packet: dict, expected_cohort_sha256: str | None = None) -> dict:
+    """Independently bind ALL 81 graphs; E3 parent cannot hide in another file."""
+    result = validate(packet, expected_cohort_sha256)
+    path = Path('docs/research/source-trust/protocol-draft.json')
+    data = path.read_bytes()
+    frozen = json.loads(Path('docs/research/source-trust-methods/frozen-pr6.json').read_text())
+    require(hashlib.sha256(data).hexdigest() == frozen['tracked_files_sha256'][str(path)], 'frozen_R1_panel_protocol')
+    protocol = json.loads(data)
+    design, pair = protocol['design'], protocol['targeted_pair']
+    expected = {('random', 'correct', Fraction(0), None)}
+    expected.update(('random', direction, Fraction(str(rate)), seed) for rate in design['rates'] if rate != 0
+                    for direction in design['directions'] for seed in design['injection_seeds'])
+    expected.update(('targeted', pair['direction'], Fraction(str(pair['rate'])), seed) for seed in pair['injection_seeds'])
+    identities = [(g['mode'], g['direction'], Fraction(g['rate']), g['seed']) for g in packet['graphs']]
+    require(len(identities) == len(expected) == 81 and set(identities) == expected, 'complete_R1_E0_E1_E3_panel')
+    return {**result, 'r1_E0_E1_graphs':76, 'r1_E3_graphs':5, 'all_E3_parents_same_manifest':True,
+            'cross_manifest_E3_parent_accepted':False}
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("manifest", type=Path)
     p.add_argument("--cohort-sha256")
+    p.add_argument("--r1-panel", action="store_true")
     args = p.parse_args()
     require(args.manifest.stat().st_size <= 32 * 1024 * 1024, "manifest_input_limit")
     try:
-        result = validate(json.loads(args.manifest.read_text()), args.cohort_sha256)
+        checker = validate_r1_panel if args.r1_panel else validate
+        result = checker(json.loads(args.manifest.read_text()), args.cohort_sha256)
     except (KeyError, TypeError, RecursionError, ZeroDivisionError) as error:
         raise ValueError("malformed_manifest") from error
     print(json.dumps(result, sort_keys=True))
