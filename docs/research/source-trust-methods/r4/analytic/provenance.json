@@ -1,0 +1,14 @@
+{
+  "kind": "ANALYTIC_DESIGN_BOUND_NOT_POWER_OR_DEFENSE",
+  "generation_commit": "ad95ebd7ad1de5be2f121d4f61a238e53040f7bc",
+  "files": {
+    "report.json": "0cfce0cfed5446e0301302906a300c7b11ad6dc47b23dbb0db9ac8df32358c59",
+    "budget-bounds.csv": "fbc668dce317b9a381cce45fb75ce448858a33217d489a67f0f1eddde9c313ec",
+    "missing-bounds.csv": "b2e116e6222eb102704aefb4702531b158924b792bba97f9673e34cecdc9666f",
+    "toy-center-diagnostics.csv": "6f934ea1d2620aaea4cb52d6c8c403c265820d7126ba211d8440c5cb1b33833e"
+  },
+  "new_study_simulation_trials": 0,
+  "pilot_executions": 0,
+  "holdout_executions": 0,
+  "approved_new_graph_budget": false
+}
