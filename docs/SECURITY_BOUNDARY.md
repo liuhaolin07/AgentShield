@@ -43,3 +43,27 @@ and enforcing modules are separate: detection in an ALLOW decision is not a bloc
 The model adapter allows only fixed official DeepSeek/Qwen endpoints after opt-in
 and credential reuse; attack sinks stay local. Missing keys, non-attempted attacks
 and unsupported conversions are UNRUN without credit. Model paraphrase is not tracked.
+
+## V1.10 extension
+
+PrecisionAuthority additionally authenticates per-field/element/character
+metadata, encoder witnesses, active classification references, study flags and
+scoped release stamps. Narrowing is replayed; literal/wrapper replacement and
+cross-session handles are rejected. Source-layout declarations remain trusted
+and fallible. Coarse/precise comparisons share metadata integrity and the same
+transport path. Uncertain sources BLOCK or REQUIRE_REVIEW before execution,
+unless a trusted scoped grant resolves that output or policy explicitly ALLOWs.
+
+A release never erases provenance globally. Only an immediate original-source
+projection/slice with exact authorized parameters may be released to the exact
+sink kind/origin. Later transforms revoke the grant; the scanner still applies.
+Independent tests include wildcard, wrong source/sink/selector, recomposed-field
+substitution, metadata tampering, downgraded labels and raw wrappers.
+
+Audit metadata omit raw source values/paths, but audit files and public result
+files are not signed append-only proofs. Benchmark receiver bodies and fixture
+inputs are intentionally synthetic, retained as independent execution evidence;
+never use personal data/real credentials with these research exporters. The
+independent gate verifies report consistency, not authenticity against a
+malicious experiment operator. Same-process Python is still not an isolation
+boundary, and metadata/decoding bounds are not a universal denial-of-service proof.
