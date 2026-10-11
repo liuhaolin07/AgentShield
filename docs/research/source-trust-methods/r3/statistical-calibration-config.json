@@ -1,0 +1,49 @@
+{
+  "version": "source-trust-statistical-calibration-2",
+  "kind": "STATISTICAL_SIMULATION_NOT_DEFENSE",
+  "seed": 271828,
+  "trials": 200,
+  "bootstrap_draws": 1000,
+  "families": [
+    30,
+    60
+  ],
+  "graphs": [
+    5,
+    30
+  ],
+  "scenarios": [
+    "uniform_quota",
+    "template_block_quota",
+    "rare_global_fault",
+    "balanced_global_fault"
+  ],
+  "alpha": 0.05,
+  "multiplicity": 17,
+  "thresholds": {
+    "safety_improvement": 0.05,
+    "tcr_noninferiority": 0.05,
+    "absolute_tcr": 0.8,
+    "equivalence": 0.02
+  },
+  "threshold_status": "NOT_JUSTIFIED_BY_TASK_OWNER",
+  "estimand": {
+    "hypothesis": "H5",
+    "protocol_path": "docs/research/source-trust/protocol-draft.json",
+    "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+    "grid": [
+      0.0,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "integration_domain": [
+      0.0,
+      1.0
+    ],
+    "normalization_width": 1.0,
+    "scope": "toy_safety_component_only"
+  }
+}

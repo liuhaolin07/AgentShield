@@ -1,0 +1,44 @@
+[build-system]
+requires = ["maturin>=1.9,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "appa-agent-python"
+dynamic = ["version"]
+description = "Synchronous PyO3 bindings for OpenAPPA CallSession mediation"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Rust",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.maturin]
+features = ["extension-module"]
+module-name = "appa_agent_python"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "Cargo.toml" },
+    { file = "../Cargo.toml" },
+    { file = "../Cargo.lock" },
+    { file = "src/**/*.rs" },
+    { file = "../appa-engine/Cargo.toml" },
+    { file = "../appa-engine/src/**/*.rs" },
+    { file = "../appa-eventlog/Cargo.toml" },
+    { file = "../appa-eventlog/src/**/*.rs" },
+    { file = "../appa-runtime-api/Cargo.toml" },
+    { file = "../appa-runtime-api/src/**/*.rs" },
+    { file = "../appa-runtime/Cargo.toml" },
+    { file = "../appa-runtime/src/**/*.rs" },
+    { file = "../appa-policy/Cargo.toml" },
+    { file = "../appa-policy/src/**/*.rs" },
+]

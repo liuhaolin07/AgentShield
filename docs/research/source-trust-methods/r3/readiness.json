@@ -1,0 +1,28 @@
+{
+  "version": "source-trust-methods-readiness-3",
+  "status": "NOT_READY_FOR_PREREGISTRATION_OR_PILOT",
+  "pr6_frozen_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+  "pilot": {"planned_maximum_rows": 984, "status": "UNRUN", "executions": 0, "receiver_observations": 0, "model_requests": 0},
+  "holdout": {"status": "UNRUN", "material_acquired": false, "executions": 0},
+  "actual_human_annotators": 0,
+  "actual_human_arbitrators": 0,
+  "actual_independent_auditors": 0,
+  "gates": {
+    "R1_H5_grid": "CORRECTED_AND_EXTERNALLY_BOUND",
+    "legacy_low_rate_H5_name": "RETRACTED_RAW_RESULTS_PRESERVED",
+    "E0_E1_E3_shared_bounded_manifest": "81_GRAPHS_PLANNING_ONLY",
+    "truth_projection_hash_chain": "STRUCTURAL_FIXTURE_VERIFIED_NOT_HUMAN_TRUTH",
+    "quantified_audit_rule": "TA2_CANDIDATE_LOCKED_PENDING_INDEPENDENT_REVIEW",
+    "full_joint_H5_toy_power": "MEASURED_INSUFFICIENT_POWER_AT_5_AND_30_GRAPHS",
+    "actual_policy_joint_H5_power": "UNRUN",
+    "threshold_task_value_basis": "PENDING_INDEPENDENT_TASK_OWNER",
+    "dual_human_truth": "UNRUN_no_annotators",
+    "independent_truth_audit": "UNRUN",
+    "revised_confirmatory_graph_budget": "NOT_APPROVED",
+    "external_paired_runtime_adapters": "UNRUN"
+  },
+  "joint_toy": {"trials": 2000, "graph_rows": 35000, "E0_rows": 2000, "joint_confirmations": 0, "actual_defense_executions": 0},
+  "no_defense_task_selection": "PROHIBITED",
+  "measurement_contribution_requires_H5_success": false,
+  "system_superiority_claim_requires_joint_H5": true
+}

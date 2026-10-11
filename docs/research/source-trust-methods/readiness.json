@@ -1,0 +1,25 @@
+{
+  "version": "source-trust-methods-readiness-1",
+  "pr6_frozen_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+  "status": "NOT_READY_FOR_PREREGISTRATION_OR_PILOT",
+  "pilot": {"planned_maximum_rows": 984, "status": "UNRUN", "executions": 0, "receiver_observations": 0, "model_requests": 0},
+  "holdout": {"status": "UNRUN", "material_acquired": false, "executions": 0},
+  "gates": {
+    "fresh_baseline_logs": "COMPLETE",
+    "development_corruption_manifest": "COMPLETE_controls_only",
+    "pointwise_calibration": "COMPLETE_undercoverage_observed",
+    "full_joint_H5_power": "UNRUN",
+    "threshold_task_value_basis": "PENDING_INDEPENDENT_TASK_OWNER",
+    "dual_human_truth": "UNRUN_no_annotators",
+    "blinding_and_arbitration": "UNRUN_no_receipts",
+    "independent_truth_audit": "UNRUN",
+    "revised_confirmatory_graph_budget": "NOT_APPROVED",
+    "external_paired_runtime_adapters": "UNRUN"
+  },
+  "actual_human_annotators": 0,
+  "actual_human_arbitrators": 0,
+  "actual_independent_auditors": 0,
+  "no_defense_task_selection": "PROHIBITED",
+  "measurement_contribution_requires_H5_success": false,
+  "system_superiority_claim_requires_joint_H5": true
+}

@@ -1,0 +1,210 @@
+"""Independent frozen-file and statistical CSV checks, not security efficacy."""
+from __future__ import annotations
+import argparse
+import ast
+import csv
+import gzip
+import hashlib
+import io
+import json
+import math
+from pathlib import Path
+import re
+import subprocess
+
+ROOT = Path('docs/research/source-trust-methods')
+LIMIT = 16*1024*1024
+
+
+def require(ok: bool, reason: str) -> None:
+    if not ok:
+        raise ValueError(reason)
+
+
+def load_gzip(path: Path) -> bytes:
+    with gzip.open(path, 'rb') as handle:
+        data = handle.read(LIMIT+1)
+    require(len(data) <= LIMIT, 'decompressed_input_limit')
+    return data
+
+
+def freeze_check(root: Path = ROOT) -> int:
+    manifest = json.loads((root/'frozen-pr6.json').read_text())
+    require(manifest['commit'] == 'b631d1c17c6d1125d4ffc9969f5e794926c49681', 'pr6_identity')
+    files = manifest['tracked_files_sha256']
+    require(len(files) == 266, 'freeze_count')
+    for name, expected in files.items():
+        require(hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, 'frozen_file_changed:'+name)
+    return len(files)
+
+
+def boolean(text: str) -> bool:
+    require(text in ('True', 'False'), 'csv_boolean')
+    return text == 'True'
+
+
+def protocol_grid() -> tuple[list[float], str]:
+    path = Path('docs/research/source-trust/protocol-draft.json')
+    blob = path.read_bytes()
+    frozen = json.loads((ROOT/'frozen-pr6.json').read_text())['tracked_files_sha256']
+    digest = hashlib.sha256(blob).hexdigest()
+    require(digest == frozen[str(path)], 'frozen_R1_protocol_identity')
+    doc = json.loads(blob)
+    h5 = next(h for h in doc['hypotheses'] if h['id'] == 'H5')
+    grid = doc['design']['rates']
+    require(grid == sorted(float(k.split('=',1)[1]) for k in h5['statistics'] if k.startswith('delta_TCR_p=')), 'protocol_TCR_grid')
+    require(grid[0] == 0 and grid[-1] == 1 and len(grid) == 6, 'protocol_domain')
+    return grid, digest
+
+
+def estimand_grid(report: dict) -> tuple[list[float], bool]:
+    formal, digest = protocol_grid()
+    if report['version'] == 'source-trust-statistical-calibration-1':
+        # Recover the historical wrong grid from the pinned code Git object;
+        # verify consistency while explicitly refusing its historical H5 name.
+        provenance = json.loads((ROOT/'statistical-calibration/provenance.json').read_text())
+        commit = provenance['generation_commit']
+        require(re.fullmatch('[0-9a-f]{40}',commit) is not None, 'legacy_commit')
+        code = subprocess.check_output(['git','show',commit+':evaluation/source_trust_statistics.py'])
+        require(hashlib.sha256(code).hexdigest() == report['source_sha256'], 'legacy_generator_identity')
+        assignments = [n for n in ast.parse(code).body if isinstance(n, ast.Assign) and
+                       any(isinstance(t,ast.Name) and t.id == 'GRID' for t in n.targets)]
+        require(len(assignments) == 1, 'historical_grid_definition')
+        grid = list(ast.literal_eval(assignments[0].value))
+        return grid, False
+    require(report['version'] == 'source-trust-statistical-calibration-2', 'calibration_version')
+    expected = {'hypothesis':'H5','protocol_path':'docs/research/source-trust/protocol-draft.json',
+                'protocol_sha256':digest,'grid':formal,'integration_domain':[formal[0],formal[-1]],
+                'normalization_width':formal[-1]-formal[0],'scope':'toy_safety_component_only'}
+    require(report.get('estimand') == report['config'].get('estimand') == expected, 'R1_H5_estimand_binding')
+    return formal, True
+
+
+def validate_calibration(report: dict, rows: list[dict]) -> dict:
+    require(report['kind'] == 'STATISTICAL_SIMULATION_NOT_DEFENSE', 'not_defense')
+    require(all(report[k] == 0 for k in ('actual_defense_executions', 'receiver_observations', 'model_requests')), 'no_execution_claim')
+    require(report['full_joint_H5_power']['status'] == 'UNRUN', 'joint_power_not_observed')
+    config = report['config']
+    grid, h5_eligible = estimand_grid(report)
+    require(config['threshold_status'] == 'NOT_JUSTIFIED_BY_TASK_OWNER', 'value_basis_pending')
+    expected_cells = {(f, g, s, m) for f in config['families'] for g in config['graphs']
+                      for s in config['scenarios'] for m in ('family_percentile', 'graph_percentile', 'graph_hoeffding')}
+    require(len(rows) == len(expected_cells)*config['trials'] == report['simulation_rows'], 'row_count')
+    cells, identities = {}, set()
+    for row in rows:
+        require(row['kind'] == report['kind'], 'row_kind')
+        key = (int(row['families']), int(row['graphs']), row['scenario'], row['method'])
+        identity = (*key, int(row['trial']))
+        require(key in expected_cells and identity not in identities and 0 <= identity[-1] < config['trials'], 'unique_trial_cell')
+        identities.add(identity)
+        truth, estimate, low, high = (float(row[k]) for k in ('true_mean', 'estimate', 'ci_low', 'ci_high'))
+        require(all(math.isfinite(v) for v in (truth, estimate, low, high)) and low <= high, 'finite_interval')
+        if key[2] in ('uniform_quota', 'template_block_quota'):
+            # Independent analytic integral on the frozen six-point grid.
+            n = key[0]*10
+            rates = [math.floor(p*n)/n for p in grid]
+            analytic = -.5*sum((grid[i+1]-grid[i])*(rates[i]+rates[i+1])/2 for i in range(len(grid)-1))/(grid[-1]-grid[0])
+            criterion = 'H5_safety_component_ONLY'
+        else:
+            require(key[2] in ('rare_global_fault', 'balanced_global_fault'), 'known_response')
+            analytic = .025 if key[2] == 'rare_global_fault' else 0.
+            criterion = 'H4_equivalence_component_ONLY'
+        require(abs(truth-analytic) < 1e-12 and row['criterion'] == criterion, 'analytic_truth_or_criterion')
+        require(boolean(row['covered']) == (low-1e-12 <= truth <= high+1e-12), 'coverage_recomputed')
+        require(boolean(row['degenerate']) == (abs(high-low) < 1e-12), 'degeneracy_recomputed')
+        resolved = key[3] == 'graph_hoeffding' or config['bootstrap_draws']*config['alpha']/(2*config['multiplicity']) >= 20
+        require(boolean(row['adjusted_tail_resolved']) == resolved, 'tail_resolution')
+        if resolved:
+            a, b = float(row['adjusted_low']), float(row['adjusted_high'])
+            require(a <= b and math.isfinite(a) and math.isfinite(b), 'adjusted_interval')
+            passed = b < -.05 if criterion.startswith('H5') else -.02 < a <= b < .02
+            require(boolean(row['component_gate_pass']) == passed, 'gate_recomputed')
+        else:
+            require(all(row[k] == '' for k in ('adjusted_low', 'adjusted_high', 'component_gate_pass')), 'unresolved_gate_excluded')
+        cells.setdefault(key, []).append(row)
+    require(set(cells) == expected_cells, 'complete_cells')
+    summary_keys = set()
+    for summary in report['summary']:
+        key = (summary['families'], summary['graphs'], summary['scenario'], summary['method'])
+        require(key in cells and key not in summary_keys, 'unique_summary')
+        summary_keys.add(key)
+        cell = cells[key]
+        observed = [r for r in cell if r['component_gate_pass'] != '']
+        count_checks = {'coverage_numerator': sum(boolean(r['covered']) for r in cell), 'coverage_denominator': len(cell),
+                        'degenerate_numerator': sum(boolean(r['degenerate']) for r in cell), 'degenerate_denominator': len(cell),
+                        'component_gate_numerator': sum(boolean(r['component_gate_pass']) for r in observed),
+                        'component_gate_denominator': len(observed), 'component_excluded': len(cell)-len(observed)}
+        require(all(summary[k] == v for k, v in count_checks.items()), 'summary_counts')
+        require(abs(summary['coverage']-count_checks['coverage_numerator']/len(cell)) < 1e-12, 'summary_coverage')
+        width = sum(float(r['ci_high'])-float(r['ci_low']) for r in cell)/len(cell)
+        require(abs(summary['mean_width']-width) < 1e-12, 'summary_width')
+        require(summary['component_status'] == ('MEASURED_TOY_ONLY' if observed else 'UNRUN_insufficient_adjusted_tail_resolution'), 'exclusions_status')
+    require(summary_keys == expected_cells, 'complete_summary')
+    return {'kind': 'STATISTICAL_CONSISTENCY_GATE_NOT_SECURITY_TEST', 'validated_simulation_rows': len(rows),
+            'cells': len(cells), 'actual_defense_executions': 0, 'full_joint_H5_power': 'UNRUN',
+            'R1_H5_grid_eligible': h5_eligible, 'historical_claim_status': 'FORMAL_GRID_TOY_COMPONENT_ONLY' if h5_eligible else 'RETRACTED_H5_NAME_LOW_RATE_EXPLORATORY_AUC'}
+
+
+def validate_artifacts(root: Path = ROOT) -> dict:
+    base = root/'statistical-calibration'
+    report_blob = load_gzip(base/'report.json.gz')
+    report = json.loads(report_blob)
+    provenance = json.loads((base/'provenance.json').read_text())
+    require(report['kind'] == provenance['kind'] == 'STATISTICAL_SIMULATION_NOT_DEFENSE', 'provenance_kind')
+    for name in ('report.json', 'summary.csv', 'trials.csv'):
+        blob = load_gzip(base/(name+'.gz'))
+        require(hashlib.sha256(blob).hexdigest() == provenance['files'][name], 'raw_file_hash')
+    config_blob = json.dumps(report['config'], sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False).encode()
+    require(hashlib.sha256(config_blob).hexdigest() == report['config_sha256'] == provenance['config_sha256'], 'frozen_config_identity')
+    require(json.loads((root/'statistical-calibration-config.json').read_text()) == report['config'], 'config_changed')
+    commit = provenance['generation_commit']
+    require(re.fullmatch('[0-9a-f]{40}', commit) is not None, 'generation_commit')
+    code = subprocess.check_output(['git', 'show', commit+':evaluation/source_trust_statistics.py'])
+    require(hashlib.sha256(code).hexdigest() == report['source_sha256'] == provenance['generation_source_sha256'], 'generation_git_object')
+    rows = list(csv.DictReader(io.StringIO(load_gzip(base/'trials.csv.gz').decode())))
+    return validate_calibration(report, rows)
+
+
+def readiness_check(root: Path = ROOT) -> dict:
+    packet = json.loads((root/'readiness.json').read_text())
+    require(packet['status'] == 'NOT_READY_FOR_PREREGISTRATION_OR_PILOT', 'still_pending')
+    require(packet['pilot']['status'] == packet['holdout']['status'] == 'UNRUN', 'no_pilot_or_holdout_claim')
+    require(not packet['holdout']['material_acquired'], 'no_holdout_intake')
+    require(all(packet['pilot'][k] == 0 for k in ('executions', 'receiver_observations', 'model_requests')), 'zero_pilot_executions')
+    require(all(packet[k] == 0 for k in ('actual_human_annotators', 'actual_human_arbitrators', 'actual_independent_auditors')), 'no_invented_humans')
+    return {'pilot': 'UNRUN', 'holdout': 'UNRUN', 'human_truth_verified': False}
+
+
+def readiness_r3_check(packet: dict | None = None) -> dict:
+    packet = packet or json.loads((ROOT/'r3/readiness.json').read_text())
+    require(packet['version'] == 'source-trust-methods-readiness-3' and
+            packet['status'] == 'NOT_READY_FOR_PREREGISTRATION_OR_PILOT', 'R3_still_pending')
+    require(packet['pilot']['status'] == packet['holdout']['status'] == 'UNRUN' and
+            not packet['holdout']['material_acquired'] and packet['holdout']['executions'] == 0,
+            'R3_no_pilot_or_holdout')
+    require(packet['pilot']['planned_maximum_rows'] == 984 and
+            all(packet['pilot'][k] == 0 for k in ('executions','receiver_observations','model_requests')), 'R3_zero_pilot')
+    require(all(packet[k] == 0 for k in ('actual_human_annotators','actual_human_arbitrators','actual_independent_auditors')), 'R3_no_invented_humans')
+    require(packet['gates']['actual_policy_joint_H5_power'] == 'UNRUN' and
+            packet['gates']['threshold_task_value_basis'] == 'PENDING_INDEPENDENT_TASK_OWNER' and
+            packet['gates']['revised_confirmatory_graph_budget'] == 'NOT_APPROVED', 'R3_no_automatic_authorization')
+    report = json.loads(load_gzip(ROOT/'r3/joint-calibration/report.json.gz'))
+    counts = {'trials':report['trial_rows'], 'graph_rows':report['raw_graph_rows'], 'E0_rows':report['e0_rows'],
+              'joint_confirmations':sum(r['joint_confirmation_numerator'] for r in report['summary']),
+              'actual_defense_executions':report['actual_defense_executions']}
+    require(packet['joint_toy'] == counts and counts['joint_confirmations'] == 0, 'R3_joint_toy_counts')
+    require(packet['gates']['full_joint_H5_toy_power'] == 'MEASURED_INSUFFICIENT_POWER_AT_5_AND_30_GRAPHS', 'R3_toy_not_policy_power')
+    return {'pilot':'UNRUN', 'holdout':'UNRUN', 'toy_joint_power':'MEASURED_INSUFFICIENT',
+            'actual_policy_joint_power':'UNRUN', 'human_truth_verified':False}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.parse_args()
+    print(json.dumps({'frozen_pr6_files': freeze_check(), 'calibration': validate_artifacts(),
+                     'calibration_r3': validate_artifacts(ROOT/'r3'), 'readiness': readiness_check(),
+                     'readiness_r3':readiness_r3_check()}, sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

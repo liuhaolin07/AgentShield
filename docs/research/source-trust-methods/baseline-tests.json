@@ -1,0 +1,10 @@
+{
+  "baseline_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+  "command": "python -m unittest discover -s test -v",
+  "passed": 286,
+  "failed": 0,
+  "seconds": 25.341,
+  "raw_log": "baseline-unit-tests.txt.gz",
+  "local_network": "controlled tests allowed",
+  "model_requests": 0
+}

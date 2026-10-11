@@ -1,0 +1,151 @@
+{
+  "version": "source-trust-analytic-feasibility-1",
+  "kind": "ANALYTIC_DESIGN_BOUND_NOT_POWER_OR_DEFENSE",
+  "frozen_R3_commit": "962390e6ea2c75b93534356dcef2110335da4742",
+  "contract": {
+    "alpha": 0.05,
+    "multiplicity": 17,
+    "minimum_TCR": 0.8,
+    "NI_margin": 0.05,
+    "safety_reduction": 0.05,
+    "grid": [
+      0.0,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ]
+  },
+  "input_sha256": {
+    "docs/research/source-trust/protocol-draft.json": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+    "docs/research/source-trust-methods/r3/joint-calibration-config.json": "285b16f36f8c23a29dd7d8324a779ffaf7ed7e7f6b10ff12df5c7ce6c2ea710f",
+    "docs/research/source-trust-methods/r3/joint-calibration/trials.csv.gz": "a0bccec856dea05a62469e6f9d78233985b1732ba77852c5bfd0db66e350e0c4",
+    "evaluation/source_trust_statistics.py": "7ca1bf3dbdeb42dc04ed6e056c86ea4be2bfada0a58af92c6b8c12e710bd073f",
+    "evaluation/source_trust_joint.py": "6563488feb8a1ed2a45ef815c86b21a803a04f0ac5018f3e5cdb4c7618310575"
+  },
+  "source_sha256": "cb0c8d6208523b011777593c109f4d9739194c5875a26a76c0c1e5492d9832ff",
+  "best_case_budgets": [
+    {
+      "independent_graphs_per_nonzero_point": 5,
+      "half_width": 0.8075947497458209,
+      "maximum_absolute_TCR_lower": 0.1924052502541791,
+      "absolute_TCR_mathematically_possible": false,
+      "joint_status": "MATHEMATICALLY_IMPOSSIBLE_UNDER_GHO1"
+    },
+    {
+      "independent_graphs_per_nonzero_point": 30,
+      "half_width": 0.3296991759713227,
+      "maximum_absolute_TCR_lower": 0.6703008240286773,
+      "absolute_TCR_mathematically_possible": false,
+      "joint_status": "MATHEMATICALLY_IMPOSSIBLE_UNDER_GHO1"
+    },
+    {
+      "independent_graphs_per_nonzero_point": 81,
+      "half_width": 0.20064852874484296,
+      "maximum_absolute_TCR_lower": 0.799351471255157,
+      "absolute_TCR_mathematically_possible": false,
+      "joint_status": "MATHEMATICALLY_IMPOSSIBLE_UNDER_GHO1"
+    },
+    {
+      "independent_graphs_per_nonzero_point": 82,
+      "half_width": 0.1994213091056915,
+      "maximum_absolute_TCR_lower": 0.8005786908943084,
+      "absolute_TCR_mathematically_possible": true,
+      "joint_status": "NOT_RULED_OUT_BY_THIS_COMPONENT_NOT_A_POWER_CLAIM"
+    },
+    {
+      "independent_graphs_per_nonzero_point": 120,
+      "half_width": 0.16484958798566135,
+      "maximum_absolute_TCR_lower": 0.8351504120143387,
+      "absolute_TCR_mathematically_possible": true,
+      "joint_status": "NOT_RULED_OUT_BY_THIS_COMPONENT_NOT_A_POWER_CLAIM"
+    }
+  ],
+  "missingness_bounds": [
+    {
+      "observed_C_missing_fraction_at_one_point": 0.0,
+      "minimum_graphs_for_best_case_absolute_TCR": 82,
+      "status": "NECESSARY_COMPONENT_BOUND_NOT_APPROVED_BUDGET"
+    },
+    {
+      "observed_C_missing_fraction_at_one_point": 0.03,
+      "minimum_graphs_for_best_case_absolute_TCR": 113,
+      "status": "NECESSARY_COMPONENT_BOUND_NOT_APPROVED_BUDGET"
+    },
+    {
+      "observed_C_missing_fraction_at_one_point": 0.05,
+      "minimum_graphs_for_best_case_absolute_TCR": 145,
+      "status": "NECESSARY_COMPONENT_BOUND_NOT_APPROVED_BUDGET"
+    },
+    {
+      "observed_C_missing_fraction_at_one_point": 0.2,
+      "minimum_graphs_for_best_case_absolute_TCR": null,
+      "status": "NO_FINITE_GHO1_BOUND_CROSSING"
+    }
+  ],
+  "retained_toy_center_diagnostics": [
+    {
+      "rate": 0.05,
+      "true_delta_TCR": 0.019000000000000017,
+      "true_absolute_TCR": 0.930525,
+      "graphs_for_expected_center_absolute_bound": 192,
+      "graphs_for_expected_center_NI_bound_strict": 2740,
+      "kind": "INTERVAL_AT_RETAINED_TOY_MEAN_NOT_POWER_OR_REQUIRED_REAL_SAMPLE_SIZE"
+    },
+    {
+      "rate": 0.1,
+      "true_delta_TCR": 0.019000000000000017,
+      "true_absolute_TCR": 0.9300499999999999,
+      "graphs_for_expected_center_absolute_bound": 193,
+      "graphs_for_expected_center_NI_bound_strict": 2740,
+      "kind": "INTERVAL_AT_RETAINED_TOY_MEAN_NOT_POWER_OR_REQUIRED_REAL_SAMPLE_SIZE"
+    },
+    {
+      "rate": 0.25,
+      "true_delta_TCR": 0.019000000000000017,
+      "true_absolute_TCR": 0.928625,
+      "graphs_for_expected_center_absolute_bound": 198,
+      "graphs_for_expected_center_NI_bound_strict": 2740,
+      "kind": "INTERVAL_AT_RETAINED_TOY_MEAN_NOT_POWER_OR_REQUIRED_REAL_SAMPLE_SIZE"
+    },
+    {
+      "rate": 0.5,
+      "true_delta_TCR": 0.019000000000000017,
+      "true_absolute_TCR": 0.9262499999999999,
+      "graphs_for_expected_center_absolute_bound": 205,
+      "graphs_for_expected_center_NI_bound_strict": 2740,
+      "kind": "INTERVAL_AT_RETAINED_TOY_MEAN_NOT_POWER_OR_REQUIRED_REAL_SAMPLE_SIZE"
+    },
+    {
+      "rate": 1.0,
+      "true_delta_TCR": 0.019000000000000017,
+      "true_absolute_TCR": 0.9215,
+      "graphs_for_expected_center_absolute_bound": 221,
+      "graphs_for_expected_center_NI_bound_strict": 2740,
+      "kind": "INTERVAL_AT_RETAINED_TOY_MEAN_NOT_POWER_OR_REQUIRED_REAL_SAMPLE_SIZE"
+    }
+  ],
+  "minimum_best_case_component_graphs": 82,
+  "current_R3_calibration_budgets": [
+    5,
+    30
+  ],
+  "current_budget_joint_confirmation_mathematically_impossible": true,
+  "new_study_simulation_trials": 0,
+  "new_Agent_experiment_rows": 0,
+  "pilot_executions": 0,
+  "holdout_executions": 0,
+  "model_requests": 0,
+  "approved_new_graph_budget": false,
+  "power_and_error_control_of_alternative_estimators": "UNRUN_NOT_SELECTED",
+  "status": "NOT_READY_FOR_PREREGISTRATION_OR_PILOT",
+  "scope": [
+    "Fixed GHO-1 construction only, not impossibility of inference in general",
+    "A best-case single-component crossing is not a sufficient joint-power condition",
+    "Increasing Monte Carlo trials, families, task repetitions or bootstrap draws does not change graph n",
+    "IID graph validity still needs review; width calculations do not establish coverage under dependent graphs",
+    "82 independent graphs per point differs from 81 total conditions in a planning manifest",
+    "Retained toy means are historical hypothetical truth, not estimated real-policy effects"
+  ]
+}

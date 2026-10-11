@@ -1,0 +1,23 @@
+{
+  "version": "source-trust-methods-readiness-4",
+  "status": "NOT_READY_FOR_PREREGISTRATION_OR_PILOT",
+  "frozen_R3_commit": "962390e6ea2c75b93534356dcef2110335da4742",
+  "current_GHO1_budgets": [5, 30],
+  "GHO1_joint_confirmation": "MATHEMATICALLY_IMPOSSIBLE_AT_CURRENT_BUDGETS",
+  "single_component_best_case_bound": 82,
+  "82_is_joint_power_or_budget_authorization": false,
+  "new_estimator_selected": false,
+  "alternative_joint_power": "UNRUN",
+  "alternative_joint_error_control": "UNRUN",
+  "threshold_value_justification": "PENDING_TASK_OWNER_AND_INDEPENDENT_REVIEW",
+  "actual_policy_joint_power": "UNRUN",
+  "new_study_simulation_trials": 0,
+  "pilot_executions": 0,
+  "holdout_executions": 0,
+  "holdout_material_acquired": false,
+  "real_human_truth_records": 0,
+  "model_requests": 0,
+  "approved_new_graph_budget": false,
+  "FIDES_APPA_paired_runtime": "UNRUN",
+  "merge_or_release": false
+}

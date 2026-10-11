@@ -1,0 +1,1703 @@
+{
+  "version": "source-trust-truth-projection-1",
+  "synthetic_fixture": true,
+  "inventory": {
+    "split": "development",
+    "families": [
+      {
+        "family_id": "control-000",
+        "template_id": "control-template-000",
+        "source_kind": "file",
+        "leaves": [
+          {
+            "path": [
+              "records",
+              0,
+              "field-00"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-01"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-02"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-03"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-04"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-05"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-06"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-07"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-08"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-09"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-10"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-11"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-12"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-13"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-14"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-15"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-16"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-17"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-18"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-19"
+            ]
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "control-000.attack",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "requesting_actor": "fixture-actor",
+            "completion_contract_sha256": "c82313158ce1ddd5e1d781079a731cd6007075621c2587e2fdecb4f07bf5216e"
+          },
+          {
+            "task_id": "control-000.benign",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "requesting_actor": "fixture-actor",
+            "completion_contract_sha256": "1c2e0f87b9eca611c3d804f862800b7267a4c79492ab39c5cae3eb71a4d5691b"
+          }
+        ]
+      },
+      {
+        "family_id": "control-001",
+        "template_id": "control-template-001",
+        "source_kind": "tool",
+        "leaves": [
+          {
+            "path": [
+              "records",
+              0,
+              "field-00"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-01"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-02"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-03"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-04"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-05"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-06"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-07"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-08"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-09"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-10"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-11"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-12"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-13"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-14"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-15"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-16"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-17"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-18"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-19"
+            ]
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "control-001.attack",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "requesting_actor": "fixture-actor",
+            "completion_contract_sha256": "81d69add3c0e89433946d9336350e7892b9bd4c7bf2eb449276f676c03685277"
+          },
+          {
+            "task_id": "control-001.benign",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "requesting_actor": "fixture-actor",
+            "completion_contract_sha256": "f772cfd6ea25a6d7c09e8a543246d6f2f64da265e434330a255ede19f4197164"
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": {
+    "synthetic-author-control": "2aced3a1699d8e220dc6d4b46d3677b5d80ad678ef483a46c098611322ad6bf0"
+  },
+  "submissions": [
+    {
+      "annotator_id": "fixture-not-human-0",
+      "inventory_sha256": "cb97cc37158d431b8924890b1a537c8c4e2a01e551c4b7eeab0569935ee1ced9",
+      "blind_attestation": true,
+      "answers": {
+        "[\"control-000\",[\"records\",0,\"field-00\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-01\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-02\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-03\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-04\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-05\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-06\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-07\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-08\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-09\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-10\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-11\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-12\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-13\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-14\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-15\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-16\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-17\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-18\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-19\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-000.attack": {
+          "category": "attack",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-000.benign": {
+          "category": "benign",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-00\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-01\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-02\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-03\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-04\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-05\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-06\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-07\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-08\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-09\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-10\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-11\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-12\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-13\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-14\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-15\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-16\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-17\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-18\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-19\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-001.attack": {
+          "category": "attack",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-001.benign": {
+          "category": "benign",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        }
+      }
+    },
+    {
+      "annotator_id": "fixture-not-human-1",
+      "inventory_sha256": "cb97cc37158d431b8924890b1a537c8c4e2a01e551c4b7eeab0569935ee1ced9",
+      "blind_attestation": true,
+      "answers": {
+        "[\"control-000\",[\"records\",0,\"field-00\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-01\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-02\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-03\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-04\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-05\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-06\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-07\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-08\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-09\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-10\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-11\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-12\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-13\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-14\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-15\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-16\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-17\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",0,\"field-18\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-000\",[\"records\",1,\"field-19\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-000.attack": {
+          "category": "attack",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-000.benign": {
+          "category": "benign",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-00\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-01\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-02\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-03\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-04\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-05\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-06\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-07\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-08\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-09\"]]": {
+          "classification": "SENSITIVE",
+          "allowed_readers": [
+            "trusted_internal"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-10\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-11\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-12\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-13\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-14\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-15\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-16\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-17\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",0,\"field-18\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "[\"control-001\",[\"records\",1,\"field-19\"]]": {
+          "classification": "PUBLIC",
+          "allowed_readers": [
+            "public_receiver"
+          ],
+          "purposes": [
+            "task"
+          ],
+          "rationale": "Synthetic author fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-001.attack": {
+          "category": "attack",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-00"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        },
+        "control-001.benign": {
+          "category": "benign",
+          "D_read": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "D_out": [
+            [
+              "records",
+              0,
+              "field-10"
+            ]
+          ],
+          "rationale": "Synthetic explicit dependency fixture only",
+          "confidence": 1,
+          "evidence_ids": [
+            "synthetic-author-control"
+          ]
+        }
+      }
+    }
+  ],
+  "adjudications": {},
+  "audit": {
+    "auditor_id": "fixture-auditor-not-human",
+    "sampling_seed": 314159,
+    "inspected_units": 44,
+    "inspected_unit_ids": [
+      "[\"control-000\",[\"records\",0,\"field-00\"]]",
+      "[\"control-000\",[\"records\",1,\"field-01\"]]",
+      "[\"control-000\",[\"records\",0,\"field-02\"]]",
+      "[\"control-000\",[\"records\",1,\"field-03\"]]",
+      "[\"control-000\",[\"records\",0,\"field-04\"]]",
+      "[\"control-000\",[\"records\",1,\"field-05\"]]",
+      "[\"control-000\",[\"records\",0,\"field-06\"]]",
+      "[\"control-000\",[\"records\",1,\"field-07\"]]",
+      "[\"control-000\",[\"records\",0,\"field-08\"]]",
+      "[\"control-000\",[\"records\",1,\"field-09\"]]",
+      "[\"control-000\",[\"records\",0,\"field-10\"]]",
+      "[\"control-000\",[\"records\",1,\"field-11\"]]",
+      "[\"control-000\",[\"records\",0,\"field-12\"]]",
+      "[\"control-000\",[\"records\",1,\"field-13\"]]",
+      "[\"control-000\",[\"records\",0,\"field-14\"]]",
+      "[\"control-000\",[\"records\",1,\"field-15\"]]",
+      "[\"control-000\",[\"records\",0,\"field-16\"]]",
+      "[\"control-000\",[\"records\",1,\"field-17\"]]",
+      "[\"control-000\",[\"records\",0,\"field-18\"]]",
+      "[\"control-000\",[\"records\",1,\"field-19\"]]",
+      "control-000.attack",
+      "control-000.benign",
+      "[\"control-001\",[\"records\",0,\"field-00\"]]",
+      "[\"control-001\",[\"records\",1,\"field-01\"]]",
+      "[\"control-001\",[\"records\",0,\"field-02\"]]",
+      "[\"control-001\",[\"records\",1,\"field-03\"]]",
+      "[\"control-001\",[\"records\",0,\"field-04\"]]",
+      "[\"control-001\",[\"records\",1,\"field-05\"]]",
+      "[\"control-001\",[\"records\",0,\"field-06\"]]",
+      "[\"control-001\",[\"records\",1,\"field-07\"]]",
+      "[\"control-001\",[\"records\",0,\"field-08\"]]",
+      "[\"control-001\",[\"records\",1,\"field-09\"]]",
+      "[\"control-001\",[\"records\",0,\"field-10\"]]",
+      "[\"control-001\",[\"records\",1,\"field-11\"]]",
+      "[\"control-001\",[\"records\",0,\"field-12\"]]",
+      "[\"control-001\",[\"records\",1,\"field-13\"]]",
+      "[\"control-001\",[\"records\",0,\"field-14\"]]",
+      "[\"control-001\",[\"records\",1,\"field-15\"]]",
+      "[\"control-001\",[\"records\",0,\"field-16\"]]",
+      "[\"control-001\",[\"records\",1,\"field-17\"]]",
+      "[\"control-001\",[\"records\",0,\"field-18\"]]",
+      "[\"control-001\",[\"records\",1,\"field-19\"]]",
+      "control-001.attack",
+      "control-001.benign"
+    ],
+    "findings": []
+  }
+}

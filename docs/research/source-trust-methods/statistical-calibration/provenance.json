@@ -1,0 +1,19 @@
+{
+  "kind": "STATISTICAL_SIMULATION_NOT_DEFENSE",
+  "generation_commit": "7fff90fa921fad498396b9974192264a221d288a",
+  "config_sha256": "fd7804202b859ddba96f124dd17151d063eabae13e559d558eb1aed33bfb4b0d",
+  "generation_source_sha256": "889741afb804f757e47553b8ef4a1482ea716b7355d38edaf2da20750932a555",
+  "plot_source_sha256": "20590ddbcefe5ddd7299c43cf489a29c763d4ef563c7841cfa0b311b051c53dd",
+  "simulation_rows": 9600,
+  "actual_defense_executions": 0,
+  "model_requests": 0,
+  "receiver_observations": 0,
+  "full_joint_H5_power": "UNRUN",
+  "initial_export": "numerical_files_saved; chart_failed_on_floating_point_error_bar",
+  "recovery": "plot_only; numerical_outputs_not_changed",
+  "files": {
+    "report.json": "b16b3c99acf2527c07b0cfd90ac29ad1a30dab9ea5fb3ab3f9d59aca139049a9",
+    "trials.csv": "f85c254e5c12d90efef0f168afe1f099b7ef81cb66bc8730e58f30d67e0f19c5",
+    "summary.csv": "9a52a2109c0cdf262892a95545b7c72c9dff481d20b8c69b70934ef36a3c7310"
+  }
+}

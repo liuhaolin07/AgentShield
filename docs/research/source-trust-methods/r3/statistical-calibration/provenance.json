@@ -1,0 +1,29 @@
+{
+  "kind": "STATISTICAL_SIMULATION_NOT_DEFENSE",
+  "generation_commit": "b27d870a8aef8d05876d099bcb38010259fc2092",
+  "config_sha256": "d9967d244318ec9a5708010d3e2910841254605a3e5021868201992d0fa1544c",
+  "generation_source_sha256": "7ca1bf3dbdeb42dc04ed6e056c86ea4be2bfada0a58af92c6b8c12e710bd073f",
+  "simulation_rows": 9600,
+  "actual_defense_executions": 0,
+  "model_requests": 0,
+  "receiver_observations": 0,
+  "full_joint_H5_power": "UNRUN",
+  "files": {
+    "report.json": "d96450e25e57931e6330f9babd850b1357dadbf2f6284ce21a7a883bab846809",
+    "trials.csv": "8d543ae4d690c3e1a8c47182f796991a028d9d0cd82b5d8905956ab1f88ae4ac",
+    "summary.csv": "2e297de355ee053c8582c9fbf33d3d53d7cba39d13ed12077e66863db85a2ee3"
+  },
+  "paired_common_fault_rows_unchanged": 4800,
+  "grid": [
+    0.0,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "integration_domain": [
+    0.0,
+    1.0
+  ]
+}

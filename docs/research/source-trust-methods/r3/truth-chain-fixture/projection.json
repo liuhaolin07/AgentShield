@@ -1,0 +1,668 @@
+{
+  "version": "source-trust-truth-projection-1",
+  "status": "STRUCTURAL_PROJECTION_ONLY",
+  "projection": {
+    "schema_version": "source-trust-corruption-1",
+    "split": "development",
+    "annotation_status": "author_only_measurement_control",
+    "families": [
+      {
+        "family_id": "control-000",
+        "template_id": "control-template-000",
+        "source_kind": "file",
+        "leaves": [
+          {
+            "path": [
+              "records",
+              0,
+              "field-00"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-01"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-02"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-03"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-04"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-05"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-06"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-07"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-08"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-09"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-10"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-11"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-12"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-13"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-14"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-15"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-16"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-17"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-18"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-19"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "control-000.attack",
+            "category": "attack",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "dependencies": [
+              [
+                "records",
+                0,
+                "field-00"
+              ]
+            ]
+          },
+          {
+            "task_id": "control-000.benign",
+            "category": "benign",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "dependencies": [
+              [
+                "records",
+                0,
+                "field-10"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "family_id": "control-001",
+        "template_id": "control-template-001",
+        "source_kind": "tool",
+        "leaves": [
+          {
+            "path": [
+              "records",
+              0,
+              "field-00"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-01"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-02"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-03"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-04"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-05"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-06"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-07"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-08"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-09"
+            ],
+            "sensitive": true,
+            "allowed_readers": [
+              "trusted_internal"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-10"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-11"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-12"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-13"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-14"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-15"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-16"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-17"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              0,
+              "field-18"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          },
+          {
+            "path": [
+              "records",
+              1,
+              "field-19"
+            ],
+            "sensitive": false,
+            "allowed_readers": [
+              "public_receiver"
+            ],
+            "purposes": [
+              "task"
+            ]
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "control-001.attack",
+            "category": "attack",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "dependencies": [
+              [
+                "records",
+                0,
+                "field-00"
+              ]
+            ]
+          },
+          {
+            "task_id": "control-001.benign",
+            "category": "benign",
+            "sink": "public_receiver",
+            "purpose": "task",
+            "dependencies": [
+              [
+                "records",
+                0,
+                "field-10"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "chain": {
+    "inventory_sha256": "cb97cc37158d431b8924890b1a537c8c4e2a01e551c4b7eeab0569935ee1ced9",
+    "evidence_sha256": "561a0f36810279fe3613688a7582019754924317ca4ddf4e5e73c67619db6526",
+    "submission_sha256": [
+      "a829e60513ab3c09c2b706682589d6f511f908bfe592d32466f42523892de46a",
+      "cafcc775184a6da5dbd6b8ee7a6e9a74dcc396bc960a1516355c0f3303b38316"
+    ],
+    "adjudications_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "audit_sha256": "802a4f62b6587a2e0441e453e33fa951029677ddcd7b967c5ad38705671d0274",
+    "raw_ledger_sha256": "7cfd662cc94a05dcde2788794ed73a3f8a75858e7b3745dddf20d31377f911c7",
+    "projection_sha256": "42511904ac606bcdba3861e19f8c9e16715e196565356cb2324e105c8103f341"
+  },
+  "chain_sha256": "f4d379100f4f2422fc3abf659564ae9d41cbdaea32b5d0ace857bb026ae787a6",
+  "conflicting_units": [],
+  "audit_gate": {
+    "structurally_passed": true,
+    "critical_errors": 0,
+    "minor_errors": 0,
+    "inspected_units": 44,
+    "full_rework_required": false,
+    "action": "AWAIT_HUMAN_VERIFICATION",
+    "pilot_eligible": false,
+    "required_units": 44,
+    "sampling_seed": 314159
+  },
+  "pilot_eligible": false,
+  "human_identity_or_semantics_verified": false
+}

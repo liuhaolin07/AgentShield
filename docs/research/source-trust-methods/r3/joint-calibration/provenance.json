@@ -1,0 +1,16 @@
+{
+  "kind": "STATISTICAL_JOINT_TOY_NOT_DEFENSE",
+  "generation_commit": "17b9047d496af7b539e03b1bb7fe6a48b7de8ce2",
+  "config_sha256": "73182f59394972a37e625281ffaade463dd483c74083a5d15b500f1064683a7c",
+  "files": {
+    "report.json": "554172a22467547ac8e779836210883755a24a3fef60f174475e4021b1723f3d",
+    "trials.csv": "aec976a29c145dec7cbcea8ba38eff6f944b88113dc728459eebde83bd35e899",
+    "graphs.csv": "89a0d9ec343ba97bc7d15eb903bb5e54f0be40525461c680dba82198e066b4c0",
+    "e0.csv": "77f3c3ac2d13c30f5ef0f24af4302e94095129ea7f6a943c6301c13a711483b5",
+    "summary.csv": "ff7d2017d0a4a3a9b03e7586d8cf53a03a49ac7fa76d3b948643a469df4b8fca"
+  },
+  "trial_rows": 2000,
+  "raw_graph_rows": 35000,
+  "e0_rows": 2000,
+  "actual_defense_executions": 0
+}
