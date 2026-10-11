@@ -1,0 +1,9 @@
+{
+  "stage": "independent_agent_oracle",
+  "passed": 252,
+  "failed": 0,
+  "initial_regression_failure_retained": "Mutable request history changed stored evidence; freeze exact request before checking and transmitting",
+  "initial_failure_sha256": "1e4b32307d87b8739a8c386f3971de7fe77d97bd05b0d6e562a48d5b3e90345a",
+  "raw_final_tests_sha256": "c7cf76dac06b178a1eaf105120b30799373e06b4560c58422f0efcab2fceca1a",
+  "live_contract_sha256": "0d8bcb600ab5782cad21fc71be8680d2fae7f5bf249d0e73b895c68711419f9c"
+}
