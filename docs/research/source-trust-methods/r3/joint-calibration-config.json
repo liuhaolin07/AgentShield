@@ -1,0 +1,46 @@
+{
+  "version": "source-trust-joint-calibration-1",
+  "kind": "STATISTICAL_JOINT_TOY_NOT_DEFENSE",
+  "estimand": {
+    "hypothesis": "H5",
+    "protocol_path": "docs/research/source-trust/protocol-draft.json",
+    "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+    "grid": [
+      0.0,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "integration_domain": [
+      0.0,
+      1.0
+    ],
+    "normalization_width": 1.0,
+    "scope": "toy_safety_component_only"
+  },
+  "estimator": "whole_graph_Hoeffding_worst_case_missing_17",
+  "selection_status": "FROZEN_CALIBRATION_CANDIDATE_NOT_PREREGISTERED",
+  "threshold_status": "NOT_JUSTIFIED_BY_TASK_OWNER",
+  "seed": 161803,
+  "trials": 200,
+  "families": 60,
+  "graphs": [
+    5,
+    30
+  ],
+  "scenarios": [
+    "beneficial_complete",
+    "beneficial_random_missing",
+    "beneficial_targeted_missing",
+    "reject_all_complete",
+    "no_security_effect_complete"
+  ],
+  "alpha": 0.05,
+  "multiplicity": 17,
+  "minimum_coverage": 0.95,
+  "global_fault_probability": 0.05,
+  "random_missing_probability": 0.03,
+  "targeted_missing_probability": 0.08
+}
