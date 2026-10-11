@@ -1,0 +1,36 @@
+{
+  "kind": "PRIMARY_SOURCE_FORMULA_REVIEW_NOT_ESTIMATOR_VALIDATION",
+  "title": "Empirical Bernstein Bounds and Sample Variance Penalization",
+  "authors": [
+    "Andreas Maurer",
+    "Massimiliano Pontil"
+  ],
+  "source_id": "arXiv:0907.3740v1",
+  "pdf_observed_header": "arXiv:0907.3740v1 [stat.ML] 21 Jul 2009",
+  "retrieved_url": "https://arxiv.org/pdf/0907.3740",
+  "canonical_versioned_reference": "https://arxiv.org/abs/0907.3740v1",
+  "retrieved_at_utc": "2026-10-11T13:34:06.292041+00:00",
+  "bytes": 187186,
+  "pdf_sha256": "2edbfd8e9a97e60dacd6cf9286fc951bd3f710e27e07e0b03ca92822b4d03e41",
+  "location": "Theorem 4, PDF page 2; sample variance definition same page",
+  "checked_assumptions": [
+    "IID bounded observations",
+    "normalization from range R to [0,1]",
+    "unbiased sample variance",
+    "nonzero 7/(3(n-1)) correction",
+    "alpha/(2M) allocation to each required tail"
+  ],
+  "pdf_vendored": false,
+  "copyright_license": "NOT_DETERMINED_PDF_NOT_VENDORED",
+  "candidate_implemented": false,
+  "candidate_joint_calibration": "UNRUN",
+  "zero_variance_analytic_diagnostic": {
+    "alpha": 0.05,
+    "multiplicity": 17,
+    "range": 1,
+    "n30_radius": 0.5805365500127665,
+    "best_case_component_crossing": 86
+  },
+  "new_study_simulation_trials": 0,
+  "approved_new_graph_budget": false
+}

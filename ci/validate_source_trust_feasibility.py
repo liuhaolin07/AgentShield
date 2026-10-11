@@ -66,7 +66,8 @@ def validate(report: dict[str, Any]) -> dict[str, Any]:
         if gap <= 0:
             return None
         for n in range(1, 10001):
-            if half_width(n, width) < gap if strict else half_width(n, width) <= gap:
+            passes = half_width(n, width) < gap if strict else half_width(n, width) <= gap
+            if passes:
                 return n
         raise ValueError('independent_search_limit')
     expected_budgets = (5, 30, 81, 82, 120)
@@ -109,6 +110,37 @@ def validate(report: dict[str, Any]) -> dict[str, Any]:
             'pilot_eligible': False, 'power_and_error_control_of_alternatives': 'UNRUN'}
 
 
+def metadata_check(readiness: dict | None = None, literature: dict | None = None) -> dict:
+    """Consistency only: this does not certify a theorem or human judgment."""
+    if readiness is None:
+        readiness = json.loads((BASE / 'readiness.json').read_text())
+    if literature is None:
+        literature = json.loads((BASE / 'literature-evidence.json').read_text())
+    require(readiness['frozen_R3_commit'] == R3 and readiness['version'] == 'source-trust-methods-readiness-4'
+            and readiness['status'] == 'NOT_READY_FOR_PREREGISTRATION_OR_PILOT', 'R4_scope')
+    require(readiness['current_GHO1_budgets'] == [5, 30]
+            and readiness['GHO1_joint_confirmation'] == 'MATHEMATICALLY_IMPOSSIBLE_AT_CURRENT_BUDGETS'
+            and readiness['single_component_best_case_bound'] == 82, 'R4_structural_status')
+    for field in ('82_is_joint_power_or_budget_authorization', 'new_estimator_selected',
+                  'holdout_material_acquired', 'approved_new_graph_budget', 'merge_or_release'):
+        require(readiness[field] is False, 'R4_no_authorization')
+    for field in ('new_study_simulation_trials', 'pilot_executions', 'holdout_executions', 'real_human_truth_records', 'model_requests'):
+        require(type(readiness[field]) is int and readiness[field] == 0, 'R4_no_execution_or_human_claim')
+    for field in ('alternative_joint_power', 'alternative_joint_error_control', 'actual_policy_joint_power', 'FIDES_APPA_paired_runtime'):
+        require(readiness[field] == 'UNRUN', 'R4_unrun_not_verified')
+    require(readiness['threshold_value_justification'] == 'PENDING_TASK_OWNER_AND_INDEPENDENT_REVIEW', 'R4_values_pending')
+    require(literature['source_id'] == 'arXiv:0907.3740v1' and literature['candidate_implemented'] is False
+            and literature['candidate_joint_calibration'] == 'UNRUN' and literature['new_study_simulation_trials'] == 0
+            and literature['approved_new_graph_budget'] is False, 'literature_not_implementation')
+    diagnostic = literature['zero_variance_analytic_diagnostic']
+    expected_radius = 7 * math.log(4 * 17 / .05) / (3 * (30 - 1))
+    require(diagnostic['alpha'] == .05 and diagnostic['multiplicity'] == 17 and diagnostic['range'] == 1
+            and abs(diagnostic['n30_radius'] - expected_radius) < 1e-12
+            and diagnostic['best_case_component_crossing'] == math.ceil(1 + 7 * math.log(4 * 17 / .05) / (3 * .2)),
+            'EB_small_sample_term_not_deleted')
+    return {'readiness': 'BLOCKED', 'alternative_estimators': 'UNRUN', 'theorem_semantics_machine_verified': False}
+
+
 def validate_artifacts() -> dict[str, Any]:
     base = BASE / 'analytic'
     provenance = json.loads((base / 'provenance.json').read_text())
@@ -139,6 +171,7 @@ def validate_artifacts() -> dict[str, Any]:
         rows = list(csv.DictReader(io.StringIO((base / name).read_text())))
         require(rows == [{k: '' if v is None else str(v) for k, v in row.items()} for row in expected], 'CSV_report_consistency')
     verdict['unchanged_R3_files'] = frozen_r3_check()
+    verdict['metadata'] = metadata_check()
     return verdict
 
 

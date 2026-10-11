@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import unittest
 
-from ci.validate_source_trust_feasibility import validate, validate_artifacts
+from ci.validate_source_trust_feasibility import metadata_check, validate, validate_artifacts
 
 
 class FeasibilityGateTests(unittest.TestCase):
@@ -45,6 +45,17 @@ class FeasibilityGateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'missingness_crossing'): validate(packet)
         packet = self.packet();packet['best_case_budgets'].pop(2)
         with self.assertRaisesRegex(ValueError, 'complete_budget_rows'): validate(packet)
+
+    def test_pending_candidate_or_humans_cannot_be_promoted(self):
+        for field, value in (('new_estimator_selected', True), ('real_human_truth_records', 2), ('alternative_joint_power', 'VERIFIED')):
+            packet = json.loads(Path('docs/research/source-trust-methods/r4/readiness.json').read_text())
+            packet[field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError): metadata_check(readiness=packet)
+
+    def test_zero_sample_variance_does_not_delete_EB_correction(self):
+        packet = json.loads(Path('docs/research/source-trust-methods/r4/literature-evidence.json').read_text())
+        packet['zero_variance_analytic_diagnostic']['n30_radius'] = 0.
+        with self.assertRaisesRegex(ValueError, 'small_sample_term'): metadata_check(literature=packet)
 
 
 if __name__ == '__main__':

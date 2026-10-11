@@ -1,0 +1,42 @@
+name: Source trust analytic feasibility
+
+on:
+  push:
+    branches: [codex/source-trust-methods]
+  pull_request:
+    branches: [codex/source-trust-research-design]
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-review:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Structural and tamper tests, never research trials
+        run: |
+          mkdir -p logs/source-trust-r4
+          python -m unittest discover -s test -p 'test_source_trust_feasibility*.py' -v > logs/source-trust-r4/tests.txt 2>&1
+      - name: Reproduce only analytic bounds and compare complete exports
+        run: |
+          python -m evaluation.source_trust_feasibility --output-dir logs/source-trust-r4/analytic
+          python -c 'from pathlib import Path; a=Path("logs/source-trust-r4/analytic"); b=Path("docs/research/source-trust-methods/r4/analytic"); assert all((a/name).read_bytes() == (b/name).read_bytes() for name in ("report.json", "budget-bounds.csv", "missing-bounds.csv", "toy-center-diagnostics.csv"))'
+      - name: Independently verify R1 inequalities, CSV and all 409 frozen R3 files
+        run: python -m ci.validate_source_trust_feasibility > logs/source-trust-r4/gate.txt
+      - name: Retain success and failure logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-trust-feasibility-python-${{ matrix.python-version }}
+          path: logs/source-trust-r4/
+          retention-days: 14
