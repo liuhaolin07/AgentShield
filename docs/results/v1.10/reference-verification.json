@@ -1,0 +1,243 @@
+{
+  "checked_utc": "2026-10-11T04:11:56.273571+00:00",
+  "method": "Actual public urllib retrieval plus inspected abstract/paper/code excerpts; no defense reproduced",
+  "lookups": [
+    {
+      "url": "https://arxiv.org/abs/2503.18813",
+      "status": 200,
+      "sha256": "873f10ca99e00f6e6978c381f07c41f7cbe88d1c76335eb9c20fbacf6661848b",
+      "lookup": "camel_abstract",
+      "download_sha256": "873f10ca99e00f6e6978c381f07c41f7cbe88d1c76335eb9c20fbacf6661848b",
+      "bytes": 41910
+    },
+    {
+      "url": "https://arxiv.org/abs/2406.13352",
+      "status": 200,
+      "sha256": "142602756ade99b34922167e3be4c95eeaeea5252bd7b24a41776edcd70ec58c",
+      "lookup": "agentdojo_abstract",
+      "download_sha256": "142602756ade99b34922167e3be4c95eeaeea5252bd7b24a41776edcd70ec58c",
+      "bytes": 43005
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/main/README.md",
+      "status": 200,
+      "sha256": "d8c6460ecce9bbf59ed300fbc74b4440188f74cd147a7611836270be49e7660e",
+      "lookup": "agentdojo_readme",
+      "download_sha256": "d8c6460ecce9bbf59ed300fbc74b4440188f74cd147a7611836270be49e7660e",
+      "bytes": 3184
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/main/LICENSE",
+      "status": 200,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e",
+      "lookup": "agentdojo_license",
+      "download_sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e",
+      "bytes": 1161
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel/main/README.md",
+      "error": "HTTPError",
+      "message": "HTTP Error 404: Not Found",
+      "lookup": "camel_readme"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel/main/LICENSE",
+      "error": "HTTPError",
+      "message": "HTTP Error 404: Not Found",
+      "lookup": "camel_license"
+    },
+    {
+      "url": "https://www.usenix.org/conference/osdi10/taintdroid-information-flow-tracking-system-realtime-privacy-monitoring-smartphones",
+      "error": "HTTPError",
+      "message": "HTTP Error 404: Not Found",
+      "lookup": "taintdroid"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apl-cornell/jif/master/README",
+      "error": "HTTPError",
+      "message": "HTTP Error 404: Not Found",
+      "lookup": "jif_readme"
+    },
+    {
+      "url": "https://arxiv.org/abs/2403.14720",
+      "status": 200,
+      "sha256": "5f0530309edf74c4bdf28f68f366149238b1d5453579d7a24f48ce84b8df250e",
+      "lookup": "spotlighting",
+      "download_sha256": "5f0530309edf74c4bdf28f68f366149238b1d5453579d7a24f48ce84b8df250e",
+      "bytes": 42063
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/README.md",
+      "status": 200,
+      "sha256": "8f6152538ff3b72461e04b080010a6a08bcf52b3b6f575d6d2ac0fc6e2f71129",
+      "lookup": "camel_official_readme",
+      "download_sha256": "8f6152538ff3b72461e04b080010a6a08bcf52b3b6f575d6d2ac0fc6e2f71129",
+      "bytes": 2301
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/LICENSE",
+      "status": 200,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "lookup": "camel_official_license",
+      "download_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "url": "https://api.github.com/repos/google-research/camel-prompt-injection/contents",
+      "status": 200,
+      "sha256": "83b0c6e185fbd7d42a3b9f577bf554dd2eb05cb2e159f52099e8444671aaf4ad",
+      "lookup": "camel_tree",
+      "download_sha256": "83b0c6e185fbd7d42a3b9f577bf554dd2eb05cb2e159f52099e8444671aaf4ad",
+      "bytes": 13184
+    },
+    {
+      "url": "https://api.github.com/repos/ethz-spylab/agentdojo/contents/src/agentdojo",
+      "status": 200,
+      "sha256": "498118f47637e470847f797e21e0bf35815d7e52c769086dde36f67f0861370c",
+      "lookup": "agentdojo_tree",
+      "download_sha256": "498118f47637e470847f797e21e0bf35815d7e52c769086dde36f67f0861370c",
+      "bytes": 13155
+    },
+    {
+      "url": "https://www.usenix.org/legacy/event/osdi10/tech/abstracts/Enck.html",
+      "error": "HTTPError",
+      "message": "HTTP Error 404: Not Found",
+      "lookup": "taintdroid_legacy"
+    },
+    {
+      "url": "https://www.w3.org/TR/prov-overview/",
+      "status": 200,
+      "sha256": "fc45beed479aef763da4dd6e11d1f92e0e7b91e9c19c30a0ed9ba279de36b556",
+      "lookup": "prov_overview",
+      "download_sha256": "fc45beed479aef763da4dd6e11d1f92e0e7b91e9c19c30a0ed9ba279de36b556",
+      "bytes": 34025
+    },
+    {
+      "url": "https://api.github.com/repos/apl-cornell/jif/contents",
+      "status": 200,
+      "sha256": "45d2d477ea051a44f50a78607c7c5b98da8154e07ffe531d94f9fbfb4611980a",
+      "lookup": "jif_repository",
+      "download_sha256": "45d2d477ea051a44f50a78607c7c5b98da8154e07ffe531d94f9fbfb4611980a",
+      "bytes": 14960
+    },
+    {
+      "url": "https://www.cs.cornell.edu/jif/doc/jif-3.3.0/language.html",
+      "error": "HTTPError",
+      "message": "HTTP Error 421: Misdirected Request",
+      "lookup": "jif_declass"
+    },
+    {
+      "url": "https://api.github.com/repos/google-research/camel-prompt-injection/contents/src/camel",
+      "status": 200,
+      "lookup": "camel_src_tree",
+      "download_sha256": "284a375594c0093f3aa4e9969f8808db60498c49358499e2396dc9dad07b65bd",
+      "bytes": 11448
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/main/src/agentdojo/base_tasks.py",
+      "status": 200,
+      "lookup": "agentdojo_tasks",
+      "download_sha256": "08d3a4646d1a250968045b0f933803335650a4ed04c9d2387b17d08b1e0427c5",
+      "bytes": 6880
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ethz-spylab/agentdojo/main/src/agentdojo/functions_runtime.py",
+      "status": 200,
+      "lookup": "agentdojo_runtime",
+      "download_sha256": "3c67f71eb8a7f15d2a15fe9595d84218c5e6868d95fd71d1cef679cd2192d0f7",
+      "bytes": 12627
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apl-cornell/jif/master/README.in",
+      "status": 200,
+      "lookup": "jif_readme_actual",
+      "download_sha256": "178f48acde4f71a99df56052324e8dfee61ce35d819490475b8dd4b8b8044e48",
+      "bytes": 11883
+    },
+    {
+      "url": "https://api.github.com/repos/apl-cornell/jif/contents/src/jif/ast",
+      "status": 200,
+      "lookup": "jif_src_tree",
+      "download_sha256": "4b592f05e75b13e9ae4e1b20f2f397f289cb98fd27bf7e1a36b77bdc45949dfa",
+      "bytes": 106043
+    },
+    {
+      "url": "https://arxiv.org/html/2503.18813v2",
+      "status": 200,
+      "lookup": "camel_paper_html",
+      "download_sha256": "5e51480129a665ae49fdecda69b2325352bf221ea37c1b1300844c96a2130d21",
+      "bytes": 1800000
+    },
+    {
+      "url": "https://www.usenix.org/legacy/events/osdi10/tech/full_papers/Enck.pdf",
+      "status": 200,
+      "lookup": "taintdroid_pdf",
+      "download_sha256": "46c7efc366d7a6a44f212a1f4555ff0278535ccd667796305540ffbdc84db077",
+      "bytes": 855616
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/src/camel/security_policy.py",
+      "status": 200,
+      "sha256": "e7a060e0192314613494d7a24ca660a39ddf5bdf0f0cc6300fb9bf3cd4dd5b65",
+      "lookup": "camel_security_policy",
+      "download_sha256": "e7a060e0192314613494d7a24ca660a39ddf5bdf0f0cc6300fb9bf3cd4dd5b65",
+      "bytes": 3318
+    },
+    {
+      "url": "https://api.github.com/repos/google-research/camel-prompt-injection/contents/src/camel/capabilities",
+      "status": 200,
+      "sha256": "5d9ea7c3336579b607ad5a6e10d89ca6f6b4f095f756812324db70ec36d6d377",
+      "lookup": "camel_capability_tree",
+      "download_sha256": "5d9ea7c3336579b607ad5a6e10d89ca6f6b4f095f756812324db70ec36d6d377",
+      "bytes": 5133
+    },
+    {
+      "url": "https://api.github.com/repos/google-research/camel-prompt-injection/contents/src/camel/interpreter",
+      "status": 200,
+      "sha256": "87ed829ca42c834873ac49fc3bc5ee2217d53e89eeafd9269d5af5bd243624b8",
+      "lookup": "camel_interpreter_tree",
+      "download_sha256": "87ed829ca42c834873ac49fc3bc5ee2217d53e89eeafd9269d5af5bd243624b8",
+      "bytes": 7171
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apl-cornell/jif/master/src/jif/ast/DeclassifyExpr_c.java",
+      "status": 200,
+      "sha256": "168197f0a995434ae5975538f2087298b22a07ed8864938c4bead3ac004a34de",
+      "lookup": "jif_declassification_source",
+      "download_sha256": "168197f0a995434ae5975538f2087298b22a07ed8864938c4bead3ac004a34de",
+      "bytes": 802
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apl-cornell/jif/master/src/jif/ast/LabeledTypeNode.java",
+      "status": 200,
+      "sha256": "ac0b6f872d058ee5e43178491cc3f5c8db2ffd66d21ee08483d0e0aad5a01d57",
+      "lookup": "jif_label_source",
+      "download_sha256": "ac0b6f872d058ee5e43178491cc3f5c8db2ffd66d21ee08483d0e0aad5a01d57",
+      "bytes": 311
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/src/camel/interpreter/value.py",
+      "status": 200,
+      "sha256": "5794214f0da39816324f5a76093d3fb3594f13aa502dade74d7473206af5ef19",
+      "lookup": "camel_value",
+      "download_sha256": "5794214f0da39816324f5a76093d3fb3594f13aa502dade74d7473206af5ef19",
+      "bytes": 52169
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/src/camel/capabilities/capabilities.py",
+      "status": 200,
+      "sha256": "46a779a6eff0e3e7f35639abe5eff57b2afeee76e8cd02f60f547f56d07ef19f",
+      "lookup": "camel_capabilities",
+      "download_sha256": "46a779a6eff0e3e7f35639abe5eff57b2afeee76e8cd02f60f547f56d07ef19f",
+      "bytes": 1296
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google-research/camel-prompt-injection/main/src/camel/quarantined_llm.py",
+      "status": 200,
+      "sha256": "95e62fca524fb18e830f00e95df7c68168fe0b8df2acb2785c4e775cbb1a8b42",
+      "lookup": "camel_quarantined_llm",
+      "download_sha256": "95e62fca524fb18e830f00e95df7c68168fe0b8df2acb2785c4e775cbb1a8b42",
+      "bytes": 4934
+    }
+  ]
+}

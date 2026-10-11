@@ -1,0 +1,613 @@
+run,arm,case_id,category,status,reason
+1,detect_only,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,detect_only,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,detect_only,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,detect_only,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,detect_only,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_fields,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+1,no_fields,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_fields,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,no_fields,nested_public_projection,benign,FAILED,taint_sensitive_source
+1,no_fields,dict_public_projection,benign,FAILED,taint_sensitive_source
+1,no_fields,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,no_fields,list_public_index,benign,FAILED,taint_sensitive_source
+1,no_fields,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+1,no_fields,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,no_fields,list_public_slice,benign,FAILED,taint_sensitive_source
+1,no_fields,range_public_prefix,benign,FAILED,taint_sensitive_source
+1,no_fields,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,no_fields,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,no_fields,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,no_fields,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,no_fields,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_fields,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,no_defense,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,no_defense,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,no_defense,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,no_defense,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_defense,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,precision,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+1,precision,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,precision,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,precision,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,precision,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,precision,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,precision,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,precision,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,precision,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,precision,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,coarse,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+1,coarse,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,coarse,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,coarse,nested_public_projection,benign,FAILED,taint_sensitive_source
+1,coarse,dict_public_projection,benign,FAILED,taint_sensitive_source
+1,coarse,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,coarse,list_public_index,benign,FAILED,taint_sensitive_source
+1,coarse,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,coarse,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+1,coarse,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,coarse,list_public_slice,benign,FAILED,taint_sensitive_source
+1,coarse,range_public_prefix,benign,FAILED,taint_sensitive_source
+1,coarse,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,coarse,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,coarse,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,coarse,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,coarse,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,coarse,trusted_public_release,benign,FAILED,taint_sensitive_source
+1,coarse,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+1,no_source,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,no_source,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,no_source,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,no_source,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_source,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_release,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+1,no_release,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_release,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,no_release,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_release,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,no_release,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,no_release,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,no_release,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,no_release,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_release,trusted_public_release,benign,FAILED,taint_sensitive_source
+1,full,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+1,full,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,full,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,full,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,full,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,full,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,full,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,full,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,full,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+1,no_propagation,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,no_propagation,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,no_propagation,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,unknown_normal_review_cost,benign,FAILED,source_review_required
+1,no_propagation,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,no_propagation,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,no_propagation,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,static_rule,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,static_rule,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,static_rule,password_document,benign,FAILED,sensitive_data
+1,static_rule,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,static_rule,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+1,scanner,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+1,scanner,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+1,scanner,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+1,scanner,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_release,trusted_public_release,benign,FAILED,taint_sensitive_source
+2,no_release,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_release,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,no_release,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,no_release,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,no_release,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+2,no_release,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_release,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,no_release,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,no_release,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,full,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,full,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,full,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,full,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,full,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+2,full,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,full,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,full,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,full,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,no_source,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,no_source,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,no_source,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_source,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,scanner,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,scanner,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,scanner,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,scanner,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,coarse,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,coarse,trusted_public_release,benign,FAILED,taint_sensitive_source
+2,coarse,list_public_index,benign,FAILED,taint_sensitive_source
+2,coarse,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,coarse,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,coarse,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,coarse,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,coarse,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,coarse,list_public_slice,benign,FAILED,taint_sensitive_source
+2,coarse,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+2,coarse,dict_public_projection,benign,FAILED,taint_sensitive_source
+2,coarse,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,coarse,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,coarse,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,coarse,range_public_prefix,benign,FAILED,taint_sensitive_source
+2,coarse,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+2,coarse,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,coarse,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,coarse,nested_public_projection,benign,FAILED,taint_sensitive_source
+2,no_propagation,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,no_propagation,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,no_propagation,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,no_propagation,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,no_propagation,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,no_propagation,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_propagation,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,precision,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,precision,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,precision,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,precision,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,precision,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+2,precision,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,precision,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,precision,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,precision,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,precision,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,password_document,benign,FAILED,sensitive_data
+2,static_rule,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,static_rule,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,static_rule,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,static_rule,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,static_rule,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_fields,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,no_fields,list_public_index,benign,FAILED,taint_sensitive_source
+2,no_fields,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_fields,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,no_fields,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,no_fields,unknown_normal_review_cost,benign,FAILED,source_review_required
+2,no_fields,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,no_fields,list_public_slice,benign,FAILED,taint_sensitive_source
+2,no_fields,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+2,no_fields,dict_public_projection,benign,FAILED,taint_sensitive_source
+2,no_fields,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_fields,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+2,no_fields,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+2,no_fields,range_public_prefix,benign,FAILED,taint_sensitive_source
+2,no_fields,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+2,no_fields,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,no_fields,nested_public_projection,benign,FAILED,taint_sensitive_source
+2,no_defense,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,no_defense,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,no_defense,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,no_defense,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,no_defense,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+2,detect_only,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+2,detect_only,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+2,detect_only,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+2,detect_only,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,full,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,full,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,full,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,full,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,full,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+3,full,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,full,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,full,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,full,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,coarse,range_public_prefix,benign,FAILED,taint_sensitive_source
+3,coarse,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,coarse,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,coarse,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,coarse,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,coarse,dict_public_projection,benign,FAILED,taint_sensitive_source
+3,coarse,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,coarse,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,coarse,nested_public_projection,benign,FAILED,taint_sensitive_source
+3,coarse,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+3,coarse,trusted_public_release,benign,FAILED,taint_sensitive_source
+3,coarse,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+3,coarse,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,coarse,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,coarse,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,coarse,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,coarse,list_public_index,benign,FAILED,taint_sensitive_source
+3,coarse,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,coarse,list_public_slice,benign,FAILED,taint_sensitive_source
+3,no_defense,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,no_defense,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,no_defense,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,no_defense,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_defense,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,no_propagation,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,no_propagation,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,no_propagation,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,no_propagation,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,no_propagation,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_propagation,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_fields,range_public_prefix,benign,FAILED,taint_sensitive_source
+3,no_fields,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,no_fields,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,no_fields,json_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,no_fields,dict_public_projection,benign,FAILED,taint_sensitive_source
+3,no_fields,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,no_fields,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,no_fields,nested_public_projection,benign,FAILED,taint_sensitive_source
+3,no_fields,composed_public_reprojection,benign,FAILED,taint_sensitive_source
+3,no_fields,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+3,no_fields,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,no_fields,base64_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,no_fields,url_range_roundtrip_public,benign,FAILED,taint_sensitive_source
+3,no_fields,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_fields,list_public_index,benign,FAILED,taint_sensitive_source
+3,no_fields,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_fields,list_public_slice,benign,FAILED,taint_sensitive_source
+3,no_release,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,no_release,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,no_release,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,no_release,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,no_release,trusted_public_release,benign,FAILED,taint_sensitive_source
+3,no_release,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+3,no_release,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,no_release,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_release,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_release,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,no_source,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,no_source,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,no_source,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,no_source,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,static_rule,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,static_rule,password_document,benign,FAILED,sensitive_data
+3,static_rule,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,static_rule,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,static_rule,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,precision,unknown_normal_block_cost,benign,FAILED,source_classification_blocked
+3,precision,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,precision,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,precision,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,precision,unknown_normal_review_cost,benign,FAILED,source_review_required
+3,precision,unwitnessed_decode_normal_cost,benign,FAILED,taint_sensitive_source
+3,precision,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,precision,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,precision,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,precision,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,scanner,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,scanner,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,scanner,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,scanner,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,list_private_index,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,model_semantic_rewrite,attack,UNRUN,Semantic leak objective requires a separately validated semantic oracle and live model
+3,detect_only,list_private_slice,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,private_slice_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,wrong_public_known_key,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,json_roundtrip_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,implicit_control_flow,attack,UNRUN,Implicit branch/timing channels are not tracked
+3,detect_only,sensitive_approved_tool,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,unknown_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,private_model_boundary,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,conflict_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,arbitrary_library_rot13,attack,UNRUN,Unwrapped third-party conversion is outside explicit tracking
+3,detect_only,private_segmented_encode,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,opaque_direct,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,wrong_public_opaque,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,nested_private_base64,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,wrong_field_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,missing_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,dict_private_projection,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,range_reverse_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,unknown_allow_private,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,mixed_concat,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,opaque_multilayer,attack,FAILED,Frozen security or legitimate-task contract not satisfied
+3,detect_only,range_private_suffix,attack,FAILED,Frozen security or legitimate-task contract not satisfied

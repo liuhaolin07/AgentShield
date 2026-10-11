@@ -1,0 +1,7 @@
+ablation,arm,ASR,TCR,FPR,failures
+without_source_policy,no_source,"{""numerator"": 24, ""denominator"": 24, ""value"": 1.0}","{""numerator"": 24, ""denominator"": 24, ""value"": 1.0}","{""numerator"": 0, ""denominator"": 24, ""value"": 0.0}",24
+without_propagation,no_propagation,"{""numerator"": 21, ""denominator"": 24, ""value"": 0.875}","{""numerator"": 21, ""denominator"": 24, ""value"": 0.875}","{""numerator"": 3, ""denominator"": 24, ""value"": 0.125}",24
+without_field_precision,no_fields,"{""numerator"": 3, ""denominator"": 24, ""value"": 0.125}","{""numerator"": 6, ""denominator"": 24, ""value"": 0.25}","{""numerator"": 18, ""denominator"": 24, ""value"": 0.75}",21
+without_declassification,no_release,"{""numerator"": 6, ""denominator"": 24, ""value"": 0.25}","{""numerator"": 18, ""denominator"": 24, ""value"": 0.75}","{""numerator"": 6, ""denominator"": 24, ""value"": 0.25}",12
+without_scanner,precision,"{""numerator"": 6, ""denominator"": 24, ""value"": 0.25}","{""numerator"": 21, ""denominator"": 24, ""value"": 0.875}","{""numerator"": 3, ""denominator"": 24, ""value"": 0.125}",9
+detection_only,detect_only,"{""numerator"": 24, ""denominator"": 24, ""value"": 1.0}","{""numerator"": 24, ""denominator"": 24, ""value"": 1.0}","{""numerator"": 0, ""denominator"": 24, ""value"": 0.0}",24

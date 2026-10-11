@@ -1,0 +1,20 @@
+{
+  "passed": 271,
+  "failed": 0,
+  "skipped": 0,
+  "raw_tests_sha256": "16dbebb933e24db7e3cee6d9fef6cb82e5c84130ff4312e61cd49c4902c0c127",
+  "preserved_artifacts": 49,
+  "old_python_sources": 61,
+  "v17_transitions": {
+    "HELD->HELD": 82,
+    "UNRUN->UNRUN": 4
+  },
+  "v18_v19_all_case_contracts_statuses_and_credits_identical": true,
+  "live_model_summary": {
+    "HELD": 0,
+    "FAILED": 0,
+    "UNRUN": 36
+  },
+  "actual_paid_calls": 0,
+  "reserved_implementation_hashes_unchanged": true
+}

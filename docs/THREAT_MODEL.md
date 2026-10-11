@@ -36,3 +36,38 @@ B0–B2 omit MAC/replay checks while sharing bounded issuance; source-only and
 observe-only are intentional research weakening modes. The receiver/executor
 is infrastructure, never a defense credited for blocking. Misclassification and
 benign-projection contracts remain in every group and metric denominator.
+
+## V1.10 precision additions (historical V1.9 text above)
+
+PrecisionRuntime/PrecisionAgent use the same data-only trust boundary. The
+attacker can choose bounded operations, arguments, handle aliases and injected
+public tool content; cannot edit trusted SourceLayout, SourceRegistry, release
+rules, callback registration, study arm, issuer storage or receiver/oracle.
+Fine labels describe dictionary fields, list elements and Unicode character
+ranges. Projection is allowed to narrow only according to authenticated source
+granularity and replayed supported semantics. This does not establish secrecy
+of shape, length, key selection, branch/timing or other implicit channels.
+
+Granular classification errors are included in experiments even though classifier
+modification is outside the runtime attacker model: they model configuration
+failures, not HMAC forgery. Incorrect public fields can leak where coarse union
+would incidentally protect them. Correct-label mechanism evidence and
+classification accuracy are reported separately. Authorized releases are trusted
+policy actions scoped to one original source/projection/sink; ordinary agent
+interfaces have no untaint, release, literal issuer or raw-value mint operation.
+
+The new genuine-model study distinguishes adoption, matching attack attempts,
+specific protected sources, matching canaries, pre-execution blocks and observed
+sink delivery. Indirect injection occurs in PUBLIC tool/file content while the
+user asks for a benign summary; direct malicious user tasks remain separate.
+Opaque private reads need not enter model context merely to name a handle, but
+inspect/transform materialization is checked before the next actual model call.
+Model-generated values conservatively inherit request dependencies. Semantic
+reconstruction from external/raw information is unproved and not credited.
+
+The V1.10 No Defense arm keeps common handle verification unlike historical
+V1.9 B0; comparison is about content defenses inside a common guarded protocol,
+not unrestricted malicious Python. Detection Only findings do not count as
+blocks. All paid calls default off; provider endpoints are fixed and distinct
+from the loopback attack receiver. Missing credentials, provider failure or
+unobserved adoption are UNRUN. Model-boundary transport probes are not inference.

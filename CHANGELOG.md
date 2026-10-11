@@ -2,7 +2,29 @@
 
 All notable changes to AgentShield are documented in this file.
 
-## Unreleased — V1.9 research hardening
+## Unreleased — V1.10 precision evaluation
+
+- Immutable bounded field/element/character dependencies, exact JSON/Base64/URL
+  witnesses, replayed narrowing and scoped trusted original-source releases.
+- Authenticated explicit source classification/uncertainty, independent source/
+  payload/sink attack oracle, multi-round guarded model tool loop and bounded
+  opt-in provider budget using existing DeepSeek/Qwen adapters.
+- New frozen 43-development / 20-reserved contracts, six baselines/six ablations
+  (11 unique arms), actual local HTTP evidence, unique-task uncertainty,
+  complete JSON/CSV/SVG, separate cost/measurement controls and independent gate.
+- Actual Full development ASR 9/63, TCR 42/51, FPR 9/51; first untouched reserved
+  ASR 6/24, TCR 21/24, FPR 3/24. Coarse FPR 39/51 and 21/24 decreases, but wrong
+  public granular labels add real leaks (reserved Coarse ASR 3/24). Failures remain.
+- Genuine model study: 36 UNRUN, missing credentials, zero API calls, no invented
+  usage/cost. Paid calls stay off by default even when credentials exist.
+- 271 tests pass; 49 historical artifact and 61 old Python source hashes unchanged.
+  V1.7/V1.8/V1.9 compatibility validated. Candidate 196bedc preceded first new
+  reserved observation; no implementation tuning after it. CI uploads failures.
+- Updated source/precision/threat/research/experiment documentation and bilingual
+  README. Mature taint/declassification techniques are not claimed as novel;
+  correct-label mechanism benefit does not establish unconditional security.
+
+## V1.9 research hardening — historical development
 
 - Session-issued immutable handles, keyed source hashes/HMAC and replayed
   transform-chain verification; bounded data-only AgentPort rejects manual

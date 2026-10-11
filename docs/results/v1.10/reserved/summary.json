@@ -1,0 +1,2391 @@
+{
+  "schema_version": 1,
+  "experiment": "v1.10",
+  "oracle_version": 1,
+  "dataset_version": "v1.10-precision-1",
+  "dataset_sha256": "69658bf1eb266cbb7054a78df15ac8e3288fdf1ce4fbf7717716d8bab64bae74",
+  "split": "reserved",
+  "seed": 17,
+  "repeat": 3,
+  "candidate_commit": "196bedcfc05412aee241b72d27e22796bd543ad4",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "source_sha256": {
+    "security/__init__.py": "0241698196e35e90b549ae1c3c58eec63958378c0cff49763ec6c69bd79f2247",
+    "security/attested_runtime.py": "8556b3ddce6162a945ce11a086b776179b23d2c2818f952a0cb1bb94c8e8636d",
+    "security/audit.py": "233cc6d0846d79fdc3431ea7698dbdb963be75e89f5676fe05d22953efcfcd27",
+    "security/capabilities.py": "c2cc644be85f24e4b9256a0acf47ae3837073e623ae2ec16ae39eec4af9f683d",
+    "security/inspection.py": "74c1ed23ec5162cee66dc1dcb13790bec39c353da9a250f5246caacfd7cae6ef",
+    "security/middleware.py": "c3af328763aba7a743916191ccb648ef834d012bb195656b37effc4b2f2e5393",
+    "security/policy.py": "aca1af4e00d419161bc50151ae31b2f71474e1897c2fad53e9c20c77d9249442",
+    "security/precision.py": "93b5e4ebc2b99413d63567b7a2036b0ee022ebe36e7716baca746d15bc7aed67",
+    "security/precision_integrity.py": "afa59a6b511d3652598b2eb239a6d83a63822dfb32418c8505d87eb01ef54067",
+    "security/precision_research.py": "6af3ca05cfa073d2c303c5e15f3d6ff4d85b56ba57e3e6bc50a0d67a00c4366c",
+    "security/precision_runtime.py": "d2c12a5185573f3d9f9a4d169a44f46e3b2bd141b5031487db8816dab2ef7430",
+    "security/research_runtime.py": "ed9c4d2ba03ea212d83f5e26c6456a1129022694dadda9d5cad8b6bf443874b0",
+    "security/runtime.py": "ce42312609d83d3d7428dd20a3d739249650cb968544069d2a6f573ae65f1d04",
+    "security/scanner.py": "639025038337ac9dea18dcdec760ec171bf46c59b3c2b93beec36c4a7af3a1ab",
+    "security/source_classification.py": "e751e48f896c9004990f333d7d278ba9f21a2390c95614609db0e315da8f869d",
+    "security/taint.py": "3897181a17b915c6104f022b63c13304d77507f95551697101be54626d7809da",
+    "security/taint_context.py": "4c9e3f1468925875b6218334d09a0c80dd3775e3f51af6c8f73f7f47c1eecb4a",
+    "security/taint_integrity.py": "17cb20faf37ca8af7738cfadaaf12f3226b4852647384ebd4e6a18da470a72fa",
+    "agent/__init__.py": "e88108980ee06817c523400311beedb329164dbb2ed832057159e3f28f5b7e57",
+    "agent/agent.py": "6c474323ea08e551eec15f736f5e77d5425100e8de5d17f6c7cd6e8b07d3cfab",
+    "agent/llm_agent.py": "82c39727b59fe3a2a574f90b9a18a21c536c1daa77f63f91cc328a5ac916b253",
+    "agent/precision_agent.py": "75f48697ba90294c25be655167b67d07cde883c067ac02e8145a11e48484c38b",
+    "agent/research_agent.py": "d59598ee68bce7e666f5739445ae48d9f91774752f1295694fe4f23baeb7565c",
+    "agent/taint_agent.py": "9c52a7b22ecbbe0ea46fc5a28335279f049f11ae193f7588ba3de8b1e7e30c43",
+    "model/__init__.py": "c9ffd663bfa4d70c6963b781e9867ae8d32c840bc5c2d90329de9d6498f70358",
+    "model/dots_client.py": "789a1e3db483c9678735383df06009ee9cd3e840de159b5c0dfceeda342016d0",
+    "model/research_client.py": "3d99972828a619a62bdaa73ddc3b982929f3ce56a034edbbbb61af5f4ec8a825",
+    "model/study_budget.py": "de5c0c6586b0ec90622968b76f6e56ba6edc76e33859bd2ab8c22fabe49948f9",
+    "evaluation/__init__.py": "07916e28063a4e833efca7fb4606f0166fc4d1bb98e0477386ef10b6660ecefb",
+    "evaluation/__main__.py": "f6905d2a4faeb76770c037b6ea131c323b0ac69807cdc506bd297563d5f4c315",
+    "evaluation/agent_oracle.py": "37a80a8bb7e036c71abbe32c9da68f20f314e6dd8aac7d67349c94bab1ce7545",
+    "evaluation/cases.py": "c960b69cd39c09998ff6fea4cd3967b456cb65e8f5eda1237c394e00d6dd955a",
+    "evaluation/compare.py": "2e2b90f7e122b6f359c8b7f2965924ce8544e5b64080c9687105ac89c649b6ef",
+    "evaluation/experiment.py": "46058448c29ebba5d47f291b24c5e8706d0faa64865245ea6b98890b202ea5c9",
+    "evaluation/live_precision.py": "82de124256c018cf85bd18fc020440a5b3a48c9af4828f9ccc07a09aebce7c50",
+    "evaluation/plot.py": "b58b1aaab046e43f6fd9bc33dd67ff45e0df228a301f4af19df760d7edecf03f",
+    "evaluation/precision_agent_study.py": "787694ddcaa0adeff4b81cdab7427e8123644a78dc9e18d085a2c3189e5ecee7",
+    "evaluation/precision_experiment.py": "329eb6b3cfe79807a9be50ad43cf1ff67244f79c41582d1d7cc01217a6f2c112",
+    "evaluation/precision_metrics.py": "cdfb93a5b32f87fd5de87c95a2388353217f1ec0d6806badd4bf7a207cb9c0c9",
+    "evaluation/precision_plot.py": "428c88cbab298b8b2aabdec876ff40e08e06f51e80b4791676015404efe2cfda",
+    "evaluation/real_agent.py": "b0c2eae1f4cb4f684cf1460c85e0ebf3f1410ce02cca26334636702dd2c35eb9",
+    "evaluation/receiver.py": "7fc94b5eb8e9a2ea70f5210e4769db3653af6ae3e9cc7a969dcd2c617af2effe",
+    "evaluation/research.py": "97f22b7582c5471733c78304cfbc868879a72a0bcd7cf0782c7f5cc7cc9e21ff",
+    "evaluation/research_plot.py": "959c2ee6f51bd115bb4034da8b6170fde475c7cf3a344d50e3ebed286dd1b1d2",
+    "evaluation/runner.py": "ecdb065655cbeff6f7d0c1634b0260e4bf5c686aeb5dc47a6e1bca1ae64b17b9",
+    "benchmark/__init__.py": "bfde68b3a5f7dba7c15804ace409091198a108bb9fc0d834825b0fcbfdc8901e",
+    "benchmark/build_dataset.py": "72adb0de47320fa91ba9ea8f3b119b39c784f87a4d3c2f5547b955e9fb485851",
+    "benchmark/live_protocol.py": "14c73b03b1681ea08377454c5c35e04448f36870834596683cf8a7e397b4ae16",
+    "benchmark/loader.py": "a996c37fe797f895ca4001abe4ed4d701d10b40b873f587d1aab551ac1e2446f",
+    "benchmark/precision_dataset.py": "e33b7dc021fa5ede85750b34fc8d39972dd79dea2e0b2535a25f120752685f4f",
+    "ci/__init__.py": "dc04cca018d1dd58a8e67776cf400faa788396683eedc2925d8912972e96e833",
+    "ci/validate_v110.py": "5a2ab00e929f20f41de2c74b31572c81082edf556a26555d8c995e3e9797e714",
+    "ci/validate_v19.py": "0a6f0b35a7f1ed229680f53aa2cb24df9405b6998f6bd0e16ad3f93f2ff25030"
+  },
+  "conditions": {
+    "synthetic_only": true,
+    "network": "pinned 127.0.0.1",
+    "live_llm": false,
+    "model_sink": "controlled transport probe, no inference",
+    "same_inputs_executors_contracts": true,
+    "controls": "content enforcement off identically in all arms",
+    "memory": "per-case tracemalloc peak includes measurement/fixture/guarded execution, not RSS",
+    "end_to_end": "includes temporary fixture creation, transformations, gate, local HTTP, audit verification; tracing enabled for all arms"
+  },
+  "arms": {
+    "no_defense": {
+      "defense_mode": "no_defense",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "static_rule": {
+      "defense_mode": "static_rule",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "scanner": {
+      "defense_mode": "scanner",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "coarse": {
+      "defense_mode": "scanner_taint",
+      "scan_content": false,
+      "field_precision": false,
+      "release_enabled": false,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "precision": {
+      "defense_mode": "scanner_taint",
+      "scan_content": false,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "full": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "no_source": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": false,
+      "source_labels": false,
+      "enforce_content": true
+    },
+    "no_propagation": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": false,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "no_fields": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": false,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "no_release": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": false,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": true
+    },
+    "detect_only": {
+      "defense_mode": "scanner_taint",
+      "scan_content": true,
+      "field_precision": true,
+      "release_enabled": true,
+      "propagate": true,
+      "source_policy_enabled": true,
+      "source_labels": true,
+      "enforce_content": false
+    }
+  },
+  "ablations": {
+    "without_source_policy": "no_source",
+    "without_propagation": "no_propagation",
+    "without_field_precision": "no_fields",
+    "without_declassification": "no_release",
+    "without_scanner": "precision",
+    "detection_only": "detect_only"
+  },
+  "summary": {
+    "HELD": 375,
+    "FAILED": 219,
+    "UNRUN": 66
+  },
+  "metrics": {
+    "no_defense": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 24,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "ABR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "normal_execution_success_rate": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "false_block_reasons": {},
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "FPR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        },
+        "ABR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 77.92545816666667,
+          "paired_completed_benign": 24,
+          "extra_mean": 0.0,
+          "extra_min": 0.0,
+          "extra_max": 0.0
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 13.599243020833335,
+          "paired_completed_benign": 24,
+          "extra_mean": 0.0,
+          "extra_min": 0.0,
+          "extra_max": 0.0
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 23.041310645833335,
+          "paired_completed_benign": 24,
+          "extra_mean": 0.0,
+          "extra_min": 0.0,
+          "extra_max": 0.0
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 120466.16666666667,
+          "paired_completed_benign": 24,
+          "extra_mean": 0,
+          "extra_min": 0,
+          "extra_max": 0
+        }
+      },
+      "model_token_cost": null
+    },
+    "static_rule": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 24,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -1.597046854166667,
+        "minimum": -105.549378,
+        "maximum": 9.710007
+      },
+      "ABR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "normal_execution_success_rate": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "false_block_reasons": {},
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "FPR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        },
+        "ABR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 65.34627283333333,
+          "paired_completed_benign": 24,
+          "extra_mean": -28.394358541666662,
+          "extra_min": -369.37635399999994,
+          "extra_max": 96.91411900000003
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 12.002196166666666,
+          "paired_completed_benign": 24,
+          "extra_mean": -4.800348375000001,
+          "extra_min": -105.54937800000002,
+          "extra_max": 7.840254999999999
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 19.101037625,
+          "paired_completed_benign": 24,
+          "extra_mean": -7.7351275,
+          "extra_min": -86.35948499999999,
+          "extra_max": 56.645876999999984
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 120164.52083333333,
+          "paired_completed_benign": 24,
+          "extra_mean": -62.291666666666664,
+          "extra_min": -5921,
+          "extra_max": 6822
+        }
+      },
+      "model_token_cost": null
+    },
+    "scanner": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 24,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -3.021574541666667,
+        "minimum": -101.404781,
+        "maximum": 7.209331
+      },
+      "ABR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "normal_execution_success_rate": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "false_block_reasons": {},
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "FPR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        },
+        "ABR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 57.06183952083333,
+          "paired_completed_benign": 24,
+          "extra_mean": -37.568483208333326,
+          "extra_min": -386.43939399999994,
+          "extra_max": 55.37713600000001
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 10.577668479166666,
+          "paired_completed_benign": 24,
+          "extra_mean": -6.0539285833333345,
+          "extra_min": -101.40478100000001,
+          "extra_max": 5.573744
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 16.424480312500002,
+          "paired_completed_benign": 24,
+          "extra_mean": -11.099206,
+          "extra_min": -87.45593299999999,
+          "extra_max": 39.921475
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 120328.22916666667,
+          "paired_completed_benign": 24,
+          "extra_mean": 78.79166666666667,
+          "extra_min": -6007,
+          "extra_max": 4626
+        }
+      },
+      "model_token_cost": null
+    },
+    "coarse": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "TCR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "FPR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "precision": {
+        "numerator": 21,
+        "denominator": 42,
+        "value": 0.5
+      },
+      "recall": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "confusion": {
+        "TP": 21,
+        "FP": 21,
+        "TN": 3,
+        "FN": 3
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": 5.310100770833333,
+        "minimum": -69.386911,
+        "maximum": 46.984223
+      },
+      "ABR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "normal_execution_success_rate": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "false_block_reasons": {
+        "taint_sensitive_source": 18,
+        "source_classification_blocked": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 18,
+            "denominator": 21,
+            "value": 0.8571428571428571
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "TCR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "FPR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "ABR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 102.58518329166667,
+          "paired_completed_benign": 3,
+          "extra_mean": -0.9865700000000004,
+          "extra_min": -8.905473,
+          "extra_max": 3.483625
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 18.909343791666668,
+          "paired_completed_benign": 3,
+          "extra_mean": -0.6358693333333338,
+          "extra_min": -3.9359600000000015,
+          "extra_max": 1.1457319999999998
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 29.863644916666665,
+          "paired_completed_benign": 3,
+          "extra_mean": -0.005446999999999906,
+          "extra_min": -0.17239000000000004,
+          "extra_max": 0.09144899999999989
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 149861.39583333334,
+          "paired_completed_benign": 3,
+          "extra_mean": -129,
+          "extra_min": -189,
+          "extra_max": -49
+        }
+      },
+      "model_token_cost": null
+    },
+    "precision": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 45,
+        "FAILED": 9,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "TCR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "FPR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "precision": {
+        "numerator": 18,
+        "denominator": 21,
+        "value": 0.8571428571428571
+      },
+      "recall": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "confusion": {
+        "TP": 18,
+        "FP": 3,
+        "TN": 21,
+        "FN": 6
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -2.4544222291666666,
+        "minimum": -89.607268,
+        "maximum": 20.069375
+      },
+      "ABR": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "normal_execution_success_rate": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 2,
+          "denominator": 8,
+          "value": 0.25,
+          "wilson_95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "TCR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "FPR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "ABR": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75,
+          "wilson_95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 57.22050658333333,
+          "paired_completed_benign": 21,
+          "extra_mean": -41.64885214285714,
+          "extra_min": -333.15415999999993,
+          "extra_max": 47.68308999999999
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 11.144820791666666,
+          "paired_completed_benign": 21,
+          "extra_mean": -5.213301333333334,
+          "extra_min": -89.607268,
+          "extra_max": 20.069374999999994
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 16.132833020833335,
+          "paired_completed_benign": 21,
+          "extra_mean": -13.97240838095238,
+          "extra_min": -85.314376,
+          "extra_max": 10.912019999999998
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 120551.3125,
+          "paired_completed_benign": 21,
+          "extra_mean": 620.047619047619,
+          "extra_min": -9547,
+          "extra_max": 13219
+        }
+      },
+      "model_token_cost": null
+    },
+    "full": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 45,
+        "FAILED": 9,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "TCR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "FPR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "precision": {
+        "numerator": 18,
+        "denominator": 21,
+        "value": 0.8571428571428571
+      },
+      "recall": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "confusion": {
+        "TP": 18,
+        "FP": 3,
+        "TN": 21,
+        "FN": 6
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -2.1829752916666667,
+        "minimum": -104.712878,
+        "maximum": 52.973042
+      },
+      "ABR": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "normal_execution_success_rate": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 2,
+          "denominator": 8,
+          "value": 0.25,
+          "wilson_95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "TCR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "FPR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "ABR": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75,
+          "wilson_95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 62.78043139583333,
+          "paired_completed_benign": 21,
+          "extra_mean": -29.620940333333333,
+          "extra_min": -384.388111,
+          "extra_max": 334.28318499999995
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 11.416267729166666,
+          "paired_completed_benign": 21,
+          "extra_mean": -4.856139047619048,
+          "extra_min": -104.71287800000002,
+          "extra_max": 52.973042
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 19.350015583333334,
+          "paired_completed_benign": 21,
+          "extra_mean": -6.6307595714285705,
+          "extra_min": -72.850883,
+          "extra_max": 122.155736
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 120770.83333333333,
+          "paired_completed_benign": 21,
+          "extra_mean": 947.6666666666666,
+          "extra_min": -4021,
+          "extra_max": 10427
+        }
+      },
+      "model_token_cost": null
+    },
+    "no_source": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 24,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -1.6210867083333333,
+        "minimum": -102.465582,
+        "maximum": 10.631553
+      },
+      "ABR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "normal_execution_success_rate": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "false_block_reasons": {},
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "FPR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        },
+        "ABR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 63.127618437500004,
+          "paired_completed_benign": 24,
+          "extra_mean": -29.71078745833333,
+          "extra_min": -322.1823069999999,
+          "extra_max": 22.135365000000007
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 11.9781563125,
+          "paired_completed_benign": 24,
+          "extra_mean": -4.446758333333334,
+          "extra_min": -102.46558200000001,
+          "extra_max": 8.099823
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 18.046289645833333,
+          "paired_completed_benign": 24,
+          "extra_mean": -9.313243125,
+          "extra_min": -70.25454500000001,
+          "extra_max": 7.465378999999999
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 124430.33333333333,
+          "paired_completed_benign": 24,
+          "extra_mean": 5124.25,
+          "extra_min": -5568,
+          "extra_max": 79766
+        }
+      },
+      "model_token_cost": null
+    },
+    "no_propagation": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "TCR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "FPR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "precision": {
+        "numerator": 3,
+        "denominator": 6,
+        "value": 0.5
+      },
+      "recall": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "confusion": {
+        "TP": 3,
+        "FP": 3,
+        "TN": 21,
+        "FN": 21
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -5.509243395833334,
+        "minimum": -115.829289,
+        "maximum": 0.947567
+      },
+      "ABR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "normal_execution_success_rate": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "TCR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "FPR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "ABR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 44.1884775,
+          "paired_completed_benign": 21,
+          "extra_mean": -68.19737595238095,
+          "extra_min": -469.35200599999996,
+          "extra_max": 23.265518
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 8.089999625,
+          "paired_completed_benign": 21,
+          "extra_mean": -10.850069333333334,
+          "extra_min": -115.82928900000002,
+          "extra_max": 0.35676600000000036
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 10.474616833333334,
+          "paired_completed_benign": 21,
+          "extra_mean": -25.228684142857144,
+          "extra_min": -122.11035399999999,
+          "extra_max": 24.629861
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 93551.22916666667,
+          "paired_completed_benign": 21,
+          "extra_mean": -63433.333333333336,
+          "extra_min": -206493,
+          "extra_max": 6671
+        }
+      },
+      "model_token_cost": null
+    },
+    "no_fields": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 33,
+        "FAILED": 21,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 3,
+        "denominator": 24,
+        "value": 0.125
+      },
+      "TCR": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "FPR": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "precision": {
+        "numerator": 21,
+        "denominator": 39,
+        "value": 0.5384615384615384
+      },
+      "recall": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "confusion": {
+        "TP": 21,
+        "FP": 18,
+        "TN": 6,
+        "FN": 3
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": 7.071316145833333,
+        "minimum": -77.279143,
+        "maximum": 68.690795
+      },
+      "ABR": {
+        "numerator": 21,
+        "denominator": 24,
+        "value": 0.875
+      },
+      "normal_execution_success_rate": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "false_block_reasons": {
+        "taint_sensitive_source": 15,
+        "source_classification_blocked": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 15,
+            "denominator": 21,
+            "value": 0.7142857142857143
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 1,
+          "denominator": 8,
+          "value": 0.125,
+          "wilson_95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "TCR": {
+          "numerator": 2,
+          "denominator": 8,
+          "value": 0.25,
+          "wilson_95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "FPR": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75,
+          "wilson_95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        },
+        "ABR": {
+          "numerator": 7,
+          "denominator": 8,
+          "value": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 131.39672497916666,
+          "paired_completed_benign": 6,
+          "extra_mean": 2.5257021666666666,
+          "extra_min": -22.988548,
+          "extra_max": 31.243527
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 20.670559166666667,
+          "paired_completed_benign": 6,
+          "extra_mean": 2.1477589999999998,
+          "extra_min": -6.616842,
+          "extra_max": 9.857235999999999
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 41.286216395833335,
+          "paired_completed_benign": 6,
+          "extra_mean": 0.46023033333333324,
+          "extra_min": -3.668743,
+          "extra_max": 3.81973
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 148221,
+          "paired_completed_benign": 6,
+          "extra_mean": 1593.1666666666667,
+          "extra_min": -341,
+          "extra_max": 7732
+        }
+      },
+      "model_token_cost": null
+    },
+    "no_release": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 42,
+        "FAILED": 12,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "TCR": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "FPR": {
+        "numerator": 6,
+        "denominator": 24,
+        "value": 0.25
+      },
+      "precision": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "recall": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "confusion": {
+        "TP": 18,
+        "FP": 6,
+        "TN": 18,
+        "FN": 6
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": -0.12635293749999996,
+        "minimum": -105.90849,
+        "maximum": 29.544077
+      },
+      "ABR": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "normal_execution_success_rate": {
+        "numerator": 18,
+        "denominator": 24,
+        "value": 0.75
+      },
+      "false_block_reasons": {
+        "source_classification_blocked": 3,
+        "taint_sensitive_source": 3
+      },
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 3,
+            "denominator": 21,
+            "value": 0.14285714285714285
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 2,
+          "denominator": 8,
+          "value": 0.25,
+          "wilson_95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "TCR": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75,
+          "wilson_95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        },
+        "FPR": {
+          "numerator": 2,
+          "denominator": 8,
+          "value": 0.25,
+          "wilson_95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "ABR": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75,
+          "wilson_95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 69.38564764583333,
+          "paired_completed_benign": 18,
+          "extra_mean": -29.166949999999993,
+          "extra_min": -392.1832059999999,
+          "extra_max": 194.657691
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 13.472890083333333,
+          "paired_completed_benign": 18,
+          "extra_mean": -3.919675111111112,
+          "extra_min": -105.90849000000001,
+          "extra_max": 29.544077
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 19.1401351875,
+          "paired_completed_benign": 18,
+          "extra_mean": -10.848265555555555,
+          "extra_min": -82.34381199999999,
+          "extra_max": 60.106688000000005
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 121842.39583333333,
+          "paired_completed_benign": 18,
+          "extra_mean": 2387.777777777778,
+          "extra_min": -6303,
+          "extra_max": 14581
+        }
+      },
+      "model_token_cost": null
+    },
+    "detect_only": {
+      "assessments": 60,
+      "summary": {
+        "HELD": 30,
+        "FAILED": 24,
+        "UNRUN": 6
+      },
+      "ASR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "TCR": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "FPR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "recall": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "confusion": {
+        "TP": 0,
+        "FP": 0,
+        "TN": 24,
+        "FN": 24
+      },
+      "excluded": {
+        "control": 6,
+        "unrun": 6
+      },
+      "extra_defense_latency_ms": {
+        "paired_samples": 48,
+        "mean": 1.2241308958333335,
+        "minimum": -105.766565,
+        "maximum": 44.458705
+      },
+      "ABR": {
+        "numerator": 0,
+        "denominator": 24,
+        "value": 0.0
+      },
+      "normal_execution_success_rate": {
+        "numerator": 24,
+        "denominator": 24,
+        "value": 1.0
+      },
+      "false_block_reasons": {},
+      "source_classification_sensitivity": {
+        "conflict": {
+          "ASR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "correct": {
+          "ASR": {
+            "numerator": 15,
+            "denominator": 15,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 21,
+            "value": 0.0
+          }
+        },
+        "missing": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_field": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "wrong_public": {
+          "ASR": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          },
+          "FPR": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "task_cluster_estimates": {
+        "ASR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "TCR": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ]
+        },
+        "FPR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        },
+        "ABR": {
+          "numerator": 0,
+          "denominator": 8,
+          "value": 0.0,
+          "wilson_95": [
+            0,
+            0.32440756488388023
+          ]
+        }
+      },
+      "task_cluster_rule": "ASR/FPR: any observed repeat; TCR/ABR: all observed repeats. Missing repeats reported, no assumed outcomes; authored non-IID contracts.",
+      "cost": {
+        "end_to_end_ms": {
+          "observations": 48,
+          "mean": 77.8098411875,
+          "paired_completed_benign": 24,
+          "extra_mean": -8.242398916666662,
+          "extra_min": -377.69115199999993,
+          "extra_max": 407.410415
+        },
+        "gate_ms": {
+          "observations": 48,
+          "mean": 14.823373916666666,
+          "paired_completed_benign": 24,
+          "extra_mean": -0.5449049583333339,
+          "extra_min": -105.76656500000001,
+          "extra_max": 44.458705
+        },
+        "propagation_ms": {
+          "observations": 48,
+          "mean": 21.905205229166665,
+          "paired_completed_benign": 24,
+          "extra_mean": -2.7310266666666667,
+          "extra_min": -83.105639,
+          "extra_max": 163.911739
+        },
+        "peak_traced_bytes": {
+          "observations": 48,
+          "mean": 127012.6875,
+          "paired_completed_benign": 24,
+          "extra_mean": 9384.333333333334,
+          "extra_min": -5780,
+          "extra_max": 163017
+        }
+      },
+      "model_token_cost": null
+    }
+  },
+  "limitations": [
+    "Authored exploratory explicit-flow tasks, not a blind external benchmark or genuine LLM adoption study.",
+    "Repeats measure stability; unique authored tasks supply task-cluster intervals, not population certainty.",
+    "Coarse uses the V1.9 union propagation algorithm inside the same V1.10 source registry and executor; this is not the historical V1.9 cohort.",
+    "Integrity/common wrappers remain active in No Defense for a fair content-policy comparison.",
+    "Wrong granular source annotations may leak data that coarse union blocked.",
+    "Unwrapped operations, implicit flows and semantic rewrites are UNRUN.",
+    "Latency/memory differences are instrumented local measurements; token/billing costs are null, never inferred from text."
+  ],
+  "raw_artifacts_sha256": {
+    "report.json": "b8f7163a2b604dd27b69ccb15fdad7787a174a2366b7a16fe78abe13f72f090a",
+    "cases.csv": "7a0a5c1c1f6f8e58d4d728ead4a0334baa8bc2ed92b350c706868ddcb6c774a7"
+  }
+}

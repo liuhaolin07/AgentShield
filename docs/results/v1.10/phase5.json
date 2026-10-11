@@ -1,0 +1,17 @@
+{
+  "stage": "research_benchmark_candidate",
+  "passed": 271,
+  "failed": 0,
+  "raw_tests_sha256": "c99652829c7df3d9db6e2f89d174fff59bb13e60c8332f9cfecbf1b6f99517b9",
+  "development_summary": {
+    "HELD": 807,
+    "FAILED": 513,
+    "UNRUN": 99
+  },
+  "reserved_executions_before_candidate_commit": 0,
+  "development_observer_fixes": [
+    "Copied trace list replaced with actual event list",
+    "Canonical JSON normalization for tuple/list audit metadata; original failures retained"
+  ],
+  "historical_artifacts_unchanged": true
+}

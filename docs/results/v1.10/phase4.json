@@ -1,0 +1,14 @@
+{
+  "stage": "controlled_live_agent_study",
+  "passed": 258,
+  "failed": 0,
+  "raw_tests_sha256": "005158f68774f9cf08de96a3108db3285a557ac5c0ad9602796d79408f341b9a",
+  "live_model_calls": 0,
+  "summary": {
+    "HELD": 0,
+    "FAILED": 0,
+    "UNRUN": 36
+  },
+  "model_availability": "UNVERIFIED",
+  "default_paid_execution": false
+}

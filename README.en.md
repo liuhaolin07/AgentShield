@@ -1,4 +1,4 @@
-# AgentShield · V1.9 in development (V1.7 / V1.8 baselines preserved)
+# AgentShield · V1.10 in development (V1.7 / V1.8 / V1.9 preserved)
 
 **English** · [中文](README.md)
 
@@ -11,10 +11,57 @@ block the action before the tool executes.
 
 V1.6 includes both the deterministic demo agent and an optional Dots-powered
 tool-calling agent. The policy parser and API client use only the Python
-standard library. The `send_http` tool still prints a simulation instead of
-making a real network request.
+standard library. Default `send_http` prints a simulation; later controlled loopback transport
+requires explicit configuration.
 
-## V1.9: attested sources and independently checked experiments (development)
+## V1.10: precision-aware provenance and objective-specific evaluation
+
+Adds field/element/character-range dependencies, authenticated exact-codec
+witnesses, scoped trusted original-source releases, uncertain-source policy and
+source/payload/sink-specific agent evaluation. Existing CLI/APIs remain unchanged;
+precision is a configurable runtime, not automatic protection of legacy callers.
+Trusted classification and the bounded data-only interface remain prerequisites.
+
+| Arm (same new frozen protocol) | Development ASR / TCR / FPR | First reserved ASR / TCR / FPR |
+| --- | --- | --- |
+| Coarse (V1.9 union algorithm in common V1.10 executor) | 9/63 · 12/51 · 39/51 | 3/24 · 3/24 · 21/24 |
+| Precision | 12/63 · 42/51 · 9/51 | 6/24 · 21/24 · 3/24 |
+| Scanner + Precision | 9/63 · 42/51 · 9/51 | 6/24 · 21/24 · 3/24 |
+
+**Fewer false blocks, but more reserved leaks under wrong granular labels.**
+Those real failures are retained. Correctly classified supported Full attacks
+have 0/42 development and 0/15 reserved deliveries, only 14/5 unique authored
+attacks. This does not establish unconditional security, superior performance
+or a direct before/after comparison with the different historical V1.9 cohort.
+
+271 automated tests pass. The new 43-development/20-reserved tasks produce 2,079
+complete assessments (seed 17, three repeats), six baselines and six ablations
+mapped to 11 unique arms. Reports retain every FAILED/UNRUN, fractions/exclusions,
+unique-task Wilson intervals, independent receiver bodies, redacted lineage and
+instrumented latency/Python allocation peaks. The first reserved run followed
+candidate `196bedc`; no implementation tuning followed its observations.
+
+```bash
+python -m unittest discover -s test -p 'test_*.py' -v
+python -m evaluation.precision_experiment --split development --seed 17 --repeat 3 --charts --output-dir logs/v110-development
+python -m ci.validate_v110 logs/v110-development/report.json
+python -m evaluation.live_precision --output-dir logs/v110-live-disabled
+```
+
+Figures optionally require `requirements-research.txt`. Experiment exit 1
+preserves real failures; the independent gate validates evidence, not greenwashed
+security. Genuine DeepSeek/Qwen calls default off: **36 UNRUN, zero API calls**,
+model availability unverified and token/cost unknown. Scripted regression clients
+and loopback model-boundary probes are not genuine LLM evaluation.
+
+[Protocol](docs/EXPERIMENT_V1.10.md) · [Precision](docs/PRECISION_TAINT.md) ·
+[Classification](docs/SOURCE_CLASSIFICATION.md) · [Live opt-in/budgets](docs/REAL_AGENT_EVALUATION.md) ·
+[Complete JSON/CSV/SVG](docs/results/v1.10/) · [Chinese improvement report](docs/IMPROVEMENT_REPORT_V1.10.zh-CN.md) ·
+[Verified related work](docs/RELATED_WORK.md). No external blind study, arbitrary
+Python/implicit-flow guarantee, official AgentDojo score or submission-ready
+claim. Development only; not merged or released.
+
+## V1.9: attested sources and independently checked experiments (historical development)
 
 Built on V1.8 ecfa751, the new runtime issues opaque handles, verifies source and
 transform chains, and exposes a bounded data-only AgentPort. Only trusted file,

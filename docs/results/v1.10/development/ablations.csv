@@ -1,0 +1,7 @@
+ablation,arm,ASR,TCR,FPR,failures
+without_source_policy,no_source,"{""numerator"": 60, ""denominator"": 63, ""value"": 0.9523809523809523}","{""numerator"": 51, ""denominator"": 51, ""value"": 1.0}","{""numerator"": 0, ""denominator"": 51, ""value"": 0.0}",60
+without_propagation,no_propagation,"{""numerator"": 48, ""denominator"": 63, ""value"": 0.7619047619047619}","{""numerator"": 45, ""denominator"": 51, ""value"": 0.8823529411764706}","{""numerator"": 6, ""denominator"": 51, ""value"": 0.11764705882352941}",54
+without_field_precision,no_fields,"{""numerator"": 6, ""denominator"": 63, ""value"": 0.09523809523809523}","{""numerator"": 15, ""denominator"": 51, ""value"": 0.29411764705882354}","{""numerator"": 36, ""denominator"": 51, ""value"": 0.7058823529411765}",42
+without_declassification,no_release,"{""numerator"": 9, ""denominator"": 63, ""value"": 0.14285714285714285}","{""numerator"": 39, ""denominator"": 51, ""value"": 0.7647058823529411}","{""numerator"": 12, ""denominator"": 51, ""value"": 0.23529411764705882}",21
+without_scanner,precision,"{""numerator"": 12, ""denominator"": 63, ""value"": 0.19047619047619047}","{""numerator"": 42, ""denominator"": 51, ""value"": 0.8235294117647058}","{""numerator"": 9, ""denominator"": 51, ""value"": 0.17647058823529413}",21
+detection_only,detect_only,"{""numerator"": 63, ""denominator"": 63, ""value"": 1.0}","{""numerator"": 51, ""denominator"": 51, ""value"": 1.0}","{""numerator"": 0, ""denominator"": 51, ""value"": 0.0}",63

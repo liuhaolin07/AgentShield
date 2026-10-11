@@ -1,4 +1,4 @@
-# AgentShield · V1.9 开发中（保留 V1.7 / V1.8 基线）
+# AgentShield · V1.10 开发中（保留 V1.7 / V1.8 / V1.9 基线）
 
 [English](README.en.md) · **中文**
 
@@ -7,9 +7,36 @@
 
 AgentShield 是一个面向「使用工具的 Agent」的小型、可运行安全层。每一次文件读取与每一条对外 HTTP 调用都会经过中间件——在工具真正执行之前，由中间件放行或拦截该动作。
 
-V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。`send_http` 工具目前仍只打印模拟结果，不发起真实网络请求。
+V1.6 同时包含确定性演示 Agent 和一个可选的、由 Dots 驱动的工具调用 Agent。策略解析器与 API 客户端仅使用 Python 标准库。默认 `send_http` 只打印模拟结果；后续版本的受控本机 HTTP 模式需显式启用。
 
-## V1.9：可信来源边界与可核验实验（开发中）
+## V1.10：精细来源追踪与独立任务评估（开发中）
+
+新增字段/元素/字符范围依赖、可验证编码往返、可信原始来源投影授权、未知来源 BLOCK/REQUIRE_REVIEW，以及具体来源/敏感载荷/目标驱动的 Agent Oracle。保留原 CLI；精细追踪是独立可配置运行时，不会自动改变旧 API。保护依赖可信来源声明和数据接口，**不支持任意 Python 或隐式流安全**。
+
+同一冻结 V1.10 协议上的真实结果（seed=17，三次重复）：
+
+| 组别 | 开发 ASR / TCR / FPR | 首次保留 ASR / TCR / FPR |
+| --- | --- | --- |
+| Coarse（V1.9 合并传播算法，共用新协议） | 9/63 · 12/51 · 39/51 | 3/24 · 3/24 · 21/24 |
+| Precision | 12/63 · 42/51 · 9/51 | 6/24 · 21/24 · 3/24 |
+| Scanner + Precision | 9/63 · 42/51 · 9/51 | 6/24 · 21/24 · 3/24 |
+
+**误报减少，但保留集泄露增加。** 错误公开字段/元素声明导致精细组真实外泄，粗粒度组仍阻断；该失败未修饰或删除。正确分类的受支持攻击 Full 送达 0/42（开发）与 0/15（保留），仅 14/5 个独立任务，不能推导总体安全。历史 V1.9 的不同任务不能直接与本表比较。
+
+271 项测试通过。开发 43 个任务、保留 20 个任务共 2,079 条完整执行记录，六基线和六消融映射为 11 个唯一组；HELD/FAILED/UNRUN、分母/排除项、唯一任务 Wilson 区间、真实接收正文、脱敏来源链、延迟与 Python 分配峰值全部保留。候选 `196bedc` 提交后首次保留运行，未据结果调参。
+
+```bash
+python -m unittest discover -s test -p 'test_*.py' -v
+python -m evaluation.precision_experiment --split development --seed 17 --repeat 3 --charts --output-dir logs/v110-development
+python -m ci.validate_v110 logs/v110-development/report.json
+python -m evaluation.live_precision --output-dir logs/v110-live-disabled
+```
+
+绘图可先安装 `requirements-research.txt`。实验命令因保留真实 FAILED 退出 1；独立证据 gate 校验完整性，不要求隐藏失败。真实 DeepSeek/Qwen 任务默认不付费：本轮 **36 UNRUN、0 API 调用**，模型可用性未验证，Token/费用未知；脚本模型回归不是 LLM 成绩。
+
+[完整中文改进报告](docs/IMPROVEMENT_REPORT_V1.10.zh-CN.md) · [实验协议](docs/EXPERIMENT_V1.10.md) · [精细追踪](docs/PRECISION_TAINT.md) · [分类边界](docs/SOURCE_CLASSIFICATION.md) · [真实模型安全启用](docs/REAL_AGENT_EVALUATION.md) · [原始 JSON/CSV/图表](docs/results/v1.10/) · [研究定位与已核实文献](docs/RELATED_WORK.md)。尚无外部盲测、CaMeL/AgentDojo 官方对照或可投稿级证据；未合并/发布。
+
+## V1.9：可信来源边界与可核验实验（历史开发结果）
 
 在 V1.8 `ecfa751` 上迭代，新增运行时签发的不透明句柄、来源/转换链完整性检查和受限数据接口 `AgentPort`。文件、批准工具和模型适配器才能生成来源；手工包装、伪造 literal、标签剥离、跨会话句柄在新运行时发送前被拒绝。旧 CLI、V1.7 扫描器和 V1.8 公共 API/历史证据保持兼容。**同进程私有对象不是 Python 沙箱**；保护依赖可信运行时和仅通过数据接口调用的 Agent。
 

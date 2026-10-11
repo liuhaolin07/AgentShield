@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, codex/v1.7-independent-evaluation, codex/v1.8-taint-tracking]
+    branches: [main, codex/v1.7-independent-evaluation, codex/v1.8-taint-tracking, codex/v1.9-research-hardening]
 
 permissions:
   contents: read
@@ -169,4 +169,64 @@ jobs:
         with:
           name: v18-research-figures
           path: logs/research-figures/
+          retention-days: 7
+
+  v110-precision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install optional plotting dependencies
+        run: python -m pip install -r requirements-research.txt
+      - name: Verify immutable historical evidence and reserved candidate
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          baseline = json.loads(Path('docs/results/v1.10/baseline-freeze.json').read_text())
+          for group in ('preserved_files_sha256', 'source_sha256'):
+              for name, digest in baseline[group].items():
+                  if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
+                      raise SystemExit('Changed historical source/evidence: '+name)
+          candidate = json.loads(Path('docs/results/v1.10/reserved-candidate.json').read_text())
+          for name, digest in candidate['source_sha256'].items():
+              if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
+                  raise SystemExit('Implementation changed after reserved candidate: '+name)
+          print('Historical evidence and reserved implementation hashes verified')
+          PY
+      - name: New development comparisons (keep failures)
+        continue-on-error: true
+        run: python -m evaluation.precision_experiment --split development --seed 17 --repeat 3 --charts --output-dir logs/v110-development
+      - name: Reserved compatibility (not a new blind trial)
+        continue-on-error: true
+        run: python -m evaluation.precision_experiment --split reserved --seed 17 --repeat 3 --charts --output-dir logs/v110-reserved
+      - name: Independently validate contracts, arrivals, classification, metrics and cost
+        if: always()
+        run: |
+          python -m ci.validate_v110 logs/v110-development/report.json
+          python -m ci.validate_v110 logs/v110-reserved/report.json
+      - name: Verify genuine model study is disabled and no paid calls occur
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          result = subprocess.run([sys.executable, '-m', 'evaluation.live_precision', '--output-dir', 'logs/v110-live-disabled'])
+          report = json.loads(Path('logs/v110-live-disabled/report.json').read_text())
+          if result.returncode != 2 or report['summary'] != {'HELD': 0, 'FAILED': 0, 'UNRUN': 36}:
+              raise SystemExit('Unexpected live-model observations')
+          if report['cost']['request_attempts'] != 0:
+              raise SystemExit('Default invocation attempted model API')
+          print('36 UNRUN, zero paid requests')
+          PY
+      - name: Upload complete synthetic evidence including all failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: v110-precision-evidence
+          path: |
+            logs/v110-development/
+            logs/v110-reserved/
+            logs/v110-live-disabled/
           retention-days: 7
