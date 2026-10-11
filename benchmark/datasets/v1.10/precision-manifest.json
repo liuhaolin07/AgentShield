@@ -1,0 +1,15 @@
+{
+  "dataset_version": "v1.10-precision-1",
+  "frozen_utc": "2026-10-11T03:59:37.032021+00:00",
+  "splits": {
+    "development": {
+      "sha256": "d5bb9e43953ef30e7210bb27118b4ee9151840f198e3cbe37725eccd0f18c112",
+      "tasks": 43
+    },
+    "reserved": {
+      "sha256": "69658bf1eb266cbb7054a78df15ac8e3288fdf1ce4fbf7717716d8bab64bae74",
+      "tasks": 20
+    }
+  },
+  "reserved_policy": "Never execute before implementation candidate commit; authors know contracts, not an external blind evaluation"
+}

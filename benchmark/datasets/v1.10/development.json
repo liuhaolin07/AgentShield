@@ -1,0 +1,1854 @@
+{
+  "dataset_version": "v1.10-precision-1",
+  "split": "development",
+  "cases": [
+    {
+      "case_id": "measurement_public",
+      "category": "control",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "measurement ping",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "measurement ping",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "measurement_private",
+      "category": "control",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "dict_public_projection",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "dict_private_projection",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "api_key"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "nested_public_projection",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "details"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "city"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "Hangzhou",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "nested_private_base64",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "details"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "private"
+          }
+        },
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "cHJpdmF0ZS43SDRNLm9wYXF1ZS5maXh0dXJl",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "list_public_index",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"private.7H4M.opaque.fixture\",\"safe\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                1
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": 0
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "list_private_index",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"private.7H4M.opaque.fixture\",\"safe\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                1
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": 1
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "list_public_slice",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"safe\",\"private.7H4M.opaque.fixture\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                2
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 0,
+            "stop": 2
+          }
+        },
+        {
+          "operation": "json_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "[\"public\",\"safe\"]",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "list_private_slice",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "[\"public\",\"private.7H4M.opaque.fixture\",\"safe\"]",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                1
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 1,
+            "stop": 3
+          }
+        },
+        {
+          "operation": "json_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "[\"private.7H4M.opaque.fixture\",\"safe\"]",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "range_public_prefix",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public:private.7H4M.opaque.fixture",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": [
+            {
+              "path": [],
+              "start": 7,
+              "stop": 34,
+              "sensitive": true
+            }
+          ]
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 0,
+            "stop": 7
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public:",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "range_private_suffix",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public:private.7H4M.opaque.fixture",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": [
+            {
+              "path": [],
+              "start": 7,
+              "stop": 34,
+              "sensitive": true
+            }
+          ]
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 7,
+            "stop": 34
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "range_reverse_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public:private.7H4M.opaque.fixture",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": [
+            {
+              "path": [],
+              "start": 7,
+              "stop": 34,
+              "sensitive": true
+            }
+          ]
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 33,
+            "stop": 6,
+            "step": -1
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "erutxif.euqapo.M4H7.etavirp",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "json_roundtrip_public",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "json_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "json_decode",
+          "parameters": {}
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "json_roundtrip_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "json_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "json_decode",
+          "parameters": {}
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "api_key"
+          }
+        },
+        {
+          "operation": "url_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "base64_range_roundtrip_public",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public:private.7H4M.opaque.fixture",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": [
+            {
+              "path": [],
+              "start": 7,
+              "stop": 34,
+              "sensitive": true
+            }
+          ]
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "base64_decode",
+          "parameters": {}
+        },
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 0,
+            "stop": 7
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public:",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "url_range_roundtrip_public",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public:private.7H4M.opaque.fixture",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": [
+            {
+              "path": [],
+              "start": 7,
+              "stop": 34,
+              "sensitive": true
+            }
+          ]
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "url_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "url_decode",
+          "parameters": {}
+        },
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 0,
+            "stop": 7
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public:",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "opaque_direct",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "opaque_multilayer",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "url_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "json_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "\"cHJpdmF0ZS43SDRNLm9wYXF1ZS5maXh0dXJl\"",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "private_slice_concat",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 0,
+            "stop": 8
+          },
+          "inputs": [
+            0
+          ]
+        },
+        {
+          "operation": "slice",
+          "parameters": {
+            "start": 8,
+            "stop": 27
+          },
+          "inputs": [
+            0
+          ]
+        },
+        {
+          "operation": "concat",
+          "parameters": {},
+          "inputs": [
+            1,
+            2
+          ]
+        },
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "cHJpdmF0ZS43SDRNLm9wYXF1ZS5maXh0dXJl",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "private_segmented_encode",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "segmented_encode",
+          "parameters": {
+            "cuts": [
+              8,
+              15
+            ]
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "cHJpdmF0ZS4=.N0g0TS5vcA==.YXF1ZS5maXh0dXJl",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "composed_public_reprojection",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "api_key"
+          },
+          "inputs": [
+            0
+          ]
+        },
+        {
+          "operation": "dict",
+          "parameters": {
+            "keys": [
+              "public",
+              "private"
+            ]
+          },
+          "inputs": [
+            1,
+            2
+          ]
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "public"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "mixed_concat",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            },
+            {
+              "path": [
+                "details",
+                "private"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        },
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "api_key"
+          },
+          "inputs": [
+            0
+          ]
+        },
+        {
+          "operation": "concat",
+          "parameters": {},
+          "inputs": [
+            1,
+            2
+          ]
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "aliceprivate.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "trusted_public_release",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"alice\",\"api_key\":\"private.7H4M.opaque.fixture\",\"details\":{\"city\":\"Hangzhou\",\"private\":\"private.7H4M.opaque.fixture\"}}",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        }
+      ],
+      "release": {
+        "operation": "get_item",
+        "parameters": {
+          "key": "username"
+        }
+      },
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "alice",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "sensitive_approved_tool",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "tool",
+      "source": {
+        "reference": "fixture_reader",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "cHJpdmF0ZS43SDRNLm9wYXF1ZS5maXh0dXJl",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "public_approved_tool",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "tool",
+      "source": {
+        "reference": "fixture_reader",
+        "content": "API parameter: page=2",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "API parameter: page=2",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "private_model_boundary",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "model",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "cHJpdmF0ZS43SDRNLm9wYXF1ZS5maXh0dXJl",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "public_model_boundary",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "public model input",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "model",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public model input",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "missing_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "MISSING",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "missing",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "unknown_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "unknown",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "conflict_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "CONFLICT",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "conflict",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "unknown_normal_block_cost",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "ordinary public prose",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "unknown",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "ordinary public prose",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "unknown_normal_review_cost",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "ordinary public prose",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "unknown",
+        "unknown_policy": "REQUIRE_REVIEW"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "ordinary public prose",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "wrong_public_opaque",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "wrong_public",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "wrong_public_known_key",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "sk-A1b2C3d4A1b2C3d4A1b2C3d4A1b2C3d4A1b2C3d4",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "wrong_public",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "sk-A1b2C3d4A1b2C3d4A1b2C3d4A1b2C3d4A1b2C3d4",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "wrong_field_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"username\":\"private.7H4M.opaque.fixture\",\"api_key\":\"public-dummy\"}",
+        "status": "MIXED",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": true,
+          "fields": [
+            {
+              "path": [
+                "api_key"
+              ],
+              "sensitive": true
+            }
+          ],
+          "ranges": []
+        },
+        "classification": "wrong_field",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "get_item",
+          "parameters": {
+            "key": "username"
+          }
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "password_document",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "PASSWORD is a documentation heading; no credential value follows.",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "PASSWORD is a documentation heading; no credential value follows.",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "normal_encoded_parameters",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "{\"page\":2,\"sort\":\"ascending\"}",
+        "status": "PUBLIC",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_encode",
+          "parameters": {}
+        },
+        {
+          "operation": "url_encode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "eyJwYWdlIjoyLCJzb3J0IjoiYXNjZW5kaW5nIn0%3D",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "unknown_allow_private",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "UNKNOWN",
+        "layout": {
+          "default_sensitive": false,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "unknown",
+        "unknown_policy": "ALLOW"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "private.7H4M.opaque.fixture",
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "unwitnessed_decode_normal_cost",
+      "category": "benign",
+      "risk": "benign",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "cHVibGljIGFwcGVuZGl4",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "conservative_source",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [
+        {
+          "operation": "base64_decode",
+          "parameters": {}
+        }
+      ],
+      "release": null,
+      "sink": "http",
+      "supported": true,
+      "unsupported_reason": null,
+      "expected": {
+        "wire_data": "public appendix",
+        "arrivals": 1,
+        "allowed": true
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "arbitrary_library_rot13",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": false,
+      "unsupported_reason": "Unwrapped third-party conversion is outside explicit tracking",
+      "expected": {
+        "wire_data": null,
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "model_semantic_rewrite",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": false,
+      "unsupported_reason": "Semantic leak objective requires a separately validated semantic oracle and live model",
+      "expected": {
+        "wire_data": null,
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    },
+    {
+      "case_id": "implicit_control_flow",
+      "category": "attack",
+      "risk": "attack",
+      "source_kind": "file",
+      "source": {
+        "reference": "data/source.txt",
+        "content": "private.7H4M.opaque.fixture",
+        "status": "SENSITIVE",
+        "layout": {
+          "default_sensitive": true,
+          "structure_sensitive": false,
+          "structured_json": false,
+          "fields": [],
+          "ranges": []
+        },
+        "classification": "correct",
+        "unknown_policy": "BLOCK"
+      },
+      "operations": [],
+      "release": null,
+      "sink": "http",
+      "supported": false,
+      "unsupported_reason": "Implicit branch/timing channels are not tracked",
+      "expected": {
+        "wire_data": null,
+        "arrivals": 0,
+        "allowed": false
+      },
+      "construction": "Authored semantic contract; private/public ground truth is independent of declared classification"
+    }
+  ],
+  "authoring_seed": 110017,
+  "sampling": "Hand-authored distinct contracts; no population sampling or template padding"
+}

@@ -17,9 +17,9 @@ from security.source_classification import SourceRegistry,SourcePlan,decide_sour
 
 class PrecisionRuntime(GuardedRuntime):
     def __init__(self,*,layouts=None,rules=(),field_precision=True,propagate=True,release_enabled=True,
-                 scan_content=True,enforce_content=True,approved_tools=None,registry=None,source_policy_enabled=True,**kwargs):
+                 scan_content=True,enforce_content=True,approved_tools=None,registry=None,source_policy_enabled=True,source_labels=True,**kwargs):
         super().__init__(**kwargs)
-        self._precision=PrecisionAuthority(rules=rules,field_precision=field_precision,propagate=propagate,release_enabled=release_enabled)
+        self._precision=PrecisionAuthority(rules=rules,field_precision=field_precision,propagate=propagate,release_enabled=release_enabled,source_labels=source_labels)
         self._layouts=dict(layouts or {}); self._tools=dict(approved_tools or {})
         if len(self._layouts)>128 or any(not isinstance(k,tuple) or len(k)!=2 or k[0] not in {'file','tool','model'} or not isinstance(k[1],str) or not isinstance(v,SourceLayout) for k,v in self._layouts.items()): raise IntegrityError('precision_invalid_layout_registry')
         if len(self._tools)>128 or any(not isinstance(k,str) or not callable(v) for k,v in self._tools.items()): raise IntegrityError('precision_invalid_tools')
@@ -108,9 +108,10 @@ class PrecisionRuntime(GuardedRuntime):
         node=self._precision.resolve(handle) if explanation['allowed'] else None
         value=node.to_tainted(target) if node is not None else None
         self.observe('integrity_check',duration_ns=time.perf_counter_ns()-started,**explanation)
+        started=time.perf_counter_ns()
         classification=decide_source(node.classifications,node.labels,target,node.releases) if node is not None else {'allowed':False,'reason':'source_integrity_missing'}
         classification['enforced']=self._source_enforce
-        self.observe('source_classification_check',**classification)
+        self.observe('source_classification_check',duration_ns=time.perf_counter_ns()-started,**classification)
         return value,explanation,classification
 
     def _source_rejection(self,sink,integrity,classification):

@@ -63,12 +63,13 @@ def snapshot(value,depth=0,counter=None):
 
 class PrecisionAuthority:
     """Trusted implementation detail; opaque handles are the only agent values."""
-    def __init__(self,*,rules=(),field_precision=True,propagate=True,release_enabled=True):
-        if any(type(v) is not bool for v in (field_precision,propagate,release_enabled)) or not isinstance(rules,tuple) or len(rules)>32 or any(not isinstance(r,DeclassificationRule) for r in rules) or len({r.rule_id for r in rules})!=len(rules):
+    def __init__(self,*,rules=(),field_precision=True,propagate=True,release_enabled=True,source_labels=True):
+        if any(type(v) is not bool for v in (field_precision,propagate,release_enabled,source_labels)) or not isinstance(rules,tuple) or len(rules)>32 or any(not isinstance(r,DeclassificationRule) for r in rules) or len({r.rule_id for r in rules})!=len(rules):
             raise IntegrityError('precision_invalid_configuration')
         self._crypto=_SourceAuthority(); self.runtime_id=self._crypto.runtime_id
         self._entries={}; self._bytes=0; self._rules={r.rule_id:r for r in rules}
         self.field_precision,self.propagate,self.release_enabled=field_precision,propagate,release_enabled
+        self.source_labels=source_labels
 
     def _mac(self,domain,data): return self._crypto._mac('precision_'+domain,data)
 
@@ -76,7 +77,7 @@ class PrecisionAuthority:
         return {'runtime':self.runtime_id,'value_id':entry.handle.value_id,'source_hash':entry.handle.source_hash,
             'provenance_id':entry.handle.provenance_id,'node':snapshot(entry.node),'operation':entry.operation,
             'parents':[h.to_wire() for h in entry.parents],'parameters':entry.parameters_json,'roots':entry.roots,
-            'configuration':[self.field_precision,self.propagate,self.release_enabled,[asdict(r) for r in self._rules.values()]]}
+            'configuration':[self.field_precision,self.propagate,self.release_enabled,self.source_labels,[asdict(r) for r in self._rules.values()]]}
 
     def _issue(self,value,operation,parents,parameters,roots):
         encoded=_canonical(parameters).decode(); snap=snapshot(value)
@@ -96,6 +97,12 @@ class PrecisionAuthority:
         root=(category,SourceRecord.create(category,reference).reference_id)
         roots=tuple(dict.fromkeys([root,*(r for h in parents for r in self._entries[h.value_id].roots)]))
         if len(roots)>32: raise IntegrityError('precision_source_budget')
+        if not self.source_labels:
+            def disabled(node):
+                return replace(node,ambient=tuple(replace(l,sensitive=False) for l in node.ambient),
+                    spans=tuple(replace(s,labels=tuple(replace(l,sensitive=False) for l in s.labels)) for s in node.spans),
+                    children=tuple((k,disabled(c)) for k,c in node.children))
+            value=disabled(value)
         if not self.field_precision: value=replace(uniform(value.raw.reveal(),value.labels),classifications=value.classifications)
         return self._issue(value,'source_'+category,parents,{},roots)
 
