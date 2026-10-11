@@ -17,7 +17,7 @@ def authored_cases() -> list[dict[str, Any]]:
     cases: list[dict[str, Any]] = []
 
     def add(cid: str, risk: str, family: str, data: Any, fields: list[tuple[tuple[str | int, ...], bool]],
-            selectors: list[str | int] = [], *, status: str = 'MIXED', unknown: str = 'BLOCK',
+            selectors: list[str | int] | tuple[str | int, ...] = (), *, status: str = 'MIXED', unknown: str = 'BLOCK',
             encode: str | None = None, kind: str = 'file', control: bool = False) -> None:
         structured = isinstance(data, (dict, list))
         operations = [{'operation': 'get_item', 'parameters': {'key': k}} for k in selectors]
