@@ -1,0 +1,22 @@
+# Frozen evidence must never be line-ending rewritten: every dataset and
+# artifact below is pinned by a SHA-256 gate (v1.8 "Frozen dataset SHA-256
+# mismatch", v1.10 "live_contract_integrity_mismatch"). Checking these out
+# with core.autocrlf=true breaks those gates on Windows.
+benchmark/datasets/** -text
+evaluation/datasets/** -text
+docs/results/** -text
+docs/figures/** -text
+
+# Same for the research scripts that hash their own inputs.
+*.json -text
+*.jsonl -text
+*.csv -text
+*.svg -text
+
+# Source: platform-neutral.
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf

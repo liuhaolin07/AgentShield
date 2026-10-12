@@ -1,0 +1,75 @@
+name: Research chain CI (v1.7 → v1.10)
+
+# Additive workflow: the original frozen CI files are hash-pinned by
+# docs/results/source-trust/v1/frozen-v110.json and must not be edited.
+# This file runs the same offline test suite plus the freeze-verification
+# gates on the integration branch and the v1.10 codex branches, which the
+# original ci.yml pull_request trigger does not cover.
+
+on:
+  push:
+    branches: [research/agentshield-v110]
+  pull_request:
+    branches: [research/agentshield-v110, codex/v1.10-precision-evaluation, codex/v1.10-source-trust-study, codex/v1.9-research-hardening, codex/v1.8-taint-tracking, codex/v1.7-independent-evaluation]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Offline test suite
+        run: python -m unittest discover -s test -p "test_*.py" -v
+
+  freeze-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: V1.10 baseline freeze and reserved candidate hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          baseline = json.loads(Path('docs/results/v1.10/baseline-freeze.json').read_text())
+          for group in ('preserved_files_sha256', 'source_sha256'):
+              for name, digest in baseline[group].items():
+                  if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
+                      raise SystemExit('Changed historical source/evidence: '+name)
+          candidate = json.loads(Path('docs/results/v1.10/reserved-candidate.json').read_text())
+          for name, digest in candidate['source_sha256'].items():
+              if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
+                  raise SystemExit('Implementation changed after reserved candidate: '+name)
+          print('Historical evidence and reserved implementation hashes verified')
+          PY
+      - name: Source-trust frozen V1.10 file check
+        run: |
+          python - <<'PY'
+          from ci.validate_source_trust import check_v110_freeze
+          print('Frozen V1.10 files:', check_v110_freeze())
+          PY
+      - name: Verify live model calls stay disabled (zero paid requests)
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          result = subprocess.run([sys.executable, '-m', 'evaluation.live_precision',
+                                   '--output-dir', 'logs/live-disabled-check'])
+          report = json.loads(Path('logs/live-disabled-check/report.json').read_text())
+          if result.returncode != 2 or report['summary'] != {'HELD': 0, 'FAILED': 0, 'UNRUN': 36}:
+              raise SystemExit('Unexpected live-model observations')
+          if report['cost']['request_attempts'] != 0:
+              raise SystemExit('Default invocation attempted model API')
+          print('36 UNRUN, zero paid requests')
+          PY
