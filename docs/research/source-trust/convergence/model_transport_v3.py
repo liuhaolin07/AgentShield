@@ -18,6 +18,7 @@ from corruption_graph import canonical, digest
 from development_execution_v2 import decode, read_raw, save_raw, sha
 from development_intake import Reader
 from dots_diagnostic import NoRedirect
+from platform_contract import require_secure_io
 from validate_intake import require
 
 PROVIDERS = {
@@ -146,6 +147,7 @@ def inspect_response(raw, status, config, phase=None):
 
 class CapturedClient:
     def __init__(self, root, config, wire):
+        require_secure_io()
         require(config["provider"] in PROVIDERS and type(config["max_requests"]) is int
                 and 0 < config["max_requests"] <= 16 and config["retries"] == 0
                 and wire.kind in ("LIVE_PROVIDER", "FIXTURE_IN_MEMORY", "FIXTURE_HTTP"), "capture_policy")

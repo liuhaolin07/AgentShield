@@ -21,6 +21,7 @@ from model_transport_v3 import (CapturedClient, CaptureStop, FixtureWire, HttpWi
                                 MAX_RESPONSE, WireResponse, policy, replay_capture)
 from model_workflow_v3 import (fixture_response, load, payload, prepare, replay_row,
                                run, tool_request, verify)
+from platform_contract import secure_io_supported
 
 
 @contextmanager
@@ -47,6 +48,7 @@ def server(callback):
         thread.join()
 
 
+@unittest.skipUnless(secure_io_supported(), "POSIX secure capture required; refusal tested separately")
 class CaptureTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
@@ -258,6 +260,7 @@ class CaptureTests(unittest.TestCase):
             CapturedClient(self.root, self.config, SimpleNamespace(kind="unknown"))
 
 
+@unittest.skipUnless(secure_io_supported(), "POSIX secure capture required; refusal tested separately")
 class WorkflowTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()

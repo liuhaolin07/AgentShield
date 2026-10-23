@@ -12,6 +12,7 @@ from pathlib import Path, PurePosixPath
 import stat
 
 from material_adapter import verify_material
+from platform_contract import PlatformUnsupported, require_secure_io, unsupported_report
 from validate_intake import HERE, digest, fields, identifier, require, validate_manifest
 
 SCHEMA = "development-delivery-v1"
@@ -54,17 +55,18 @@ class Reader:
         self.hashes = {}
 
     def read(self, relative, limit):
+        require_secure_io()
         parts = PurePosixPath(relative).parts
         require(isinstance(relative, str) and parts and not relative.startswith("/")
                 and all(p not in (".", "..") for p in parts)
                 and str(PurePosixPath(relative)) == relative, "relative_delivery_path")
-        fd = os.open(self.root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        fd = os.open(self.root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0))
         try:
             for part in parts[:-1]:
-                child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                child = os.open(part, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0), dir_fd=fd)
                 os.close(fd)
                 fd = child
-            file_fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+            file_fd = os.open(parts[-1], os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0), dir_fd=fd)
             with os.fdopen(file_fd, "rb") as stream:
                 require(stat.S_ISREG(os.fstat(stream.fileno()).st_mode), "regular_delivery_file")
                 raw = stream.read(limit + 1)
@@ -87,6 +89,15 @@ def template():
 
 
 def preflight(root):
+    try:
+        require_secure_io()
+    except PlatformUnsupported:
+        return {**unsupported_report(), "formal_families_admitted": 0, "experiment_authorized": False,
+                "development_families_delivered": 0, "evidence_files_bound": 0}
+    return _preflight(root)
+
+
+def _preflight(root):
     reader = Reader(root)
     raw = reader.read("manifest.json", 2 * 1024 * 1024)
     manifest = parse(raw)

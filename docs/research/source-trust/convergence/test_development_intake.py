@@ -5,13 +5,16 @@ import hashlib
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 
 from development_intake import HERE, REF_KINDS, Reader, encode, parse, preflight, sha, template
+from platform_contract import secure_io_supported
 
 
+@unittest.skipUnless(secure_io_supported(), "POSIX secure I/O required; refusal tested in test_platform_contract")
 class DevelopmentIntakeTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -177,11 +180,11 @@ class DevelopmentIntakeTests(unittest.TestCase):
     def test_cli_empty_template_and_check_do_not_overwrite(self):
         script = str(HERE / "development_intake.py")
         root = Path(self.temp.name) / "new"
-        command = ["python", script, "init", "--output", str(root)]
+        command = [sys.executable, script, "init", "--output", str(root)]
         self.assertEqual(subprocess.run(command, capture_output=True).returncode, 2)
         self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
         output = Path(self.temp.name) / "check.json"
-        command = ["python", script, "check", "--root", str(root), "--output", str(output)]
+        command = [sys.executable, script, "check", "--root", str(root), "--output", str(output)]
         self.assertEqual(subprocess.run(command, capture_output=True).returncode, 2)
         original = output.read_bytes()
         self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)

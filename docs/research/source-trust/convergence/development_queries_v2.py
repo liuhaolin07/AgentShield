@@ -1,17 +1,18 @@
 """Durable development-only query costs, charged before callback dispatch."""
 
 from collections import Counter
-import fcntl
 import json
 import math
 import os
 
 from corruption_graph import canonical, digest
+from platform_contract import fcntl, require_secure_io
 from validate_intake import require
 
 
 class QueryLedger:
     def __init__(self, path, task_universes, *, split="development"):
+        require_secure_io(locking=True)
         require(split == "development", "holdout_adaptation_forbidden")
         require(bool(task_universes) and all(isinstance(k, str) and isinstance(v, list) and bool(v)
                     and len(v) == len(set(v)) and all(isinstance(x, str) for x in v)
@@ -22,7 +23,7 @@ class QueryLedger:
         self.counts = Counter()
         self.previous, self.sequence = None, 0
         existed = path.exists()
-        fd = os.open(path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+        fd = os.open(path, os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0), 0o600)
         self.stream = os.fdopen(fd, "r+", encoding="utf-8")
         try:
             fcntl.flock(self.stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)

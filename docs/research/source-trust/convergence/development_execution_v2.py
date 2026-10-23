@@ -15,6 +15,7 @@ from corruption_graph import canonical, digest
 from development_graph_v2 import projection, verify_graph
 from material_adapter import decode_pointer, verify_material
 from runtime_probe import assess_observation, probe_identity
+from platform_contract import PlatformUnsupported, require_secure_io
 from validate_intake import HERE, require
 
 ROOT = HERE.parents[3]
@@ -40,8 +41,9 @@ def decode(raw):
 
 
 def save_raw(path, raw):
+    require_secure_io()
     require(type(raw) is bytes and len(raw) <= MAX_ARTIFACT, "archive_byte_limit")
-    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o600)
     with os.fdopen(fd, "wb") as stream:
         stream.write(raw)
         stream.flush()
@@ -49,13 +51,14 @@ def save_raw(path, raw):
 
 
 def read_raw(root, row_id, name):
+    require_secure_io()
     require(len(row_id) == 64 and all(c in "0123456789abcdef" for c in row_id), "archive_row_id")
     require(name in ("input.json", "request.bin", "response.bin", "record.json"), "archive_file_name")
-    base_fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    base_fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0))
     try:
-        row_fd = os.open(row_id, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=base_fd)
+        row_fd = os.open(row_id, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0), dir_fd=base_fd)
         try:
-            fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=row_fd)
+            fd = os.open(name, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0), dir_fd=row_fd)
             with os.fdopen(fd, "rb") as stream:
                 require(stat.S_ISREG(os.fstat(stream.fileno()).st_mode), "archive_regular_file")
                 raw = stream.read(MAX_ARTIFACT + 1)
@@ -76,7 +79,7 @@ def configuration(mode):
 
 
 def code_hashes():
-    names = ("development_execution_v2.py", "development_graph_v2.py", "runtime_probe.py", "material_adapter.py")
+    names = ("development_execution_v2.py", "development_graph_v2.py", "runtime_probe.py", "material_adapter.py", "platform_contract.py")
     result = {"convergence/" + n: sha((HERE / n).read_bytes()) for n in names}
     freeze = decode((HERE.parent / "frozen-pr5.json").read_bytes())["tracked_files_sha256"]
     for name, expected in freeze.items():
@@ -186,6 +189,7 @@ def dispatch_rpc(snapshot, request, receiver):
 
 
 def execute_row(root, manifest, graph, raw, family_id, task_id, mode, receiver, *, matched=None, request=None):
+    require_secure_io()
     plan = plan_row(manifest, graph, family_id, task_id, mode, matched)
     verify_material(manifest, family_id, raw)
     family = next(f for f in manifest["families"] if f["family_id"] == family_id)
@@ -229,6 +233,8 @@ def rescore(root, plan):
         result = score(snapshot, raw["request.bin"], decode(raw["response.bin"]))
         require(result == record["score"], "original_text_rescore_disagreement")
         return result
+    except PlatformUnsupported:
+        return unknown(plan["kind"], "PLATFORM_UNSUPPORTED")
     except (ValueError, TypeError, KeyError, OSError, UnicodeError, StopIteration, RecursionError):
         return unknown(plan["kind"])
 

@@ -40,6 +40,12 @@
       "source": "model_workflow_v3.py",
       "observed": "Current model workflow is fixed to eight author-fixture rows, fixture transport and zero live calls",
       "required": "Bind accepted material IDs, task IDs, graphs, defense configurations, executor, provider and request/cost limits in a separate pilot execution plan"
+    },
+    {
+      "code": "F4_PROVIDER_CAPTURE_UNVERIFIED",
+      "source": "pilot_readiness.py",
+      "observed": "Only offline fixture transport has been verified; no real provider raw-capture acceptance evidence",
+      "required": "Provider-bound raw request/response verification evidence and explicit provider_capture_verified=true before dispatch"
     }
   ],
   "other_pending_not_used_as_additional_pilot_material_gates": {
@@ -93,5 +99,11 @@
     "independent-development-v1/template/manifest.json": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
     "independent-development-v1/template/delivery.json": "afe8bbf9ac3966d5042dc7c78ecf04afb1a4f58de587d0a2ba4fbbb79f4aea5a"
   },
-  "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+  "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+  "provider_capture_verified": false,
+  "provider_capture_evidence_ref": null,
+  "C2_review_verified": false,
+  "D6_materials_accepted": false,
+  "execution_plan_bound": false,
+  "execution_platform_verified": false
 }

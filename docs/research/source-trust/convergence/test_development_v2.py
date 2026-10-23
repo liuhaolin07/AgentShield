@@ -19,6 +19,7 @@ from development_execution_v2 import (aggregate, configuration, execute_row, pla
 from development_queries_v2 import QueryLedger
 from evaluation.receiver import LoopbackReceiver
 from validate_intake import load_unique_json
+from platform_contract import secure_io_supported
 
 
 def fixtures():
@@ -77,6 +78,7 @@ class GraphV2Tests(unittest.TestCase):
         self.assertEqual(120 * 2 * 3 * 5, 3600)
 
 
+@unittest.skipUnless(secure_io_supported(), "POSIX secure I/O required; refusal tested separately")
 class ExecutionV2Tests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -252,6 +254,7 @@ class ExecutionV2Tests(unittest.TestCase):
         self.assertTrue(replay_sample(self.root,plans)["passed"])
 
 
+@unittest.skipUnless(secure_io_supported(locking=True), "POSIX secure I/O and flock required; refusal tested separately")
 class QueryV2Tests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)

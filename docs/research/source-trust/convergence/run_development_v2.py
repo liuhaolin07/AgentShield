@@ -22,6 +22,7 @@ from development_execution_v2 import (aggregate, code_hashes, decode, execute_ro
 from development_graph_v2 import make_graph, name_controls
 from development_intake import Reader
 from evaluation.receiver import LoopbackReceiver
+from platform_contract import PlatformUnsupported, require_secure_io, unsupported_report
 from validate_intake import require
 
 FAMILY_IDS = ("candidate-support-file", "candidate-support-tool")
@@ -45,6 +46,7 @@ def expected_plan(manifest, graphs):
 
 
 def prepare(root):
+    require_secure_io()
     manifest = decode((BUNDLE / "manifest.json").read_bytes())
     manifest["families"] = [f for f in manifest["families"] if f["family_id"] in FAMILY_IDS]
     graphs = [make_graph(manifest), make_graph(manifest, "E1", SP, "1", 17)]
@@ -144,6 +146,9 @@ def main():
             return 0
         print(json.dumps({k: result[k] for k in ("integrity_passed", "raw_archive_rows", "planned_rows", "actual_http_arrivals", "formal_pilot_rows", "new_model_calls")}))
         return 0 if result["integrity_passed"] else 2
+    except PlatformUnsupported:
+        print(json.dumps(unsupported_report()))
+        return 2
     except (ValueError, TypeError, KeyError, OSError, UnicodeError):
         print(json.dumps({"state": "INVALID_ENGINEERING_ARTIFACT_OR_ENVIRONMENT", "formal_pilot_rows": 0}))
         return 1

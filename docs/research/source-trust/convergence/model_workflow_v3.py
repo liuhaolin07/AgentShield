@@ -24,6 +24,7 @@ from development_intake import Reader
 from evaluation.receiver import LoopbackReceiver
 from model_transport_v3 import (CapturedClient, CaptureStop, FixtureWire, PHASES, PROVIDERS,
                                 WireResponse, policy, replay_capture)
+from platform_contract import PlatformUnsupported, require_secure_io, unsupported_report
 from validate_intake import require
 
 FAMILY_IDS = ("candidate-support-file", "candidate-support-tool")
@@ -109,6 +110,7 @@ def make_plan(provider, manifest, graph):
 
 
 def prepare(root, provider="deepseek"):
+    require_secure_io()
     manifest = decode((BUNDLE / "manifest.json").read_bytes())
     manifest["families"] = [f for f in manifest["families"] if f["family_id"] in FAMILY_IDS]
     graph = make_graph(manifest)
@@ -310,6 +312,8 @@ def main():
         elif args.command=="run-fixture": output={k:result[k] for k in ("fixture_transport_requests","actual_http_arrivals","real_model_calls","new_cost_cny")}
         else: output={k:result[k] for k in ("integrity_passed","planned_rows","fully_rescorable_rows","real_model_calls")}
         print(json.dumps(output));return 0 if result.get("integrity_passed",True) else 2
+    except PlatformUnsupported:
+        print(json.dumps({**unsupported_report(), "real_model_calls": 0}));return 2
     except (ValueError,TypeError,KeyError,OSError,UnicodeError,CaptureStop):
         print(json.dumps({"state":"INVALID_OR_INCOMPLETE_FIXTURE_WORKFLOW","real_model_calls":0}));return 1
 
