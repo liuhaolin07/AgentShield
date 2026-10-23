@@ -60,9 +60,7 @@ class DotsToolStudyTests(unittest.TestCase):
         self.assertEqual(study.select_call(selection(target), "length", target)[1], "MODEL_REQUEST_INVALID")
 
     def test_live_gate_call_cap_and_unknown_usage_stop_before_next_dispatch(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            log = study.EventLog(Path(tmp) / "events.jsonl")
-            self.addCleanup(log.close)
+        with tempfile.TemporaryDirectory() as tmp, contextlib.closing(study.EventLog(Path(tmp) / "events.jsonl")) as log:
             client = study.DotsStudyClient(log)
             with self.assertRaisesRegex(study.StudyStop, "live_disabled"):
                 client.chat([], [], row_id="row", phase="selection")
@@ -81,10 +79,8 @@ class DotsToolStudyTests(unittest.TestCase):
             self.assertEqual(self.opener.open.call_count, 1)
 
     def test_http_error_records_fixed_code_without_body_or_retry(self):
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp, contextlib.closing(study.EventLog(Path(tmp) / "events.jsonl")) as log:
             path = Path(tmp) / "events.jsonl"
-            log = study.EventLog(path)
-            self.addCleanup(log.close)
             client = study.DotsStudyClient(log, allow_live=True)
             error = HTTPError(study.ENDPOINT, 429, "synthetic-test-credential", {}, BytesIO(b"private provider text"))
             error.read = Mock(side_effect=AssertionError("must_not_read"))
@@ -98,9 +94,7 @@ class DotsToolStudyTests(unittest.TestCase):
             error.read.assert_not_called()
 
     def test_request_limit_and_response_model_mismatch_stop(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            log = study.EventLog(Path(tmp) / "events.jsonl")
-            self.addCleanup(log.close)
+        with tempfile.TemporaryDirectory() as tmp, contextlib.closing(study.EventLog(Path(tmp) / "events.jsonl")) as log:
             client = study.DotsStudyClient(log, allow_live=True)
             with self.assertRaisesRegex(study.StudyStop, "request_byte_limit"):
                 client.chat([{"role": "user", "content": "x" * study.MAX_REQUEST_BYTES}], [], row_id="row", phase="selection")

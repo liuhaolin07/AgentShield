@@ -40,7 +40,7 @@ jobs:
       - name: Full convergence suite (platform skips remain visible)
         run: |
           mkdir -p logs/convergence
-          if python -m unittest discover -s docs/research/source-trust/convergence -p 'test_*.py' -v > logs/convergence/tests.log 2>&1; then
+          if python -u -m unittest discover -s docs/research/source-trust/convergence -p 'test_*.py' -v > logs/convergence/tests.log 2>&1; then
             result=0
           else
             result=$?
