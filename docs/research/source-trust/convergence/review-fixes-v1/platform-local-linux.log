@@ -1,0 +1,10 @@
+test_cli_missing_flag_returns_defined_state_for_both_execution_entries (test_platform_contract.PlatformContractTests.test_cli_missing_flag_returns_defined_state_for_both_execution_entries) ... ok
+test_cli_uses_current_interpreter_with_empty_path (test_platform_contract.PlatformContractTests.test_cli_uses_current_interpreter_with_empty_path) ... ok
+test_missing_dir_fd_or_directory_flag_never_silently_falls_back (test_platform_contract.PlatformContractTests.test_missing_dir_fd_or_directory_flag_never_silently_falls_back) ... ok
+test_missing_fcntl_refuses_query_ledger_before_creating_file (test_platform_contract.PlatformContractTests.test_missing_fcntl_refuses_query_ledger_before_creating_file) ... ok
+test_missing_flag_refuses_reader_writer_ledger_and_dispatch_before_effects (test_platform_contract.PlatformContractTests.test_missing_flag_refuses_reader_writer_ledger_and_dispatch_before_effects) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.176s
+
+OK

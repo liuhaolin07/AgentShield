@@ -1,0 +1,12 @@
+{
+  "verified": true,
+  "rows": 8,
+  "model_requests": 16,
+  "http_arrivals": 6,
+  "conservative_known_cost_micro_cny": 12204,
+  "unsettled_reserve_micro_cny": 0,
+  "accounted_envelope_within_budget": true,
+  "formal_pilot_rows": 0,
+  "confirmatory_rows": 0,
+  "independent_replication": false
+}

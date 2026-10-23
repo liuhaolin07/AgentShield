@@ -1,0 +1,37 @@
+{
+  "schema_version": "source-trust-amendment-v1",
+  "amendment_id": "h5-mechanism-scope-r1",
+  "status": "IMPLEMENTED_DRAFT_NOT_REGISTERED",
+  "base_protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+  "reason": "Frozen conservative only changes MIXED defaults; complete explicit leaf labels in identity tasks leave no affected leaf.",
+  "implementation_authority": {
+    "source": "current_conversation",
+    "user_request": "修复问题",
+    "scope": "Correct design/implementation mismatch; not final protocol approval or empirical evidence"
+  },
+  "applicability": "flat-string-complete-leaf-identity-v1",
+  "changes": {
+    "H5_role": "prespecified_mechanism_scope_control",
+    "first_phase_joint_superiority_claim": false
+  },
+  "preserved": {
+    "hypotheses_H1_H4": "ALL_FIELDS",
+    "H5": "ALL_FIELDS_EXCEPT_ROLE",
+    "first_phase_statistic_count": 17,
+    "E0_E1_rows": 54720,
+    "E3_rows": 3600,
+    "pilot_rows": 984,
+    "holdout_adaptation": false
+  },
+  "runtime_sha256": {
+    "security/source_trust_policy.py": "124db8211a82860c78af4e207cf875141721d107378db72d47d56414ce7d957c",
+    "security/source_classification.py": "e751e48f896c9004990f333d7d278ba9f21a2390c95614609db0e315da8f869d",
+    "security/precision_runtime.py": "d2c12a5185573f3d9f9a4d169a44f46e3b2bd141b5031487db8816dab2ef7430",
+    "security/precision_integrity.py": "afa59a6b511d3652598b2eb239a6d83a63822dfb32418c8505d87eb01ef54067",
+    "security/precision.py": "93b5e4ebc2b99413d63567b7a2036b0ee022ebe36e7716baca746d15bc7aed67",
+    "security/taint.py": "3897181a17b915c6104f022b63c13304d77507f95551697101be54626d7809da"
+  },
+  "holdout_results_accessed": false,
+  "preregistered": false,
+  "experiment_authorized": false
+}

@@ -1,0 +1,136 @@
+{
+  "scope": "Development payload/graph checks and bounded synthetic loopback integration; NOT pilot or confirmatory experiments",
+  "verified_at": "2026-10-22T13:56:10+08:00",
+  "reference_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+  "local_branch": "codex/source-trust-convergence",
+  "python": "3.12.14",
+  "original_document_checks": {
+    "passed": 39,
+    "failed": 0
+  },
+  "frozen_pr5_files_verified": 255,
+  "original_pr6_files_byte_identical": 11,
+  "synthetic_tests": {
+    "tests_run": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "intake_tests": 13,
+    "graph_tests": 15,
+    "material_adapter_tests": 9,
+    "runtime_integration_and_observation_tests": 2
+  },
+  "synthetic_schedule_check": {
+    "development_fixtures": 60,
+    "E0_graphs": 1,
+    "E1_graphs": 75,
+    "E3_graphs": 5,
+    "E0_E1_planning_rows": 27360,
+    "E3_planning_rows": 1800,
+    "executed_rows": 0,
+    "persisted_research_materials": 0
+  },
+  "intake": {
+    "scope": "read-only declared metadata and development contract checks; not semantic validation",
+    "structurally_valid": true,
+    "family_counts": {
+      "development": 0,
+      "external_holdout": 0
+    },
+    "declared_template_counts": {
+      "development": 0,
+      "external_holdout": 0
+    },
+    "inventory_gaps": [
+      "development_families:0/60",
+      "external_holdout_families:0/60",
+      "insufficient_declared_holdout_clusters",
+      "external_custody_not_received"
+    ],
+    "independent_template_audit": "NOT_VERIFIED_BY_THIS_CHECKER",
+    "ground_truth_semantics": "NOT_VERIFIED_BY_THIS_CHECKER",
+    "holdout_contents": "NOT_READ",
+    "experiment_authorized": false,
+    "experiments_executed_by_checker": 0,
+    "package_review": "APPROVED_BY_USER_NOT_FINAL_REGISTRATION",
+    "pending_evidence_gates": [
+      "analysis_and_plot_code",
+      "attack_algorithm_and_query_ledger",
+      "corruption_generator_and_graph_hashes",
+      "independent_execution_environment",
+      "independent_reproduction",
+      "mechanism_and_adapter_SHA",
+      "missingness_and_observation_gate_implementation",
+      "new_dataset_ground_truth_dependency_contracts",
+      "power_and_CI_coverage_validation",
+      "registration",
+      "template_split_manifest",
+      "threshold_value_justification",
+      "unseen_external_holdout"
+    ]
+  },
+  "new_experiments_executed": 0,
+  "model_requests": 0,
+  "pilot_rows_executed": 0,
+  "new_dataset_families": 0,
+  "runtime_tests_rerun": true,
+  "package_review_approved_by_user": true,
+  "review_record": "review-record.json",
+  "final_protocol_approved": false,
+  "third_party_review_completed": false,
+  "preregistered": false,
+  "experiment_authorized": false,
+  "generator_gate": "IMPLEMENTED_PENDING_MATERIAL_VALIDATION",
+  "external_holdout_generation": "NOT_IMPLEMENTED",
+  "files_sha256": {
+    "DECISIONS.md": "ff279b5d16b2ac780f6648ac8d3a17ddaaeb23f06475d98cc4c0c4c2d0572ef8",
+    "GENERATOR.md": "402a2be59f7aa295ebfcc3fbb5045bcfef5ebf964b3c6a46fe306a9a0643590f",
+    "INTAKE.md": "7be44e84e69911ea3f9a411b9d88ba812f7db7bc88201493cc0314fc5c8e358d",
+    "README.md": "e3e153e00b5bf897842d37a0f807e5ca9a7b95db651b71d0e98a1a1f0fafd46e",
+    "STARTUP.md": "b860501c3ddb6c4bd06ea5832f9ead8c87cbe3d24660745902c5e6626d4541d7",
+    "corruption_graph.py": "002cd83c2370bfabf4b29611ca15559aa06e312e4bf5b22201945ecb7f1fb152",
+    "evidence-gates.json": "678b0bde4d70b351f9fce5f88c8c5d855cc405a50e9aceff0065da398a2983de",
+    "intake-manifest.json": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
+    "local-material-audit.json": "852cf623928f9942c2c6ba2ba233af53935b183b3b143d9af4775ae9a9ca52cf",
+    "material_adapter.py": "1c294b1adcfd796f6a8ff01584c9439c18c384db196c53ea6a9dbe0cbd624986",
+    "pre-startup-verification.json": "de1f18ef39e1a8531d308407d6a9a127553ebd0b768dc530ab57511a570dbc85",
+    "review-record.json": "13f48beb373cdd9b06316586e8dddb3d0922319c223482cd37d40aa63096f73b",
+    "reviewed-package-verification.json": "27b0b912fd1990b1ea095d733c05c3c14401b95d25f3cc8db38461ea4ba9ec42",
+    "runtime_probe.py": "7c07fcf18898dbde595df263e298a871c836d28d7c964cafe824238c29228330",
+    "test_adapter.py": "52322203773739bc1f5469983694b77de39ff7af4ae07fa0925c2f0fd013634a",
+    "test_graph.py": "a86c8a012b0c7f3e9816b2cd51023986cd9eaf43f952912f94209df636a547f6",
+    "test_intake.py": "5d336f7aa2901a8272c5fb7fef0ce1f8a4d283b8bb97965279fd500da0b655f5",
+    "validate_intake.py": "5fb09fc55c8b121af9da274f0a010e9d7ca8ca36b58c89b5529b446f5fda8e40",
+    "verify_graph.py": "a547b8bcbcfcfb5bcf18e8dd1aa7013cab4f2a36c2919ca95b1ccdd87b2806f3"
+  },
+  "full_runtime_regression_rerun": false,
+  "runtime_integration": {
+    "scope": "Synthetic file/tool ingress, identity output, pinned IPv4 loopback only",
+    "matrix_per_successful_invocation": {
+      "families": 2,
+      "conditions": 3,
+      "strategies": 3,
+      "tasks_per_family": 2,
+      "probes": 36,
+      "actual_http_arrivals": 16
+    },
+    "successful_invocations_this_work_package": 2,
+    "total_probes_this_work_package": 72,
+    "total_http_arrivals_this_work_package": 32,
+    "initial_default_sandbox_attempt": "Blocked before any probe by socket PermissionError; rerun permitted by automatic approval review",
+    "model_requests": 0,
+    "external_http_requests": 0,
+    "pilot_rows": 0
+  },
+  "adapter_gate": "PARTIAL_IMPLEMENTATION_PENDING_VALIDATION",
+  "observation_gate": "PARTIAL_IMPLEMENTATION_PENDING_VALIDATION",
+  "H5_design_finding": {
+    "status": "MECHANISM_CONTRAST_REQUIRES_RESOLUTION_BEFORE_CONFIRMATORY_FREEZE",
+    "scope": "All explicitly labelled leaves in flat-string identity adapter; fixed conservative changes only MIXED default",
+    "empirical_H5_test": false,
+    "protocol_changed": false
+  },
+  "material_location_audit": "local-material-audit.json",
+  "material_availability": "USER_CONFIRMED_NO_NEW_INDEPENDENT_MATERIALS_AVAILABLE"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "APPROVED_BY_USER",
+  "source": "current_conversation",
+  "verbatim": "审查通过，下一步",
+  "reviewer_role": "user",
+  "reviewed_verification_sha256": "27b0b912fd1990b1ea095d733c05c3c14401b95d25f3cc8db38461ea4ba9ec42",
+  "scope": "P0/P1 convergence package, internal-measurement route and next implementation step",
+  "does_not_complete": [
+    "threshold_justification",
+    "new_materials",
+    "pilot_execution",
+    "final_protocol_registration",
+    "independent_third_party_review"
+  ]
+}

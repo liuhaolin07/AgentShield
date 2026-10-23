@@ -1,0 +1,23 @@
+{
+  "scope": "read-only declared metadata and development contract checks; not semantic validation",
+  "structurally_valid": true,
+  "family_counts": {
+    "development": 0,
+    "external_holdout": 0
+  },
+  "declared_template_counts": {
+    "development": 0,
+    "external_holdout": 0
+  },
+  "inventory_gaps": [
+    "development_families:0/60",
+    "external_holdout_families:0/60",
+    "insufficient_declared_holdout_clusters",
+    "external_custody_not_received"
+  ],
+  "independent_template_audit": "NOT_VERIFIED_BY_THIS_CHECKER",
+  "ground_truth_semantics": "NOT_VERIFIED_BY_THIS_CHECKER",
+  "holdout_contents": "NOT_READ",
+  "experiment_authorized": false,
+  "experiments_executed_by_checker": 0
+}

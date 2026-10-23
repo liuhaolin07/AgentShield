@@ -1,0 +1,25 @@
+{
+  "version": "statistics-validation-v1",
+  "scope": "SYNTHETIC_ESTIMATOR_STRESS_CHECK_NOT_RESEARCH_PILOT",
+  "simulation_seed": 20261022,
+  "datasets_per_scenario": 100,
+  "bootstrap_replicates_per_dataset": 10000,
+  "bootstrap_seed": 1729,
+  "statistic_count": 17,
+  "familywise_alpha": 0.05,
+  "coverage_target": 0.95,
+  "empirical_coverage_acceptance_rule": "NONE: diagnostic only; 100 datasets insufficient to certify coverage or power",
+  "scenarios": [
+    {"id": "independent_60", "clusters": 60, "sizes": "one", "generator": "bounded_correlated_components"},
+    {"id": "independent_30", "clusters": 30, "sizes": "one", "generator": "bounded_correlated_components"},
+    {"id": "shared_pairs_30", "clusters": 30, "sizes": "two", "generator": "bounded_correlated_components"},
+    {"id": "unequal_30", "clusters": 30, "sizes": "cycle_1_2_3", "generator": "bounded_correlated_components"},
+    {"id": "rare_event_30", "clusters": 30, "sizes": "two", "generator": "cluster_bernoulli", "event_probability": 0.01},
+    {"id": "single_template_60", "clusters": 1, "sizes": "sixty", "generator": "bounded_correlated_components"},
+    {"id": "constant_60", "clusters": 60, "sizes": "one", "generator": "constant_components"}
+  ],
+  "cohort": "mathematical family-level components; not generated research materials or HTTP execution rows",
+  "holdout_read": false,
+  "formal_pilot_rows": 0,
+  "confirmatory_success": false
+}

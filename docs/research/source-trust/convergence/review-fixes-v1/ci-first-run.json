@@ -1,0 +1,21 @@
+{
+  "run_id": 39908189914,
+  "url": "https://github.com/liuhaolin07/AgentShield/actions/runs/39908189914",
+  "head_sha": "16f1f20f3d8f7cc4b5666667a16b7f20a5d6e078",
+  "ubuntu": {
+    "conclusion": "success",
+    "tests_run": 212,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "windows": {
+    "conclusion": "failure",
+    "tests_run": 212,
+    "failures": 0,
+    "errors": 3,
+    "skipped": 50,
+    "reason": "Three Dots test log handles closed after TemporaryDirectory cleanup; WinError 32"
+  },
+  "followup": "Close logs with contextlib.closing inside TemporaryDirectory; retain first failure, await new CI"
+}

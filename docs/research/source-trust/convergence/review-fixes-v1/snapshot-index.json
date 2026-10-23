@@ -1,0 +1,327 @@
+{
+  "schema": "evidence-snapshot-index-v1",
+  "authority": "Review correction F5; replaces ambiguous reference_commit interpretation",
+  "originals_retained_for_review_bindings": true,
+  "snapshots": [
+    {
+      "path": "docs/research/source-trust/convergence/development-v2/verification.json",
+      "snapshot_sha256": "5034dbe3e418517788807c2897a7e43982b8a896396e0c446fe394d1385ab56f",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": "3ebce7de93781fb5e3c742529c8a6f5be882f2ed",
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "REPRODUCIBLE_HISTORICAL",
+      "reason": null,
+      "files_count": 84,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/model-capture-v3/verification.json",
+      "snapshot_sha256": "6a07207b5dcd84fbbd074e8306b5be62c779d97367541958e9a243cc9cb58321",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": "c57563d7a34c3bf6cdd2f5b48b85a5031143596c",
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "REPRODUCIBLE_HISTORICAL",
+      "reason": null,
+      "files_count": 112,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-analysis-verification.json",
+      "snapshot_sha256": "70167d90d2c2c7f9fea37c81a70df807d64c806b1d3df46f4a4ba884219c608a",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 52,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-candidate-verification.json",
+      "snapshot_sha256": "9c475c126e8108c836f7f432f81cc9bbabd59e870235b70ef4541ad324a4b571",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 25,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/STARTUP.md",
+        "docs/research/source-trust/convergence/local-material-audit.json",
+        "docs/research/source-trust/convergence/runtime_probe.py"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-deepseek-verification.json",
+      "snapshot_sha256": "dfd36b3fedc22f8236866fa18e88de790097a64cdfe21dca8d1525a47f0ec84c",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 106,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-development-intake-verification.json",
+      "snapshot_sha256": "943359ccfc3377e4d6a7e795746ba47d7ccb56d6b7b7e14d28f997e5f384a9c1",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 130,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-dots-live-verification.json",
+      "snapshot_sha256": "4cdf134c13890310cb9125c08ada356e92562ecf304c561e7c7d9ac8fe004119",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 93,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json",
+        "docs/research/source-trust/convergence/dots-diagnostic-v1/README.md"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-dots-study-verification.json",
+      "snapshot_sha256": "50aeff6b1514aa7a073c507488f94bc8bbc1d5b2182aa79870b6f3109f48ba52",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 96,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-dots-verification.json",
+      "snapshot_sha256": "7c74f2394c852f47f9c72a9bbf3c18be0043fefe91706cfe0881ee65079c2816",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 88,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-h5-fix-verification.json",
+      "snapshot_sha256": "ba20bb3da65a8f3ca1606a35bfe6284d434b69872e30a7e9344eb4f58204c8d2",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 19,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/DECISIONS.md",
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/STARTUP.md",
+        "docs/research/source-trust/convergence/evidence-gates.json",
+        "docs/research/source-trust/convergence/local-material-audit.json",
+        "docs/research/source-trust/convergence/runtime_probe.py",
+        "docs/research/source-trust/convergence/test_adapter.py",
+        "docs/research/source-trust/convergence/validate_intake.py"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-ledger-verification.json",
+      "snapshot_sha256": "bc13672088586850a7d63142dc83818b55378714e0d05cfb14cb8b6e2b2102a0",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 79,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-material-review-verification.json",
+      "snapshot_sha256": "6e50e40aacf1b07d28e089f14c7171c53407651640156ba6bd0f2e6f237a1d7c",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 123,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-model-evidence-review-verification.json",
+      "snapshot_sha256": "adb77f1c4eeb5802f3ee996a0954040e1903c2536fbbf060469834ea3423f356",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 117,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-rare-interval-verification.json",
+      "snapshot_sha256": "e4d23ba018557543153300176aac3d97d518ead74d34d6b13466a1a85b0d8cea",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 69,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json",
+        "docs/research/source-trust/convergence/statistics-validation-v1/README.md"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-startup-verification.json",
+      "snapshot_sha256": "de1f18ef39e1a8531d308407d6a9a127553ebd0b768dc530ab57511a570dbc85",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 13,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/DECISIONS.md",
+        "docs/research/source-trust/convergence/GENERATOR.md",
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/evidence-gates.json",
+        "docs/research/source-trust/convergence/test_intake.py",
+        "docs/research/source-trust/convergence/validate_intake.py"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/pre-statistics-verification.json",
+      "snapshot_sha256": "6c83c36d8ec14c0777f987d5a3601d9be55e0bd3503a1d000a167114ed929b1a",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 57,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/candidate-progress.json"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/reviewed-package-verification.json",
+      "snapshot_sha256": "27b0b912fd1990b1ea095d733c05c3c14401b95d25f3cc8db38461ea4ba9ec42",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": null,
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "SUPERSEDED_UNREPRODUCIBLE",
+      "reason": "No matching committed tree in published convergence history; original claims are retired, bytes retained for review provenance",
+      "files_count": 7,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [
+        "docs/research/source-trust/convergence/DECISIONS.md",
+        "docs/research/source-trust/convergence/INTAKE.md",
+        "docs/research/source-trust/convergence/README.md",
+        "docs/research/source-trust/convergence/evidence-gates.json",
+        "docs/research/source-trust/convergence/test_intake.py",
+        "docs/research/source-trust/convergence/validate_intake.py"
+      ],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/verification.json",
+      "snapshot_sha256": "ed0f75f6f090f614facf82680961fde74c79ae078e0b7486941dd736ca31994d",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": "3ebce7de93781fb5e3c742529c8a6f5be882f2ed",
+      "path_base": "docs/research/source-trust/convergence",
+      "status": "REPRODUCIBLE_HISTORICAL",
+      "reason": null,
+      "files_count": 138,
+      "closest_tree_commit": "fc70dcf7a2d7cb50b425c8d56f6f882b0d979202",
+      "mismatched_files_in_closest_tree": [],
+      "original_reference_commit_role": "base_only_not_the_verified_file_tree"
+    },
+    {
+      "path": "docs/research/source-trust/convergence/review-fixes-v1/original-pr6-files.json",
+      "snapshot_sha256": "c13c5a996c3ccfe8117e28e27366e2a52ad85b2323dbc814d95110171fae8f6e",
+      "status": "REPRODUCIBLE_HISTORICAL",
+      "base_commit": "5c2b86c0f381b89f55f6f5d41a5d9180a82240fb",
+      "verified_tree_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "path_base": ""
+    },
+    {
+      "path": "docs/research/source-trust/convergence/review-fixes-v1/verification.json",
+      "snapshot_sha256": "8072ad376f855fc0e22209a41894c661ab19efcf52c9dff399a376dbcae79b24",
+      "status": "CURRENT_REPRODUCIBLE",
+      "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "verified_tree_commit": "a99320d20601b13844c9b39c079223badf26c299",
+      "path_base": ""
+    }
+  ]
+}

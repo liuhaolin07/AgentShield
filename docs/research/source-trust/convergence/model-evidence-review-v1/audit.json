@@ -1,0 +1,198 @@
+{
+  "scope": "READ_ONLY_EVIDENCE_INVENTORY_NOT_INDEPENDENT_REPLICATION",
+  "real_model_requests_including_diagnostic": 33,
+  "provider_reported_tokens_including_diagnostic": 9402,
+  "development_trajectories": 16,
+  "actual_development_http_arrivals": 12,
+  "unique_reused_families": 2,
+  "unique_declared_template_clusters": 1,
+  "independent_clusters_verified": false,
+  "formal_materials_admitted": 0,
+  "by_provider": {
+    "dots": {
+      "no_defense": {
+        "planned_attack": 2,
+        "planned_benign": 2,
+        "target_requests": 4,
+        "attack_delivered": 2,
+        "attack_runtime_blocks": 0,
+        "benign_completed": 2,
+        "benign_runtime_blocks": 0,
+        "unknown_attack": 0,
+        "unknown_benign": 0,
+        "feedback_responses": 4,
+        "status_acknowledgements": 4,
+        "ASR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "TCR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "FPR_identified_bounds": [
+          0.0,
+          0.0
+        ]
+      },
+      "precision": {
+        "planned_attack": 2,
+        "planned_benign": 2,
+        "target_requests": 4,
+        "attack_delivered": 0,
+        "attack_runtime_blocks": 2,
+        "benign_completed": 2,
+        "benign_runtime_blocks": 0,
+        "unknown_attack": 0,
+        "unknown_benign": 0,
+        "feedback_responses": 4,
+        "status_acknowledgements": 4,
+        "ASR_identified_bounds": [
+          0.0,
+          0.0
+        ],
+        "TCR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "FPR_identified_bounds": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "deepseek": {
+      "no_defense": {
+        "planned_attack": 2,
+        "planned_benign": 2,
+        "target_requests": 4,
+        "attack_delivered": 2,
+        "attack_runtime_blocks": 0,
+        "benign_completed": 2,
+        "benign_runtime_blocks": 0,
+        "unknown_attack": 0,
+        "unknown_benign": 0,
+        "feedback_responses": 4,
+        "status_acknowledgements": 4,
+        "ASR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "TCR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "FPR_identified_bounds": [
+          0.0,
+          0.0
+        ]
+      },
+      "precision": {
+        "planned_attack": 2,
+        "planned_benign": 2,
+        "target_requests": 4,
+        "attack_delivered": 0,
+        "attack_runtime_blocks": 2,
+        "benign_completed": 2,
+        "benign_runtime_blocks": 0,
+        "unknown_attack": 0,
+        "unknown_benign": 0,
+        "feedback_responses": 4,
+        "status_acknowledgements": 4,
+        "ASR_identified_bounds": [
+          0.0,
+          0.0
+        ],
+        "TCR_identified_bounds": [
+          1.0,
+          1.0
+        ],
+        "FPR_identified_bounds": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "deepseek_conservative_estimated_cost_cny": 0.012204,
+  "actual_billing_verified": false,
+  "budget_snapshot": {
+    "E0_E1": 54720,
+    "E3": 3600,
+    "first_phase_excluding_controls": 58320,
+    "pilot_separate": 984
+  },
+  "formal_pilot_rows": 0,
+  "confirmatory_rows": 0,
+  "preregistered": false,
+  "pending_evidence_gates": [
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14"
+  ],
+  "H1_H5_live_study_status": {
+    "H1": "NOT_TESTED_IN_THIS_LIVE_WORKFLOW",
+    "H2": "NOT_TESTED_IN_THIS_LIVE_WORKFLOW",
+    "H3": "NOT_TESTED_IN_THIS_LIVE_WORKFLOW",
+    "H4": "NOT_TESTED_IN_THIS_LIVE_WORKFLOW",
+    "H5": "NOT_TESTED_IN_THIS_LIVE_WORKFLOW"
+  },
+  "raw_model_responses_available_for_independent_rescoring": false,
+  "allowed_claim": "Two provider integrations completed the same constrained identity workflow with observed runtime enforcement and status feedback on author fixtures.",
+  "unsupported_claims": [
+    "complete_egress_coverage",
+    "robustness_to_source_mislabeling",
+    "model_capability_causal_comparison",
+    "independent_replication",
+    "H1_H5_confirmation"
+  ],
+  "new_model_requests": 0,
+  "new_tool_executions": 0,
+  "archive_checks": {
+    "dots": {
+      "verified": true,
+      "rows": 8,
+      "model_requests": 16,
+      "http_arrivals": 6,
+      "formal_pilot_rows": 0,
+      "confirmatory_rows": 0,
+      "independent_replication": false
+    },
+    "deepseek": {
+      "verified": true,
+      "rows": 8,
+      "model_requests": 16,
+      "http_arrivals": 6,
+      "conservative_known_cost_micro_cny": 12204,
+      "unsettled_reserve_micro_cny": 0,
+      "accounted_envelope_within_budget": true,
+      "formal_pilot_rows": 0,
+      "confirmatory_rows": 0,
+      "independent_replication": false
+    }
+  },
+  "source_sha256": {
+    "diagnostic": "0ad7692ff743328f52467cad9c22c0975a30b1cec8b79f9a14f8c955e3c22f09",
+    "dots_report": "1bc688fc5026ff5c7434d80b34d8090e3a6eb4a16ce89595ddec4b120c96639a",
+    "deepseek_report": "bca1bbe2ca1370fe2b1696c069002c86916cc905d6fdee4813774980b18b919d",
+    "dots_plan": "188f2f72f5639d18931667439e1ede9f7c18c4471af0e5006fca67716b6b520e",
+    "deepseek_plan": "50a0df6fc7452bb4afa3c717659e2f7d5c6e80c71f8a49f7c0346bebca5b6c66",
+    "comparison": "b6bf9643b73d31bdbfe973b5a5911dbd994908abbe3e23dd04d28c5c7ea75d10",
+    "manifest": "e22a600d6c0dbc26d7ca640950a4b74d510e0dec8c76ee56a08718b56731245b",
+    "intake": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
+    "gates": "2db015908257e411d5b0af7472ce3e5cef22b3ff97043aff8aa6d08520fa0dbe",
+    "protocol": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+  },
+  "audit_code_sha256": "94742cbd9d48213b9083376275040aa4ce6c1ce9284f9093c74f71421a609ef4",
+  "audit_result_sha256": "b5bfb51f82f326bf6bcc4c80ea8a83982964370e44554d5a6af3b524f27a960f"
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "Read-only manifest and repository inventory in the attached /workspace; no holdout bodies opened",
+  "checked_at": "2026-10-22T13:55:37+08:00",
+  "user_report": "已有本地仓库",
+  "exact_material_location": "USER_CONFIRMED_NO_NEW_INDEPENDENT_MATERIALS_AVAILABLE",
+  "repositories": [
+    {
+      "path": "/workspace/AgentShield",
+      "head": "d6702767c5e20b4ede8e764e29cb412b96a2b74a",
+      "finding": "Existing four-case methodology diagnostic, not automatically new PR6 material"
+    },
+    {
+      "path": "/workspace/AgentShield-pr6",
+      "head": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+      "finding": "Pinned PR6 worktree; intake has no new development or holdout families"
+    }
+  ],
+  "metadata_checked": [
+    {
+      "path": "benchmark/datasets/source-trust-v1/manifest.json",
+      "sha256": "8320377c20b8f99177e7c97aa6675a27dbc313fc4cc98163330a2a05e93f3c2c",
+      "finding": "Historical v1.10-source-trust-1 manifest, 28 tasks"
+    },
+    {
+      "path": "docs/results/source-trust/v1/external-source-material/manifest.json",
+      "sha256": "264bf976af7992026f884d5cc7fb28a4c98f26465aeb0378c3a265f20d04e0fc",
+      "finding": "AgentDojo attack source intake, UNRUN; no task-suite adapter or blinded material claim"
+    },
+    {
+      "path": "docs/results/source-trust/v1/development-history/manifest.json",
+      "sha256": "bb266a936d05876cc3864cd17ad12012f1dcc423a4af416fc4ac8c3f6155d1a2",
+      "finding": "Development/debug history; no holdout or external-independence claim"
+    }
+  ],
+  "new_families_admitted": 0,
+  "limitation": "Inventory covers the attached workspace; user confirmed no new independent materials are available. No pending path request.",
+  "user_followup": "那就是没有",
+  "later_candidate_package": {
+    "path": "candidate-materials-v1",
+    "candidate_families": 12,
+    "author": "assistant_in_current_session",
+    "independent_authorship": false,
+    "semantic_review": "PENDING",
+    "admitted_research_families": 0
+  },
+  "user_confirmation_applies_to": "Preexisting independent materials before the new author-draft package was constructed."
+}

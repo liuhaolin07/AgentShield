@@ -1,0 +1,17 @@
+{
+  "schema_version": "source-trust-intake-v1",
+  "purpose": "DRAFT_INTAKE_NOT_EXECUTION_MANIFEST",
+  "reference": {
+    "pr": 6,
+    "commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+    "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+  },
+  "families": [],
+  "holdout_custody": {
+    "status": "NOT_RECEIVED",
+    "custodian_ref": null,
+    "commitment_sha256": null,
+    "template_audit_ref": null,
+    "results_accessed": false
+  }
+}

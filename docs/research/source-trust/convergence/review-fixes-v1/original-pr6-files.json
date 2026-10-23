@@ -1,0 +1,17 @@
+{
+  "verified_tree_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+  "path_base": "repository",
+  "files_sha256": {
+    "docs/research/source-trust/LITERATURE_MATRIX.md": "1ed42024c11d714d99b2e4f2aeabbd9030b143cf1a9f25655119feeaf64975e2",
+    "docs/research/source-trust/PROTOCOL_DRAFT.md": "bbb06bdfc9964f619ce041a3c0ed4ea756673d6eeaf16ee504d93cefc57edc65",
+    "docs/research/source-trust/README.md": "a252162a057909d65490ae82f036ce8a80ba4a0cd63d6b59cf2acdfdcce34eb1",
+    "docs/research/source-trust/RESEARCH_DESIGN.md": "d38d0d78f8a2f449015954ca4a287645ca1ea0e3e3f955b507fee188238ce115",
+    "docs/research/source-trust/RESEARCH_DESIGN.pdf": "98218daef74aa1ca38022b82393fe1c89c82014ba16cdceb9e336c4c54c4362d",
+    "docs/research/source-trust/frozen-pr5.json": "62ef48021ceb7ef96cd0eb17baffb7a3880ec39fb5a4756492b3fa1d3acc3d89",
+    "docs/research/source-trust/pdf-header.tex": "1285fb35579ba40c2383c9c71b50f4062ccf26cc92147722298a8dbdce417b39",
+    "docs/research/source-trust/protocol-draft.json": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+    "docs/research/source-trust/references-verified.json": "f954779f38517e13faf71b2a279744d82fffabead769bc3f7991a697087b394f",
+    "docs/research/source-trust/verification.json": "3fb01299709cdfd10a915e44f9290ce0f402ba2aadeff6b3a9774dc30defc63c",
+    "docs/research/source-trust/verify_design.py": "1444bec11f7efb269184574a95c42f9ef34ac6d5bb4ea9bf15310e833435980d"
+  }
+}

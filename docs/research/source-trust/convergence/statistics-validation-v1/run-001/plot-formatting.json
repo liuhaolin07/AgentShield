@@ -1,0 +1,6 @@
+{
+  "scope": "SVG whitespace normalization only; no numeric or geometry changes",
+  "rule": "strip trailing whitespace from each line and keep one final newline",
+  "raw_renderer_sha256": "ca505b2f2429e3d31474ab7f063c821aa3f708c8c7ec0bdf8cd42a2bd04e0bb8",
+  "stored_svg_sha256": "8fa53c33781e62297fca20dce0e086a640f06fa0244ce30e55a809f700513ece"
+}

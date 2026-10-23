@@ -1,0 +1,561 @@
+{
+  "scope": "UNAPPLIED_INTERVAL_CANDIDATE_COMPARISON",
+  "comparisons": [
+    {
+      "id": "independent_60",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 60,
+      "effective_clusters": 60.000000000000014,
+      "reference_bootstrap_joint_covered": 97,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 0.97,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 0.05392488701175546,
+        "H2.delta_TCR": 0.0536508407564372,
+        "H2.delta_FPR": 0.0531678407719054,
+        "H3.delta_ASR": 0.053513315925961,
+        "H5.delta_ASR_AUC": 0.052975811805017585,
+        "H5.delta_TCR_p=0.0": 0.053289028313035114,
+        "H5.delta_TCR_p=0.05": 0.053735001529636006,
+        "H5.delta_TCR_p=0.1": 0.05421802144332484,
+        "H5.delta_TCR_p=0.25": 0.05376937026466613,
+        "H5.delta_TCR_p=0.5": 0.05332711794458641,
+        "H5.delta_TCR_p=1.0": 0.05348998818881387,
+        "H5.TCR_conservative_p=0.0": 0.021444230864218306,
+        "H5.TCR_conservative_p=0.05": 0.021269316992127207,
+        "H5.TCR_conservative_p=0.1": 0.021445275187458604,
+        "H5.TCR_conservative_p=0.25": 0.021480094045462715,
+        "H5.TCR_conservative_p=0.5": 0.02156741714435087,
+        "H5.TCR_conservative_p=1.0": 0.02140221557879039
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 0.932530092323758,
+        "H2.delta_TCR": 0.932530092323758,
+        "H2.delta_FPR": 0.932530092323758,
+        "H3.delta_ASR": 0.932530092323758,
+        "H5.delta_ASR_AUC": 0.932530092323758,
+        "H5.delta_TCR_p=0.0": 0.932530092323758,
+        "H5.delta_TCR_p=0.05": 0.932530092323758,
+        "H5.delta_TCR_p=0.1": 0.932530092323758,
+        "H5.delta_TCR_p=0.25": 0.932530092323758,
+        "H5.delta_TCR_p=0.5": 0.932530092323758,
+        "H5.delta_TCR_p=1.0": 0.932530092323758,
+        "H5.TCR_conservative_p=0.0": 0.3331305961730594,
+        "H5.TCR_conservative_p=0.05": 0.3330449555448517,
+        "H5.TCR_conservative_p=0.1": 0.3331402639818102,
+        "H5.TCR_conservative_p=0.25": 0.33332889995414033,
+        "H5.TCR_conservative_p=0.5": 0.3331898846614854,
+        "H5.TCR_conservative_p=1.0": 0.3332445339738264
+      },
+      "restricted_binomial_diagnostic": null
+    },
+    {
+      "id": "independent_30",
+      "datasets": 100,
+      "families": 30,
+      "clusters": 30,
+      "effective_clusters": 30.0,
+      "reference_bootstrap_joint_covered": 98,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 0.98,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 0.0733785716526252,
+        "H2.delta_TCR": 0.07393166444576567,
+        "H2.delta_FPR": 0.07513446974962613,
+        "H3.delta_ASR": 0.07538727861358135,
+        "H5.delta_ASR_AUC": 0.07520853685374554,
+        "H5.delta_TCR_p=0.0": 0.07477167839244223,
+        "H5.delta_TCR_p=0.05": 0.07325486537853218,
+        "H5.delta_TCR_p=0.1": 0.07401598826440511,
+        "H5.delta_TCR_p=0.25": 0.07369433201306434,
+        "H5.delta_TCR_p=0.5": 0.0733729449193816,
+        "H5.delta_TCR_p=1.0": 0.07341953049227583,
+        "H5.TCR_conservative_p=0.0": 0.03003425797183933,
+        "H5.TCR_conservative_p=0.05": 0.02972898267928903,
+        "H5.TCR_conservative_p=0.1": 0.029888319510800107,
+        "H5.TCR_conservative_p=0.25": 0.0299201118469792,
+        "H5.TCR_conservative_p=0.5": 0.030326223462051778,
+        "H5.TCR_conservative_p=1.0": 0.029629062951063965
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 1.3187967038852937,
+        "H2.delta_TCR": 1.3187967038852937,
+        "H2.delta_FPR": 1.3187967038852937,
+        "H3.delta_ASR": 1.3187967038852937,
+        "H5.delta_ASR_AUC": 1.3187967038852937,
+        "H5.delta_TCR_p=0.0": 1.3187967038852937,
+        "H5.delta_TCR_p=0.05": 1.3187967038852937,
+        "H5.delta_TCR_p=0.1": 1.3187967038852937,
+        "H5.delta_TCR_p=0.25": 1.3187967038852937,
+        "H5.delta_TCR_p=0.5": 1.3187967038852937,
+        "H5.delta_TCR_p=1.0": 1.3187967038852937,
+        "H5.TCR_conservative_p=0.0": 0.43018114515984657,
+        "H5.TCR_conservative_p=0.05": 0.4302470511831483,
+        "H5.TCR_conservative_p=0.1": 0.4299228501795984,
+        "H5.TCR_conservative_p=0.25": 0.4296548844367555,
+        "H5.TCR_conservative_p=0.5": 0.4307780936882784,
+        "H5.TCR_conservative_p=1.0": 0.42989435277914034
+      },
+      "restricted_binomial_diagnostic": null
+    },
+    {
+      "id": "shared_pairs_30",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 30,
+      "effective_clusters": 30.0,
+      "reference_bootstrap_joint_covered": 96,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 0.96,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 0.0691885681317016,
+        "H2.delta_TCR": 0.06737929604900969,
+        "H2.delta_FPR": 0.06712652022645064,
+        "H3.delta_ASR": 0.06772206578466579,
+        "H5.delta_ASR_AUC": 0.06772192677215744,
+        "H5.delta_TCR_p=0.0": 0.06826340727993321,
+        "H5.delta_TCR_p=0.05": 0.06797591086061697,
+        "H5.delta_TCR_p=0.1": 0.06781632673152677,
+        "H5.delta_TCR_p=0.25": 0.06828785609165325,
+        "H5.delta_TCR_p=0.5": 0.06835882173279184,
+        "H5.delta_TCR_p=1.0": 0.06877887465176111,
+        "H5.TCR_conservative_p=0.0": 0.027465613655284972,
+        "H5.TCR_conservative_p=0.05": 0.027176334141049495,
+        "H5.TCR_conservative_p=0.1": 0.026947415925304464,
+        "H5.TCR_conservative_p=0.25": 0.027160641705737048,
+        "H5.TCR_conservative_p=0.5": 0.027142380228610645,
+        "H5.TCR_conservative_p=1.0": 0.027462830256244897
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 1.3187967038852937,
+        "H2.delta_TCR": 1.3187967038852937,
+        "H2.delta_FPR": 1.3187967038852937,
+        "H3.delta_ASR": 1.3187967038852937,
+        "H5.delta_ASR_AUC": 1.3187967038852937,
+        "H5.delta_TCR_p=0.0": 1.3187967038852937,
+        "H5.delta_TCR_p=0.05": 1.3187967038852937,
+        "H5.delta_TCR_p=0.1": 1.3187967038852937,
+        "H5.delta_TCR_p=0.25": 1.3187967038852937,
+        "H5.delta_TCR_p=0.5": 1.3187967038852937,
+        "H5.delta_TCR_p=1.0": 1.3187967038852937,
+        "H5.TCR_conservative_p=0.0": 0.42951300922949237,
+        "H5.TCR_conservative_p=0.05": 0.4292293074415808,
+        "H5.TCR_conservative_p=0.1": 0.42887224369156807,
+        "H5.TCR_conservative_p=0.25": 0.4291568502083636,
+        "H5.TCR_conservative_p=0.5": 0.42909861808917327,
+        "H5.TCR_conservative_p=1.0": 0.42923131668560616
+      },
+      "restricted_binomial_diagnostic": null
+    },
+    {
+      "id": "unequal_30",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 30,
+      "effective_clusters": 25.714285714285705,
+      "reference_bootstrap_joint_covered": 96,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 0.96,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 0.07209807116093193,
+        "H2.delta_TCR": 0.07105154925142908,
+        "H2.delta_FPR": 0.07155068201624327,
+        "H3.delta_ASR": 0.07170449308861415,
+        "H5.delta_ASR_AUC": 0.07222031924676162,
+        "H5.delta_TCR_p=0.0": 0.07211297437353514,
+        "H5.delta_TCR_p=0.05": 0.0716429690939443,
+        "H5.delta_TCR_p=0.1": 0.07137052839540974,
+        "H5.delta_TCR_p=0.25": 0.07235660176436987,
+        "H5.delta_TCR_p=0.5": 0.0720914529129611,
+        "H5.delta_TCR_p=1.0": 0.07150414376666364,
+        "H5.TCR_conservative_p=0.0": 0.028569006270462088,
+        "H5.TCR_conservative_p=0.05": 0.028870561785373058,
+        "H5.TCR_conservative_p=0.1": 0.028914086036673517,
+        "H5.TCR_conservative_p=0.25": 0.02865892044006716,
+        "H5.TCR_conservative_p=0.5": 0.02894651951133512,
+        "H5.TCR_conservative_p=1.0": 0.02839794971362751
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 1.4244632452992536,
+        "H2.delta_TCR": 1.4244632452992536,
+        "H2.delta_FPR": 1.4244632452992536,
+        "H3.delta_ASR": 1.4244632452992536,
+        "H5.delta_ASR_AUC": 1.4244632452992536,
+        "H5.delta_TCR_p=0.0": 1.4244632452992536,
+        "H5.delta_TCR_p=0.05": 1.4244632452992536,
+        "H5.delta_TCR_p=0.1": 1.4244632452992536,
+        "H5.delta_TCR_p=0.25": 1.4244632452992536,
+        "H5.delta_TCR_p=0.5": 1.4244632452992536,
+        "H5.delta_TCR_p=1.0": 1.4244632452992536,
+        "H5.TCR_conservative_p=0.0": 0.45552194501047893,
+        "H5.TCR_conservative_p=0.05": 0.4554983976359872,
+        "H5.TCR_conservative_p=0.1": 0.45543118244362885,
+        "H5.TCR_conservative_p=0.25": 0.4555316525838258,
+        "H5.TCR_conservative_p=0.5": 0.45573262804016307,
+        "H5.TCR_conservative_p=1.0": 0.45555971370770587
+      },
+      "restricted_binomial_diagnostic": null
+    },
+    {
+      "id": "rare_event_30",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 30,
+      "effective_clusters": 30.0,
+      "reference_bootstrap_joint_covered": 29,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 0.29,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 0.054333333333333324,
+        "H2.delta_TCR": 0.054333333333333324,
+        "H2.delta_FPR": 0.054333333333333324,
+        "H3.delta_ASR": 0.054333333333333324,
+        "H5.delta_ASR_AUC": 0.054333333333333324,
+        "H5.delta_TCR_p=0.0": 0.054333333333333324,
+        "H5.delta_TCR_p=0.05": 0.054333333333333324,
+        "H5.delta_TCR_p=0.1": 0.054333333333333324,
+        "H5.delta_TCR_p=0.25": 0.054333333333333324,
+        "H5.delta_TCR_p=0.5": 0.054333333333333324,
+        "H5.delta_TCR_p=1.0": 0.054333333333333324,
+        "H5.TCR_conservative_p=0.0": 0.05433333333333332,
+        "H5.TCR_conservative_p=0.05": 0.05433333333333332,
+        "H5.TCR_conservative_p=0.1": 0.05433333333333332,
+        "H5.TCR_conservative_p=0.25": 0.05433333333333332,
+        "H5.TCR_conservative_p=0.5": 0.05433333333333332,
+        "H5.TCR_conservative_p=1.0": 0.05433333333333332
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 1.3187967038852937,
+        "H2.delta_TCR": 1.3187967038852937,
+        "H2.delta_FPR": 1.3187967038852937,
+        "H3.delta_ASR": 1.3187967038852937,
+        "H5.delta_ASR_AUC": 1.3187967038852937,
+        "H5.delta_TCR_p=0.0": 1.3187967038852937,
+        "H5.delta_TCR_p=0.05": 1.3187967038852937,
+        "H5.delta_TCR_p=0.1": 1.3187967038852937,
+        "H5.delta_TCR_p=0.25": 1.3187967038852937,
+        "H5.delta_TCR_p=0.5": 1.3187967038852937,
+        "H5.delta_TCR_p=1.0": 1.3187967038852937,
+        "H5.TCR_conservative_p=0.0": 0.34236584263798986,
+        "H5.TCR_conservative_p=0.05": 0.34236584263798986,
+        "H5.TCR_conservative_p=0.1": 0.34236584263798986,
+        "H5.TCR_conservative_p=0.25": 0.34236584263798986,
+        "H5.TCR_conservative_p=0.5": 0.34236584263798986,
+        "H5.TCR_conservative_p=1.0": 0.34236584263798986
+      },
+      "restricted_binomial_diagnostic": {
+        "covered": 100,
+        "coverage": 1.0,
+        "mean_width": 0.2179487983797126,
+        "scope": "known iid binary cluster event only"
+      }
+    },
+    {
+      "id": "single_template_60",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 1,
+      "effective_clusters": 1.0,
+      "reference_bootstrap_joint_covered": 0,
+      "reference_bootstrap_joint_available": 0,
+      "reference_bootstrap_joint_coverage": null,
+      "reference_bootstrap_mean_widths": null,
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 2.0,
+        "H2.delta_TCR": 2.0,
+        "H2.delta_FPR": 2.0,
+        "H3.delta_ASR": 2.0,
+        "H5.delta_ASR_AUC": 2.0,
+        "H5.delta_TCR_p=0.0": 2.0,
+        "H5.delta_TCR_p=0.05": 2.0,
+        "H5.delta_TCR_p=0.1": 2.0,
+        "H5.delta_TCR_p=0.25": 2.0,
+        "H5.delta_TCR_p=0.5": 2.0,
+        "H5.delta_TCR_p=1.0": 2.0,
+        "H5.TCR_conservative_p=0.0": 1.0,
+        "H5.TCR_conservative_p=0.05": 1.0,
+        "H5.TCR_conservative_p=0.1": 1.0,
+        "H5.TCR_conservative_p=0.25": 1.0,
+        "H5.TCR_conservative_p=0.5": 1.0,
+        "H5.TCR_conservative_p=1.0": 1.0
+      },
+      "restricted_binomial_diagnostic": null
+    },
+    {
+      "id": "constant_60",
+      "datasets": 100,
+      "families": 60,
+      "clusters": 60,
+      "effective_clusters": 60.000000000000014,
+      "reference_bootstrap_joint_covered": 100,
+      "reference_bootstrap_joint_available": 100,
+      "reference_bootstrap_joint_coverage": 1.0,
+      "reference_bootstrap_mean_widths": {
+        "H1.delta_ASR": 1.249000902703301e-16,
+        "H2.delta_TCR": 1.249000902703301e-16,
+        "H2.delta_FPR": 1.249000902703301e-16,
+        "H3.delta_ASR": 1.249000902703301e-16,
+        "H5.delta_ASR_AUC": 1.249000902703301e-16,
+        "H5.delta_TCR_p=0.0": 0.0,
+        "H5.delta_TCR_p=0.05": 0.0,
+        "H5.delta_TCR_p=0.1": 0.0,
+        "H5.delta_TCR_p=0.25": 0.0,
+        "H5.delta_TCR_p=0.5": 0.0,
+        "H5.delta_TCR_p=1.0": 0.0,
+        "H5.TCR_conservative_p=0.0": 8.881784197001252e-16,
+        "H5.TCR_conservative_p=0.05": 8.881784197001252e-16,
+        "H5.TCR_conservative_p=0.1": 8.881784197001252e-16,
+        "H5.TCR_conservative_p=0.25": 8.881784197001252e-16,
+        "H5.TCR_conservative_p=0.5": 8.881784197001252e-16,
+        "H5.TCR_conservative_p=1.0": 8.881784197001252e-16
+      },
+      "Hoeffding_joint_covered": 100,
+      "Hoeffding_joint_coverage": 1.0,
+      "Hoeffding_joint_coverage_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "Hoeffding_mean_widths": {
+        "H1.delta_ASR": 0.932530092323758,
+        "H2.delta_TCR": 0.932530092323758,
+        "H2.delta_FPR": 0.932530092323758,
+        "H3.delta_ASR": 0.932530092323758,
+        "H5.delta_ASR_AUC": 0.932530092323758,
+        "H5.delta_TCR_p=0.0": 0.932530092323758,
+        "H5.delta_TCR_p=0.05": 0.932530092323758,
+        "H5.delta_TCR_p=0.1": 0.932530092323758,
+        "H5.delta_TCR_p=0.25": 0.932530092323758,
+        "H5.delta_TCR_p=0.5": 0.932530092323758,
+        "H5.delta_TCR_p=1.0": 0.932530092323758,
+        "H5.TCR_conservative_p=0.0": 0.3331325230809386,
+        "H5.TCR_conservative_p=0.05": 0.3331325230809386,
+        "H5.TCR_conservative_p=0.1": 0.3331325230809386,
+        "H5.TCR_conservative_p=0.25": 0.3331325230809386,
+        "H5.TCR_conservative_p=0.5": 0.3331325230809386,
+        "H5.TCR_conservative_p=1.0": 0.3331325230809386
+      },
+      "restricted_binomial_diagnostic": null
+    }
+  ],
+  "binomial_coverage_enumeration": [
+    {
+      "n": 10,
+      "p": 0,
+      "coverage": 1.0
+    },
+    {
+      "n": 10,
+      "p": 0.001,
+      "coverage": 0.9999552393710069
+    },
+    {
+      "n": 10,
+      "p": 0.01,
+      "coverage": 0.9998861508820941
+    },
+    {
+      "n": 10,
+      "p": 0.1,
+      "coverage": 0.9998530974000003
+    },
+    {
+      "n": 10,
+      "p": 0.5,
+      "coverage": 0.998046875
+    },
+    {
+      "n": 10,
+      "p": 0.9,
+      "coverage": 0.9998530974000001
+    },
+    {
+      "n": 10,
+      "p": 0.99,
+      "coverage": 0.9998861508820942
+    },
+    {
+      "n": 10,
+      "p": 0.999,
+      "coverage": 0.9999552393710069
+    },
+    {
+      "n": 10,
+      "p": 1,
+      "coverage": 1.0
+    },
+    {
+      "n": 30,
+      "p": 0,
+      "coverage": 1.0
+    },
+    {
+      "n": 30,
+      "p": 0.001,
+      "coverage": 0.9995730383520673
+    },
+    {
+      "n": 30,
+      "p": 0.01,
+      "coverage": 0.9997774021013663
+    },
+    {
+      "n": 30,
+      "p": 0.1,
+      "coverage": 0.9995456448850955
+    },
+    {
+      "n": 30,
+      "p": 0.5,
+      "coverage": 0.998569093644619
+    },
+    {
+      "n": 30,
+      "p": 0.9,
+      "coverage": 0.9995456448850946
+    },
+    {
+      "n": 30,
+      "p": 0.99,
+      "coverage": 0.9997774021013666
+    },
+    {
+      "n": 30,
+      "p": 0.999,
+      "coverage": 0.9995730383520673
+    },
+    {
+      "n": 30,
+      "p": 1,
+      "coverage": 1.0
+    },
+    {
+      "n": 60,
+      "p": 0,
+      "coverage": 1.0
+    },
+    {
+      "n": 60,
+      "p": 0.001,
+      "coverage": 0.9999672106308268
+    },
+    {
+      "n": 60,
+      "p": 0.01,
+      "coverage": 0.9996542456521443
+    },
+    {
+      "n": 60,
+      "p": 0.1,
+      "coverage": 0.9993343361520002
+    },
+    {
+      "n": 60,
+      "p": 0.5,
+      "coverage": 0.997329563717193
+    },
+    {
+      "n": 60,
+      "p": 0.9,
+      "coverage": 0.9993343361519985
+    },
+    {
+      "n": 60,
+      "p": 0.99,
+      "coverage": 0.9996542456521449
+    },
+    {
+      "n": 60,
+      "p": 0.999,
+      "coverage": 0.9999672106308268
+    },
+    {
+      "n": 60,
+      "p": 1,
+      "coverage": 1.0
+    }
+  ],
+  "binomial_nominal_per_parameter_coverage": 0.9970588235294118,
+  "zero_event_30_cluster_demo": {
+    "restricted_binomial_interval": [
+      0.0,
+      0.19539442716591918
+    ],
+    "Hoeffding_unit_range_radius": 0.3296991759713227,
+    "Hoeffding_difference_range_radius": 0.6593983519426454,
+    "zero_events_probability_at_p_0_01": 0.7397003733882802
+  },
+  "precision_cost": {
+    "absolute_TCR_best_lower_at_60_equal_clusters": 0.7668674769190609,
+    "minimum_equal_clusters_for_Hoeffding_absolute_TCR_lower_0_80_at_all_success": 82,
+    "interpretation": "arithmetic limitation of this candidate, not a request to expand the formal budget"
+  },
+  "reference_bootstrap_rerun": false,
+  "new_mathematical_datasets_reconstructed": 700,
+  "assumptions": {
+    "independent_clusters": true,
+    "cluster_membership_fixed_before_outcomes": true,
+    "family_weights_fixed_before_outcomes": true,
+    "eligibility_fixed_before_outcomes": true,
+    "estimand": "conditional_expectation_given_frozen_design"
+  },
+  "assumptions_independently_verified": false,
+  "selected_for_protocol": false,
+  "real_data_coverage_validated": false,
+  "power_validated": false,
+  "preregistered": false,
+  "experiment_authorized": false,
+  "confirmatory_success": false,
+  "new_runtime_rows": 0,
+  "new_model_requests": 0,
+  "new_http_requests": 0,
+  "numpy_version": "2.3.5",
+  "input_code_sha256": {
+    "convergence/rare-event-validation-v1/config.json": "667aef793c9845d2a2584a2e26eefaedcadf6813073097f63f3598888a35da79",
+    "convergence/rare-event-validation-v1/candidate-amendment.json": "d9ace921ce9c5c17e326c3af4241714e9e7d5ee3f4b4f84c5ec124c6c588b838",
+    "convergence/compare_rare_intervals.py": "88fca39ad7723bcb9ab872c7584e8ff08e2b932ac72b2d33d04f5a412ca64d9e",
+    "convergence/finite_sample_intervals.py": "89c7472270960d76ad7b89be720b7bf9b9c11945467672aab2b45af2cd6bcd73",
+    "convergence/paired_inference.py": "6ec64582cb8d2ed2fb936159c1111341383e270fbd2ca0af0301a542a9dc3eb9",
+    "convergence/validate_statistics.py": "f5730e4c6470c68b37c9d9f14dacf193f7e11cc9009d889b67b4c14e5a5f446a",
+    "convergence/statistics-validation-v1/config.json": "975560ce562b159278e9a6d3f8249d1dfc8a751c6d269fc990557a2135115f4a",
+    "convergence/statistics-validation-v1/run-001/report.json": "0e0c1e6c0a19fd857a95459848a3b11b04d9cc9406eccff0174425078a3b6458",
+    "convergence/protocol-amendment.json": "1dec35a465c678fafba10cfbbec546bb7eb1f2ca94a71564b286f1c0272df977",
+    "protocol-draft.json": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+  }
+}

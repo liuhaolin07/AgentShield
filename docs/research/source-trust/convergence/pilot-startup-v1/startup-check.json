@@ -1,0 +1,109 @@
+{
+  "schema": "formal-pilot-startup-snapshot-v1",
+  "checked_at": "2026-10-23T05:14:42.977958+00:00",
+  "source_commit": "c57563d7a34c3bf6cdd2f5b48b85a5031143596c",
+  "user_requested_start": true,
+  "state": "BLOCKED_C2_D6_AND_UNBOUND_EXECUTOR",
+  "execution_started": false,
+  "dispatchable": false,
+  "pilot_target": {
+    "families": 12,
+    "file_families": 6,
+    "tool_families": 6,
+    "primary_rows": 936,
+    "control_rows": 48,
+    "total_rows": 984
+  },
+  "current_materials": {
+    "development_manifest_entries": 0,
+    "development_families_delivered": 0,
+    "pilot_eligible_families": 0,
+    "independent_review_verified": false,
+    "old_reviewed_leaves": 0,
+    "old_reviewed_tasks": 0
+  },
+  "blocking_facts": [
+    {
+      "code": "C2_REVIEW_INCOMPLETE",
+      "source": "development-v2/REVIEW_CONDITIONS.md#C2",
+      "observed": "No completed independent blind ratings, kappa or adjudications in the delivered review record",
+      "required": "At least three qualified blind raters; all 240 current fields and all future material fields covered; kappa and all disagreement adjudications; collection/signing roles frozen"
+    },
+    {
+      "code": "D6_NO_ELIGIBLE_MATERIALS",
+      "source": "development-v2/REVIEW_CONDITIONS.md#D6",
+      "observed": "0 received/accepted/calibrated eligible families; known author fixtures and trivial derivatives excluded",
+      "required": "12 accepted and dependency-calibrated new development families, six file and six tool, with source/truth/authorization/lineage evidence"
+    },
+    {
+      "code": "EXECUTION_PLAN_UNBOUND",
+      "source": "model_workflow_v3.py",
+      "observed": "Current model workflow is fixed to eight author-fixture rows, fixture transport and zero live calls",
+      "required": "Bind accepted material IDs, task IDs, graphs, defense configurations, executor, provider and request/cost limits in a separate pilot execution plan"
+    },
+    {
+      "code": "F4_PROVIDER_CAPTURE_UNVERIFIED",
+      "source": "pilot_readiness.py",
+      "observed": "Only offline fixture transport has been verified; no real provider raw-capture acceptance evidence",
+      "required": "Provider-bound raw request/response verification evidence and explicit provider_capture_verified=true before dispatch"
+    }
+  ],
+  "other_pending_not_used_as_additional_pilot_material_gates": {
+    "C3_deviation_threshold": null,
+    "C6_statistics_finalized": false,
+    "H4_selected": false,
+    "external_holdout_received": false,
+    "note": "Development-only pilot is not described as needing all 60 development or holdout families; no new minimum cluster gate imposed here"
+  },
+  "schedule_scope": "DRAFT_UNBOUND_SLOTS_NOT_EXECUTION_ROWS",
+  "schedule_sha256": "53ed3d0935f5065eda58fce9e36b946885817a6db3d4f5ea62d618458a873669",
+  "budget_checks": {
+    "primary_conditions": 13,
+    "primary": 936,
+    "control": 48,
+    "total": 984,
+    "per_family_slot": 82,
+    "source_kind_rows": {
+      "file": 492,
+      "tool": 492
+    },
+    "controls_first": true,
+    "actual_bindings": 0,
+    "assertions_passed": true
+  },
+  "research_budgets_unchanged": {
+    "E0_E1": 54720,
+    "E3_additional": 3600,
+    "pilot_separate": 984
+  },
+  "work_this_request": {
+    "model_requests": 0,
+    "tool_executions": 0,
+    "formal_pilot_rows": 0,
+    "new_cost_cny": 0,
+    "holdout_contents_read": false,
+    "accepted_materials_changed": false
+  },
+  "historical_author_rehearsal_not_counted": {
+    "rows": 984,
+    "delivered": 324,
+    "blocked": 660,
+    "formal_pilot_credit": 0
+  },
+  "input_files_sha256": {
+    "intake-manifest.json": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
+    "development-v2/review-decision.json": "bedb62abe77265a5ea7d8053ef0f80884ac94e37b5fd39eac1fa88343a16c584",
+    "development-v2/REVIEW_CONDITIONS.md": "173d09bccb5f49082e5cafd73f8c5b81cc573dfab7ead9061f7fedc52a8d9d07",
+    "material-review-v1/pending-check.json": "266d84efb02b7de3e020966a5509b7af7a249be4b788dba2c20f42cba02ad6b4",
+    "model-capture-v3/verification.json": "6a07207b5dcd84fbbd074e8306b5be62c779d97367541958e9a243cc9cb58321",
+    "independent-development-v1/template/manifest.json": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
+    "independent-development-v1/template/delivery.json": "afe8bbf9ac3966d5042dc7c78ecf04afb1a4f58de587d0a2ba4fbbb79f4aea5a"
+  },
+  "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+  "provider_capture_verified": false,
+  "provider_capture_evidence_ref": null,
+  "C2_review_verified": false,
+  "D6_materials_accepted": false,
+  "execution_plan_bound": false,
+  "execution_platform_verified": false
+}

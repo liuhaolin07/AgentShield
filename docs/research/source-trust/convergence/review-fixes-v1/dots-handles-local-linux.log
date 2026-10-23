@@ -1,0 +1,12 @@
+test_feedback_failure_preserves_actual_delivery_and_marks_remaining_unknown (test_dots_tool_study.DotsToolStudyTests.test_feedback_failure_preserves_actual_delivery_and_marks_remaining_unknown) ... ok
+test_full_local_roundtrip_controls_and_runtime_blocks (test_dots_tool_study.DotsToolStudyTests.test_full_local_roundtrip_controls_and_runtime_blocks) ... ok
+test_http_error_records_fixed_code_without_body_or_retry (test_dots_tool_study.DotsToolStudyTests.test_http_error_records_fixed_code_without_body_or_retry) ... ok
+test_live_gate_call_cap_and_unknown_usage_stop_before_next_dispatch (test_dots_tool_study.DotsToolStudyTests.test_live_gate_call_cap_and_unknown_usage_stop_before_next_dispatch) ... ok
+test_model_nonadoption_never_executes_runtime_or_receives_block_credit (test_dots_tool_study.DotsToolStudyTests.test_model_nonadoption_never_executes_runtime_or_receives_block_credit) ... ok
+test_request_limit_and_response_model_mismatch_stop (test_dots_tool_study.DotsToolStudyTests.test_request_limit_and_response_model_mismatch_stop) ... ok
+test_selection_distinguishes_nonadoption_wrong_target_and_invalid_call (test_dots_tool_study.DotsToolStudyTests.test_selection_distinguishes_nonadoption_wrong_target_and_invalid_call) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.711s
+
+OK

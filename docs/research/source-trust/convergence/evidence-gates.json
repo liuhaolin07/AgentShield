@@ -1,0 +1,179 @@
+{
+  "schema_version": "source-trust-convergence-v3",
+  "reference": {
+    "pr": 6,
+    "commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
+    "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04"
+  },
+  "status": "IMPLEMENTATION_AFTER_PACKAGE_REVIEW",
+  "working_route": "AGENTSHIELD_INTERNAL_MEASUREMENT",
+  "protocol_approval": "PENDING",
+  "preregistered": false,
+  "experiment_authorized": false,
+  "new_experiments_executed": 0,
+  "first_phase": [
+    "H1",
+    "H2",
+    "H3",
+    "H5"
+  ],
+  "H4": "CONDITIONAL_NOT_SELECTED_NOT_IMPLEMENTED",
+  "budget_snapshot": {
+    "E0_E1": 54720,
+    "E3": 3600,
+    "first_phase_excluding_controls": 58320,
+    "pilot_separate": 984
+  },
+  "gates": [
+    {
+      "id": "G01",
+      "protocol_key": "protocol_review",
+      "deliverable": "审阅内部测量定位、确认性/探索性范围与H4延期",
+      "acceptance": "署名或可追溯评审记录，列明异议处置",
+      "status": "APPROVED_BY_USER",
+      "evidence": [
+        "review-record.json"
+      ],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G02",
+      "protocol_key": "threshold_value_justification",
+      "deliverable": "论证 .05/.80/.02 的任务价值",
+      "acceptance": "看holdout之前完成依据与评审，禁止按效果选阈值",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G03",
+      "protocol_key": "new_dataset_ground_truth_dependency_contracts",
+      "deliverable": "独立真值、授权关系及执行前依赖契约",
+      "acceptance": "60开发家族材料与独立契约齐备；不从策略或送达结果反推真值/依赖",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G04",
+      "protocol_key": "template_split_manifest",
+      "deliverable": "模板隔离与聚类清单",
+      "acceptance": "60开发/60外部保留，至少30独立保留模板簇提议；独立作者核对模板派生关系",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G05",
+      "protocol_key": "corruption_generator_and_graph_hashes",
+      "deliverable": "正式错标生成器和共享图验证",
+      "acceptance": "split内分方向排名前缀、floor(pN)、图摘要共享及E3逐家族成本通过独立验证",
+      "status": "IMPLEMENTED_PENDING_MATERIAL_VALIDATION",
+      "evidence": [
+        "GENERATOR.md",
+        "corruption_graph.py",
+        "verify_graph.py",
+        "test_graph.py"
+      ],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G06",
+      "protocol_key": "attack_algorithm_and_query_ledger",
+      "deliverable": "冻结E3攻击与查询账本",
+      "acceptance": "开发每任务最多20查询，包含失败；保留不适应",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G07",
+      "protocol_key": "mechanism_and_adapter_SHA",
+      "deliverable": "冻结内部三策略/执行器SHA与适配范围",
+      "acceptance": "内部路线不声称FIDES/APPA已适配；改为跨机制路线须补两个同契约适配",
+      "status": "PARTIAL_IMPLEMENTATION_PENDING_VALIDATION",
+      "evidence": [
+        "STARTUP.md",
+        "material_adapter.py",
+        "runtime_probe.py",
+        "test_adapter.py",
+        "H5_FIX.md",
+        "protocol-amendment.json",
+        "protocol_amendment.py",
+        "mechanism_applicability.py",
+        "test_mechanism.py"
+      ],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G08",
+      "protocol_key": "missingness_and_observation_gate_implementation",
+      "deliverable": "独立接收、任务回执、缺失界和拒绝证据",
+      "acceptance": "环境失败不计防御成功；每格覆盖>=.95及最坏缺失门禁可执行",
+      "status": "PARTIAL_IMPLEMENTATION_PENDING_VALIDATION",
+      "evidence": [
+        "STARTUP.md",
+        "material_adapter.py",
+        "runtime_probe.py",
+        "test_adapter.py"
+      ],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G09",
+      "protocol_key": "analysis_and_plot_code",
+      "deliverable": "配对簇分析与图表代码",
+      "acceptance": "首轮17统计量、10000重采样及种子1729、权重和共同区间实现并经校验",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G10",
+      "protocol_key": "power_and_CI_coverage_validation",
+      "deliverable": "984行开发pilot与功效/覆盖核验",
+      "acceptance": "先工程pilot，再论证簇数/ICC/尾部精度；不足即探索性，不按效果扩样",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G11",
+      "protocol_key": "unseen_external_holdout",
+      "deliverable": "独立保管的未揭示材料",
+      "acceptance": "外部保管人及承诺摘要、交接/揭示日志齐备；改动后不得复用已揭示集",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G12",
+      "protocol_key": "independent_execution_environment",
+      "deliverable": "独立执行环境",
+      "acceptance": "环境锁定、独立执行者与复跑流程可追溯",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_freeze"
+    },
+    {
+      "id": "G13",
+      "protocol_key": "registration",
+      "deliverable": "最终冻结与注册",
+      "acceptance": "前置门禁证据齐备，时间戳注册；取消Draft或文档检查不替代注册",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_confirmatory_run"
+    },
+    {
+      "id": "G14",
+      "protocol_key": "independent_reproduction",
+      "deliverable": "投稿前独立复跑",
+      "acceptance": "固定工件重建；确定性结果一致、区间容差预先规定、差异有账本",
+      "status": "PENDING",
+      "evidence": [],
+      "phase": "before_submission"
+    }
+  ],
+  "package_review": "review-record.json",
+  "protocol_amendment": "protocol-amendment.json"
+}

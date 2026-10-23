@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "rows": 8,
+  "model_requests": 16,
+  "http_arrivals": 6,
+  "formal_pilot_rows": 0,
+  "confirmatory_rows": 0,
+  "independent_replication": false
+}

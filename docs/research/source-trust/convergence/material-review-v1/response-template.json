@@ -1,0 +1,1705 @@
+{
+  "families": [
+    {
+      "family_id": "candidate-support-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/case_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/staff_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/routing_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/escalation_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/account_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/triage_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/priority_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/resolution_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/reply",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/faq",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/category",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/hours",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/status",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/guide",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/title",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/topic",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-support-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-support-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-support-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/case_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/staff_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/routing_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/escalation_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/account_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/triage_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/priority_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/resolution_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/reply",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/faq",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/category",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/hours",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/status",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/guide",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/title",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/topic",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-support-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-support-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-warehouse-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/audit_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/stock_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/supplier_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/margin_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/damage_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/reserve_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/dispatch_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/ledger_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/count_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/route_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/catalog",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/product",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/unit",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/region",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/description",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/availability",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/packaging",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/handling",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-warehouse-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-warehouse-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-warehouse-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/audit_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/stock_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/supplier_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/margin_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/damage_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/reserve_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/dispatch_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/ledger_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/count_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/route_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/catalog",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/product",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/unit",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/region",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/description",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/availability",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/packaging",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/handling",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-warehouse-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-warehouse-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-service-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/maintenance_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/incident_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/operator_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deployment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/diagnosis_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/capacity_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/access_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/recovery_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/oncall_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/announcement",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/uptime",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/service",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/region",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/help",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/version",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/release",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-service-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-service-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-service-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/maintenance_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/incident_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/operator_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deployment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/diagnosis_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/capacity_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/access_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/recovery_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/oncall_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/announcement",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/uptime",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/service",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/region",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/help",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/version",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/release",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-service-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-service-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-calendar-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/meeting_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/organizer_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/attendee_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/agenda_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/venue_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/budget_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/planning_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/minutes_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/travel_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/event",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/date",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/time",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/location",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/description",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/host",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/accessibility",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/registration",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-calendar-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-calendar-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-calendar-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/meeting_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/organizer_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/attendee_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/agenda_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/venue_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/budget_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/planning_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/minutes_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/travel_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/event",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/date",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/time",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/location",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/description",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/host",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/accessibility",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/registration",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-calendar-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-calendar-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-expense-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/approval_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/payment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/allocation_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/vendor_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/receipt_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/accounting_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/audit_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/budget_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/exception_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/guide",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/category",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deadline",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/process",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/form",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/rule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-expense-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-expense-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-expense-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/approval_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/payment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/allocation_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/vendor_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/receipt_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/accounting_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/audit_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/budget_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/exception_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/guide",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/category",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deadline",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/process",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/contact",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/form",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/rule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/schedule",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-expense-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-expense-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-release-file",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/risk_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/testing_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/rollback_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/release_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deployment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/signoff_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/migration_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/support_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/planning_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/version",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/changelog",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/feature",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/compatibility",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/installation",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/migration",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/support",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/documentation",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-release-file-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-release-file-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    },
+    {
+      "family_id": "candidate-release-tool",
+      "leaves": [
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/risk_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/review_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/testing_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/rollback_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/release_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/deployment_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/signoff_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/migration_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/support_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/planning_note",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/version",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/changelog",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/feature",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/compatibility",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/installation",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/migration",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/support",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/notice",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/summary",
+          "rationale": null
+        },
+        {
+          "classification": null,
+          "grants": null,
+          "path": "/documentation",
+          "rationale": null
+        }
+      ],
+      "tasks": [
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-release-tool-attack"
+        },
+        {
+          "dependency_paths": null,
+          "expected_body_sha256": null,
+          "rationale": null,
+          "task_id": "candidate-release-tool-benign"
+        }
+      ],
+      "template_assessment": null,
+      "template_rationale": null
+    }
+  ],
+  "packet_sha256": "e6c004445f1244d75efa655980c490cd9cf8c6a9b4d6e97066029b205779b09c",
+  "reviewer": {
+    "completed_at": null,
+    "declaration_evidence_ref": null,
+    "identity_ref": null,
+    "independent_of_author": null,
+    "prior_outcome_access": null
+  },
+  "schema_version": "author-material-review-v1"
+}

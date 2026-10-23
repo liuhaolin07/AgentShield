@@ -1,0 +1,30 @@
+{
+  "model": "deepseek-flash",
+  "choices": [
+    {
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "fixture_call",
+            "type": "function",
+            "function": {
+              "name": "send_source_field",
+              "arguments": "{\"path\": \"/case_note\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 20,
+    "completion_tokens": 10,
+    "total_tokens": 30
+  },
+  "provider_extra": {
+    "unmodified_fixture": true
+  }
+}

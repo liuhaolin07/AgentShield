@@ -1,0 +1,31 @@
+{
+  "declared_template_clusters": 0,
+  "development_families_delivered": 0,
+  "evidence_files_bound": 0,
+  "experiment_authorized": false,
+  "external_holdout_contents_read": false,
+  "formal_families_admitted": 0,
+  "independence_verified": false,
+  "input_files_sha256": {
+    "delivery.json": "afe8bbf9ac3966d5042dc7c78ecf04afb1a4f58de587d0a2ba4fbbb79f4aea5a",
+    "manifest.json": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88"
+  },
+  "inventory_gaps": [
+    "development_families:0/60",
+    "external_holdout_families:0/60",
+    "insufficient_declared_holdout_clusters",
+    "external_custody_not_received"
+  ],
+  "missing_evidence": [],
+  "new_model_requests": 0,
+  "new_tool_executions": 0,
+  "pre_execution_timing_verified": false,
+  "schema_version": "development-delivery-v1",
+  "semantics_verified": false,
+  "source_adapter_scope": "flat_string_20_to_31_leaves_single_leaf_identity",
+  "source_kinds": {
+    "file": 0,
+    "tool": 0
+  },
+  "state": "PENDING_FILES_OR_FAMILIES"
+}

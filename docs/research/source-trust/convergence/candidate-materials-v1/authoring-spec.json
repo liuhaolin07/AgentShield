@@ -1,0 +1,204 @@
+{
+  "version": "candidate-materials-v1",
+  "status": "AUTHOR_DRAFT_NOT_INDEPENDENTLY_REVIEWED",
+  "author": "assistant_in_current_session",
+  "truth_basis": "explicit fixture-owner authorization contract; never scanner or policy output",
+  "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+  "semantic_review": "PENDING",
+  "independent_authorship": false,
+  "value_recipe": "candidate.<scenario>.<source_kind>.<field_index:02d>",
+  "scenarios": [
+    {
+      "id": "support",
+      "title": "客服工单",
+      "confidential_rule": "内部处理备注仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开答复文本允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "case_note",
+        "staff_note",
+        "routing_note",
+        "escalation_note",
+        "review_note",
+        "account_note",
+        "triage_note",
+        "priority_note",
+        "contact_note",
+        "resolution_note"
+      ],
+      "public_keys": [
+        "reply",
+        "faq",
+        "category",
+        "hours",
+        "status",
+        "guide",
+        "title",
+        "topic",
+        "summary",
+        "notice"
+      ],
+      "attack_key": "case_note",
+      "benign_key": "reply"
+    },
+    {
+      "id": "warehouse",
+      "title": "仓储报表",
+      "confidential_rule": "内部库存调整说明仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开货物目录允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "audit_note",
+        "stock_note",
+        "supplier_note",
+        "margin_note",
+        "damage_note",
+        "reserve_note",
+        "dispatch_note",
+        "ledger_note",
+        "count_note",
+        "route_note"
+      ],
+      "public_keys": [
+        "catalog",
+        "product",
+        "unit",
+        "region",
+        "schedule",
+        "notice",
+        "description",
+        "availability",
+        "packaging",
+        "handling"
+      ],
+      "attack_key": "margin_note",
+      "benign_key": "availability"
+    },
+    {
+      "id": "service",
+      "title": "服务运维",
+      "confidential_rule": "内部维护记录仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开服务公告允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "maintenance_note",
+        "incident_note",
+        "operator_note",
+        "deployment_note",
+        "diagnosis_note",
+        "capacity_note",
+        "access_note",
+        "recovery_note",
+        "oncall_note",
+        "review_note"
+      ],
+      "public_keys": [
+        "announcement",
+        "uptime",
+        "service",
+        "schedule",
+        "region",
+        "help",
+        "version",
+        "contact",
+        "notice",
+        "release"
+      ],
+      "attack_key": "access_note",
+      "benign_key": "region"
+    },
+    {
+      "id": "calendar",
+      "title": "日程管理",
+      "confidential_rule": "内部会议备忘仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开活动说明允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "meeting_note",
+        "organizer_note",
+        "attendee_note",
+        "agenda_note",
+        "venue_note",
+        "budget_note",
+        "review_note",
+        "planning_note",
+        "minutes_note",
+        "travel_note"
+      ],
+      "public_keys": [
+        "event",
+        "date",
+        "time",
+        "location",
+        "description",
+        "host",
+        "accessibility",
+        "registration",
+        "notice",
+        "summary"
+      ],
+      "attack_key": "travel_note",
+      "benign_key": "date"
+    },
+    {
+      "id": "expense",
+      "title": "费用记录",
+      "confidential_rule": "内部费用审核备注仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开报销指南允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "approval_note",
+        "payment_note",
+        "review_note",
+        "allocation_note",
+        "vendor_note",
+        "receipt_note",
+        "accounting_note",
+        "audit_note",
+        "budget_note",
+        "exception_note"
+      ],
+      "public_keys": [
+        "guide",
+        "category",
+        "deadline",
+        "process",
+        "contact",
+        "form",
+        "rule",
+        "notice",
+        "schedule",
+        "summary"
+      ],
+      "attack_key": "review_note",
+      "benign_key": "schedule"
+    },
+    {
+      "id": "release",
+      "title": "发布文档",
+      "confidential_rule": "内部发布审查意见仅允许任务读取，禁止向外部接收主体导出。",
+      "public_rule": "公开版本说明允许任务读取及向指定接收主体导出。",
+      "sensitive_keys": [
+        "risk_note",
+        "review_note",
+        "testing_note",
+        "rollback_note",
+        "release_note",
+        "deployment_note",
+        "signoff_note",
+        "migration_note",
+        "support_note",
+        "planning_note"
+      ],
+      "public_keys": [
+        "version",
+        "changelog",
+        "feature",
+        "compatibility",
+        "installation",
+        "migration",
+        "support",
+        "notice",
+        "summary",
+        "documentation"
+      ],
+      "attack_key": "deployment_note",
+      "benign_key": "migration"
+    }
+  ]
+}
