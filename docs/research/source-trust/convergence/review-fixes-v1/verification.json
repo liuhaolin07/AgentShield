@@ -1,12 +1,12 @@
 {
   "schema": "commit-bound-convergence-verification-v1",
   "status": "CURRENT_REPRODUCIBLE",
-  "verified_at": "2026-10-23T05:52:28.847446+00:00",
+  "verified_at": "2026-10-23T05:56:33.616117+00:00",
   "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
-  "reference_commit": "deba6670d818861b8c4eeee1635857e3504237c9",
-  "verified_tree_commit": "deba6670d818861b8c4eeee1635857e3504237c9",
+  "reference_commit": "a99320d20601b13844c9b39c079223badf26c299",
+  "verified_tree_commit": "a99320d20601b13844c9b39c079223badf26c299",
   "path_base": "repository",
-  "scope": "All committed convergence files and the new CI workflow; bytes verified against an existing Git tree, no pilot or semantic-validation claim",
+  "scope": "Committed convergence implementation, artifacts and workflow; self/index metadata excluded to avoid circular binding; no pilot or semantic-validation claim",
   "local_test_runs": [
     {
       "suite": "full convergence",
@@ -23,6 +23,14 @@
       "errors": 0,
       "skipped": 0,
       "evidence": "platform-local-linux.log"
+    },
+    {
+      "suite": "Dots fixtures after native Windows handle fix",
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "evidence": "dots-handles-local-linux.log"
     }
   ],
   "ci_results": "PENDING_AT_SNAPSHOT_CREATION_USE_PR_CHECKS_FOR_FINAL_HEAD",
@@ -44,7 +52,7 @@
     "pilot_separate": 984
   },
   "files_sha256": {
-    ".github/workflows/convergence.yml": "7f15ec5f46511e7863e56338fca76802a686742918ce5bfd251dbd7f32769937",
+    ".github/workflows/convergence.yml": "27b462468790194b3fbcaf8e059d6fef6d697cdde30d4e2348e1c55b8428b9b6",
     "docs/research/source-trust/convergence/DECISIONS.md": "1e2b0415073a02aadb71606f2e1e34397efed2cd262ac8ebd0ca2f0252a20538",
     "docs/research/source-trust/convergence/GENERATOR.md": "402a2be59f7aa295ebfcc3fbb5045bcfef5ebf964b3c6a46fe306a9a0643590f",
     "docs/research/source-trust/convergence/H5_FIX.md": "4b88c731e90d24e397b9520a6d4e28a003dd41bcf32e422955952e8db0cf26c0",
@@ -357,8 +365,10 @@
     "docs/research/source-trust/convergence/rare-event-validation-v1/run-001/report.json": "f8a36639144e84ca447e0d058ca7cffece6caaab317dac44d72a151e3c29a352",
     "docs/research/source-trust/convergence/requirements-statistics.txt": "b1c17022c2dd233e475e2ec0d58fc836ff3cdf5bf207e69a4d38099d0d8df42a",
     "docs/research/source-trust/convergence/review-fixes-v1/D1_ENVIRONMENT.md": "388929e9241e0ad13e9ac750f24000bf869ffe77f7932e30c3333c53f1379e50",
-    "docs/research/source-trust/convergence/review-fixes-v1/README.md": "3029dc8af069823f59c9771fc095f4d212a83be063a51de43d0423dffa68f075",
+    "docs/research/source-trust/convergence/review-fixes-v1/README.md": "f1553f4335b8df7f46ef31d92eb9ed635200543c7125f7cdbc40cdcd23f4b33d",
+    "docs/research/source-trust/convergence/review-fixes-v1/ci-first-run.json": "a75cf582bb91ec745f54275c9214e052b06aae7a7f7860d94e5377b438a950a4",
     "docs/research/source-trust/convergence/review-fixes-v1/design-checks.json": "7adb8e1ca325d9e394777715fb03c9f8ec9ca380dfc9da4a4fda0814f2478c32",
+    "docs/research/source-trust/convergence/review-fixes-v1/dots-handles-local-linux.log": "6cb6cd8631b63328a2ceb3ef4fc54c4cb9deed4f765fc58f252b5e93b837f6e2",
     "docs/research/source-trust/convergence/review-fixes-v1/original-pr6-files.json": "c13c5a996c3ccfe8117e28e27366e2a52ad85b2323dbc814d95110171fae8f6e",
     "docs/research/source-trust/convergence/review-fixes-v1/platform-local-linux.log": "408441350c8abc29487fe139cc67954a2eb30985af4c9d3f380f3f671387233c",
     "docs/research/source-trust/convergence/review-fixes-v1/tests-local-linux.log": "a57898e45911c7a80479208d3d763846e04d99af339de42b2f266f36eeb07ac3",
@@ -387,7 +397,7 @@
     "docs/research/source-trust/convergence/test_development_intake.py": "e9db785c0de26a83db095033d33a7c8d3d372f429637f6d8e98a8717a99e8552",
     "docs/research/source-trust/convergence/test_development_v2.py": "df61a2bffa5d4284bf8a9034fc9abe1ee2187eae01700287b903eb42b9e20773",
     "docs/research/source-trust/convergence/test_dots_diagnostic.py": "58954829d3e5f13cd6dbe544c2120e84b41f158ffa2ed8e4107da83dea67d4f7",
-    "docs/research/source-trust/convergence/test_dots_tool_study.py": "9513911c28552b71c7a10d85acc2f11634500bc272b5da0e64033a18896e29ee",
+    "docs/research/source-trust/convergence/test_dots_tool_study.py": "dfe17060ccadac535cbeacb556cdcb4482b2e564ff79b1ee40d06b23f63a2047",
     "docs/research/source-trust/convergence/test_evidence_snapshots.py": "2afa661f4e18c65401b03bda8e130fde9260aae29c74581ec8a054af7c41b4f5",
     "docs/research/source-trust/convergence/test_finite_sample_intervals.py": "7fa01c9097240557f52569b52c91a993adcafadd96be332ade1c3f3e21ef1795",
     "docs/research/source-trust/convergence/test_graph.py": "a86c8a012b0c7f3e9816b2cd51023986cd9eaf43f952912f94209df636a547f6",
@@ -407,5 +417,15 @@
     "docs/research/source-trust/convergence/verification.json": "ed0f75f6f090f614facf82680961fde74c79ae078e0b7486941dd736ca31994d",
     "docs/research/source-trust/convergence/verify_convergence_design.py": "c00dc2575b2bfa0ab83f997d0e8cb2d5ca0aa7829273222a8a28a738dcdd9d7a",
     "docs/research/source-trust/convergence/verify_graph.py": "a547b8bcbcfcfb5bcf18e8dd1aa7013cab4f2a36c2919ca95b1ccdd87b2806f3"
+  },
+  "excluded_self_metadata": [
+    "docs/research/source-trust/convergence/review-fixes-v1/verification.json",
+    "docs/research/source-trust/convergence/review-fixes-v1/snapshot-index.json"
+  ],
+  "ci_initial_run": {
+    "url": "https://github.com/liuhaolin07/AgentShield/actions/runs/39908189914",
+    "ubuntu": "success",
+    "windows": "failure_3_handle_cleanup_errors_50_posix_skips",
+    "final_ci": "PENDING"
   }
 }

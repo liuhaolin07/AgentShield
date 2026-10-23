@@ -317,10 +317,10 @@
     },
     {
       "path": "docs/research/source-trust/convergence/review-fixes-v1/verification.json",
-      "snapshot_sha256": "ea1535fd7c9e22a2686969cdee67eba0d1f451a87abf86340764782592299cf4",
+      "snapshot_sha256": "8072ad376f855fc0e22209a41894c661ab19efcf52c9dff399a376dbcae79b24",
       "status": "CURRENT_REPRODUCIBLE",
       "base_commit": "b631d1c17c6d1125d4ffc9969f5e794926c49681",
-      "verified_tree_commit": "deba6670d818861b8c4eeee1635857e3504237c9",
+      "verified_tree_commit": "a99320d20601b13844c9b39c079223badf26c299",
       "path_base": ""
     }
   ]
