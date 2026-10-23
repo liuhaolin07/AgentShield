@@ -300,6 +300,78 @@ class DesignBindingTests(unittest.TestCase):
                     self.assertEqual(json.loads(result.stdout),
                         {'state': 'INVALID_DESIGN_METADATA', 'experiment_authorized': False})
 
+    def check_reference_values(self, ref_name, field):
+        module = load_module()
+        from engineering_fixture import make_packet, mutate_document
+        import json, os, subprocess, sys, tempfile
+        packet = make_packet(module)
+        cases = [('engineering', packet, 0, 'DESIGN_METADATA_VALID_NOT_AUTHORIZED')]
+        for name, value in [('plain_text', ' 工程 outcomes {"outcomes":[0,1]} \t'),
+                            ('null', None), ('object', {'outcomes': [0, 1]}),
+                            ('list', []), ('empty', ''), ('whitespace', ' \t\r\n')]:
+            altered = mutate_document(module, packet, ref_name,
+                lambda doc, value=value: doc.update({field: value}))
+            valid = name == 'plain_text'
+            cases.append((name, altered, 0 if valid else 1,
+                          'DESIGN_METADATA_VALID_NOT_AUTHORIZED' if valid else 'INVALID_DESIGN_METADATA'))
+        proposal = json.loads((MODULE_PATH.parent/'proposal.json').read_text(encoding='utf-8'))
+        self.assertTrue(all(proposal[ref] is None for ref in module.REFS))
+        cases.append(('pending', proposal, 2, 'PENDING_REAL_DESIGN_INPUTS'))
+        blocked = ('experiment_authorized', 'interval_selection_ready', 'coverage_certified',
+                   'power_validated', 'pre_outcome_timing_independently_verified',
+                   'source_frame_authenticity_verified', 'independence_verified', 'pilot_dispatchable')
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            def git(*args):
+                return subprocess.check_output(['git', '-c', 'core.autocrlf=false',
+                    '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath='+str(repo/'no-hooks'),
+                    '-C', str(repo), *args], stderr=subprocess.PIPE)
+            git('init', '-q')
+            git('config', 'user.name', 'Engineering Test')
+            git('config', 'user.email', 'engineering@example.invalid')
+            prefix = 'docs/research/source-trust/convergence/prospective-design-v1/'
+            for name, value, _, _ in cases:
+                target = repo/(prefix+name+'.json')
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(module.canonical(value))
+            git('add', '--', prefix)
+            git('commit', '-qm', 'Engineering reference syntax metadata only')
+            revision = git('rev-parse', 'HEAD').decode().strip()
+            env = dict(os.environ); env.pop('PYTHONPATH', None)
+            command = [sys.executable, '-I', '-X', 'utf8', str(MODULE_PATH),
+                       '--repo', str(repo), '--commit', revision, '--packet']
+            for name, value, exitcode, state in cases:
+                with self.subTest(case=name, entrypoint='check_packet'):
+                    if exitcode == 1:
+                        with self.assertRaisesRegex(ValueError, '^'+field+'$'):
+                            module.check_packet(value)
+                    else:
+                        report = module.check_packet(value)
+                        self.assertEqual(report['state'], state)
+                        for flag in blocked:
+                            self.assertIs(report[flag], False, flag)
+                        self.assertEqual(report['formal_materials_admitted'], 0)
+                with self.subTest(case=name, entrypoint='git_cli'):
+                    result = subprocess.run(command+[prefix+name+'.json'], env=env, capture_output=True)
+                    self.assertEqual(result.returncode, exitcode, result.stdout.decode('utf-8', errors='replace'))
+                    self.assertEqual(result.stderr, b'')
+                    report = json.loads(result.stdout)
+                    if exitcode == 1:
+                        self.assertEqual(report, {'state': 'INVALID_DESIGN_METADATA',
+                                                  'experiment_authorized': False})
+                    else:
+                        self.assertEqual(report['state'], state)
+                        self.assertEqual(report['packet_git_commit'], revision)
+                        for flag in blocked:
+                            self.assertIs(report[flag], False, flag)
+                        self.assertEqual(report['formal_materials_admitted'], 0)
+
+    def test_origin_evidence_ref_requires_nonblank_string(self):
+        self.check_reference_values('sampling_randomness_ref', 'origin_evidence_ref')
+
+    def test_review_record_ref_requires_nonblank_string(self):
+        self.check_reference_values('cluster_independence_evidence_ref', 'review_record_ref')
+
     def test_json_duplicate_keys_and_nonfinite_values_are_rejected(self):
         module = load_module()
         self.assertTrue(hasattr(module,'parse_json'), 'strict metadata JSON decoder is missing')

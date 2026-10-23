@@ -46,7 +46,7 @@ jobs:
           python -I -X utf8 -m unittest discover -s docs/research/source-trust/convergence/d5-calibration-v2/tests -p 'test_*.py' -v 2>&1 | tee logs/convergence/d5-v2-tests.log
       - name: Prospective design metadata tests (no admission or pilot)
         run: |
-          python -I -X utf8 -c "import unittest; s=unittest.defaultTestLoader.discover('docs/research/source-trust/convergence/prospective-design-v1/tests', pattern='test_*.py'); r=unittest.TextTestRunner(verbosity=2).run(s); raise SystemExit(not (r.wasSuccessful() and r.testsRun == 13 and len(r.skipped) == 0))" 2>&1 | tee logs/convergence/prospective-design-tests.log
+          python -I -X utf8 -c "import unittest; s=unittest.defaultTestLoader.discover('docs/research/source-trust/convergence/prospective-design-v1/tests', pattern='test_*.py'); r=unittest.TextTestRunner(verbosity=2).run(s); raise SystemExit(not (r.wasSuccessful() and r.testsRun == 15 and len(r.skipped) == 0))" 2>&1 | tee logs/convergence/prospective-design-tests.log
           for packet in prospective-design-v1/proposal.json ledger-input-validation-v1/run-001/sampling-contract.json; do
             name=$(basename "$packet" .json)
             if python -I -X utf8 docs/research/source-trust/convergence/prospective-design-v1/design_binding.py --commit HEAD --packet "docs/research/source-trust/convergence/$packet" > "logs/convergence/design-$name.json"; then

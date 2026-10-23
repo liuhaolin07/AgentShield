@@ -12,7 +12,9 @@
 
 ## 实现边界
 
-`design_binding.py` 接收**仅元数据**的设计包：引用文档保存为 UTF-8 原文，按原字节SHA-256绑定；承诺摘要覆盖全部成员、抽签、计划和执行器声明，不包含摘要字段自身。CLI只从指定git提交读普通blob，不跟随文件系统符号链接，不打开来源载荷、保留答案、网络或执行器。
+`design_binding.py` 接收**仅元数据**的设计包：引用文档保存为 UTF-8 原文，按原字节SHA-256绑定；承诺摘要覆盖全部成员、抽签、计划和执行器声明，不包含摘要字段自身。CLI只从指定git提交读普通blob，不跟随文件系统符号链接，不打开来源载荷、保留答案或执行器，不直接发起外网请求。未对Git partial clone的隐式取对象做负控验收，不声称任意Git配置下的强离线保证。
+
+`randomness.origin_evidence_ref` 与 `audit.review_record_ref` 仅要求值为字符串且 `value.strip()` 非空；null、对象、列表、空串和纯空白均拒绝。原有工程引用字符串仍合法，不要求digest或URI，不读取所引用的证据，也不递归扫描字符串内的 `outcomes`。该语法检查不证明证据真实性、事前时序或独立性，不增加任何研究许可。
 
 三个旧依赖仅从程序所属可信仓库（`HERE.parents[4]`）的固定基线 `d2f2f02d8066bcad7902200aebe978015f5266d7` 读取：`docs/research/source-trust/protocol-draft.json`、`convergence/candidate-materials-v1/manifest.json`、`convergence/candidate-materials-v1/authoring-spec.json`（后两项相对 `docs/research/source-trust/`）。内部白名单及共享普通Git blob读取器拒绝symlink/submodule，逐项校验固定SHA-256，无工作树/磁盘回退；外部测试包可在不含该基线的独立仓库，依赖仍从程序仓库读取。报告的 `dependency_git_commit` / `dependency_sha256` 明示基线和三项字节摘要。公开包读取白名单不扩大到这些旧依赖或payload。`configuration_sha256` 必须是三模式摘要对象，列表等非法输入由CLI结构化拒绝（`INVALID_DESIGN_METADATA`、exit 1），不泄漏traceback。
 

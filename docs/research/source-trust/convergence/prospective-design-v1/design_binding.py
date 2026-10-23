@@ -204,6 +204,8 @@ def verify_complete_design(packet):
             and randomness['frame_sha256'] == packet['sampling_frame_ref']
             and randomness['frame_before_randomness_is_declaration_not_proof'] is True,
             'randomness_frame_binding')
+    require(isinstance(randomness['origin_evidence_ref'], str) and randomness['origin_evidence_ref'].strip(),
+            'origin_evidence_ref')
     entropy = bytes.fromhex(randomness['random_bytes_hex'])
     selected, consumed = draw_clusters(frames, entropy, 30)
     require(packet['selected_cluster_ids'] == selected, 'selection_not_reproduced')
@@ -213,6 +215,8 @@ def verify_complete_design(packet):
     require(audit['schema'] == 'lineage-audit-declaration-v1' and audit['frame_sha256'] == packet['sampling_frame_ref']
             and audit['mapping_sha256'] == digest(mapping) and audit['not_independently_verified'] is True,
             'lineage_declaration_binding')
+    require(isinstance(audit['review_record_ref'], str) and audit['review_record_ref'].strip(),
+            'review_record_ref')
     plan = document(packet, 'preexecution_plan_ref')
     fields(plan, 'schema frame_sha256 selected_ids_sha256 graphs planned_execution_rows', 'plan_metadata_fields')
     fields(plan['graphs'], 'development holdout', 'plan_split_inventory')
