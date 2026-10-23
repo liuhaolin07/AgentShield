@@ -36,11 +36,14 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pinned offline test dependency
-        run: python -m pip install numpy==2.3.5
+        run: python -m pip install -r docs/research/source-trust/convergence/d5-calibration-v2/requirements.txt
       - name: CI log gate regression tests (outside the frozen 212-test suite)
         run: |
           mkdir -p logs/convergence
           python -I -m unittest discover -s docs/research/source-trust/ci -p 'test_*.py' -v 2>&1 | tee logs/convergence/log-gate-tests.log
+      - name: D5 v2 engineering tests (not a calibration run or pilot)
+        run: |
+          python -I -X utf8 -m unittest discover -s docs/research/source-trust/convergence/d5-calibration-v2/tests -p 'test_*.py' -v 2>&1 | tee logs/convergence/d5-v2-tests.log
       - name: Full convergence suite (platform skips remain visible)
         run: |
           mkdir -p logs/convergence
