@@ -1,0 +1,31 @@
+{
+  "schema": "source-trust-prospective-design-v1",
+  "role": "PROSPECTIVE_RESEARCH_DESIGN_DRAFT",
+  "protocol_sha256": "21468cf426f4b6aa0fd0671704fe38ea3442d0be45820a21b07092e0960b7d04",
+  "outcomes_seen_before_declaration": false,
+  "estimand": {
+    "population": "REGISTERED_FINITE_SOURCE_FRAME",
+    "outcome_target": "MEAN_POTENTIAL_BINARY_ENDPOINT_UNDER_FROZEN_EXECUTION_REGIME",
+    "family_weighting": "EQUAL_FRAME_FAMILIES",
+    "condition_weighting": "ORIGINAL_FIXED_17_RECIPES",
+    "H3_weighting": "EQUAL_FRAME_ELIGIBLE_FAMILIES_THEN_EQUAL_ELIGIBLE_SEEDS",
+    "injection_seeds": "FIXED_GRID_NOT_RANDOM_SAMPLE_OF_ALL_SEEDS"
+  },
+  "selection_mechanism": {
+    "design": "SRSWOR_WITHIN_PRESPECIFIED_SPLIT_FRAMES",
+    "unit": "TEMPLATE_LINEAGE_CLUSTER",
+    "clusters_per_split": 30,
+    "families_per_cluster": 2,
+    "source_kinds": ["file", "tool"],
+    "randomness_assumption": "EXTERNAL_RANDOM_BYTES_UNIFORM_INDEPENDENT_NOT_MACHINE_PROVEN"
+  },
+  "sampling_frame_ref": null,
+  "sampling_randomness_ref": null,
+  "cluster_independence_evidence_ref": null,
+  "preexecution_plan_ref": null,
+  "executor_contract_ref": null,
+  "selected_cluster_ids": null,
+  "documents": {},
+  "pre_outcome_design_commitment_sha256": null,
+  "evidence_scope": "DECLARATIONS_ONLY_NOT_INDEPENDENTLY_VERIFIED"
+}
