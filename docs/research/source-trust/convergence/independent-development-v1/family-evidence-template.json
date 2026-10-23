@@ -1,0 +1,12 @@
+{
+  "family_id": null,
+  "source_file": null,
+  "truth_ref": null,
+  "authorization_ref": null,
+  "dependency_ref": null,
+  "lineage_ref": null,
+  "authorship_ref": null,
+  "review_ref": null,
+  "pre_execution_commitment_ref": null,
+  "receipt_refs": {}
+}

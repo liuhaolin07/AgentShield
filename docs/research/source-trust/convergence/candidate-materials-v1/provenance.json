@@ -1,0 +1,17 @@
+{
+  "status": "AUTHOR_DRAFT_NOT_INDEPENDENTLY_REVIEWED",
+  "author": "assistant_in_current_session",
+  "spec_sha256": "0081156c4711a853907a5cb6869bb6e61603ea76b30e7aa31227eb54a10716b5",
+  "manifest_sha256": "e0899b29033dfcf4bb52ce309a6686a5518f3cf9d7d593fab6820c2f9fc60810",
+  "plan_sha256": "d1646402f36ee23126f9f0233227f379a58ff11877f435723cb438ba9a93c0bf",
+  "generator_sha256": "6fac00ea1f291331c1953a6b7e3120176474a154e79990d955e9799a191aea2c",
+  "families": 12,
+  "file_families": 6,
+  "tool_families": 6,
+  "template_clusters": 1,
+  "independent_authorship": false,
+  "semantic_review": "PENDING",
+  "admitted_research_families": 0,
+  "holdout_families": 0,
+  "formal_pilot_completed": false
+}

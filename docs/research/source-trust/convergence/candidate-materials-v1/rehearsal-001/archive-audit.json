@@ -1,0 +1,12 @@
+{
+  "scope": "Read-only same-process archive validation; not third-party reproduction",
+  "matched_precision_conservative_pairs": 312,
+  "paired_state_mismatches": 0,
+  "observation_cells_including_controls": 82,
+  "planned_rows_per_cell": 12,
+  "minimum_valid_rows_per_cell": 12,
+  "graph_projection_receipt_and_code_hash_check": "PASSED",
+  "missingness_worst_case_inference": "NOT_IMPLEMENTED",
+  "independent_semantic_review": "PENDING",
+  "ledger_sha256": "d56118313af13ebba4ede459bcb17f76188419237e38a2ad83f2054bd9408add"
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "source-trust-sampling-draft-v1",
+  "status": "DRAFT_DECLARED_AFTER_ENGINEERING_OUTCOMES",
+  "input_files_sha256": {
+    "authoring-spec.json": "4e04bd86e980c3f4a3346becefdcc6f7f6e060a5af2ccfae79c2a1a289a96117",
+    "manifest.json": "e22a600d6c0dbc26d7ca640950a4b74d510e0dec8c76ee56a08718b56731245b",
+    "plan.json": "d1d78b61ce55f4727d6b4b5bb589c2c85f56bdf6039611ee7d1a78d86a536a05",
+    "rehearsal-001/rows.jsonl": "d56118313af13ebba4ede459bcb17f76188419237e38a2ad83f2054bd9408add",
+    "rehearsal-001/summary.json": "1fa473ea70f5f517cd28905d717135dfa87d15ef0642e1603957a56c861f5ec4"
+  },
+  "current_estimand": "descriptive_mean_over_fixed_author_fixture_set_and_fixed_conditions",
+  "current_selection": "author_convenience_synthetic_fixtures",
+  "probability_sample": false,
+  "outcomes_seen_before_declaration": true,
+  "declared_lineage": {
+    "id": "flat-single-leaf-identity-generator-v1",
+    "author": "assistant_in_current_session",
+    "basis": "shared authoring spec, value recipe and identity instruction template"
+  },
+  "members": [
+    {
+      "family_id": "candidate-calendar-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "a9c6acd861166e976275e1e5b016aeebaf7fbdede0d5aa83f83c041148c61d82"
+    },
+    {
+      "family_id": "candidate-calendar-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "1051f3518295eabb5d11a2ea1af34064daf575cebf07158ba6b6387c38cd0320"
+    },
+    {
+      "family_id": "candidate-expense-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "69dfd09f82db008aaf9452e25352a2fa5d4ca0dded2f8c2585910a220c663dff"
+    },
+    {
+      "family_id": "candidate-expense-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "073671549d77319ed91e35606bcfa92ac0b08ca81617a20d6bba9a27a3eb6080"
+    },
+    {
+      "family_id": "candidate-release-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "cef78d478b670adc358f8f54f1e2d90d81440fbf25e16c22246b16b15181e765"
+    },
+    {
+      "family_id": "candidate-release-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "6375283cda319de3180fd2ab6f49ce964b622e03d6cfd1fc5bc4b0d5989d71d3"
+    },
+    {
+      "family_id": "candidate-service-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "740a81e2a3a1e9e9863023b982607d2f5eba0e484487a8a28b6e30b3635b3bc9"
+    },
+    {
+      "family_id": "candidate-service-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "e553b9a18aed981c9d97a04053d50d5792ab50a455204f3e733e25f4629e0650"
+    },
+    {
+      "family_id": "candidate-support-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "2cb1999f614e2f2a30aa4f4ea9d6782713bc89353113a1797c2459ceae29ebfc"
+    },
+    {
+      "family_id": "candidate-support-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "dd0bc287b0e8bfa989a7263bee6e15868840c742923b5f7410e525dd4125e0e6"
+    },
+    {
+      "family_id": "candidate-warehouse-file",
+      "split": "development",
+      "source_kind": "file",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "d6b40004c7a5a19aaf8abe61896cd4ea658c8178eaf0e23ca5e7f33d440dc9ba"
+    },
+    {
+      "family_id": "candidate-warehouse-tool",
+      "split": "development",
+      "source_kind": "tool",
+      "template_cluster_id": "flat-single-leaf-identity-generator-v1",
+      "lineage_id": "flat-single-leaf-identity-generator-v1",
+      "source_sha256": "3305a5d4a767e8d2e2dd8284ae06cba25ef0b77d6f78f579d813412762d49c27"
+    }
+  ],
+  "proposed_research": {
+    "status": "UNSPECIFIED_NOT_FROZEN",
+    "scope": "external families satisfying the frozen first-panel contract and disjoint from development templates",
+    "estimand": null,
+    "sampling_frame_ref": null,
+    "selection_mechanism": null,
+    "sampling_randomness_ref": null,
+    "cluster_independence_evidence_ref": null,
+    "pre_outcome_design_commitment_sha256": null
+  },
+  "independent_review_records": [],
+  "independence_verified": false,
+  "formal_material_admission": false,
+  "interval_method_selected": false,
+  "preregistered": false,
+  "experiment_authorized": false
+}

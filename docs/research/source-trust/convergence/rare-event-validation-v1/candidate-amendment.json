@@ -1,0 +1,14 @@
+{
+  "amendment_id": "finite-sample-interval-candidate-v1",
+  "status": "PROPOSED_NOT_APPLIED_NOT_REGISTERED",
+  "reason": "The fixed rare-cluster-event stress scenario exposed percentile bootstrap undercoverage.",
+  "candidate_method": "weighted_cluster_Hoeffding_with_17_statistic_Bonferroni",
+  "target": "conditional expectation of fixed family-weighted components given the frozen design",
+  "assumptions": ["independent clusters", "fixed cluster membership and family counts before outcomes", "H3 eligibility fixed before outcomes", "known component bounds"],
+  "restricted_diagnostic_only": "Exact binomial-tail inversion applies only to genuine iid binary cluster counts; not general paired contrasts, AUC, seed averages or unequal family weights.",
+  "preserved": {"H1_H5_numeric_criteria": true, "H5_existing_role_amendment": true, "E0_E1_rows": 54720, "E3_rows": 3600, "pilot_rows": 984, "statistic_count": 17},
+  "acceptance_still_pending": ["independent proof and implementation review", "justification of sampling and cluster-independence assumptions", "validated archive endpoint adapter", "binary task and missingness joint validation", "power and precision adequacy within the existing budget", "explicit final protocol selection before registration"],
+  "applied_to_effective_protocol": false,
+  "preregistered": false,
+  "experiment_authorized": false
+}

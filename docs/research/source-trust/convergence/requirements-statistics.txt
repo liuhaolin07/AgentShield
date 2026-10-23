@@ -1,0 +1,3 @@
+# Optional offline statistical validation environment; not runtime dependencies.
+numpy==2.3.5
+matplotlib==3.10.8

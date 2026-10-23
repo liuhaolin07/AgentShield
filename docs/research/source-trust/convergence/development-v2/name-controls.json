@@ -1,0 +1,67 @@
+{
+  "matching_key": [
+    "family_id",
+    "candidate_id"
+  ],
+  "name_features_used_for_targeting": false,
+  "treatment": "CONTROLLED_NOT_EXCLUDED_KEEP_PER_FAMILY_COST_AND_UNIVERSE",
+  "repeated_review_note_candidates": [
+    "candidate-calendar-file:leaf:06",
+    "candidate-calendar-tool:leaf:06",
+    "candidate-expense-file:leaf:02",
+    "candidate-expense-tool:leaf:02",
+    "candidate-release-file:leaf:01",
+    "candidate-release-tool:leaf:01",
+    "candidate-service-file:leaf:09",
+    "candidate-service-tool:leaf:09",
+    "candidate-support-file:leaf:04",
+    "candidate-support-tool:leaf:04"
+  ],
+  "within_family_containment_pairs": [
+    {
+      "family_id": "candidate-release-file",
+      "paths": [
+        "/migration_note",
+        "/migration"
+      ],
+      "candidate_ids": [
+        "candidate-release-file:leaf:07",
+        "candidate-release-file:leaf:15"
+      ]
+    },
+    {
+      "family_id": "candidate-release-file",
+      "paths": [
+        "/support_note",
+        "/support"
+      ],
+      "candidate_ids": [
+        "candidate-release-file:leaf:08",
+        "candidate-release-file:leaf:16"
+      ]
+    },
+    {
+      "family_id": "candidate-release-tool",
+      "paths": [
+        "/migration_note",
+        "/migration"
+      ],
+      "candidate_ids": [
+        "candidate-release-tool:leaf:07",
+        "candidate-release-tool:leaf:15"
+      ]
+    },
+    {
+      "family_id": "candidate-release-tool",
+      "paths": [
+        "/support_note",
+        "/support"
+      ],
+      "candidate_ids": [
+        "candidate-release-tool:leaf:08",
+        "candidate-release-tool:leaf:16"
+      ]
+    }
+  ],
+  "lookup_semantics": "EXACT_JSON_POINTER_NOT_SUBSTRING"
+}

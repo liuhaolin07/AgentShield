@@ -1,0 +1,7 @@
+{
+  "evidence_inventory": [],
+  "family_evidence": [],
+  "manifest_sha256": "2909743889ef4373a03d4a672020d193f6cd4cd41b26e8fab5e57be6399d5c88",
+  "purpose": "DEVELOPMENT_ONLY_PREFLIGHT",
+  "schema_version": "development-delivery-v1"
+}

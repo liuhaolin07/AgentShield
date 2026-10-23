@@ -1,0 +1,17 @@
+{
+  "version": "rare-event-validation-v1",
+  "scope": "UNAPPLIED_INTERVAL_CANDIDATE_COMPARISON",
+  "reference_config": "statistics-validation-v1/config.json",
+  "reference_report": "statistics-validation-v1/run-001/report.json",
+  "reuse_reference_synthetic_draws": true,
+  "reference_bootstrap_rerun": false,
+  "methods": ["reference_percentile_cluster_bootstrap", "weighted_cluster_Hoeffding_candidate"],
+  "restricted_diagnostic": "Clopper_Pearson_only_for_known_iid_binary_cluster_event",
+  "binomial_enumeration_n": [10, 30, 60],
+  "binomial_enumeration_p": [0, 0.001, 0.01, 0.1, 0.5, 0.9, 0.99, 0.999, 1],
+  "familywise_alpha": 0.05,
+  "statistic_count": 17,
+  "data_driven_selection": false,
+  "protocol_replacement": false,
+  "confirmatory_success": false
+}

@@ -1,0 +1,50 @@
+{
+  "status": "CONDITIONALLY_APPROVED_ENGINEERING_STARTED",
+  "recorded_at": "2026-10-23T11:41:50.604858+08:00",
+  "source": "current_user_message",
+  "review_basis": "INLINE_MESSAGE_ONLY",
+  "attachments_verified_by_reviewer": false,
+  "local_artifact_inventory": "Earlier PDF/ZIP found in this execution workspace; not evidence that reviewer accessed them",
+  "approved_work_packages": [
+    "D1",
+    "D2",
+    "D3",
+    "D4"
+  ],
+  "conditions": {
+    "C1": {
+      "binding": "H3 candidate-ID matching and name controls",
+      "completion": "IMPLEMENTED_FORWARD_ENGINEERING_VERSION_NO_FORMAL_H3_CLAIM"
+    },
+    "C2": {
+      "binding": "material admission: >=3 blinded raters, 240 fields, Fleiss kappa and all adjudications, 12-to-60 provenance plan",
+      "completion": "PENDING_REAL_BLIND_RATERS_AND_ADJUDICATION_INTAKE_REMAINS_ZERO"
+    },
+    "C3": {
+      "binding": "arm-wise five categories and deviation comparability gate, threshold pending D5",
+      "completion": "IMPLEMENTED_THRESHOLD_PENDING_D5"
+    },
+    "C4": {
+      "binding": "raw bodies archived and hashed; missing archive in denominator; seeded rescore sample",
+      "completion": "RAW_TOOL_RPC_ARCHIVE_IMPLEMENTED_MODEL_TRANSPORT_NOT_YET_INTEGRATED"
+    },
+    "C5": {
+      "binding": "defense_mode and configuration hash per row",
+      "completion": "IMPLEMENTED_AND_TESTED"
+    },
+    "C6": {
+      "binding": "D5 joint coverage validation, minimum independent clusters and fallback, grid and 17 statistics",
+      "completion": "REQUIREMENTS_INVENTORIED_STATISTICS_NOT_FINALIZED"
+    },
+    "C7": {
+      "binding": "D5 H4 candidates, development-only selection and timed re-entry/freeze",
+      "completion": "REENTRY_DRAFT_RECORDED_H4_STILL_DEFERRED"
+    }
+  },
+  "D6_pilot_material_requirement": "ACCEPTED_CALIBRATED_MATERIALS_DISJOINT_FROM_KNOWN_AUTHOR_FIXTURES",
+  "formal_materials_admitted": 0,
+  "formal_pilot_rows": 0,
+  "preregistered": false,
+  "new_paid_model_calls_authorized_by_this_record": 0,
+  "development_implementation": "D1_D4_BOUNDED_AUTHOR_IDENTITY_SUBSET_IMPLEMENTED_AND_ENGINEERING_VALIDATED"
+}
