@@ -30,8 +30,10 @@ def main() -> int:
     args = parser.parse_args()
 
     if not args.llm:
-        agent(args.task, policy_path=args.policy, audit_path=args.audit_log)
-        return 0
+        completed = agent(
+            args.task, policy_path=args.policy, audit_path=args.audit_log
+        )
+        return 0 if completed else 2
 
     try:
         client = DotsClient(base_url=args.base_url, model=args.model)

@@ -3,6 +3,7 @@
 from collections.abc import Mapping
 from dataclasses import dataclass
 from os import PathLike
+from pathlib import Path
 from typing import Any
 
 from security.audit import DEFAULT_AUDIT_PATH, write_audit_event
@@ -113,7 +114,13 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if policy.blocks_file(path):
+        # Check the blocked-name list against the resolved path as well: a
+        # symlink with an innocuous name must not dodge a blocked target name.
+        resolved_path = Path(path)
+        if not resolved_path.is_absolute():
+            resolved_path = policy.base_directory / resolved_path
+        resolved_path = resolved_path.resolve()
+        if policy.blocks_file(path) or policy.blocks_file(str(resolved_path)):
             return _finish_decision(
                 allowed=False,
                 reason="blocked_file",
@@ -123,7 +130,7 @@ def check_tool_call(
                 audit_path=audit_path,
                 capability=capability,
             )
-        if not policy.allows_file(path):
+        if not policy.allows_file(resolved_path):
             return _finish_decision(
                 allowed=False,
                 reason="file_outside_allowed_roots",

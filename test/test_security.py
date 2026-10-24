@@ -32,6 +32,96 @@ class AgentShieldTests(unittest.TestCase):
         self.assertTrue(scan_sensitive("ak_1234567890abcdef"))
         self.assertFalse(scan_sensitive("service started successfully"))
 
+    def test_scanner_does_not_flag_words_containing_sk(self) -> None:
+        """Ordinary words ending in "sk" must not match the key pattern."""
+        self.assertFalse(scan_sensitive("task-1234567890"))
+        self.assertFalse(scan_sensitive("risk-2026"))
+        self.assertFalse(scan_sensitive("desk-42 status report"))
+        self.assertTrue(scan_sensitive("sk-1234567890abcdef"))
+        self.assertTrue(scan_sensitive("SK-abcdefghijklmnop"))
+
+    def test_model_payload_with_task_id_is_not_flagged(self) -> None:
+        """The serialized loop payload contains the user task text, so a
+        task id like task-1234567890 must not read as a leaked API key."""
+        decision = check_tool_call(
+            "model",
+            {
+                "url": "https://note3-prev-api.askdiandian.com/v1/chat/completions",
+                "data": json.dumps(
+                    {
+                        "messages": [
+                            {"role": "user", "content": "summarize task-1234567890"}
+                        ]
+                    }
+                ),
+            },
+            audit_path=self.audit_path,
+        )
+        self.assertTrue(decision)
+        self.assertEqual(decision.reason, "policy_passed")
+
+    def test_symlink_to_blocked_file_is_blocked(self) -> None:
+        """A benign-named symlink must not dodge the blocked-target name."""
+        root = Path(self.temp_directory.name) / "root"
+        root.mkdir()
+        (root / ".env").write_text("PASSWORD=demo-only\n", encoding="utf-8")
+        link = root / "notes.txt"
+        try:
+            link.symlink_to(root / ".env")
+        except OSError:
+            self.skipTest("symlinks unavailable on this platform")
+        policy_path = Path(self.temp_directory.name) / "policy.yaml"
+        policy_path.write_text(
+            "blocked_files:\n"
+            "  - .env\n"
+            "allowed_file_roots:\n"
+            "  - root\n"
+            "allowed_domains:\n"
+            "  - example.com\n",
+            encoding="utf-8",
+        )
+
+        decision = check_tool_call(
+            "file",
+            {"path": str(link)},
+            policy_path=policy_path,
+            audit_path=self.audit_path,
+        )
+        self.assertFalse(decision)
+        self.assertEqual(decision.reason, "blocked_file")
+
+    def test_policy_cache_reloads_when_file_changes(self) -> None:
+        policy_path = Path(self.temp_directory.name) / "policy.yaml"
+        policy_path.write_text(
+            "blocked_files:\n"
+            "  - .env\n"
+            "allowed_file_roots:\n"
+            "  - test\n"
+            "allowed_domains:\n"
+            "  - example.com\n",
+            encoding="utf-8",
+        )
+        first = load_policy(policy_path)
+        self.assertTrue(first.allows_url("https://example.com"))
+        self.assertFalse(first.allows_url("https://github.com"))
+
+        # The extra line changes the (mtime_ns, size) fingerprint.
+        policy_path.write_text(
+            "blocked_files:\n"
+            "  - .env\n"
+            "allowed_file_roots:\n"
+            "  - test\n"
+            "allowed_domains:\n"
+            "  - example.com\n"
+            "  - github.com\n",
+            encoding="utf-8",
+        )
+        second = load_policy(policy_path)
+        self.assertTrue(second.allows_url("https://github.com"))
+
+    def test_policy_cache_returns_same_object_while_unchanged(self) -> None:
+        self.assertIs(load_policy(DEFAULT_POLICY_PATH), load_policy(DEFAULT_POLICY_PATH))
+
     def test_policy_blocks_files_and_restricts_domains(self) -> None:
         policy = load_policy(DEFAULT_POLICY_PATH)
         self.assertTrue(policy.blocks_file("test/secrets/.env"))
