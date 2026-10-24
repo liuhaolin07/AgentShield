@@ -64,10 +64,10 @@ class AgentShieldTests(unittest.TestCase):
         """A benign-named symlink must not dodge the blocked-target name."""
         root = Path(self.temp_directory.name) / "root"
         root.mkdir()
-        (root / "real.env").write_text("PASSWORD=demo-only\n", encoding="utf-8")
+        (root / ".env").write_text("PASSWORD=demo-only\n", encoding="utf-8")
         link = root / "notes.txt"
         try:
-            link.symlink_to(root / "real.env")
+            link.symlink_to(root / ".env")
         except OSError:
             self.skipTest("symlinks unavailable on this platform")
         policy_path = Path(self.temp_directory.name) / "policy.yaml"
