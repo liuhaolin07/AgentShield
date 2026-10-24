@@ -66,13 +66,41 @@ class SecurityPolicy:
         return False
 
 
+#: Parsed policies keyed by path, validated against (mtime_ns, size) on each
+#: load. A stat is far cheaper than a re-read for hot middleware loops, and
+#: any write to the policy file changes the fingerprint and forces a reload.
+_POLICY_CACHE: dict[Path, tuple[tuple[int, int], SecurityPolicy]] = {}
+
+
 def load_policy(path: str | Path = DEFAULT_POLICY_PATH) -> SecurityPolicy:
     """Load the small, dependency-free YAML subset used by V1.5.
 
     The supported shape is three top-level keys whose values are string lists.
     Rejecting unknown syntax keeps this prototype predictable and fail-closed.
+
+    Results are cached per path and revalidated against the file's
+    ``(st_mtime_ns, st_size)`` fingerprint, so every call still observes a
+    policy file edited or replaced on disk. Parse and I/O errors are never
+    cached.
     """
     policy_path = Path(path)
+    try:
+        stat_result = policy_path.stat()
+    except OSError:
+        _POLICY_CACHE.pop(policy_path, None)
+        raise
+    fingerprint = (stat_result.st_mtime_ns, stat_result.st_size)
+
+    cached = _POLICY_CACHE.get(policy_path)
+    if cached is not None and cached[0] == fingerprint:
+        return cached[1]
+
+    policy = _parse_policy(policy_path)
+    _POLICY_CACHE[policy_path] = (fingerprint, policy)
+    return policy
+
+
+def _parse_policy(policy_path: Path) -> SecurityPolicy:
     values: dict[str, list[str]] = {
         "blocked_files": [],
         "allowed_file_roots": [],
